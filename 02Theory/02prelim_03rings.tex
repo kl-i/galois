@@ -1,0 +1,307 @@
+\documentclass[../book.tex]{subfiles}
+\begin{document}
+%   - Def - Ring (with Unity), Commutative Ring
+\begin{dfn} Rings (with Unity), Commutative Rings
+    
+    A \textbf{ring} is a triplet $(R,+,\cdot)$ where
+    $(R,+)$ is an abelian group and 
+    $\cdot : R \times R \to R$ is a multiplication such that:
+    \begin{enumerate}
+        \item Associative. 
+        $\forall a, b, c \in R, a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+        \item Identity/Unity. 
+        $\exists 1 \in R, \forall a \in R, 1 \cdot a = a \cdot 1 = a$
+        \item Left Distributes over Addition. 
+        $\forall a, b, c \in R, a\cdot(b + c) = a\cdot b + a\cdot c$
+        \item Right Distributes over Addtion.
+        $\forall a, b, c \in R, (b + c)\cdot a = b\cdot a + c\cdot a$
+    \end{enumerate}
+    If it is unambiguous, we write $ab$ for $a\cdot b$ and
+    $R$ instead of $(R,+,\cdot)$. 
+    We write $1_R$ for $1 \in R$ if it is unclear. 
+    If the multiplication is commutative, we call $R$ a \textbf{commutative ring}.
+    
+    Some people prefer to define rings \emph{without} the axiom of identity/unity,
+    hence they will call our definition of rings ``rings with unity" instead. 
+    We will stay with the convention of rings as rings with multiplicative identity.
+    
+\end{dfn}
+
+\begin{ex}
+    Verify that $(\Z,+,\cdot)$ and all fields are commutative rings. 
+\end{ex}
+
+\begin{ex} Zero Ring.
+    
+    Let $R$ be a ring where $0 = 1$. Prove that $R = \{0\}$.
+    This ring is called the \textbf{zero ring} and is denoted $\textbf{0}$.
+\end{ex}
+
+\begin{ex} Endomorphism Ring of an Abelian Group. 
+
+    Let $(V,+)$ be an abelian group. 
+    Recall that $End_\Grp(V)$ is 
+    the set of all morphisms of groups from $V$ to itself.
+    Verify that $(End_\Grp(V),+,\cdot)$ forms a ring where
+    $+$ is pointwise addition and $\cdot$ is function composition. 
+    
+\end{ex}
+
+%   - Def - Ring homomorphism, Isomorphism, Kernel
+\begin{dfn} Morphism of Rings, Isomorphisms, Images and Kernels. 
+
+    Let $(R,+,\cdot), (S,+,\times)$ be rings and $f : R \to S$ be a function. 
+    Then $f$ is called a \textbf{morphism of rings} if 
+    it is a morphism of groups from $(R,+)$ to $(S,+)$ and
+    it respects multiplication, i.e. for $a, b \in R$, 
+    \[f(a \cdot b) = f(a) \times f(b)\]
+    and respects the multiplicative identities, 
+    \[f(1_R) = 1_S\]
+    Since these are the functions that preserve the ring structure, 
+    they are the only maps to consider in the ``world of rings".
+    So we denote ``$f : R \to S$ in $\Ring$" for $f$ being a morphism of rings. 
+    If $f$ also bijects, it is called an \textbf{isomorphism}, and 
+    we say $R, S$ are \textbf{isomorphic as rings}
+    and write $R \iso_\Ring S$. 
+    We also have the following\footnote{
+    Are you seeing a pattern now?}: 
+    \begin{enumerate}
+        \item The \textbf{image} of $f$ is the set-theoretic image. 
+        \item The \textbf{kernel} of $f$, 
+        $\ker f := \{a \in R \mid f(a) = 0 \in S\}$
+    \end{enumerate}
+\end{dfn}
+
+\begin{ex} [Important] Refined Definition of a Vector Space.
+
+    Let $(V,\rho)$ be a $K$-vector space. 
+    Verify that this is equivalent to $V$ being an abelian group
+    with $\rho : K \to End_\Grp(V)$ as a morphism of rings. 
+\end{ex}
+
+\begin{ex} [Important] Modules. 
+
+    Modules generalise vector spaces to over rings.
+    That is to say: let $R$ be a ring. 
+    Then an \textbf{$R$-module} is a pair $(M,\rho)$ where
+    $M$ is an abelian group and $\rho : R \to End_\Grp(M)$ is a morphism of rings. 
+    Prove all of the theorems we have developed for vector spaces over a field, 
+    now for modules over a ring. 
+    $\RMod$ denotes the ``world of $R$-modules". 
+%    The equivalent notion of a subspace is called a \textbf{submodule}. 
+\end{ex}
+
+\begin{ex} [Important] Rings are Modules over themselves.
+
+    Let $R$ be a ring. 
+    Show that $R$ is a module over itself via left-multiplication as an action,
+    i.e. \[
+        \rho : R \to End_\Grp((R,+)), a \mapsto (x \mapsto ax)
+    \]
+    is a morphism of rings. 
+    If $R$ is a commutative ring, 
+    then right-multiplication also gives an action and
+    it coincides with the action given by left-multiplication. 
+\end{ex}
+
+\begin{ex} [Skippable] Construction of Free Modules. 
+
+    Let $R$ be a ring and $S$ be a set. 
+    We proceed to turn $S$ into an $R$-module in the same way as we did free groups.
+    
+    For a function $\la : S \to R$, define its \textbf{support} to be \[
+        \supp \la := \{s \in S \mid \la(s) \neq 0_R\}
+    \]
+    Let $\< S \>$ be the set of functions from $S$ to $R$ with \emph{finite} support.
+    Then this is naturally an $R$-module via pointwise addition and
+    pointwise left-multiplication by elements in $R$. 
+    We have a natural injection $S \to \< S \>$ by
+    interpreting $s \in S$ as the function \[
+        s : S \to R, x \to \begin{cases}
+            1   &, x = s \\
+            0   &, x \neq s
+        \end{cases}
+    \]
+    Furthermore, for arbitrary $\la \in \< S \>$, \[
+        \la = \sum_{s \in \supp \la} \la(s) s
+    \]
+    So all elements in $\< S \>$ are linear combinations of ``elements" in $S$. 
+    $\< S\>$ is called the \textbf{free $R$-module over $S$}.
+    A \emph{free $R$-module} is one that is isomorphic 
+    to a free $R$-module over some set. 
+    If it is clear what the scalars are, we simply say ``free module".
+    If $R$ is a field, we say ``free vector space" instead. 
+    
+    In particular, $R^n$ is defined as the free module over a set of $n$ elements.
+\end{ex}
+
+\begin{ex} [Skippable] ``Characterising" Property of Free Module over a Set. 
+
+    Let $R$ be a ring, $S$ a set, $\iota : S \to \<S\>$ the natural injection.
+    Show that $\<S\>$ is the \emph{smallest} $R$-module containing $S$
+    in the sense that for any $R$-module $M$ and function $f : S \to M$, 
+    there exists a unique morphism of $R$-modules
+    $\<f\> : \<S\> \to M$ such that $\<f\> \circ \iota = f$. 
+    Diagrammatically, 
+    \begin{figure} [ht]
+        \centering
+        \begin{tikzcd}
+        & \<S\> \arrow[dd,"\exists ! \< f \>",dashed]\\
+        S \arrow{ru}{\iota} \arrow{rd}{f} & \\
+        & M \\
+        \end{tikzcd}
+    \end{figure}
+    
+    Hence show that the above property determines $\<S\>$ up to ismorphism, i.e.
+    for any $R$-module with an injection from $S$ into it with the above property
+    is isomorphic to $\<S\>$. 
+    Notice that the statement of this property is almost
+    identical to that of the free group.
+\end{ex}
+
+\begin{ex} [Important] Images are Rings. 
+
+    Let $f : R \to S$ be a morphism of rings. 
+    Show that $\im f$ forms a ring under the addition and multiplication from $S$. 
+\end{ex}
+
+\begin{dfn} Subrings. 
+
+    Let $R$ be a ring, $S \subseteq R$. 
+    We leave it as an exercise to figure out the two equivalent definitions
+    of \textbf{subrings}, analogous to 
+    the definitions of subgroups, sub-$G$-sets, subspaces. 
+    We write $S \leq_\Ring R$.
+    
+    [Spoiler] Images of morphisms are subrings. 
+\end{dfn}
+
+\begin{rmk}
+    For Galois theory, we will really only need commutative rings. 
+    Thus from now on, by rings, we will mean \emph{commutative rings}. 
+\end{rmk}
+
+\begin{ex} [Important] Kernels are Submodules.
+
+    Let $f : R \to S$ be a morphism of rings. 
+    Show that $\ker f \leq_{\RMod} R$, i.e. 
+    $\ker f$ is a submodule\footnote{
+    A submodule is the module-equivalent of subspace for vector spaces.} of $R$.
+    Hence, $f$ injects if and only if $\ker f = \{0\} \subseteq R$.  
+\end{ex}
+
+\begin{rmk} 
+    Something about how rings are quite badly-behaved.
+    Namely, subrings are sadly not what you quotient by
+    because it's quotienting by submodules that gives ring structure. 
+\end{rmk}
+
+\begin{dfn} Three Equivalent Definitions of Ideals, Quotient Rings. 
+
+    Let $R$ be a ring and $S \leq_\Grp R$ a subgroup of $R$ as an abelian group
+    under $+$. 
+    Then the following are equivalent: 
+    \begin{enumerate}
+        \item $S$ forms a submodule of $R$ with 
+        left-multiplication as scalar multiplication.
+        \item The quotient group $R/S$ forms an $R$-module by
+        the scalar multiplication $a(b + S) := (ab) + S$. 
+        Furthermore, by extending the scalar multiplication by elements of $R$ to
+        multiplication by cosets of $S$, 
+        \[(a + S)(b + S) := a(b + S) = (ab) + S\]
+        $R/S$ forms a ring with the projection $R \to R/S$ as a morphism of rings.
+        \item $S$ is the kernel of some ring morphism from $R$. 
+    \end{enumerate}
+    If any of the above are true, then $S$ is called an \textbf{ideal of $R$}. 
+    And the quotient module $R/S$ with the ring structure is called 
+    the \textbf{quotient ring of $R$ by $S$}. 
+\end{dfn}
+\begin{proof}
+    ($1 \imp 2$)
+        Having verified (in the ``prove vector space things exercise") 
+        that quotienting by a submodule gives a module,
+        we have that $R/S$ is an $R$-module,
+        with scalar multiplication defined as $a (b + S) := (ab) + S$.\footnote{
+        Here when we write $a (x +S)$, 
+        we do not mean $\{a(x+s) \mid s \in S\}$.}
+        To see that $(a + S)(b + S) := a(b + S)$ is well-defined, 
+        we to show that for any representative $r$ of the coset $a + S$, 
+        $(r + S)(b + S) = a(b + S)$.
+        Let $b + S \in R/S$ and  $r \in a + S$.
+        Then there exists an $s \in S$ such that $r = a + s$,
+        \begin{align*}
+            (r + S)(b + S) &= r(b + S) = (a + s)(b + S) \\
+            &= a (b + S) + s (b + S) = a(b + S) + ((sb) + S) \\
+            &= a(b + S) + ((bs) + S) \\
+            &= a(b + S) + (0 + S) = a(b + S) = (a + S)(b + S)
+        \end{align*}
+        where from line 3 to 4, we used the fact that 
+        $S$ is closed under scalar multiplication. 
+        
+        Distributivity from both sides follows easily from
+        the distributivity properties of scalar multiplication on the module $R/S$
+        and commutativity with the other axioms of a ring are easily verfied.
+        Hence, $R/S$ forms a ring with the above multiplication. 
+        
+    ($2 \imp 3$)
+        Clearly, the kernel of the projection ring morphism $R \to R/S$
+        has $S$ as the kernel. 
+        
+    ($3 \imp 1$)
+        Already done.
+\end{proof}
+
+%   - Ex - Arbitrary intersection of ideals is ideal
+\begin{ex} Ideals Generated by a Subset. 
+    Let $S \subseteq R$ where $R$ is a ring. 
+    Deduce the existence and uniqueness of a \emph{smallest} ideal containing $S$.
+    This is called the \textbf{ideal generated by $S$} and 
+    is denoted $(S)$. 
+    
+    Verify that $(S) = 
+    \{ \sum_{i \in n} r_i s_i \mid n \in \N, r_i \in R, s_i \in S\}$. 
+    If $S = \{x\}$ is a singleton set, we write $(x)$ instead of $(\{x\})$. 
+\end{ex}
+
+%   - Thm - 1st iso
+\begin{thm} 1st Isomorphism.
+    
+    Let $f : R \to S$ be a morphism of rings. 
+    We remind the reader that we assume $R, S$ to be commutative. 
+    Then $R/\ker f \iso_\Ring \im f$ via $a + \ker f \mapsto f(a)$. 
+\end{thm}
+\begin{proof}
+    By the 1st isomorphism theorem for modules, 
+    with a suitable action $R \to End_\Grp((\im f, +))$,
+    we have $R/\ker f$ and $\im f$ isomorphic as $R$-modules. 
+    We leave it as an exercise for the reader to check that
+    this respects the multiplication on $R/\ker f$ and
+    hence is an isomorphism of rings.
+\end{proof}
+%   - Thm - 3rd iso
+\begin{thm} 3rd Isomorphism.
+
+    Let $R$ be a ring, $S \leq_{\mod{R}} R$ an ideal, and
+    $\pi : R \to R/S$ the usual projection. 
+    Then
+    \begin{enumerate}
+        \item $\pi : 
+        \{M \leq_{\mod{R}} R \mid S \subseteq M\} \to \{N \leq_{\mod{R/S}} R/S\}, 
+        M \mapsto \pi M = M/S$ is an inclusion-preserving bijection.
+        \item Let $M \leq_{\mod{R}} R$, $S \subseteq M$. 
+        Then $R / M \iso_\Ring (R / S) / (M / S)$. 
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Analogous to the theorem for groups and vector spaces (and modules). 
+\end{proof}
+
+\begin{rmk}
+    This concludes our \emph{very} brief introduction to 
+    groups, vector spaces and rings as our basic algebraic objects. 
+    
+    We now cover some elementary results on \emph{polynomial rings} over a field.
+\end{rmk}
+
+
+\end{document}

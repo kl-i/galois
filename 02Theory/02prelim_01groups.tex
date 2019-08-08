@@ -1,0 +1,637 @@
+\documentclass[../book.tex]{subfiles}
+\begin{document}
+
+%   - Def - Group
+\begin{dfn} Group. 
+
+A \textbf{group} is a pair $(G, \cdot)$, where $G$ is a set and $\cdot : G\times G \rightarrow G$ is an binary operation, satisfying the four group axioms:
+\begin{enumerate}
+\item Closure.\footnote{Although it is included in the definition of binary operation, we will include it to emphasis its importance.}  $ \forall a,b\in G$, $a\cdot b \in G$.
+\item Associativity. $ \forall a,b,c\in G$, $a \cdot (b \cdot c) = (a \cdot b) \cdot c$.
+\item Identity. $ \exists e_G \in G$ such that for all $a \in G$, 
+$e_G \cdot a = a \cdot e_G=a$.
+\item Inverse. $ \forall a\in G$,  $ \exists a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$.
+\end{enumerate}
+For convenience, we write $ab$ for $a \cdot b$, 
+as well as write $G$ for $(G,\cdot)$ 
+unless the group multiplication is of significance. 
+A group $G$ is called \textbf{abelian} 
+if the group operation is \textbf{commutative}, that is
+\[\forall a, b \in G, ab = ba.\]
+In this case, the group ``multiplication" is often denoted with a plus ``$+$"
+and the group identity with ``$0$".
+
+\end{dfn}
+
+%   - Ex - Unique identity and inverse
+
+\begin{ex} Uniqueness of Identity and Inverse.
+
+    Prove that the identity element in a group is unique, denoted by $e$ and every element $g \in G$ has a unique inverse, denoted by $g^{-1}$. And thus $(g^{-1})^{-1}=g$.
+\end{ex}
+
+%\begin{ex} 
+%    Verify that the following are groups: 
+%    \begin{enumerate}
+%        \item $(\Z, +), (\Q, +), (\R,+), (\C,+)$ all abelian
+%        \item $(\Q\backslash\{0\}, \cdot), (\R\backslash\{0\}, \cdot),
+%        (\C\backslash\{0\}, \cdot)$ all abelian
+%        \item Let $n \in \N$. 
+%        $C(\R^n) := \{f : \R^n \to \R \mid f \text{ continuous}\}$.
+%        Then $(C(\R^n),+)$ where $+$ is pointwise addition. 
+%        \item Let $X$ be a set, $(G, \cdot)$ a group. 
+%        Define $G^X := \{f : X \to G\}$. 
+%        Then $(G^X, \cdot)$ where $\cdot$ is pointwise multiplication. 
+%    \end{enumerate}
+%    Show that the following are \emph{not} groups: 
+%    \begin{enumerate}
+%       \item $(\R, \cdot)$
+%        \item $(C(\R^n),\cdot)$ where $\cdot$ is pointwise multiplication.
+%        \item Calle Non-Group. 
+%    \end{enumerate}
+%\end{ex}
+
+%   - Def - Group Homomorphism, Isomorphism, Kernel
+\begin{dfn} Morphism of Groups, Isomorphisms, Image, Kernel. 
+
+Let $(G,\cdot)$ and $(H,\circ)$ be two groups. 
+Then a \textbf{morphism of groups} (AKA group homomorphism) from $G$ to $H$ is a mapping $\phi : G \to H$ 
+satisfying the following condition for all $g_1, g_2 \in G$:
+\[\phi(g_1 \cdot g_2)=\phi(g_1) \circ \phi(g_2).\]
+In ``the world of groups", 
+morphisms of groups are really the only functions we will consider between groups,
+since they preserve group multiplication. 
+So we use ``$\phi : G \to H$ in $\Grp$" to say $\phi$ is a morphism of groups. 
+\footnote{$\Grp$ is short-hand for "the world of groups".
+    This idea is made precise by the concept of a \emph{category},
+    but we will not delve into that here. 
+}
+If $\phi$ is bijective, we say $G$ and $H$ are \textbf{isomorphic as groups}, 
+denoted by $G \iso_{\Grp} H$ and $\phi$ is called an \textbf{isomorphism}. 
+Notice that a morphism of groups preserve identity (i.e. $\phi(e_G)=e_H$), 
+inverse and powers.
+
+If $f:G \to H, g: H \to K$ both in $\Grp$, then $g \circ f: G \to K$ in $\Grp$. 
+Also the identity mapping is an isomorphism, i.e. $G \iso_{\Grp} G$.
+
+Given $\phi: G \to H$ in $\Grp$, we define
+\begin{enumerate}
+    \item The \textbf{image} of $\phi$ as 
+        $\im \phi=\{h \in H \mid \exists g \in G, \phi(g)=h\}$;
+    \item The \textbf{kernel} of $\phi$ as 
+        $\ker \phi=\{g \in G \mid \phi(g)=e_H\}$.
+\end{enumerate}
+\end{dfn}
+\ex{Prove that both $\im  \phi$ and $\text{ker } \phi$ are groups 
+    under the multiplication from the groups they are respectively subsets of. 
+}
+
+%   - Ex - Homomorphism Inject iff Kernel trivial
+\ex{Prove that $\phi$ is injective if and only if $\text{ker }\phi=\{e_G\}$.}
+
+%   - Def - Subgroups
+\begin{dfn} Subgroups. 
+
+    Let $G$ be a group, $H \subseteq G$.
+    Then the following are equivalent: 
+    \begin{enumerate}
+        \item $H$ forms a group under the multiplication from $G$. 
+        \item $H$ is the image of an injective morphism of groups into $G$. 
+    \end{enumerate}
+    If either of the above is true, $H$ is called a \emph{subgroup of $G$}.
+    This is denoted with $H \leq_{\Grp} G$. 
+    If it is unambiguous that these are groups,
+    we omit the subscript $\Grp$. 
+    
+\end{dfn}
+
+\begin{eg} Subgroups. 
+    Images and kernels of morphisms of groups.
+\end{eg}
+%   - Ex - Arbitrary intersection of subgroups is subgroup
+\ex{Let $(H_i)_{i \in I}$ be subgroups of $G$. 
+    Prove that $\bigcap_{i \in I} H_i \leq G$. 
+    Hence deduce that 
+    \[
+        \forall S \subseteq G, \exists ! \<S\> \leq G, 
+        S \subseteq \< S \> \land 
+        \forall H \leq G, S \subseteq H \imp \< S \> \subseteq H. 
+    \]
+    i.e. $\< S \>$ is the \emph{smallest} subgroup containing $S$.
+    $\< S \>$ is called the \textbf{subgroup generated by $S$}. 
+    If $S = \{x\}$ is a singleton set, 
+    we write $\< x \>$ instead of $\< \{x\} \>$. 
+}
+
+\begin{ex} Alternative construction for Subgroup Generated by a Subset.
+
+    Let $S \subseteq G$. 
+    Define \[
+        \tilde{S} := \{g \in G \mid \exists s \in S, g = s \lor g = s^{-1}\}
+    \]
+    For $n \in \N$, 
+    \[
+        \tilde{S}^0 = \{e\} \,\,\,\,\,\,\,
+        \tilde{S}^n := \{g_1\cdots g_n \in G \mid g_i \in \tilde{S}\}
+    \]
+    Show that $\< S \> = \bigcup_{n \in \N} \tilde{S}^n$. 
+\end{ex}
+
+\begin{ex} [Skippable] Construction of Free Groups. 
+
+    Let $S$ be a set. We proceed to turn $S$ into a group.
+    The idea is essentially the same as the alternative 
+    construction for the subgroup generated by a subset.
+    The only difference is that for subgroups, 
+    we had an ambient group structure to use,
+    but for sets "sitting in a vacuum", 
+    we will have to make a group structure from scratch.
+    
+    Define 
+    \[\tilde{S} := \{1,-1\}\times S)\]
+    Let $s$ denote $(1,s) \in \{1\} \times S$ and
+    $s^{-1}$ denote $(-1,s) \in \{-1\} \times S$. 
+    For $n \in \N$, define the \textbf{$\tilde{S}$-strings of length $n$} as
+    \[
+        \tilde{S}^n := \{ s : n \to \tilde{S} \}
+    \]
+    For $s \in \tilde{S}^n, i \in n$, denote $s_i$ as $s(i)$.
+    So $s$ can be seen as an $n$-tuple $(s_i)_{i \in n}$\footnote{If you like,
+    this is a way of formally
+    defining a tuple.},
+    and we write $s_0\cdots s_{n-1}$ for the function $s$ instead.
+    This should be thought of as finite products of elements in $\tilde{S}$.
+    So our to-be group is the set of all such products, 
+    $\bigsqcup_{n \in \N} \tilde{S}^n$.
+    For 
+    $s : n \to \tilde{S}, t : m \to \tilde{S} \in \bigsqcup_{n \in \N} \tilde{S}^n$,
+    we define the multiplication as concatenation of strings: 
+    \[
+        st : n+m \to \tilde{S}, i \mapsto 
+        \begin{cases}
+            s(i), & i < n \\
+            t(i-n), & i \geq n
+        \end{cases}
+    \]
+    Then clearly this multiplication is associative and 
+    we have the empty string $e : 0 \to \tilde{S}$ as the identity. 
+    
+    We are not quite finished yet.
+    As of now, for $s \in \tilde{S}$, 
+    $ss^{-1}$, $s^{-1}s$ and $e$ are \emph{different} elements in our to-be group,
+    i.e. we have not defined cancellation by inverses. 
+    This is done as follows. 
+    For $n \leq m \in \N$, $a \in S$,  
+    define the \textbf{$n$-th Chirs-Frod insertion of $a$}
+    as 
+    \[
+        CF_n : \tilde{S}^m \to \tilde{S}^{m+2}, 
+        s_0\cdots s_{m-1} \mapsto 
+        \begin{cases}
+        aa^{-1} & \text{, if } 0 = m\\
+        s_0 \cdots s_{n-1} a a^{-1} s_n \cdots s_{m-1} & \text{, if } 0 < m
+        \end{cases}
+    \]
+    i.e. insert $aa^{-1}$ after the $n$-th symbol. 
+    Similarly, we define the \textbf{$n$-th Frod-Chirs insertion of $a$}, $FC_n$, 
+    as inserting $a^{-1}a$ after the $n$-th symbol. 
+    Then for 
+    $s_0\cdots s_{n-1}, t_0\cdots t_{m-1} \in \bigsqcup_{n \in \N} \tilde{S}^n$, 
+    we define $s_0\cdots s_{n-1} \sim t_0\cdots t_{m-1}$ when
+    they are equal or there exists a Chirs-Frod or Frod-Chirs insertion
+    mapping one to the other. 
+    
+    Prove that $\sim$ is an equivalence relation on 
+    $\bigsqcup_{n \in \N} \tilde{S}^n$
+    and the multiplication of strings respects the equivalence classes of $\sim$,
+    that is
+    \[
+        s \sim f \land t \sim g \imp st \sim fg
+    \]
+    Hence show that $\< S \> := 
+    \bigsqcup_{n \in \N} \tilde{S}^n / \sim$
+    forms a group with the multiplication carried over to equivalence classes. 
+    
+    $\< S \>$ is called the \textbf{free group generated by $S$}. 
+    A free group is one that is isomorphic to a free group generated by a set. 
+\end{ex}
+
+\begin{ex} [Skippable] The ``Characterising" Property of Free Groups. 
+
+    Let $\< S \>$ be the free group generated by a set $S$. 
+    We have a natural inclusion $\iota : S \to \< S \>, s \mapsto s$.
+    Let $G$ be a group, $f : S \to G$ any function. 
+    Show that 
+    $\exists ! \< f \> : \< S \> : \<G\> \text{ in } \Grp, 
+    \< f \> \circ \iota = f$. 
+    Diagrammatically, 
+    \begin{figure} [ht]
+        \centering
+        \begin{tikzcd}
+        & \< S \> \arrow[dd,"\exists ! \< f \>",dashed]\\
+        S \arrow{ru}{\iota} \arrow{rd}{f} & \\
+        & G \\
+        \end{tikzcd}
+    \end{figure}
+    
+    This can be interpreted as saying $\< S \>$ is the 
+    ``smallest" group containing $S$. 
+    
+    Show that any other group with the property above is automatically
+    isomorphic to $\< S \>$ as groups. 
+    Thus, this property characterises $\< S \>$ uniquely
+    up to isomorphisms of groups. 
+    Hence, we never have to think about 
+    the construction of $\< S \>$ ever again.
+    \footnote{
+        This idea of determining an object
+        as the ``best" with a certain property will appear again and again. 
+        It is formalised by the concept of \emph{universal properties} in Category Theory,
+        which we shall not explore explicitly here. 
+    }
+\end{ex}
+
+\begin{ex} Automorphism Group of a Set. 
+
+    Let $X$ a set. Prove that the \emph{set-theoretic automorphisms of $X$}
+    \[Aut_\Set(X) := \{f : X \to X \mid f \text{ bijects }\}\] forms a group
+    with function composition as multiplication, i.e.
+    \[
+        Aut_\Set(X) \times Aut_\Set(X) \to Aut_\Set(X), 
+        (f, g) \mapsto fg := f \circ g
+    \]
+\end{ex}
+
+\begin{rmk}
+
+    One should see $Aut_\Set(X)$ as all the symmetries of $X$. 
+    Since a set $X$ does not have any ``internal structure", 
+    $Aut_\Set(X)$ simply consists of all permutations of elements of $X$. 
+    Thus, when $X$ has more ``structure", 
+    we will often be considering a subgroup of $Aut_\Set(X)$ instead, 
+    as the following simple example illustrates. 
+    
+\end{rmk}
+
+\begin{eg}
+    Let $X = \{v_0, v_1, v_2, v_3 \in \R^2\}$ be 
+    vertices of a square centred at the origin, labelled counterclockwise. 
+    Let $(a, b, c, d)$ denote the permutation of $X$ sending
+    $v_0 \mapsto a, v_1 \mapsto b, v_2 \mapsto c, v_3 \mapsto d$. 
+    We have the following set of ``symmetries" of $X$ as a square, 
+    \begin{align*}
+        \{
+            &(v_0, v_1, v_2, v_3), (v_1, v_2, v_3, v_0), 
+            (v_2, v_3, v_0, v_1), (v_3, v_0, v_1, v_2), \\
+            &(v_0, v_3, v_2, v_1), (v_1, v_0, v_3, v_2), 
+            (v_2, v_1, v_0, v_3), (v_3, v_2, v_1, v_0)
+        \} \subseteq Aut_\Set(X)
+    \end{align*}
+    
+    \ex{Prove that the symmetries above form a subgroup of $Aut_\Set(X)$.}
+\end{eg}
+
+\begin{rmk}
+    In general, given a group $G$ and a set $X$, 
+    we may want to interpret $G$ as ``symmetries" of $X$. 
+    This is made precise via a \emph{group action}. 
+\end{rmk}
+
+%   - Def - Group Action
+\begin{dfn} (Left) Group Actions. 
+
+    Let $G$ be a group. 
+    Then a \emph{G-Set} is a pair $(X, \rho)$ where 
+    $X$ is a set and $\rho : G \to Aut_\Set(X)$ in $\Grp$.
+    We say \emph{$G$ acts on $X$ via $\rho$} or 
+    \emph{$\rho$ is a $G$-action on $X$}. 
+    For $g \in G$, we denote $g_\rho := \rho(g) : X \to X$. 
+    If the action $\rho$ is unambiguous, we use $X$ instead of $(X,\rho)$
+    and $g$ instead of $g_\rho$.
+    
+\end{dfn}
+
+Just as we had morphisms of groups to compare groups, 
+given a group $G$, we also have \emph{morphisms of $G$-sets}. 
+
+% Should sub-G-sets be included formally?
+\begin{dfn} Morphism of $G$-Sets. 
+
+    Let $(X,\rho), (Y,\sigma)$ be $G$-sets, $f : X \to Y$ a function. 
+    Then $f$ is a \textbf{morphism of $G$-sets} when
+    \[
+        \forall g \in G, f \circ g_\rho = g_\sigma \circ f
+    \]
+    Morphisms of $G$-sets are essentially 
+    the functions between $G$-sets that preserve the actions from $G$. 
+    Thus, they are really the only maps to consider in ``the world of $G$-sets".
+    Hence we write ``$f : X \to Y$ in $G\mhyph\Set$". 
+    If $f$ bijects, it is called an \emph{isomorphism of G-sets}. 
+    We then denote $(X,\rho) \iso_{G\mhyph\Set} (Y,\sigma)$. 
+    
+\end{dfn}
+
+\ex{ Let $f : X \to Y$ in $G\mhyph\Set$, $\im f$ be the usual set-theoretic image.
+    Show that $\forall g \in G, 
+    \res{g}{\im  f} \in Aut_\Set(\im  f) \leq_\Grp Aut_\Set(Y)$,
+    i.e. $\im f$ forms a $G$-set from the $G$-action on $Y$.  
+}
+
+\begin{dfn} Sub-$G$-Sets.
+    Let $X$ be a $G$-set, $Y \subseteq X$. 
+    Then the following are equivalent: 
+    \begin{enumerate}
+        \item $Y$ forms a $G$-set from the $G$-action on $X$, 
+        i.e. for all $g \in G$, \[\res{g}{Y} \in Aut_\Set(Y)\]
+        \item $Y$ is the image of an injective morphism of $G$-sets, 
+        i.e. there exists a $G$-set $(Z,\sigma)$ and $G$-set morphism $f : Z \to X$
+        that is injective and $fZ = Y$. 
+    \end{enumerate}
+    If either of the above is true, 
+    we say $Y$ is a \textbf{sub-$G$-set} of $X$,
+    denoted $Y \leq_{G\mhyph\Set} X$. 
+    If it is clear that these are $G$-sets, 
+    we omit the subcript $G\mhyph\Set$.
+    
+\end{dfn}
+
+%   - Def - Orbit
+\begin{dfn} Orbits under an Action. 
+
+    Let $(X, \rho)$ be a $G$-set, $x \in X$. 
+    Then the \emph{orbit of $x$ under $\rho$} is defined as
+    \[
+        Orb_\rho(x) := \{g_\rho(x) \in X \mid g \in G\}
+    \]
+    The set of orbits is denoted $X / G$.
+    If the action is unambiguous, we use $Orb(x)$ instead of $Orb_\rho(x)$. 
+
+\end{dfn}
+
+%   - Ex - Orbits are equivalence classes
+\ex{[Important]
+    For $x, y \in X$, let $x \sim y := y \in Orb(x)$. 
+    Show that $\sim$ is an equivalence relation on $X$ 
+    with orbits as equivalence classes, 
+    hence deducing $X/G$ is a partition $X$. 
+}
+
+\ex{Let $x \in X$. Show that $Orb(x) \leq_{G\mhyph\Set} X$.}
+
+A subgroup $H$ of a group $G$ acts on $G$ as a set: 
+
+%   - Def - Cosets as Orbits
+\begin{dfn} Left Cosets. 
+
+    Let $H \leq_\Grp G$. 
+    Define 
+    \[H \to Aut_\Set(G), h \mapsto (g \mapsto gh^{-1})\]
+    Then this is an $H$-action on $G$. \footnote{
+        The reader may be wondering why it is $gh^{-1}$, not $gh$.
+        Note the following: for $a, b \in H$, 
+        $(ab)(g) = g(ab)^{-1} = gb^{-1}a^{-1} = a(b(g)) = (a \circ b)(g)$.
+        So we see that the inverse is needed to make our action a morphism of groups.
+    }
+    For $g \in G$, 
+    the \emph{left coset of $H$ represented by $g$} is defined as
+    \[gH := Orb(g)\]
+    i.e. the orbit of $g$ under this $H$-action. 
+    This is all the elements in $G$ reachable by 
+    right-multiplication with $H$, hence the notation $gH$. 
+    Furthermore, let $G / H$ be the set of all cosets, 
+    then $G$ acts naturally on $G / H$ by
+    \[G \to Aut_\Set(G / H), g \mapsto (g_0H \mapsto gg_0H)\]
+\end{dfn}
+
+The following concept is intimately related to that of orbits. 
+
+%   - Def - Stabiliser Subgroup of an Element
+\begin{dfn} Stabiliser Subgroup of an Element. 
+
+    Let $\rho$ be a $G$-action on $X$, $x \in X$. 
+    Then the \emph{stabiliser subgroup of $x$} is defined as
+    \[
+        Stab_\rho(x) := \{g \in G \mid g_\rho(x) = x\} \leq_\Grp G
+    \]
+    Unfold the definition of ``$\rho$ in $\Grp$" and verify that 
+    $Stab_\rho(x)$ is indeed a subgroup. 
+    We write $Stab(x)$ instead, if the action is clear. 
+
+\end{dfn}
+Now, the main theorem concerning group actions. 
+%   - Thm - Orbit Stabiliser
+\begin{thm} Orbit-Stabiliser. 
+    
+    Let $(X,\rho)$ be a $G$-set, $x \in X$.
+    Then $G / Stab(x) \iso_{G-Set} Orb(x)$ via the isomorphism of $G$-sets, 
+    \[
+        G / Stab(x) \to Orb(x), gStab(x) \mapsto g_\rho(x)
+    \]
+\end{thm}
+\begin{proof}
+    Well-definedness and bijectivity are easily verified. 
+    To show this is a morphism of $G$-sets, let $g \in G$, $g_0Stab(x) \in G / Stab(x)$. 
+    Then by the definition of the $G$-actions on $G/Stab(x)$ and $Orb(x)$, 
+    we have 
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzcd}
+        g_0Stab(x) \arrow[r,"g",symbol=\longmapsto] \arrow[d,symbol=\longmapsto]
+        & (gg_0)Stab(x) \arrow[d,symbol=\longmapsto]\\
+        g_0(x) \arrow[r,"g",symbol=\longmapsto] 
+        & g(g_0(x)) = (gg_0)(x)\\
+        \end{tikzcd}
+    \end{figure}
+    
+    %\kern-3em
+    So this is indeed a isomorphism of $G$-sets. 
+\end{proof}
+
+From this we can immediately deduce the classic theorem due to Lagrange. 
+
+%   - Cor - Lagrange
+\begin{cor} Lagrange's Theorem. 
+
+    Let $H \leq_{\Grp} G$ where $G$ is finite. 
+    Then $|G| = |G / H||H|.$
+    
+    The \emph{index of $H$ in $G$} is defined as $[G : H] := |G / H|$. 
+\end{cor}
+\begin{proof}
+    For $g \in G$, $Stab(g) = \{h \in H \mid gh^{-1} = g\} = \{e\}$.
+    Then by the orbit-stabiliser theorem, $|gH| = |H/Stab(g)| = |H/{e}| = |H|$.
+    Hence by $G / H$ partitioning $G$, 
+    \[
+        |G| = \sum_{gH \in G/H} |gH| = \sum_{gH \in G/H} |H| = |G/H| |H|
+    \]
+\end{proof}
+%\begin{rmk}
+%    Let $H \leq_{\Grp} G$.
+%    We already have a multiplication of elements in $G/H$ by elements in $G$
+%    via the $G$-action on $G/H$, $a\cdot bH := a(bH) = (ab)H$.
+%    One may wonder if we can adapt this multiplication to multiply by \emph{cosets}, 
+%    turning $G/H$ into a group. 
+%    A plausible way of doing this is defining it as $aH \cdot bH := (ab)H$. 
+%    Alas, this is \emph{not} always well-defined. 
+%    Hence we have, for subgroups, the notion of \emph{normality}. 
+%\end{rmk}
+%   - Def - 4 eqv defs of Normal Subgroup
+\begin{dfn} 4 Equivalent Definitions of Normal Subgroups, 
+Quotient Groups. 
+    Let $N \leq_{\Grp} G$. 
+    Then the following are equivalent: 
+    \begin{enumerate}
+        \item $\forall a, b \in G, aNbN = 
+        \{an_abn_b \mid n_a, n_b \in N\} = (ab)N.$
+        \item $G / N$ forms a group with $aN \cdot bN := (ab)N$.
+            Hence $G \to G/N, a \mapsto aN$ is a morphism of groups.
+        \item $N$ is the kernel of some morphism of groups from $G$. 
+        \item $\forall g \in G, gNg^{-1} = \{gng^{-1} \mid n \in N\} = N$. 
+    \end{enumerate}
+    If any of the above is true, 
+    then we say \emph{$N$ is a normal subgroup of $G$}
+    and write $N \normsub_\Grp G$. 
+    $G/N$ is called the \emph{quotient of $G$ by $N$}. 
+\end{dfn}
+
+\begin{proof}
+    ($1 \imp 2$) 
+        We check that the multiplication is well-defined. 
+        Let $an_a \in aN, bn_b \in bN$. 
+        Then $an_abn_b \in aNbN = (ab)N$. 
+        Hence $(an_abn_b)N = (ab)N$.
+        The group axioms are easily verified
+        and the map is clearly a morphism of groups.
+        
+    ($2 \imp 3$)
+        It is clear that $N$ is the kernel of the morphism
+        $G \to G/N$.
+        
+    ($3 \imp 4$)
+        Let $g \in G$. 
+        Let $\phi : G \to K$ in $\Grp$ with $N = \text{ker }\phi$.
+        Then for $n \in N$, it is easily verified that $\phi(gng^{-1}) = e_K$. 
+        So $\forall g \in G, gNg^{-1} \subseteq N$. 
+        Hence for $g \in G$, $N = g(g^{-1}Ng)g^{-1} \subseteq gNg^{-1}$.
+        
+    ($4 \imp 1$)
+        Let $a, b \in G$. 
+        Essentially, $aNbN = abNb^{-1}bN = abNN = abN$. 
+        The formalities are left as an exercise for the reader to check. 
+        
+\end{proof}
+
+\begin{rmk}
+    The morphism $G \to G/N$ is usually called the \emph{projection}. 
+    One should think of this as taking $G$ partitioned by the cosets of $N$
+    and collapsing each coset to a point. 
+    The set of these points form the quotient. 
+\end{rmk}
+
+\begin{rmk}
+    Note that all subgroups of abelian groups are normal. 
+    The main significance of this is that 
+    when we quotient here we always end up with a group structure.
+\end{rmk}
+
+Now we are ready for the main theorems regarding isomorphisms
+that we will so often use. 
+
+%   - Thm - 1st iso
+\begin{thm} 1st Isomorphism (AKA Orbit-Stabiliser Applied to Groups). 
+    
+    Let $\phi : G \to H$ in $\Grp$. 
+    Then $G / \text{ker } \phi \iso_\Grp \im \phi$ 
+    via $g(\text{ker }\phi) \mapsto \phi(g)$.
+    This is depicted by the following diagram:
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzcd}[column sep=huge,row sep=large]
+        G \arrow{r}{\phi} \arrow{d}{\pi} & \im \phi \leq H\\
+        G/\text{ker }\phi 
+        \arrow{ur}[anchor=center,rotate=26,yshift=-2.5ex]
+        {g\text{ker }\phi \mapsto \phi(g)}
+        \end{tikzcd}
+    \end{figure}
+    We say the diagram \textbf{commutes}. 
+\end{thm}
+\begin{proof}
+    Left as an easy exercise. 
+    (Hint : Use the orbit-stabiliser theorem
+    on a suitable element in $\im \phi$ with a suitable $G$-action on $\im \phi$.)
+\end{proof}
+%   - Thm - 3rd iso Part 1 and 2
+\begin{thm} 3rd Isomorphism. 
+    Let $N \normsub_\Grp G$ with $\pi : G \to G/N$ the usual morphism. Then
+    \begin{enumerate}
+        \item $\pi : 
+        \{M \leq_\Grp G \mid N \subseteq M\} \to \{K \leq_\Grp G/N\}, 
+        M \mapsto \pi M = M/N$ is an inclusion-preserving bijection.
+        \footnote{This means for all $M_0\subseteq M_1,
+        \pi M_0 \subseteq \pi M_1$}
+        \item Let $M \leq_\Grp G$, $N \subseteq M$. 
+        Then $M \normsub_\Grp G \iff \pi M \normsub_\Grp G/N$. 
+        \item Let $M \normsub_\Grp G$, $N \subseteq M$. 
+        Then $G / M \iso_\Grp (G / N) / (M / N)$. 
+    \end{enumerate}
+    
+\end{thm}
+\begin{proof}
+    
+    (1) Let $M \leq G$, $N \subseteq M$. 
+    $N \normsub G$ implies $\forall g \in G, gNg^{-1} = N$. 
+    In particular, this means $\forall m \in M, mNm^{-1} = N$. 
+    By definition 4 of normality, $N \normsub M$, 
+    i.e. $M/N$ is well-defined as a group. 
+    $\pi M$ consists of the cosets of $N$ with elements of $M$ as representatives. 
+    This is exactly $M/N$, so $\pi M = M/N$. 
+    
+    Let $M_0, M_1 \leq G$, $N \subseteq M_0 \subseteq M_1$.
+    Then clearly $\pi M_0 \subseteq \pi M_1$. 
+    So we have inclusion preservation. 
+    
+    We now show surjectivity. Let $H \leq G/N$. 
+    We claim that $\pi^{-1} H$ is a subgroup of $G$ that maps to $H$. 
+    Indeed $\pi(\pi^{-1} H) = H$, 
+    and since $\{N\} = \{e_{G/N}\} \subseteq H$, 
+    $N = \pi^{-1} \{N\} \subseteq \pi^{-1} H$.
+    To show $\pi^{-1} H$ is a subgroup of $G$, 
+    let $a, b \in \pi^{-1} H$, i.e. $\pi(a), \pi(b) \in H$. 
+    Then $\pi(ab) = \pi(a)\pi(b) \in H$ by $H \leq G/N$, so $ab \in \pi^{-1} H$. 
+    Also, $\pi(a^{-1}) = (\pi(a))^{-1} \in H$ again by $H \leq G/N$. 
+    Clearly $e_G \in \pi^{-1} H$. Thus $\pi^{-1} H$ is a subgroup of $G$. 
+    
+    Injectivity is where we shall use the mysterious $N \subseteq M$ condition. 
+    Let $M_0, M_1 \leq G$, $N \subseteq M_0$, $N \subseteq M_1$. 
+    Assume $\pi M_0 = \pi M_1$. Then $M_0 / N = M_1 / N$. 
+    We wish to show $M_0 = M_1$. 
+    Since the argument is symmetrical, it suffices to prove $M_0 \subseteq M_1$. 
+    So let $m_0 \in M_0$. Then $M_0 / N = M_1 / N$ implies
+    $\exists m_1 \in M_1, m_0 N = m_1 N$. 
+    Notice $m_0 \in m_0 N = m_1 N \subseteq M_1$.  
+    Hence, $m_0 \in M_1$. Thus $M_0 \subseteq M_1$
+    and the proof of 1 is done. 
+
+    Parts 2 and 3 are left as an exercise. 
+    (Hint for part 3 : Use the 1st isomorphism theorem.)
+\end{proof}
+
+Here is the diagram to have in mind:
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+        G \arrow[r,"\pi"]  & G/N   \arrow[r]& (G/N)/(M/N)   \\
+        M \arrow[r,"\pi"]   \arrow[u,symbol=\leq] 
+        & M/N \arrow[u, swap,symbol=\leq] \arrow[r]
+        & \{e_{(G/N)/(M/N)}\} \arrow[u,symbol=\leq]\\
+        N \arrow[u, swap,symbol=\leq] \arrow[r,"\pi"] & \{e_{G/N}\} \arrow[u,symbol=\leq]
+    \end{tikzcd}
+\end{figure}
+\begin{rmk}
+    As we will see, 
+    the idea of morphisms between objects, 
+    sub-objects, quotient-objects and the isomorphism theorems
+    will appear again and again with various objects in algebra. 
+    We next cover the above theory for vector spaces. 
+\end{rmk}
+\end{document}

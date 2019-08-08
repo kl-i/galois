@@ -1,0 +1,202 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+%    - Thm - Nice properties of (-)[x] (is a functor)
+\begin{lem} Extensions induce Ring Morphisms on the Polynomial Ring. 
+
+    Let $\iota_0 : K \to L, \iota_1 : L \to M$ be extensions. 
+    Then we have a natural injective morphism of rings $\Bar{\iota_0} : K[X] \to L[X]$
+    and $\Bar{\iota_1} : L[X] \to M[X]$ such that 
+    $\Bar{\iota_1 \circ \iota_0} = \Bar{\iota_1} \circ \Bar{\iota_0}$. 
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzcd}
+        K \arrow[r,"\iota_0"] \arrow[dr,"\iota_1 \circ \iota_0" below left] &
+        L \arrow[d,"\iota_1"]& & 
+        K[X] \arrow[r,"\Bar{\iota_0}"] \arrow[dr,"\Bar{\iota_1 \circ \iota_0} 
+        =    \Bar{\iota_1}\circ\Bar{\iota_0}" below left] & 
+        L[X] \arrow[d,"\Bar{\iota_1}"] \\
+        & M & & & M[X]
+        \end{tikzcd}
+        \label{fig:polyring_functor}
+    \end{figure}
+\end{lem}
+\begin{proof}
+    $\Bar{\iota_0} : K[X] \to L[X], 
+    \sum_{k=0}^n \la_kX^k \mapsto \sum_{k = 0}^n \iota_0(\la_k)X^k$. 
+    
+    (Check the composition-preserving property.)
+\end{proof}
+%    - Def - Evaluation Homomorphism. 
+\begin{lem} Evaluation Morphism. 
+
+    Let $K$ be a field, $a \in K$. 
+    Then the \emph{evaluation at a} \[ev_a : K[X] \to K, f \mapsto f(a)\]
+    is a morphism of rings. 
+
+    Furthermore, given an extension $\iota : K \to L$, 
+    we have $\iota \circ ev_a = ev_{\iota a} \circ \bar{\iota}$. 
+    I.e. the following diagram commutes. 
+    \begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+    K[x] \arrow[r,"\Bar{\iota}"] \arrow[d,"ev_a"]
+    & L[X] \arrow[d,"ev_{\iota a}"]\\
+    K \arrow[r,"\iota"]& L\\
+    \end{tikzcd}
+    \label{fig:ev}
+\end{figure}
+\end{lem}
+\begin{proof} Both statements are straightforward to check. 
+\end{proof}
+
+%    - Def - Alg Element, Alg ext
+\begin{dfn}
+    Let $\iota : K \to L$ be a field extension and $a \in L$. 
+    Then we have the ring morphism \[
+        ev_a \circ \bar\iota : K[X] \to L, 
+        f \mapsto (\bar\iota f)(a) 
+    \]
+    i.e. takes polynomials over $K$ and evaluates them at $a$ inside $L$.
+    $a$ is called \textbf{algebraic over $K$} when 
+    $\ker (ev_a \circ \bar\iota) \neq (0)$.
+    For polynomials $g \in \ker (ev_a \circ \bar\iota)$, 
+    we say \textbf{$g$ has $a$ as a root}. 
+    Otherwise, $a$ is called \textbf{transcendental over $K$} when
+    the kernel is instead zero. 
+    
+    $\iota : K \to L$ is called an \textbf{algebraic extension}
+    when for all $a \in L$, $a$ is algebraic over $K$.
+\end{dfn}
+%    - Def - \min(a,K) 3 eqv def (min deg, irr, generates ideal) and uniqueness
+\begin{dfn}
+Let $\iota : K \to L$ be an extension, $a \in L$, $a$ is algebraic over $K$. 
+Then there exists a unique non-constant, monic polynomial $\min(a,K)$ 
+with $a$ as a root such that one of the three equivalent conditions holds:
+\begin{enumerate}
+    \item $\min(a,K)$ has minimal degree amongst other 
+        non-constant polynomials with $a$ as a root.
+    \item $\min(a,K)$ generates $\ker ev_{a} \circ \Bar{\iota}$. 
+    \item $\min(a,K)$ is irreducible. 
+\end{enumerate}
+Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}. 
+\end{dfn}
+\begin{proof}
+    Existence and uniqueness satisfying condition (1) and/or (2) is given by
+    $K[X]$ being a PID. 
+    
+    ($2 \imp 3$)
+    $\min(a,K)$ being irreducible is equivalent to it being prime,
+    which is equivalent to $K[X]/(\min(a,K))$ being an integral domain.
+    Since $\min(a,K)$ generates $\ker(ev_a \circ \bar\iota)$, 
+    we have via the 1st isomorphism theorem for rings, \[
+        K[X]/(\min(a,K)) \iso \im (ev_a \bar\iota) \leq L
+    \]
+    A subring of an integral domain is clearly also integral, hence we are done.
+    
+    ($3 \imp 2$)
+    Let $f$ be some other polynomial in $\ker(ev_a \circ\bar\iota)$.
+    Then by irreducibility, 
+    \[\min(a, K) \mid f \text{ or } (\min(a,K),f) = 1\]
+    Suppose $(\min(a,K),f) = 1$. 
+    Then by evaluating everything at $a$, we get $1 = 0$ inside $L$,
+    which is a contradiction since $L$ is a field. 
+    Hence, $\min(a,K)$ divides all polynomials in $\ker(ev_a \circ \bar\iota)$,
+    i.e. generates the kernel.
+\end{proof}
+\begin{rmk}
+    From the motivating example in the first section of the book, 
+    we know that for a simple extension $K(a)$ ought to look like
+    polynomials in $a$ over $K$. 
+    The following theorem proves this.
+\end{rmk}
+%    - Thm - K(a) = K[a] i.e. Simple Ext iso to Quotient by Min Poly
+\begin{thm} The Form of Simple Extensions by Algebraic Elements.
+
+    Let $\iota : K \to L$ be a field extension and 
+    $a \in L$ be an algebraic element over $K$. 
+    Then $K(a) = (ev_a \circ\bar\iota)K[X]$.
+    I.e. $K(a)$ looks like polynomials over $K$ evaluated at $a$.
+\end{thm}
+\begin{proof}
+    Clearly $(ev_a\circ\bar\iota) K[X] \subseteq K(a)$.
+    To show the other inclusion, let us recall that
+    $K(a)$ is defined as the smallest field containing $\iota K$ and $a$.
+    $\iota K$ and $a$ are clearly inside $(ev_a\circ\bar\iota) K[X]$,
+    so we only need to prove that it is a field.
+    
+    Using the 1st isomorphism theorem, we get \[
+        (ev_a\circ\bar\iota) K[X] \iso K[X]/(\min(a,K))
+    \]
+    The irreducibility of $\min(a,K)$ implies that 
+    for all polynomials $f$ in $K[X]$, $\min(a,K) \mid f$ or 
+    $\al \min(a,K) + \be f = 1$ for some polynomials $\al, \be$.
+    Projecting everything to the quotient $K[X]/(\min(a,K))$ shows that
+    every element in the quotient is either 0 or unit.
+    The quotient is thus a field and we are done. 
+\end{proof}
+%    - Ex - Deg Ext = Deg Min Poly
+\begin{ex} The Degree of Simple Extensions over Algebraic Elements.
+
+    Let $\iota : K \to L$ be a field extension and 
+    $a \in L$ be an algebraic element over $K$. 
+    Show that $[K(a):K] = \deg \min(a, K)$. 
+    (Hint: You now know $K(a) \iso K[X]/(\min(a,K))$.)
+\end{ex}
+
+Some equivalent conditions for an element to be algebraic.
+%    - Lem - K(a) fin iff a alg
+\begin{lem}
+    Let $\iota : K \to L$ be a field extension and $a \in L$. 
+    Then the following are equivalent:
+    \begin{enumerate}
+        \item $a$ is algebraic over $K$
+        \item $K \to K(a)$ is a finite extension
+        \item $K \to K(a)$ is an algebraic extension.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    ($1 \imp 2$)
+        The previous result.
+        
+    ($2 \imp 3$)
+        Let $[K(a):K]$ be finite, $b \in K(a)$.
+        Then $K(b)$ is a subfield of $K(a)$ containing $\iota K$. 
+        So by the Tower Law, we have $[K(b):K]$ finite as well.
+        Here is the trick. 
+        $\{b^k\}_{k \in \N}$ is a subset of vectors in $K(b)$.
+        Since $[K(b):K] = \dim_K K(b)$ is finite, 
+        $\{b^k\}_{k \in \N}$ cannot be linearly independent. 
+        Thus there is a finite $K$-linear combination
+        of powers of $b$ equal to zero. 
+        This is clearly just a polynomial over $K$ 
+        with $b$ as a root!
+        
+    ($3 \imp 1$)
+        Trivial.
+\end{proof}
+%    - Lem - L/K fin -> L/K Alg
+\begin{thm} Finite Extensions are Algebraic.
+
+    Let $\iota : K \to L$ be a finite field extension. 
+    Then it is an algebraic extension.
+\end{thm}
+\begin{proof}
+    Let $a \in L$. Then $K(a)$ is a subfield of $L$ containing $\iota K$.
+    Hence by the Tower Law, $[K(a) : K]$ is finite,
+    which implies $a$ is algebraic by the previous lemma. 
+\end{proof}
+\begin{rmk}
+    The fact that all finite extensions are algebraic means that
+    as far as we are concerned, we do not have to worry about
+    elements not being algebraic.
+\end{rmk}
+
+We now have enough to solve some problems the greeks had.
+
+%    - Eg - Greek Geometry
+%        - Def - Constructible in one step/ Constructible
+%        - Lem - Constructible Extensions have deg 1 or 2
+%        - Cor - Impossible to Trisect angle/ Double Cube / Square Circle
+
+\end{document}

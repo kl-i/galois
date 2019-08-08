@@ -1,0 +1,283 @@
+\documentclass[../book.tex]{subfiles}
+\begin{document}
+\begin{dfn} Fields (Preliminary Version).
+
+    A \textbf{field} is a triplet $(K,+,\cdot)$ where
+    $+, \cdot$ are binary operations such that
+    $(K,+)$ is an abelian group with identity $0$,
+    $(K^\times,\cdot)$ where $K^\times := K\backslash\{0\}$
+    is an abelian group with identity $1 \neq 0$,
+    and $\cdot$ \textbf{distributes} over $+$, i.e. for all
+    $a, b, c \in K,$ 
+    \[a \cdot (b + c) = a \cdot b + a \cdot c.\]
+    $+,\cdot$ are respectively called \textbf{addition} and \textbf{multiplication}, 
+    $0, 1$ are respectively the \textbf{additive and multiplicative identity}. 
+\end{dfn}
+
+\begin{eg}
+    $(\Q,+,\cdot), (\R,+,\cdot), (\C,+,\cdot)$ are all fields. 
+    Verify that for all primes $p \in \Z$, $(\Z/p\Z,+,\cdot)$
+    is also a field.
+\end{eg}
+
+\begin{dfn} Endomorphisms, Automorphisms of Groups.
+
+    Let $(V,+)$ be a group. 
+    The set of \textbf{endomorphisms} of $V$ is defined as
+    \[ 
+        End_\Grp(V) := \{\la : V \to V \text{ in } \Grp\} 
+    \]
+    Then $End_\Grp(V)$ naturally forms a group, under pointwise addition:
+    \[
+        End_\Grp(V) \times End_\Grp(V) \to End_\Grp(V), 
+    \]
+    \[
+        (\la, \mu) \mapsto (\la + \mu : x \mapsto \la(x) + \mu(x))
+    \]
+    with the \emph{zero morphism} $0 : V \to V, 
+    x \mapsto 0$ as the group identity\footnote{
+    $0$ means different things in different places,
+    with sufficient common sense this does not lead to confusion. 
+    Here, $0$ is certainly not a ``number" in general 
+    (whatever that means).}.
+    If $V$ is abelian, then $End_\Grp(V)$ is also abelian. 
+    
+    The set of \textbf{automorphisms} of $V$, denoted $Aut_\Grp(V)$, 
+    is the subset of isomorphisms in $End_\Grp(V)$. 
+    Then $Aut_\Grp(V)$ is a group on its own
+    as a subgroup of $Aut_\Set(V)$ under function composition. 
+    
+\end{dfn}
+
+\begin{rmk}
+    Note that multiplication for $Aut_\Grp(V)$ also works for $End_\Grp(V)$.
+    However, since endomophisms are not required to be bijective, 
+    $End_\Grp(V)$ is \emph{not} a group under this multiplication. 
+    For example, the zero morphism has no multiplicative inverse. 
+    This multiplication \emph{does} distribute over addition in $End_\Grp(V)$: let $f, g, h \in End_\Grp(V), v \in V$, then
+    \begin{align*}
+        &(f(g + h))(v) = f((g+h)(v)) = f(g(v) + h(v)) \\
+        =\;& f(g(v)) + f(h(v)) = (fg)(v) + (fh)(v) = (fg + fh)(v)
+    \end{align*}
+    It looks like it is \emph{almost} a field. 
+    We shall have more to say about structures like this 
+    in the next section on \emph{rings}. 
+\end{rmk}
+
+%   - Def - Vector Space over a field K 
+\begin{dfn} Vector Space over a Field. 
+
+    Let $K$ be a field. 
+    Then a \textbf{$K$-vector space} is a pair $(V,\rho)$
+    where $V$ is an abelian group under $+$, 
+    and $\rho : K \to End_\Grp(V)$ is a morphism of groups for both
+    $(K,+) \to (End_\Grp(V),+)$ \emph{and} 
+    $(K^\times,\cdot) \to Aut_\Grp(V)$.
+    If $\rho$ is unambiguous, then we write $V$ instead of $(V,\rho)$. 
+    
+    Let $V$ be a $K$-vector space. 
+    Then elements in $K$ are referred to as \textbf{scalars}
+    and for $\la \in K, v \in V$, applying $\la$ to $v$ 
+    (i.e. applying $\la_\rho$ to $v$) is called
+    \textbf{scalar multiplication} and is denoted $\la v$. 
+    Elements in $V$ are called \emph{vectors}. 
+
+\end{dfn}
+
+\begin{rmk}
+    One should think of a $K$-vector space $V$ as $K$ acting on $V$
+    in a similar way to a group acting on a set. 
+    $V$ is in fact a $G$-set for $G=K^\times$
+    \footnote{a $K^\times$-set}, 
+    as $\rho : K^\times \to Aut_\Grp(V) \leq_\Grp Aut_\Set(V)$
+    is a morphism of groups. 
+    The motivation for $\rho$ mapping into $Aut_\Grp(V)$ is
+    to have $K^\times$ preserve the "structure" of $V$ as a group. 
+    
+\end{rmk}
+
+\ex{Unfold the definition of of $V$ being a $K$-vector space to obtain
+    the usual axioms of a vector space used in other sources: 
+    \begin{enumerate}
+        \item Associativity of Vector Addition.
+            $\forall a, b, c \in V, a + (b + c) = (a + b) + c$.
+        \item Additive Identity of Vector Addition.
+            $\exists 0 \in V, \forall a \in V, 0 + a = a + 0 = a$.
+        \item Additive Inverse of Vector Addition.
+            $\forall a \in V, \exists b \in V, a + b = b + a = 0$. 
+        \item Commutativity of Vector Addition.
+            $\forall a, b \in V, a + b = b + a$. 
+        \item Compatibility of Scalar Multiplication.
+            $\forall \la, \mu \in K, \forall a \in V, (\la\mu)(a) = \la(\mu(a))$
+        \item Identity for Scalar Multiplication.
+            $\forall a \in V, 1(a) = a$.
+        \item Distributivity of Scalar Multiplication over Vector Addition.
+            \[ 
+                \forall \la \in K, \forall a, b \in V, \la(a + b) = \la(a) + \la(b)
+            \]
+        \item Distributivity of Vectors over Scalar Addition.
+            \[ 
+                \forall \la, \mu \in K, 
+                \forall a \in V, (\la + \mu)(a) = \la(a) + \mu(a) 
+            \]
+    \end{enumerate}
+}
+
+\ex{Let $V$ be a $K$-vector space. 
+    Show that $\forall a \in V, 0(a) = 0$, 
+    where the first 0 is in $K$ and the second is in $V$. 
+    
+    Also show that $\forall a \in V, (-1)a = -a$
+    where the first $-1$ is in $K$ and 
+    the second $-a$ is the additive inverse in $V$ as an abelian group. 
+}
+
+%   - Def - Linear Map, Isomorphism, Kernel
+\begin{dfn} Morphism of $K$-vector Spaces, Isomorphisms, Images, Kernels. 
+
+    Let $V, W$ be $K$-vector spaces
+    Then $V, W$ are both $K^\times$-sets by the previous remark. 
+    Let $f : V \to W$ a function. 
+    Then $f$ is a \textbf{morphism of $K$-vector spaces} (AKA linear map) when 
+    $f$ is a morphism of groups \emph{and} a morphism of $K^\times$-sets, 
+    or equivalently, for all $a, b \in V, \la \in K,$ 
+    \[
+        f(a + b) = f(a) + f(b) \text{ and } 
+        f(\la(a)) = \la(f(a))
+    \]
+    Since morphisms of $K$-vector spaces preserve 
+    the actions of $K$ on $K$-vector spaces, 
+    they are really the only functions worth considering 
+    in ``the world of $K$-vector spaces". 
+    Thus, we write ``$f : V \to W$ in $\KVec$". 
+    
+    If in addition $f$ bijects, it is called an \textbf{isomorphism}, and 
+    we say $V$ and $W$ are \textbf{isomorphic as $K$-vector spaces}.
+    We write $V \iso_{\KVec} W$.
+    
+    We also have: 
+    \begin{itemize}
+        \item The \textbf{image} of $f$, 
+            $\im f$ := $\{b \in W \mid \exists a \in V, f(a) = b\}$.
+        \item The \textbf{kernel} of $f$, 
+            $ \ker f$ := $\{ a \in V \mid f(a) = 0 \in W\}$.
+    \end{itemize}
+\end{dfn}
+\ex{Let $U, V, W$ be $K$-vector spaces, $f : U \to V$, $g : V \to W$ both in $\KVec$.
+    Show that $g \circ f : U \to W$ in $\KVec$. 
+}
+
+%   - ex - Homomorphism Inject iff Kernel Trivial
+\ex{Let $f : V \to W$ in $\KVec$. 
+    Prove that $f$ injects if and only if $\ker f = \{0\} \subseteq V$.
+}
+
+\ex{Let $f : V \to W$ in $\KVec$. 
+    Show that \[\im f \leq_\Grp W \;and\;
+    \im \; f \leq_{K^\times\mhyph\Set}W\]
+    Hence deduce that $\im f$ is a $K$-vector space. 
+    Similarly, show that $ \ker f$ forms a $K$-vector space
+    from the group multiplication and $K^\times$-action on $V$. 
+}
+%   - Def - Subspaces
+\begin{dfn} Subspaces. 
+
+    Let $V$ be a $K$-vector space, $W \subseteq V$.
+    $W$ is a \textbf{subspace} of $V$ when 
+    $W \leq_\Grp V$ \emph{and} $W \leq_{K^\times\mhyph\Set} V$
+    (or simply when $W$ is a vector space
+    under the vector space structure from $V$).
+    We denote this with $W \leq_{\KVec} V$. 
+    If it is clear that $W, V$ are $K$-vector spaces,
+    we omit the subscript $\KVec$. 
+    
+\end{dfn}
+%   - Ex - Images, Kernels are Subspaces
+\begin{eg}
+    Images and kernels are subspaces.
+\end{eg}
+%   - Ex - Arbitrary intersection of subspaces is subspace
+\ex{For all $i \in I$, let $V_i$ be a subspace of $V$, a $K$-vector space. 
+    Prove: 
+    \[\bigcap_{i \in I} V_i \leq_{\KVec} V\] 
+    Hence deduce that for all $S \subseteq V$, there exists a unique $\< S\> \leq_{\KVec} V$ such that
+    \[
+        S \subseteq \< S \> \;and\;
+        \forall W \leq_{\KVec} V, (S \subseteq W \imp \< S \> \subseteq W). 
+    \]
+    i.e. $\< S \>$ is the \emph{smallest} subspace containing $S$. 
+    $\< S \>$ is called the \textbf{subspace generated by $S$}. 
+    Futhermore, show that 
+    \[\< S \> = \{\sum_{i = 1}^n \la_i s_i \mid n \in \N, \la_i \in K, s_i \in S\}\]
+    These finite sums are called \textbf{linear combinations of elements in $S$}.
+    If $S = \{x\}$ is a singleton set, 
+    we write $\< x \>$ for $\< \{x\} \>$. 
+}
+
+%   - Def - Quotient Space 
+\begin{dfn} Quotient Space.
+
+    Let $V$ be a $K$-vector space, $W \leq V$ a subspace.
+    So $W \leq_\Grp V$. 
+    Since $V$ abelian, $W \normsub_\Grp V$ and we have a group structure on $V / W$.
+    \[ 
+        (a + W) + (b + W) = (a + b) + W
+    \]
+    The question is, do we get a $K$-vector space structure?
+    Well, note that for $a \in V, \la \in K$, 
+    by $W \leq_{K^\times\mhyph\Set} V$,
+    \[\la (a + W) := \{\la(a + w) \mid w \in W\} \subseteq (\la a) + W\]
+    Hence if we define $\la(a + W) := (\la a) + W$, 
+    this is well-defined as a $K^\times$-action,
+    making $V/W$ a $K$-vector space.
+    Furthermore, this makes the projection $V \to V/W$ 
+    a morphism of $K$-vector spaces. 
+    This $K$-vector space, $V/W$ is called the \textbf{quotient space of $V$ by $W$}.
+\end{dfn}
+%   - Thm - 1st iso
+\begin{thm} 1st Isomorphism. 
+    
+    Let $f : V \to W$ in $\KVec$. 
+    Then $V / \ker f \iso_{\KVec} \im f$ via $a + \ker f \mapsto f(a)$.
+\end{thm}
+\begin{proof}
+    By the 1st isomorphism theorem for groups, 
+    $a + \ker f \mapsto f(a)$ is an isomorphism of groups. 
+    Let $\la \in K$ be a scalar. 
+    Then for $a + \ker f \in V/\ker f$, 
+    \[
+        \la(a + \ker f) = (\la a) + \ker f \mapsto 
+        f(\la a) = \la f(a)
+    \]
+    So the map is also an isomorphism of $K^\times$-sets.
+    Hence the map is an isomorphism of $K$-vector spaces. 
+\end{proof}
+%   - Thm - 3rd iso
+\begin{thm} 3rd Isomorphism. 
+
+    Let $W \leq_{\KVec} V$, $\pi : V \to V/W$ be the usual projection. 
+    Then 
+    \begin{enumerate}
+        \item $\pi : 
+        \{M \leq_{\KVec} V \mid W \subseteq M\} \to \{N \leq_{\KVec} V/W\}, 
+        M \mapsto \pi M = M/W$ is an inclusion-preserving bijection.
+        \item Let $M \leq_{\KVec} V$, $W \subseteq M$. 
+        Then $V / M \iso_\Grp (V / W) / (M / W)$. 
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Analogous to the proof for groups
+    and thus is left as an exercise to the reader. 
+\end{proof}
+
+\begin{rmk}
+    Note that for $K$-vector spaces, there is no need 
+    for the notion of ``normal" subspaces. 
+    That has been taken care of by the underlying groups being abelian.
+\end{rmk}
+
+% Idea
+%   - Def - Direct Sum of Vector Spaces
+%   - Eg - Vector Space Generated from a Set (Free Vector Space)
+%   - Def - Lin Indep, Spanning, Basis via Inject, Surject, Biject from Free Vector space
+\end{document}

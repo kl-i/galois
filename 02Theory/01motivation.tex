@@ -1,0 +1,257 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+
+
+%    - Eg - Splitting field of x^3 - 2
+%        - Computation of the general form of elements
+%        - 
+%        - The Galois Grp / the trick
+%        - subgrp tree
+%        - subfield tree / technique for finding fixed subfields
+%    - Thm - G-equivariance of Gal(L/ -)
+
+% maybe some friendliness?
+Concepts touched on in this chapter will be proven later on,
+so if you see things that aren't obvious or 
+you don't know the definitions of don't be put off.
+
+\begin{eg} 
+
+Consider $\Q$ as a field.
+$X^3 - 2 \in \Q[X]$ has no solutions in $\Q$.
+However, $\Q \subset \C$ and inside $\C[X]$, 
+$X^3 - 2 = (X - r)(X - r\omega)(X - r\omega^2)$ where 
+$r = \sqrt[3]{2}$, $\omega = exp(2\pi i / 3)$. 
+We restrict our focus to the smallest subfield containing $\Q$ 
+and these roots, denoted $\Q(r, r\omega, r\omega^2)$. 
+
+Intuitively, $\Q(r, r\omega, r\omega^2)$ is what you get when you put
+$\Q, r, \omega$ in a box with the axioms of a field and shake it, 
+giving all possible arithmetic expressions. 
+
+\begin{clm} 
+    \[ 
+        \Q(r, r\omega, r\omega^2) 
+        = \{a + b r + c r^2 + d\omega + er\omega + fr^2\omega
+        \mid a, \dots, f \in \Q\} 
+    \]
+\end{clm}
+
+We will do this in two steps: 
+First, throw $r$ in i.e. compute $\Q(r)$. 
+Then, repeat by throwing $\omega$ into $\Q(r)$.
+
+\begin{proof} 
+    We first prove 
+    $\Q(r) = \{f(r) \mid f \in \Q[X] \} =\{a + br + cr^2 \mid a, b, c \in \Q \}$ 
+    by showing it is a field and it is the smallest containing $\Q$ and $r$
+    (this is the definition of $\Q(r)$). 
+    
+    By the division algorithm on polynomials, 
+    $\{f(r) \mid f \in \Q[X] \} =\{a + br + cr^2 \mid a, b, c \in \Q \}$.
+    So we only show the first equality.
+    Note that $ 0 = r^3 - 2 = g(r)$ where $g$ is irreducible in the ring $\Q[X]$ 
+    (you cannot factorise it further without ending up with elements outside $\Q$).
+    So we have  $\forall f \in \Q[X], g \mid f \,\lor\, (f, g) = 1$.
+
+    Case $g \mid f$, $f(r) = 0$. 
+
+    Case $(f, g) = 1$, $\exists \la,\,\mu\in\Q[X], \la f + \mu g = 1$. 
+    Evaluating everything at $r$ gives $\la(r)f(r) = 1$. 
+    Hence $f(r)=0$ or it is a unit. 
+    This shows $\{f(r) \mid f \in \Q[X] \}$ is a field. 
+    
+    The least-property of $\{f(r) \mid f \in \Q[X] \}$ is trivial. (Why?)
+
+    \ex{
+        Adapt the proof above to show that 
+        the smallest field containing $\Q(r)$ and $\omega$, 
+        $\Q(r)(\omega) = \{a + b\omega \mid a, b \in \Q(r)\}$. 
+        Hence complete the proof by convincing yourself that
+        $\Q(r, \omega) := \Q(r)(\omega) = \Q(r, r\omega, r\omega^2)$. 
+    }
+\end{proof}
+
+\ex{
+    Show that $\Q(r, r\omega, r\omega^2)$ is a $\Q$-vector space 
+    with $\{1, r, r^2, \omega, r\omega, r^2\omega \}$ as a basis. 
+}
+
+Now introducing maps. 
+For a function $\sigma : \Q(r, r\omega, r\omega^2) \to 
+\Q(r, r\omega, r\omega^2) $, 
+we say $\sigma$ is a \emph{morphism of fields} if: 
+\begin{enumerate}
+    \item $\forall a, b \in \Q(r, r\omega, r\omega^2), 
+        \sigma(a + b) = \sigma(a) + \sigma(b)$
+    \item $\forall a, b \in \Q(r, r\omega, r\omega^2), 
+        \sigma(ab) = \sigma(a)\sigma(b)$
+    \item $\sigma(1) = 1$
+\end{enumerate}
+If $\sigma$ also bijects, it is called an \emph{isomorphism}.
+
+\ex{
+Let L = $\Q(r, r\om, r\om^2)$. 
+Show that the set of all isomorphisms from $L$ to itself 
+form a group under composition. 
+This is denoted $Aut(L)$, the \emph{automorphism group of $L$}.
+} 
+
+Consider the following subgroup of $Aut(L)$, 
+the \emph{Galois group of $L$ over $\Q$}
+\[Gal(L/\Q) := \{\sigma \in Aut(L) \mid \forall x \in \Q, \sigma(x) = x\}\]
+
+\begin{clm}
+    $Gal(L/\Q) \iso D_6$. 
+\end{clm}
+
+\begin{proof} 
+    We begin by noting that the condition $\forall x \in \Q, \sigma(x) = x$ 
+    implies $\sigma$ is a $\Q$-linear map. 
+    Since $L$ is a finite dimensional $\Q$-vector space, 
+    $\sigma$ is determined the images of $1, r, r^2, \omega, r\omega, r^2\omega$.
+    Furthermore, since we have the following equations: 
+    \[ \sigma(1) = 1 \quad \sigma(r^2) = \sigma(r)^2 \]
+    \[ \sigma(\omega) = \sigma(r^2 \cdot r\omega / 2) 
+        = \sigma(r)^2\sigma(r\omega) / 2 \]
+    \[ \sigma(r^2\omega) = \sigma(r) \sigma(r\omega) \]
+    So $\sigma$ is actually determined by the images of $r, r\omega, r\omega^2$. 
+    We proceed by doing cases on 
+    $\sigma(r), \sigma(r\omega), \sigma(r\omega^2)$. 
+
+    The rest of the proof hinges on a trick, which we will formalise later. 
+    It is the following: 
+    \begin{align*}
+        0 &= \sigma(0) = \sigma(r^3 - 2) 
+            = \sigma(r^3) - \sigma(2) = \sigma(r)^3 - 2 \\
+        &= (\sigma(r) - r) (\sigma(r) - r\omega) (\sigma(r) - r\omega^2) 
+            \imp \sigma(r) = r, r\omega, r\omega^2 
+    \end{align*}
+
+    The same follows for $\sigma(r\omega)$ and $\sigma(r\omega^2)$. 
+    Since $\sigma$ is bijective, thus injective,  
+    we see that $\sigma \in Gal(L/\Q)$ simply permute the three roots. 
+    Going backwards, extending linearly and mutiplicatively yields 
+    isomorphisms again. 
+    Hence, $Gal(L/\Q)$ is isomorphic to $S_3 \iso D_6$.  
+\end{proof}
+Since $Gal(L/\Q) \iso S_3$, 
+we will denote an element $\sigma$ by the triplet of images 
+$(\sigma(r), \sigma(r\om), \sigma(r\om^2) )$.
+
+Let us now consider subgroups of $Gal(L/\Q) \iso D_6$.
+Letting $\phi, \psi$ denote a flip and rotation that generate $D_6$, 
+we have the following subgroups: 
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+        & D_6 & & \\
+        \langle\psi\rangle \arrow[ru,"2"]&\langle\phi\rangle \arrow[u,"3"]&
+        \langle\phi\psi\rangle \arrow[lu,"3"]
+        &\langle\psi\phi\rangle \arrow[llu,"3"]\\
+        &\langle e \arrow[lu,"3"] \arrow[u,"2"] \arrow[ru,"2"]\rangle
+        \arrow[rru,"2"]& & 
+    \end{tikzcd}
+\end{figure}
+
+The arrows denote subgroup and the numbers are the index of the subgroups. 
+Let $(r, r\omega^2, r\omega) \mapsto \phi$ and 
+$(r\omega,r\omega^2,r) \mapsto \psi$ be an isomorphism $Gal(L/\Q) \iso D_6$. 
+Then there is a way we can obtain subfields of $L$ containing $\Q$. 
+For $H \leq Gal(L/\Q)$, we define the \emph{subfield fixed by $H$} to be
+\[L^H := \{z \in L \mid \forall \sigma \in H, \sigma(z) = z\} \]
+\ex{Show that $L^H$ is indeed a field inside $L$, containing $\Q$.}
+
+\begin{clm}
+    \[ L^{\langle \psi \rangle} = 
+    \{ a + b\omega \mid a, b \in \Q \}\]
+\end{clm}
+
+\begin{proof}
+    Let $z = \alpha + \beta r + \gamma r^2 
+    + \delta \omega + \mu r\omega + \nu r^2\omega$, 
+    $\alpha, \dots, \nu \in \Q$, $\psi (z) = z$. 
+    Then \begin{align*}
+        & \alpha + \beta r + \gamma r^2 
+        + \delta \omega + \mu r\omega + \nu r^2\omega \\
+        =\;&\psi(\alpha + \beta r + \gamma r^2 
+        + \delta \omega + \mu r\omega + \nu r^2\omega) \\
+        =\;& \alpha + \beta \psi(r) + \gamma \psi(r)^2 + \delta\psi(r\omega)/\psi(r)
+        + \mu \psi(r\omega) + \nu \psi(r)\psi(r\omega) \\
+        =\;& \alpha + \beta r \om + \gamma r^2 \om^2 + \delta r\om^2 / r\om
+        + \mu r \om^2 + \nu r\om r\om^2 \\
+        =\;& \al -\mu r + (\nu - \ga)r^2 + \de\om + (\be - \mu)r\om - \ga r^2 \om
+        \end{align*}
+    By the elements being a basis, we have from linear independence
+    $(\al,\be,\ga,\de,\mu,\nu)$ $= (\al,-\mu,\nu-\ga,\de,\be-\mu,-\ga)$  
+    Hence, $z = \al + \de\om$. 
+    Since $\psi$ generates $\langle \psi \rangle$, $\psi^2(z) = z$. 
+    So $L^{\langle \psi \rangle} = \{ \al + \de\om \mid \al, \de \in \Q\}$ 
+    as desired. 
+\end{proof}
+\ex{By adapting the proof above, compute the other subfields fixed by
+the other subgroups of the Galois group, thus obtaining the following diagram.}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd} [column sep = 0.1em]
+        & \Q \arrow[dl,"2"] \arrow[d,"3"] \arrow[dr,"3"] \arrow[drr,"3"] & & \\
+        \Q(\om) \arrow[dr,"3"] & \Q(r) \arrow[d,"2"] & 
+        \Q(r\om^2) \arrow[dl,"2"] & \Q(r\om) \arrow[dll,"2"]\\
+        & \Q(r,r\om,r\om^2)& &
+    \end{tikzcd}
+\end{figure}
+
+Here, the arrows denote subfields and the numberings denote
+the dimension of the superfield as a vector space over the subfield. 
+But somehow, it appears the diagram of subfields looks strikingly similar to
+the diagram of subgroups of the Galois group! 
+This is the basically Galois correspondance. 
+
+\begin{thm} Basically Galois Correspondance (for Extensions of $\Q$). 
+
+    Let $\Q \subseteq L$ where $L$ is a field. 
+    Then under ``nice" conditions, 
+    there is a order-reversing bijection between
+    subgroups of the Galois group $Gal(L/\Q)$ and 
+    the subfields of $L$ containing $\Q$. 
+    This bijection also preserves indices and dimension. 
+    
+\end{thm}
+
+As we will see, ``nice" means $L$ is a \emph{Galois extension} over $\Q$. 
+The correspondance also behaves nicely with respect to natural group actions
+of $Gal(L/\Q)$. 
+
+\ex{
+    Let $M$ be a field such that $\Q \subseteq M \subseteq L$. 
+    Then for all $\sigma \in Gal(L/\Q)$, $\sigma M$ is also a field.
+    This defines an action of $Gal(L/\Q)$ on subfields of $L$ containing $\Q$. 
+    Compute the orbits of this action.
+    Then, let $Gal(L/\Q)$ act on its subgroups via conjugation. 
+    Compute the orbits of this action (i.e. the conjugacy classes). 
+    Hence, see that the bijection also preserves orbits. 
+}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd}[column sep = 0.1em]
+        & D_6 & & & 
+        & \Q \arrow[dl,"2"] \arrow[d,"3"] 
+        \arrow[dr,"3"] \arrow[drr,"3"] & &\\
+        \color{blue}\langle\psi\rangle \arrow[ru,"2"]&
+        \color{red}\langle\phi\rangle \arrow[u,"3"]&
+        \color{red}\langle\phi\psi\rangle \arrow[lu,"3"]&
+        \color{red}\langle\psi\phi\rangle \arrow[llu,"3"]& 
+        \color{blue}\Q(\om) \arrow[dr,"3"] & 
+        \color{red}\Q(r) \arrow[d,"2"] & 
+        \color{red}\Q(r\om^2) \arrow[dl,"2"] & 
+        \color{red}\Q(r\om) \arrow[dll,"2"]\\
+        &\langle e \arrow[lu,"3"] \arrow[u,"2"] \arrow[ru,"2"]\rangle
+        \arrow[rru,"2"]& & & & \Q(r,r\om,r\om^2)& &
+    \end{tikzcd}
+    \caption{Same colour indicates same orbit.}
+\end{figure}
+
+\end{eg}
+
+\end{document}

@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, verbatim, tikz, tikz-cd}
+\usepackage{parskip}
+\usepackage{subfiles}
+\usepackage{mdframed}
+\usepackage{perpage}
+
+\MakePerPage{footnote}
+
+%theorems
+\newtheoremstyle{definitionstyle}%
+{5pt}% above thm
+{5pt}% below thm
+{}% body font
+{}% space to indent
+{\bf}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\newtheoremstyle{lemmastyle}%
+{5pt}% above thm
+{5pt}% below thm
+{\it}% body font
+{}% space to indent
+{\bf}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\newtheoremstyle{claimstyle}%
+{5pt}% above thm
+{5pt}% below thm
+{\it}% body font
+{}% space to indent
+{\it}% head font
+{:}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+%\newtheoremstyle allows creating space before and after theorems
+%[section] gives numberings according to section
+%[thm] gives continuous numberings for all three types
+
+\theoremstyle{lemmastyle}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definitionstyle}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{claimstyle}
+\newtheorem*{clm}{Claim}
+
+%tikzcd
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+  }
+}
+% allows for substituting symbols for arrows in tikz comm-diagrams.
+
+%commands
+\mathchardef\mhyph="2D
+\newcommand{\ex}[1]{\textit{Exercise. #1}}
+\newcommand\res[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\de}{\delta}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\la}{\lambda}
+\newcommand{\om}{\omega}
+\newcommand{\im}{\textnormal{im}\;}
+
+\newcommand{\Hom}[3]{\text{Hom}_{#1}(#2, #3)}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\RMod}{R\mhyph\mathbf{Mod}}
+\newcommand{\KVec}{K\mhyph\mathbf{Vec}}
+
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\iso}{\cong}
+\newcommand{\normsub}{\trianglelefteq}
+\newcommand{\norm}[1]{\Vert#1\Vert}
+%\newcommand{\Bar}[1]{\overline{#1}}
+
+\newcommand{\fa}{\mathfrak{a}}
+\newcommand{\fb}{\mathfrak{b}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\fq}{\mathfrak{q}}
+
+\mdfdefinestyle{Definitions}{
+leftmargin=0.3cm,
+rightmargin=0.3,
+linecolor=gray!70,
+topline=false,
+bottomline=false,
+rightline=false,
+backgroundcolor=gray!4}
+
+\newenvironment{dfn}
+    {\begin{mdframed}
+        [style=Definitions, skipabove=1em, skipbelow=1em]
+        \begin{definition}}
+        {\end{definition}
+    \end{mdframed}}
+\newenvironment{boxer}
+    {\begin{center}
+    \begin{tabular}{|p{0.9\textwidth}|}
+    \hline\\
+    }
+    { 
+    \\\\\hline
+    \end{tabular} 
+    \end{center}
+    }
+\begin{document}
+
+efefefion
+
+\begin{boxer}
+    $\{\langle Text\> \rangle\}$
+\end{boxer}
+
+
+\begin{dfn}
+    ...
+\end{dfn}
+
+eifenfi
+
+
+
+
+
+
+
+
+\end{document}

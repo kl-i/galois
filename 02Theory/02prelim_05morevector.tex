@@ -1,0 +1,187 @@
+\documentclass[../book.tex]{subfiles}
+\begin{document}
+% Direct Sum of Vector Spaces
+\begin{dfn} Direct Sum of Vector Spaces.
+    
+    The idea is to be able to formally add vectors from different vector spaces
+    together in some larger vector space.
+    Let $(V_i)_{i\in I}$ be a collection of $K$-vector spaces.
+    The \textbf{direct sum}, $\bigoplus_{i\in I}V_i$, 
+    will contain linear combinations of vectors from the $(V_i)_{i\in I}$.
+    It is formalised as follows. 
+    Let $\bigsqcup_{i\in I} V_i$ be the disjoint union 
+    of the collection of $K$-vector spaces.
+    Define the direct sum to be \[
+        \bigoplus_{i\in I} V_i := \{v : I \to \bigsqcup_{i\in I} V_i \mid 
+        v(i) \in V_i, \supp v \text{ finite}\}
+    \]
+    Then this is naturally a $K$-vector space under pointwise addition and scaling.
+    For all $i \in I$, we have a natural injective morphism of $K$-vector spaces 
+    $\iota_i : V_i \to \bigoplus_{i\in I} V_i$ by interpreting
+    $v \in V_i$ as the function \[
+        v : I \to \bigsqcup_{i\in I} V_i, j \mapsto \begin{cases}
+            v   &, j = i\\
+            
+            0   &, j \neq i
+        \end{cases}
+    \]
+    Then, as desired, all vectors $v$ in the direct sum can be written as
+    a linear combination \[
+        v = \sum_{i \in I} v_i , v_i = v(i) \in V_i
+    \]
+\end{dfn}
+
+\begin{thm} The ``Characterising" Property of the Direct Sum.
+    
+    Let $(V_i)_{i\in I}$ be a collection of $K$-vector spaces.
+    Then the direct sum is the \emph{smallest} vector space 
+    containing $(V_i)_{i\in I}$ in the sense that
+    for any $K$-vector space $W$ and 
+    $(f_i : V_i \to W)_{i\in I}$ $K$-vector space morphisms,
+    there exists a unique morphism of $K$-vector spaces 
+    $f : \bigoplus_{i\in I} V_i \to W$ such that for all $i\in I$, 
+    $f_i = f \circ \iota_i$. 
+    I.e. the diagram below commutes for all $i \in I$.  
+    \begin{figure} [ht]
+        \centering
+        \begin{tikzcd}
+        \bigoplus_{i\in I} V_i \arrow{r}{f} & W\\
+        V_i \arrow{u}{\iota_i} \arrow{ru}[sloped, below]{f_i}& 
+        \end{tikzcd}
+    \end{figure}
+    
+    Hence if $W$ with $(f_i : V_i \to W)_{i\in I}$ also has the above property,
+    $f$ becomes an \emph{isomorphism} between the direct sum and $W$.
+    So the above property completely characterises the direct sum. 
+\end{thm}
+\begin{proof}
+    Let $W$ be a $K$-vector space and 
+    $(f_i : V_i \to W)_{i\in I}$ $K$-vector space morphisms.
+    Let $v$ be a vector in the direct sum, 
+    i.e. $v = \sum_{i\in I} v_i$ is a finite sum where $v_i \in V_i$. 
+    $f$ being a $K$-vector space morphism and $f \circ \iota_i = f_i$ implies \[
+        f(v) = \sum_{i\in I} f(v_i) = \sum_{i\in I} f_i(v_i)
+    \]
+    This serves as a definition of $f$ and proves uniqueness of $f$. 
+    
+    Note that since the direct sum itself trivially has the above property, 
+    there is a unique morphism from it to itself commuting with all $\iota_i$,
+    namely the identity morphism of the direct sum. 
+    
+    Suppose $W$ also have the above property. 
+    Then there exists a unique morphism $g : W \to \bigoplus_{i\in I} V_i$
+    such that all $g \circ f_i = \iota_i$. 
+    Then it is easily verified that $g \circ f$ is a morphism 
+    from the direct sum to itself that commutes with all $\iota_i$.
+    But we know this must be the identity, hence $g \circ f = id$. 
+    Similarly, $f \circ g = id$. 
+    So $\bigoplus_{i\in I} V_i \iso W$ as $K$-vector spaces via $f$. 
+\end{proof}
+% Free Vector Space as direct sum indexed by set
+\begin{ex} Free Vector Space is a Direct Sum.
+    
+    Let $S$ be a set. 
+    Show that $\<S\> \iso_{\KVec} \bigoplus_{s\in S} K$ where the latter is
+    the direct sum of copies of $K$ indexed by $S$. 
+    This gives another construction for the free vector space over a set. 
+    
+    In particular, $K^n \iso K \oplus \cdots \oplus K$ $n$-times. 
+\end{ex}
+
+% Linear Indep, Spanning, Basis as Inject, Surject, Biject
+\begin{dfn} Linear Independence, Spanning, Basis.
+    
+    Let $V$ be a $K$-vector space and $\{v_i\}_{i\in I}$ a subset of vectors.
+    Then via the inclusion $\iota : \{v_i\}_{i\in I} \to V$ and
+    the characterising property of free vector spaces, 
+    we have a $K$-vector space morphism \[
+        \bar\iota : \bigoplus_{\{v_i \mid i\in I\}} K \to V, 
+        \sum_{i\in I}\la_i v_i \mapsto \sum_{i\in I}\la_i v_i
+    \]
+    Keep in mind that linear combinations are finite. 
+    Then \begin{enumerate}
+        \item If $\bar\iota$ injects,
+        the subset of vectors $\{v_i\}_{i\in I}$ 
+        is called \textbf{$K$-linearly independent}. 
+        Equivalently, 
+        $\sum_{i\in I} \la_i v_i = 0 \in V$ implies for all $i \in I$, $\la_i = 0$.
+        \item If $\bar\iota$ surjects, 
+        the subset of vectors $\{v_i\}_{i\in I}$ is called \textbf{spanning}.
+        Equivalently, every vector is a linear combination of $\{v_i\}_{i\in I}$. 
+        \item If $\bar\iota$ bijects,
+        the subset of vectors $\{v_i\}_{i\in I}$ is called a \textbf{$K$-basis}.
+    \end{enumerate}
+    If the underlying field is clear, we omit the prefix "$K$-". 
+    
+    These three definitions are a sort of way of measuring the 
+    "vector space data" of a subset of vectors.
+    Linearly independent is no-redundant data, spanning is too much data, and
+    a basis is just the right amount. 
+\end{dfn}
+
+\begin{dfn} Dimension of a Vector Space.
+
+    Let $\{v_i\}_{i\in I}$ be a basis of $V$. 
+    Note that this is equivalent to $V$ being a free vector space, namely, 
+    \[
+        V \iso \bigoplus_{\{v_i \mid i\in I\}} K \iso \<\{v_i\}_{i\in I}\> 
+    \]
+    Then the \textbf{dimension of $V$} is defined as the cardinality of the basis
+    and is denoted, $\dim_K V$. 
+    
+    We will only prove the well-definedness of dimension for finite-bases
+    \footnote{Bases is plural for basis.}, 
+    since we will only need finite-dimensional vector spaces for Galois theory
+    and the proof for general cardinality bases is somewhat tricky. 
+\end{dfn}
+% Steinitz Exchange / Dimension is Well-defined
+\begin{lem} Steinitz Exchange / Finite Dimenion is Well-Defined. 
+
+    Let $S = \{v_i\}_{i=1}^n, T = \{w_j\}_{j=1}^m$ be finite subsets 
+    of a $K$-vector space $V$ such that 
+    $S$ is linearly independent and $T$ is spanning. 
+    Then $|S| \leq |T|$.
+    
+    Hence, given two finite bases of $V$, they have the same cardinality. 
+\end{lem}
+\begin{proof}
+    The idea is to swap out vectors in $T$ by vectors in $S$, 
+    creating an injection from $S$ to $T$. 
+    ...
+\end{proof}
+\begin{cor} Morphisms between Finite Vector Spaces 
+are like Functions between Finite Sets. 
+
+    Let $f : V \to W$ be a $K$-vector space morphism and $\dim V = \dim W$ finite.
+    Then $f$ injects if and only if $f$ surjects, i.e.
+    either is automatically a bijection. 
+\end{cor}
+\begin{proof}
+    WLOG $V = K^{\dim V}$ and $W = K^{\dim W}$. 
+
+    Assume $f$ is injective. 
+    Suppose $f$ is not surjective, i.e.
+    there exists a vector $w \in W$ that is not in the image of $f$. 
+    We will show that $\dim V < \dim W$. 
+    Since $f$ is a $K$-vector space morphism and 
+    $\{i\}_{i\in\dim V}$ is a basis of $V$, 
+    the image of $f$ is equal to the subspace generated by $\{f(i)\}_{i\in\dim V}$.
+    So $w \notin \im f$ implies 
+    $w$ cannot be a linear combination of $\{f(i)\}_{i\in\dim V}$.
+    We now claim that $\{f(i)\}_{i\in\dim V} \cup \{w\}$ is linearly independent. 
+    Let $\la w + \sum_{i\in I} \la_i f(i) = 0$. 
+    If $\la = 0$, then by linear independence of $\{f(i)\}_{i\in I}$, all $\la_i = 0$. If $\la \neq 0$, then $\la \in K^\times$,
+    so $w = \sum_{i\in I} (-\la_i/\la)f(i)$, 
+    which says $w$ is in $\im f$, a contradiction. 
+    This proves $\{f(i)\}_{i\in\dim V} \cup \{w\}$ is a linearly independent set.
+    Hence by Steinitz exchange, $\dim V + 1 \leq W$,
+    which gives $\dim V < \dim W$, the desired contradiction. 
+    
+    We leave the reverse implication as an exercise for the reader. 
+    (Hint : Already, $\{f(i)\}_{i\in\dim V}$ is spanning. 
+    Show that it is linearly independent by assuming not and 
+    deriving $\dim W \leq \dim V - 1$ via Steinitz Exchange, 
+    contradicting with $\dim W = \dim V$.)
+\end{proof}
+
+\end{document}
