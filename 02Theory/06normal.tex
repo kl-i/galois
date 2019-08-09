@@ -174,8 +174,9 @@ For now, we restrict the definition of normality to 1 to 4.
     Furthermore, $N$ is a finite extension and unique up to isomorphism, i.e.
     any other normal closure of $\iota_L : K \to L$ is
     isomorphic to $N$ as a $K$-extension. 
-    Thus we denote $N$ as $N(L/K)$ and 
-    refer to anything isomorphic to it as \emph{the} normal closure of $(L,\iota)$.
+    Thus we denote $N$ as $N(L,\iota_L)$ and refer to anything isomorphic to it 
+    as \emph{the} normal closure of $(L,\iota)$.
+    If the extension $\iota_L$ is clear, we write $N(L)$ instead. 
 \end{thm}
 \begin{proof}
     Since $L$ is a finite dimensional $K$-vector space,
@@ -218,16 +219,51 @@ For now, we restrict the definition of normality to 1 to 4.
 \end{proof}
 %    - Thm - L is “in” N(L/K)
 \begin{rmk}
-    The following is the main property of normal extensions 
+    The following is a key property of normal extensions.
 \end{rmk}
-\begin{thm}
+\begin{thm} Two Embeddings into a Normal Extension Differ by an Automorphism.
     
     Let $K \overset{\iota_L}{\to} L \overset{\iota_N}{\to} N$ be extensions
     where $(N,\iota_N\circ\iota_L)$ is normal. 
     Then for all $K$-extension morphisms 
     $f : (L,\iota_L) \to (N,\iota_N\circ\iota_L)$,
     there exists a $L$-extension morphism $\bar{f} : (N,\iota_N) \to (N,f)$.
+    Diagrammatically, 
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+        & 
+        & 
+        N \arrow[dd,"\bar{f}"] \\
+        K \arrow[r,"\iota_L"] &
+        L \arrow[ru,"\iota_N"{sloped,above}] \arrow[rd,"f"{sloped,below}] &
+        \\
+        & 
+        &
+        N 
+        \end{tikzcd}
+    \end{figure}
+    This can be seen as if $L$ embeds in $N$ in two ways that agree on $K$, 
+    then there is a field automorphism of $N$ bringing one $L$ to the other, 
+    preserving $K$. 
+    So in a sense, two embeddings into a normal extension
+    differ by an automorphism. 
 \end{thm}
+\begin{proof}
+    $(N,\iota_N\circ\iota_L)$ being normal implies
+    there exists a finite set of generators $a_1,\dots,a_n$ as a $K$-extension
+    such that for all $a_i$, $(N,\iota_N\circ\iota_L)$ splits $\min(a_i,K)$. 
+    Then $N = K(a_1,\dots,a_n) \subseteq L(a_1,\dots,a_n) \subseteq N$
+    implies $a_1,\dots,a_n$ are also generators of $N$ as an $L$-extension.
+    By definition of being a $K$-extension morphism, 
+    $f\circ\iota_L = \iota_N\circ\iota_L$. 
+    So $(N,f\circ\iota_L) = (N,\iota_N\circ\iota_L)$ as $K$-extensions. 
+    Namely, $(N,f\circ\iota_L)$ is normal, which implies 
+    for all generators $a_i$, $(N,f\circ\iota_L)$ splits $\min(a_i,K)$.
+    Hence, $(N,f)$ splits $\min(a_i,L)$.
+    Thus, by embedding via conjugates, we have an $L$-extension morphism
+    $\bar{f} : (N,\iota_N) \to (N,f)$. 
+\end{proof}
 
 %    - Thm - Embeddings into Normal Ext give Automorphisms
 %\begin{thm} Normal Extensions Differ by Extension Automorphisms. 
@@ -268,13 +304,13 @@ We are now ready to prove $5 \imp 1$.
     $L$ splits $f$. 
 \end{thm}
 \begin{proof}
-    Let $f$ ba an irreducible polynomial over $K$ with a root $a \in L$. 
+    Let $f$ be an irreducible polynomial over $K$ with a root $a \in L$. 
     We do not know whether $L$ contains all the roots of $f$, 
     but we do know that $L$'s normal closure definitely does. 
-    So let $\iota_N : L \to N(L/K)$ be the normal closure of $L$. 
+    So let $\iota_N : L \to N(L)$ be the normal closure of $L$. 
     Then $f$ is an irreducible polynomial with $\iota_N(a)$ as a root.
-    So by normality, $N$ splits $f$. 
-    Let $a_i$ be an arbitrary root of $f$ in $N$. 
+    So by normality, $N(L)$ splits $f$. 
+    Let $a_i$ be an arbitrary root of $f$ in $N(L)$. 
     We seek to show that the root $a_i$ is already in $\iota_N L$. 
     The following diagram is the situation. 
     \begin{figure} [H]
@@ -283,7 +319,7 @@ We are now ready to prove $5 \imp 1$.
         K \arrow[r,"\iota_L"] \arrow[rd,"\iota_N\circ\iota_L"{sloped,below}] & 
         K(a) \arrow[r,"\subseteq"] \arrow[d,"\phi",dashed] & 
         L \arrow[r,"\iota_N"] & 
-        N \arrow[loop right,"\bar\phi",dashed] \\
+        N(L/K) \arrow[loop right,"\bar\phi",dashed] \\
         & 
         K(a_i) \arrow[rru,"\subseteq"{sloped,below}] & 
         & 
@@ -291,13 +327,15 @@ We are now ready to prove $5 \imp 1$.
     \end{figure}
     Since $a_i$ is a galois conjugate of $a$, 
     there exists a $K$-extension morphism 
-    $\phi : (K(a),\iota_L) \to (K(a_i),\iota_N\circ\iota_L)$ mapping $a \mapsto a_i$. 
-    This implies $\phi\circ\iota_L = \iota_N\circ\iota_L$, i.e.
-    $(N,\phi\circ\iota_L) = (N,\iota_N\circ\iota_L)$ as $K$-extensions.
-    By lifting normality, $(N,\iota_N)$ and $(N,\phi)$ are both normal $K(a)$-extensions.
-    Thus, there exists a $K(a)$-extension morphism $\bar\phi : (N,\iota_N) \to (N,\phi)$
-    via finite normal extensions differing by automorphisms. 
-    It follows that $\bar\phi\circ\iota_N : (L,\iota_L) \to (N,\iota_N\circ\iota_L)$
+    $\phi : (K(a),\iota_L) \to (K(a_i),\iota_N\circ\iota_L)$ 
+    such that $a \mapsto a_i$. 
+    Then $\phi : (K(a),\iota_L) \to (N,\iota_N\circ\iota_L)$
+    is a $K$-extension morphism where $(N,\iota_N\circ\iota_L)$ is normal. 
+    Hence, there exists a $K(a)$-extension morphism 
+    $\bar\phi : (N,\iota_N) \to (N,\phi)$,
+    since two embeddings into a normal extension differ by an automorphism. 
+    It follows that 
+    $\bar\phi\circ\iota_N : (L,\iota_L) \to (N,\iota_N\circ\iota_L)$
     is a $K$-extension morphism. 
     Since $\iota_N$ and $\bar\phi\circ\iota_N$ are 
     both $K$-extension morphisms from $L$ to $N$,
@@ -307,6 +345,4 @@ We are now ready to prove $5 \imp 1$.
     Thus, the root $a_i$ is actually already in $\iota_N L$.
     This completes the proof. 
 \end{proof}
-
-test. test nice. 
 \end{document}
