@@ -5,24 +5,24 @@
 \begin{lem} Extensions induce Ring Morphisms on the Polynomial Ring. 
 
     Let $\iota_0 : K \to L, \iota_1 : L \to M$ be extensions. 
-    Then we have a natural injective morphism of rings $\Bar{\iota_0} : K[X] \to L[X]$
-    and $\Bar{\iota_1} : L[X] \to M[X]$ such that 
-    $\Bar{\iota_1 \circ \iota_0} = \Bar{\iota_1} \circ \Bar{\iota_0}$. 
+    Then we have a natural morphism of rings $\bar{\iota_0} : K[X] \to L[X]$
+    and $\bar{\iota_1} : L[X] \to M[X]$ such that 
+    $\bar{\iota_1 \circ \iota_0} = \bar{\iota_1} \circ \bar{\iota_0}$. 
     \begin{figure}[ht]
         \centering
         \begin{tikzcd}
         K \arrow[r,"\iota_0"] \arrow[dr,"\iota_1 \circ \iota_0" below left] &
         L \arrow[d,"\iota_1"]& & 
-        K[X] \arrow[r,"\Bar{\iota_0}"] \arrow[dr,"\Bar{\iota_1 \circ \iota_0} 
-        =    \Bar{\iota_1}\circ\Bar{\iota_0}" below left] & 
-        L[X] \arrow[d,"\Bar{\iota_1}"] \\
+        K[X] \arrow[r,"\bar{\iota_0}"] \arrow[dr,"\bar{\iota_1 \circ \iota_0} 
+        =    \bar{\iota_1}\circ\bar{\iota_0}" below left] & 
+        L[X] \arrow[d,"\bar{\iota_1}"] \\
         & M & & & M[X]
         \end{tikzcd}
         \label{fig:polyring_functor}
     \end{figure}
 \end{lem}
 \begin{proof}
-    $\Bar{\iota_0} : K[X] \to L[X], 
+    $\bar{\iota_0} : K[X] \to L[X], 
     \sum_{k=0}^n \la_kX^k \mapsto \sum_{k = 0}^n \iota_0(\la_k)X^k$. 
     
     (Check the composition-preserving property.)
@@ -31,16 +31,20 @@
 \begin{lem} Evaluation Morphism. 
 
     Let $K$ be a field, $a \in K$. 
-    Then the \emph{evaluation at a} \[ev_a : K[X] \to K, f \mapsto f(a)\]
+    Then the \emph{evaluation at a} 
+    \[ev_a : K[X] \to K, 
+    f = \sum_{k\in\deg f} f_k X^k \mapsto \sum_{k\in\deg f} f_k a^k\]
     is a morphism of rings. 
+    We often write "$f(a)$" for $ev_a (f)$. 
+    Afterall, elements in polynomial rings are meant to be polynomials! 
 
     Furthermore, given an extension $\iota : K \to L$, 
-    we have $\iota \circ ev_a = ev_{\iota a} \circ \bar{\iota}$. 
-    I.e. the following diagram commutes. 
+    we have $\iota \circ ev_a = ev_{\iota a} \circ \bar{\iota}$,
+    i.e. the following diagram commutes. 
     \begin{figure}[ht]
     \centering
     \begin{tikzcd}
-    K[x] \arrow[r,"\Bar{\iota}"] \arrow[d,"ev_a"]
+    K[x] \arrow[r,"\bar{\iota}"] \arrow[d,"ev_a"]
     & L[X] \arrow[d,"ev_{\iota a}"]\\
     K \arrow[r,"\iota"]& L\\
     \end{tikzcd}
@@ -51,7 +55,8 @@
 \end{proof}
 
 %    - Def - Alg Element, Alg ext
-\begin{dfn}
+\begin{dfn} Algebraic and Transcendental Elements, Algebraic Extensions.
+
     Let $\iota : K \to L$ be a field extension and $a \in L$. 
     Then we have the ring morphism \[
         ev_a \circ \bar\iota : K[X] \to L, 
@@ -60,10 +65,9 @@
     i.e. takes polynomials over $K$ and evaluates them at $a$ inside $L$.
     $a$ is called \textbf{algebraic over $K$} when 
     $\ker (ev_a \circ \bar\iota) \neq (0)$.
-    For polynomials $g \in \ker (ev_a \circ \bar\iota)$, 
+    For polynomials $g \in \ker (ev_a \circ \bar\iota)\setminus \{0\}$, 
     we say \textbf{$g$ has $a$ as a root}. 
-    Otherwise, $a$ is called \textbf{transcendental over $K$} when
-    the kernel is instead zero. 
+    Otherwise, $a$ is called \textbf{transcendental over $K$}. 
     
     $\iota : K \to L$ is called an \textbf{algebraic extension}
     when for all $a \in L$, $a$ is algebraic over $K$.
@@ -71,21 +75,29 @@
 %    - Def - \min(a,K) 3 eqv def (min deg, irr, generates ideal) and uniqueness
 \begin{dfn}
 Let $\iota : K \to L$ be an extension, $a \in L$, $a$ is algebraic over $K$. 
-Then there exists a unique non-constant, monic polynomial $\min(a,K)$ 
+Then there exists a unique non-zero, monic polynomial $\min(a,K)$ 
 with $a$ as a root such that one of the three equivalent conditions holds:
 \begin{enumerate}
     \item $\min(a,K)$ has minimal degree amongst other 
-        non-constant polynomials with $a$ as a root.
-    \item $\min(a,K)$ generates $\ker ev_{a} \circ \Bar{\iota}$. 
+        non-zero polynomials with $a$ as a root.
+    \item $\min(a,K)$ generates $\ker ev_{a} \circ \bar{\iota}$. 
     \item $\min(a,K)$ is irreducible. 
 \end{enumerate}
 Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}. 
 \end{dfn}
 \begin{proof}
-    Existence and uniqueness satisfying condition (1) and/or (2) is given by
-    $K[X]$ being a PID. 
+    Existence and uniqueness satisfying condition (1) and equivalence to (2) 
+    are given by $K[X]$ being a PID. 
     
-    ($2 \imp 3$)
+    $(2 \imp 3)$
+    Suppose $\min(a,K)=pq$ for some $p,q \in K[X]$.
+    Then evaluating at $a$ gives $p(a)q(a)=0$ in K and hence WLOG $p(a)=0$,
+    as K is an integral domain.
+    This implies $p \in \ker(ev_a \circ \bar\iota)$, so $\min(a,K) \mid p$.
+    Hence $\min(a,K) = pq = rq \min(a,K)$ for some polynomial $r$.
+    Since $K[X]$ is an integral domain and $\min(a,K)$ is non-zero, $q$ is a unit.
+    
+    Here is another proof of ($2 \imp 3$):
     $\min(a,K)$ being irreducible is equivalent to it being prime,
     which is equivalent to $K[X]/(\min(a,K))$ being an integral domain.
     Since $\min(a,K)$ generates $\ker(ev_a \circ \bar\iota)$, 
@@ -93,6 +105,9 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
         K[X]/(\min(a,K)) \iso \im (ev_a \bar\iota) \leq L
     \]
     A subring of an integral domain is clearly also integral, hence we are done.
+    \footnote{Though the first proof is somewhat more direct, 
+    the second proof uses a lot of cool tools we have developed so far. 
+    In particular, this isomorphism will show up again later.}
     
     ($3 \imp 2$)
     Let $f$ be some other polynomial in $\ker(ev_a \circ\bar\iota)$.
@@ -135,6 +150,13 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     every element in the quotient is either 0 or unit.
     The quotient is thus a field and we are done. 
 \end{proof}
+\begin{rmk}
+    We can think of $K[X]/(\min(a,K))$ as 
+    \[\displaystyle 
+        \{\sum_{i=0}^{\deg\min(a,K) - 1} \la_i X^i \mid \la_i \in K\}
+    \]
+\end{rmk}
+
 %    - Ex - Deg Ext = Deg Min Poly
 \begin{ex} The Degree of Simple Extensions over Algebraic Elements.
 
@@ -144,7 +166,7 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     (Hint: You now know $K(a) \iso K[X]/(\min(a,K))$.)
 \end{ex}
 
-Some equivalent conditions for an element to be algebraic.
+%Some equivalent conditions for an element to be algebraic.
 %    - Lem - K(a) fin iff a alg
 \begin{lem}
     Let $\iota : K \to L$ be a field extension and $a \in L$. 
@@ -157,19 +179,29 @@ Some equivalent conditions for an element to be algebraic.
 \end{lem}
 \begin{proof}
     ($1 \imp 2$)
-        The previous result.
+        The previous exercise.
         
     ($2 \imp 3$)
         Let $[K(a):K]$ be finite, $b \in K(a)$.
         Then $K(b)$ is a subfield of $K(a)$ containing $\iota K$. 
         So by the Tower Law, we have $[K(b):K]$ finite as well.
         Here is the trick. 
-        $\{b^k\}_{k \in \N}$ is a subset of vectors in $K(b)$.
-        Since $[K(b):K] = \dim_K K(b)$ is finite, 
-        $\{b^k\}_{k \in \N}$ cannot be linearly independent. 
-        Thus there is a finite $K$-linear combination
-        of powers of $b$ equal to zero. 
-        This is clearly just a polynomial over $K$ 
+        
+        Consider the set of powers of $b$, $\{b^k\}_{k\in\N}$.
+        Suppose this is a linearly independent set.
+        Then any finite subset of $\{b^k\}_{k\in\N}$ is also linearly independent.
+        In particular, $\{b^k\}_{k\in[K(b):K]+1}$ is a linearly independent set
+        of $[K(b):K]+1$ vectors.
+        By Steinitz exchange, we know that in a finite dimensional vector space, 
+        any finite linearly independent set has less than or equal cardinality
+        than the dimension. 
+        Since $K(b)$ is finite dimensional with dimension $[K(b):K]$,
+        we have a contradiction.
+        
+        Thus $\{b^k\}_{k\in\N}$ is not linearly independent, i.e.
+        there is a $K$-linear combination of powers of $b$ equal to zero
+        with not-all-zero coefficients.
+        This is clearly just a non-zero polynomial over $K$ 
         with $b$ as a root!
         
     ($3 \imp 1$)
@@ -191,6 +223,49 @@ Some equivalent conditions for an element to be algebraic.
     as far as we are concerned, we do not have to worry about
     elements not being algebraic.
 \end{rmk}
+
+% Example of infinite algebraic extension
+\begin{ex} An Infinite Algebraic Extension.
+
+    Take $\Q(\{2^{1/n}\}_{n \in \N_{>0}})$ as a $\Q$-extension. 
+    We have the following sequence of extensions, 
+    adjoining a root of $2$ one by one. 
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+        & 
+        & 
+        \Q(\{2^{1/n}\}_{n \in \N_{>0}}) & 
+        & 
+        \\
+        \Q = \Q(2^{1/1}) \arrow[r,"\subseteq"{sloped,below}] 
+        \arrow[rru,"\subseteq"{sloped,above}] &
+        \Q(2^{1/2}) \arrow[r,"\subseteq"{sloped,below}] 
+        \arrow[ru,"\subseteq"{sloped,below}] &
+        \Q(2^{1/2},2^{1/3}) \arrow[r,"\subseteq"{sloped,below}] 
+        \arrow[u,"\subseteq"{sloped,above=1.5pt}] &
+        \Q(2^{1/2},2^{1/3},2^{1/4}) \arrow[r,"\subseteq"{sloped,below}] 
+        \arrow[lu,"\supseteq"{sloped,below}] &
+        \cdots \arrow[llu,"\supseteq"{sloped,above}]
+        \end{tikzcd}
+    \end{figure}
+    Clearly, \[
+        \bigcup_{k = 2}^\infty \Q(\{2^{1/n} \mid n < k\}) = 
+        \Q(\{2^{1/n}\}_{n \in \N_{>0}})
+    \]
+    
+    We claim that $\Q \to \Q(\{2^{1/n}\}_{n \in \N_{>0}})$ 
+    is an infinite algebraic extension. 
+    You can see how there exists an infinite basis (don't bother with the details),
+    thus the extension is infinite.
+    Any element $a$ in $\Q(\{2^{1/n}\}_{n \in \N_{>0}})$ 
+    will be a finite linear combination of elements in the basis, 
+    and so $a \in K(a) \subseteq \Q(\{2^{1/n}\}_{n \in S})$, where $S$ is finite. 
+    Thus $[K(a):K]$ is finite by the tower law, and $a$ is algebraic by our lemma.
+    
+    %Ugly-ass shit. Someone else write this. 
+    %Meh not too bad if you avoid the yucky part.
+\end{ex}
 
 We now have enough to solve some problems the greeks had.
 

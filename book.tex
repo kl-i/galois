@@ -1,7 +1,7 @@
 \documentclass[oneside]{book}
 
 \usepackage[left=1in,right=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, verbatim, tikz, tikz-cd, float}
+\usepackage{amsmath, amsthm, amssymb, marvosym, verbatim, tikz, tikz-cd, float}
 \usepackage{parskip}
 \usepackage{mdframed}
 \usepackage{perpage}
@@ -121,7 +121,7 @@
 \newcommand{\iso}{\cong}
 \newcommand{\normsub}{\trianglelefteq}
 \newcommand{\norm}[1]{\Vert#1\Vert}
-%\newcommand{\Bar}[1]{\overline{#1}}
+\renewcommand{\bar}[1]{\overline{#1}}
 
 \newcommand{\fa}{\mathfrak{a}}
 \newcommand{\fb}{\mathfrak{b}}
@@ -130,6 +130,11 @@
 
 \renewcommand{\thempfootnote}{\fnsymbol{mpfootnote}}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\tiny}[1]{\scalebox{0.5}{$#1$}}
+
+\newcommand{\dolater}{\Coffeecup \hspace{3pt}}
+
 
 %Boxes
 \mdfdefinestyle{Definitions}{
@@ -165,7 +170,8 @@
 \newpage
 
 \part{Preface}
-    
+    \chapter{Markers}
+        \subfile{01Preface/01markers}
 
 \part{Theory}
 
