@@ -6,7 +6,7 @@
 \begin{dfn} Extension Splitting a Polynomial. 
     
     Let $\iota : K \to L$ be a field extension, $f$ a polynomial over $K$. 
-    Then \textbf{$(L,\iota)$ splits $f$} when there exists degree 1 polynomials
+    Then \textbf{$(L,\iota)$ splits $f$} when there exist degree 1 polynomials
     $(r_i)_{i\in\deg f} \in L[X]$ such that \[
         \bar\iota f = \prod_{i\in\deg f} r_i
     \]
@@ -30,7 +30,7 @@
     degree 1 polynomials. 
 \end{ex}
 
-\begin{lem} Splitting Minimal Polynomials Lifts up.
+\begin{lem} Splitting Minimal Polynomials.
     
     Let $K \overset{\iota_0}{\to} L \overset{\iota_1}{\to} M$ be field extensions,
     $a \in M$ algebraic over $K$. 
@@ -49,25 +49,28 @@
             M
         \end{tikzcd}
     \end{figure}
-    By definition, $0 =\bar\iota_1 (\bar\iota_0 \min(a,K))(a)$ i.e. 
-    $\bar\iota_0 \min(a,K)$ is a polynomial over $L$ that has $a$ as a root.
-    So $\min(a,L) \mid \bar\iota_0 \min(a, K)$,
+    By definition, $\bar\iota_1 (\bar\iota_0 \min(a,K))(a)=0$ i.e. 
+    $\bar\iota_0 \min(a,K)$ is a polynomial over $L$ that has $a$ as a root. 
+    Thus $min(a,L)$ is well-defined,
+    and $\min(a,L) \mid \bar\iota_0 \min(a, K)$,
     which implies $\bar\iota_1 \min(a,L) \mid \bar\iota_1 (\bar\iota_0 \min(a,K))$.
+    So there exists a polynomial $f$ over $M$ such that \[
+        f \bar\iota_1 \min(a,L) = \bar\iota_1(\bar\iota_0 \min(a,K))
+    \]
     Since $M$ splits $\min(a,K)$, \[
-        \bar\iota_1(\bar\iota_0 \min(a,K)) = \prod_{i \in \deg(\min(a,K))} r_i
+        f \bar\iota_1 \min(a,L) =
+        \bar\iota_1(\bar\iota_0 \min(a,K)) = \prod_{\tiny{i \in \deg\min(a,K)}} r_i
     \]
     where $r_i \in M[X]$ are polynomials of degree 1. 
-    So there exists a polynomial $f$ over $M$ such that \[
-        f \bar\iota_1 \min(a,L) = \prod_{i \in \deg(\min(a,K))} r_i
-    \]
+    
     Clearly, the degree 1 polynomials $r_i$ are irreducible. 
-    So by unique factorisation, there is a subset $I \subseteq \deg(\min(a,K))$
+    So by unique factorisation, there is a subset $I \subseteq \deg\min(a,K)$
     such that \[
         \bar\iota_1 \min(a,L) = \prod_{i \in I} r_i
     \]
     where the $r_i$ may have been reordered and scaled by units.
     Clearly, the $r_i$ are still degree 1. 
-    To see that $|I| = \deg f$, note that $I$ is finite and apply
+    To see that $|I| = \deg min(a,L)$, note that $I$ is finite and apply
     degree of product is sum of degrees. 
 \end{proof}
 \begin{rmk}
@@ -76,18 +79,19 @@
     $K(a) \iso K[X]/(\min(a,K))$ where $\min(a,K)$ is irreducible.
     This assumed the existence of a larger field $L$ inside which $a$ sits. 
     We now do the reverse: 
-    Given a (monic) irreducible polynomial $f$ over $K$, 
+    given a (monic) irreducible polynomial $f$ over $K$, 
     we will create a larger field in which 
     we have an element $a$ which has $f$ as its minimal polynomial. 
 \end{rmk}
 %    - Lem - Quotient Ideal gen by Irr is Field via Irr Div or Coprime
 \begin{lem} Quotienting by an Irreducible Element gives a Field. 
 
-    Let $f$ be a irreducible polynomial over $K$. 
+    Let $f$ be an irreducible polynomial over $K$. 
     Then the quotient $K[X]/(f)$ is a field and hence a finite extension of $K$. 
     
     For $g \in K[X]$, let $\bar{g}$ denote the image of $g$ in the quotient.
-    Then $f = \la \min(\bar{X},K)$ where $\la \in K^\times$. 
+    Then $f = \la \min(\bar{X},K)$ where $\la \in K^\times$ 
+    ($X$ being the polynomial in $K[X]$). 
     In particular, if $f$ was monic, it would be the minimal polynomial of $\bar{X}$.
 \end{lem}
 \begin{proof}
@@ -98,7 +102,7 @@
     such that $\al f + \be g = 1$. 
     Thus by projecting to the quotient, $\bar{\be}\bar{g} = \bar{1}$, 
     i.e. $\bar{g}$ is a unit in the quotient. 
-    We just showed all elements in the quotient is either zero or a unit.
+    We just showed that an element in the quotient is either zero or a unit.
     So $K[X]/(f)$ is a field. 
     By the division algorithm, $\{\bar{1}, \bar{X}, \dots, \bar{X}^{\deg f - 1}\}$
     is a basis of $K[X]/(f)$ as a $K$-vector space
@@ -123,10 +127,10 @@
     Then the quotient is what we call $\C$. 
 \end{eg}
 \begin{rmk}
-    The above lemma is an example of how quotients are used to "set things to zero",
+    The above lemma is an example of how quotients are used to ``set things to zero",
     forcing desired properties.
     Specifically, we took a polynomial $f$ which previously is not equal to zero,
-    and we set it to zero, thus making ``X" a root of $f$. 
+    and we set it to zero, thus making $X$ a root of $f$. 
 \end{rmk}
 \begin{rmk}
     We now show that for any polynomial, there is an extension where it splits. 
@@ -160,7 +164,7 @@
 \begin{dfn} Splitting Field of a Polynomial. 
     
     Let $f$ be a polynomial over a field $K$. 
-    A $K$-extension $\iota : K \to L$ is called 
+    A $K$-extension $\iota : K \to L$ (or simply $L$) is called 
     a \textbf{splitting field of $f$} when
     $L$ splits $f$ and $L$ is generated by the roots of $f$. 
     
@@ -181,14 +185,14 @@
     Let $\iota_L : K \to L, \iota_M : K \to M$ be $K$-extensions and
     $a \in L, b \in M$ be elements algebraic over $K$. 
     Then $a, b$ are called \textbf{galois conjugates} when
-    any of the following equivalent statements are true: 
+    either of the following equivalent statements are true: 
     \begin{enumerate}
         \item $b$ is a root of $\min(a,K)$.
         \item $\min(a,K) = \min(b,K)$.
     \end{enumerate}
     This forms an equivalence relation on algebraic elements in $K$-extensions.
 \end{dfn}
-\begin{eg}
+\begin{eg} Conjugates
     \begin{enumerate}
         \item Let $\R \to \C$ be the usual extension.
         Then $i$ and $-i$ are galois conjugates.
@@ -197,13 +201,14 @@
         \item Let $\Q \to \Q(\omega)$ where $\omega = \exp(2\pi i / 3)$.
         Then $1$ and $\omega$ are \emph{not} galois conjugates even though
         both are roots of $X^3 - 1$. 
-        The mistake is that $X^3 - 1$ is not the minimal polynomial of $\omega$,
-        it is $X^2 + X + 1$. 
+        The mistake is that $X^3 - 1$ is not the minimal polynomial.
+        The minimal polynomial of $\omega$ is $X^2 + X + 1$,
+        and the minimal polynomial of $1$ is $X-1$.
     \end{enumerate}
 \end{eg}
 %    - Lem - Embedding of Simple Ext to Field with Conjugate
-\begin{lem} Embedding Simple Extensions via Conjugates.
-    \footnote{The word "embedding" is synonymous to injecting/injection.}
+\begin{lem} Embedding Simple Extensions via Conjugates.\footnote{
+    The word "embedding" is synonymous to injecting/injection.}
     
     Let $\iota : K \to K(a)$ be a simple $K$-extension
     where $a$ is algebraic over $K$. 
@@ -226,7 +231,7 @@
     \[
         \bar\iota_M \min(a,K) (f(a)) = ev_{f(a)}(\bar\iota_M \min(a,K))
         = ev_{f(a)} (\bar{f}(\bar\iota \min(a,K))) 
-        = ev_a (\bar\iota \min(a,K)) = 0
+        = f(ev_a (\bar\iota \min(a,K))) = 0
     \]
     So the function $f \mapsto f(a)$ is well-defined. 
     
@@ -254,11 +259,11 @@
 \begin{thm} Embedding Finite Extensions via Conjugates.
     
     Let $\iota_L : K \to L$ be a finite extension, i.e. (by picking a basis)
-    there exists finitely many elements $a_1,\dots,a_n \in L$ such that 
+    there exists a finite set of elements $\{a_1,\dots,a_n\} \subseteq L$ such that 
     $L = K(a_1, \dots, a_n)$. 
     Let $\iota_M : K \to M$ be another extension, such that 
     for all $a_i$ generators of $L$, $M$ splits $\min(a_i,K)$. 
-    Then there exists a $K$-extension morphism $\iota : L \to M$.
+    Then there exists a morphism of $K$-extensions $\iota : L \to M$.
     Furthermore, the number of such $K$-extension morphisms is less than equal
     to $[L : K]$ and is equal when for all generators $a_i$, 
     $\min(a_i,K)$ has distinct roots in $M$. 
@@ -268,7 +273,7 @@
     The following diagram is the idea of the proof. 
     \begin{figure}[H]
         \centering
-        \begin{tikzcd}
+        \begin{tikzcd}[sep = huge]
         K \arrow{d}{\iota_M} \arrow{r}{\iota_1 = \iota_L} & 
         K(a_1) = K_1 \arrow{dl} \arrow{r}{\iota_2 = \subseteq} & 
         \cdots \arrow{r}{\iota_{n-1} = \subseteq} & 
