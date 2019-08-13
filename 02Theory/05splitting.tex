@@ -26,8 +26,7 @@
     Hence show that $|S_f| \leq \deg f$.
     
     This shows that for the definition of a polynomial splitting, 
-    we did not have to assume it factorises into exactly $\deg f$ many 
-    degree 1 polynomials. 
+    we did not have to assume finiteness.
 \end{ex}
 
 \begin{lem} Splitting Minimal Polynomials.
@@ -197,13 +196,12 @@
         \item Let $\R \to \C$ be the usual extension.
         Then $i$ and $-i$ are galois conjugates.
         \item Let $\Q \to \Q(\sqrt{2})$ be the usual extension.
-        Then $\sqrt{2}$ and $-\sqrt{2}$ are conjugates.
+        Then $\sqrt{2}$ and $-\sqrt{2}$ are galois conjugates.
         \item Let $\Q \to \Q(\omega)$ where $\omega = \exp(2\pi i / 3)$.
         Then $1$ and $\omega$ are \emph{not} galois conjugates even though
         both are roots of $X^3 - 1$. 
         The mistake is that $X^3 - 1$ is not the minimal polynomial.
-        The minimal polynomial of $\omega$ is $X^2 + X + 1$,
-        and the minimal polynomial of $1$ is $X-1$.
+        The minimal polynomial of $\omega$ is $X^2 + X + 1$. 
     \end{enumerate}
 \end{eg}
 %    - Lem - Embedding of Simple Ext to Field with Conjugate
@@ -264,7 +262,7 @@
     Let $\iota_M : K \to M$ be another extension, such that 
     for all $a_i$ generators of $L$, $M$ splits $\min(a_i,K)$. 
     Then there exists a morphism of $K$-extensions $\iota : L \to M$.
-    Furthermore, the number of such $K$-extension morphisms is less than equal
+    Furthermore, the number of such $K$-extension morphisms is less than or equal
     to $[L : K]$ and is equal when for all generators $a_i$, 
     $\min(a_i,K)$ has distinct roots in $M$. 
 \end{thm}
@@ -410,8 +408,8 @@
     By definition, $L$ splits $f$, that is, there exists a $\la \in K$ such that 
     \[\bar\iota_L f = \iota_L(\la) \prod_{i\in\deg f}(X - a_i)\]
     This implies \[
-        (\overline{\psi \circ \iota})(f) 
-        = \bar\psi(\bar\iota(f))
+        (\overline{\psi \circ \iota_L})(f) 
+        = \bar\psi(\bar\iota_L(f))
         = \psi(\iota_L \la) \prod_{i\in\deg f} (X-\psi(a_i))
     \]
     Now since $\phi \circ ev_{a_i} = ev_{\phi(a_i)} \circ \bar\phi$

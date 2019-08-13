@@ -256,8 +256,13 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     
     We claim that $\Q \to \Q(\{2^{1/n}\}_{n \in \N_{>0}})$ 
     is an infinite algebraic extension. 
-    You can see how there exists an infinite basis (don't bother with the details),
-    thus the extension is infinite.
+    Assume for a contradiction the extension is finite, 
+    say of degree $n$. 
+    Then by set of primes is infinite we can take a set of primes 
+    $P$ of cardinality $n+1$, 
+    and have a linearly independent set $\{2^{1/p}\}_{p\ in P}$.
+    This is a contradiction, hence the extension is infinite.
+    
     Any element $a$ in $\Q(\{2^{1/n}\}_{n \in \N_{>0}})$ 
     will be a finite linear combination of elements in the basis, 
     and so $a \in K(a) \subseteq \Q(\{2^{1/n}\}_{n \in S})$, where $S$ is finite. 

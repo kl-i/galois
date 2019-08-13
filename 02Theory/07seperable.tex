@@ -21,11 +21,11 @@ In this section, we deal with when minimal polynomials having multiple roots.
     Then the \textbf{characteristic of $K$} is defined as this $p$. 
     We will denote it with $\chi_K$. 
 \end{dfn}
-\begin{clm} Characteristics are Zero or Prime.
+\begin{thm} Characteristics are Zero or Prime.
     
     Let $K$ be a field and $\chi_K$ its characteristic.
     Then $\chi_K$ is zero or prime. 
-\end{clm}
+\end{thm}
 \begin{proof}
     By the 1st isomorphism theorem, 
     \[ \Z/ (\chi_K) = \Z / \ker \iota_\Z \iso_\Ring \iota_\Z \Z \subseteq K\]
@@ -40,30 +40,143 @@ In this section, we deal with when minimal polynomials having multiple roots.
     which generates an ideal with an integral quotient ring
     i.e. $\chi_K$ is prime.
 \end{proof}
+\begin{dfn} Multiplicity of Roots.
+    
+    Let $f$ be a polynomial over $K$ and 
+    $\iota_L : K \to L$ an extension splitting $f$.
+    Suppose we have, \[
+            \bar\iota_L f = \bar\iota(\la) \prod_{i\in n} (X - a_i)^{m_i}
+    \]
+    where $\la \in K$ and $a_i \in L$. 
+    For a root $a_i$ of $f$, $m_i$ is called its \textbf{multiplicity}.
+    This is actually independent of the extension $L$,
+    since $\bar\iota_L f$ is the same over $K(\{a_i\}_{i\in n})$,
+    the splitting field of $f$ and any two splitting fields are isomorphic. 
+    A root $a_i$ with multiplicity larger than one is called \textbf{repeated}.
+\end{dfn}
+Before we introduce the three equivalent definitions of separability, 
+we will need to following two lemma. 
+\begin{lem} GCD stays the same moving up Extensions.
+    
+    Let $f, g$ be polynomials over $K$ and $\iota_L : K \to L$ an extension.
+    Let $h \in K[X]$ be a gcd of $f, g$. 
+    Then $\bar\iota_L h$ is a gcd of $\bar\iota_L f, \bar\iota_L g$. 
+    In particular, distinct irreducible polynomials remain coprime 
+    when moving up an extension. 
+\end{lem}
+\begin{proof}
+    Let $h_1$ be a gcd of $\bar\iota_L f$ and $\bar\iota_L g$. 
+    Clearly, $\bar\iota_L h$ divides $\bar\iota_L f$ and $\bar\iota_L g$. 
+    So $h_1$ divides $\bar\iota_L h$. 
+    Then any polynomial in $L[X]$ dividing both $\bar\iota_L f$ and $\bar\iota_L g$
+    divides $h_1$ and hence divides $\bar\iota_L h$. 
+    Thus, $\bar\iota_L h$ is a gcd of $\bar\iota_L f$ and $\bar\iota_L g$. 
+\end{proof}
+\begin{rmk}
+    The above lemma is significant because it says
+    if $f$ has a repeated root, then that repeated roots belongs to 
+    \emph{only one} of its irreducible factors. 
+    Hence, $f$ has a repeated root if and only if it has some irreducible factor
+    with repeated roots. 
+    This means from now on when consider the issue of repeated roots, 
+    we only need to consider irreducible polynomials. 
+\end{rmk}
+\begin{lem} Freshmen's Dream.
+    
+    Let $K$ be a field where $\chi_K \neq 0$. 
+    Then for all $a, b \in K$, \[
+        (a+b)^{\chi_K} = a^{\chi_K} + b^{\chi_K}
+    \]
+\end{lem}
+\begin{proof}
+    Follows from the binomial theorem and $\chi_K = 0$. 
+\end{proof}
 %    - Def - Sep Ext, 2 Eqv defs
 %          - Contrapositive
 \begin{dfn} Seperable, Separable Extensions
 % Multiple definitions taken from John Milne's Galois notes. 
-    
     Let $f$ be an irreducible polynomial over $K$. 
     The following are equivalent: 
     \begin{enumerate}
         \item There exists a $K$-extension $\iota_L : K \to L$ splitting $f$ where
-        $f$ has non-distinct roots, i.e.
-        \[
-            \bar\iota_L f = \la \prod_{i\in n} (X - a_i)^{m_i}
-        \]
-        where $\la \in K, n < \deg f$. 
-        For a root $a_i$ of $f$, $m_i$ is called its \textbf{multiplicity}.
-        \item Suppose $f = \sum_{k \in \deg f} f_k X^k$.
+        $f$ has a root with multiplicity higher than 1, i.e. a repeated root.
+        \item Suppose $f = \sum_{k \in \deg f} f_k X^k \in K[X]$.
         Define its formal derivative as 
-        \[ f' := \sum_{k \in \deg f - 1} (k+1)f_{k+1}X^k \]
-        Then $(f,f') = 1$.
+        \[ f' := \sum_{k \in \deg f} (k+1)f_{k+1}X^k \]
+        Then $(f,f') \neq 1$.
         \item $\chi_K$ is non-zero and there exists a polynomial $g$ over $K$
         such that $f = g(X^{\chi_K})$.
-        \item 
     \end{enumerate}
+    If any of the above is true, then $f$ is called \textbf{inseparable}.
+    Otherwise, it is called \textbf{separable}.
+    
+    Let $\iota_L : K \to L$ be a finite $K$-extension.
+    Then $(L,\iota_L)$ is called a \textbf{separable extension} when
+    all minimal polynomials of elements are separable. 
 \end{dfn}
+\begin{proof}
+    ($1\imp 2$)
+    
+        Let $\iota_L : K \to L$ be a $K$-extension where \[
+            \bar\iota_L f = \iota_L(\la) \prod_{i\in n} (X - a_i)^{m_i}
+        \]
+        WLOG $m_0 > 1$. WLOG again, let $m_0 = 2$.
+        Suppose $(f,f') = 1$ in $K[X]$. 
+        Then by the previous lemma, $(\bar\iota_L f, \bar\iota_L f') = 1$. 
+        However, by the product rule, $\bar\iota_L f'$ has a factor of $(X - a_0)$
+        which $\bar\iota_L f$ also has as a factor, i.e.
+        $(\bar\iota_L f, \bar\iota_L f') \neq 1$.
+        We have a contradiction. 
+    
+    ($2\imp 3$)
+    
+        By definition, there exists a polynomial $g \in K[X]$ such that 
+        \[f = (f,f') g\]
+        By irreducibility of $f$, $(f,f')$ is a unit or $g$ is a unit. 
+        Since $(f,f') \neq 1$, we have $g$ is a unit, 
+        which implies $f$ divides $f'$.
+        We know $f$ is non-zero. 
+        Suppose $f'$ is non-zero as well.
+        Then we have $\deg f \leq \deg f'$ whilst $\deg f' < \deg f$,
+        a contradiction. 
+        Thus $f'$ must be zero. 
+        Let $f = \sum_{k\in\deg f + 1} f_k X^k$. 
+        Then we have \[
+            0 = \sum_{k\in \deg f} (k+1) f_{k+1} X^k
+        \]
+        which implies for all $k\in\deg f$, $(k+1) f_{k+1} = 0$.
+        Then on the non-zero coefficients of $f$, we have $k+1 = 0$.
+        This implies the kernel of the canonical ring morphism $\Z \to K$
+        is non-trivial. 
+        Hence, $\chi_K$ is non-zero. 
+        Furthermore, for $k\in\deg f$ where $f_{k+1} \neq 0$, 
+        $k+1 = 0$ implies $k+1 = m_k\chi_K$ 
+        since $\chi_K$ generates the kernel of $\Z \to K$. 
+        Letting $g := f_0 + \sum_{k\in\deg f} f_{k+1}X^{m_k}$,
+        we have $f = g(X^{\chi_K})$.
+        
+    ($3\imp 1$)
+    
+        Let $\chi_K \neq 0$ and $f = g(X^{\chi_K})$
+        for some polynomial $g \in K[X]$.
+        There exists an extension $\iota_M : K \to M$ that splits $g$. 
+        Then inside $M$ we have \[
+            \bar\iota_M f = \bar\iota_M g(X^{\chi_K})
+            = \iota_M(\la) \prod_{i\in\deg g+1} (X^{\chi_K} - b_i)
+        \]
+        where $\la \in K$ and $b_i \in M$. 
+        Furthermore, there exists an extension $\iota : M \to L$ 
+        that splits $\bar\iota_M f$.
+        Let $(L,\iota_L) := (L,\iota\circ\iota_M)$. 
+        Then for all $b_i$, we have an $a_i \in L$ such that $a_i^{\chi_K} = b_i$. 
+        Hence we have \begin{align*}
+            \bar\iota_L f &= \bar\iota_L g(X^p) 
+            = \iota_L(\la) \prod_{i\in\deg g + 1}  (X^{\chi_K} - a_i^{\chi_J}) \\
+            &= \iota_L(\la) \prod_{i\in\deg g + 1}  (X - a_i)^{\chi_K}  
+        \end{align*}
+        where the second line comes from Freshmen's dream. 
+        Thus in fact, \emph{all} the roots of $f$ have multiplicity larger than 1. 
+\end{proof}
 %    - Def - Deg Sep as Cardinality of Maps into any Normal Extension 
 %            (Well def via Maps into Normal Closure)
 %    - Def - Sep Element over a Field, Sep Ext
