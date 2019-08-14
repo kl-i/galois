@@ -93,6 +93,7 @@ we will need to following two lemma.
 \end{proof}
 %    - Def - Sep Ext, 2 Eqv defs
 %          - Contrapositive
+%    - Def - Sep Element over a Field, Sep Ext
 \begin{dfn} Seperable, Separable Extensions
 % Multiple definitions taken from John Milne's Galois notes. 
     Let $f$ be an irreducible polynomial over $K$. 
@@ -179,19 +180,269 @@ we will need to following two lemma.
 \end{proof}
 %    - Def - Deg Sep as Cardinality of Maps into any Normal Extension 
 %            (Well def via Maps into Normal Closure)
-%    - Def - Sep Element over a Field, Sep Ext
-%    - Lem - Separability Inheritance
+\begin{dfn} Seperable Degree. 
+    
+    Let $\iota_L : K \to L$ be an extension. 
+    Let $\iota_M : L \to M$ be an extension such that 
+    $(M,\iota_M\circ\iota_L)$ is normal. 
+    Then the \textbf{separable degree of $(L,\iota_L)$} is
+    the number of $K$-extension morphisms 
+    from $(L,\iota_L)$ to $(M,\iota_M\circ\iota_L)$.
+    This is denoted $[L : K]_S$. 
+    
+    We prove below that for any choice of $M$,
+    the separable degree is equal to when $M$ is chosen to be 
+    the normal closure of $(L,\iota_L)$.
+    Hence it is well-defined.
+\end{dfn}
+\begin{proof}
+    Let $(N,\iota_N)$ be the normal closure of $(L,\iota_L)$.
+    Let $(M,\iota_M)$ be another $L$-extension such that 
+    $(M,\iota_M\circ\iota_L)$ is normal. 
+    By the minimal property of the normal closure, 
+    we have an $L$-extension $\bar\iota_M : N \to M$. 
+    The situation is this. 
+    \begin{figure} [H]
+        \centering
+        \begin{tikzcd} [sep = huge]
+        & 
+        & 
+        N \arrow[d,"\bar{\iota_M}"] \\
+        K \arrow[r,"\iota_L"] &
+        L \arrow[ru,"\iota_N"{sloped,below}]
+        \arrow[ru,"\phi"{sloped,above},xshift=-0.7ex, yshift=0.7ex] 
+        \arrow[rd,"\iota_M"{sloped,above}] 
+        \arrow[rd,"f"{sloped,below},xshift=-0.7ex, yshift=-0.7ex] &
+        \bar{\iota_M} N \arrow[d,"\subseteq"] 
+        \arrow[loop right,"\res{\bar{f}}{\bar{\iota_M} N}"] \\
+        & 
+        &
+        M \arrow[loop right,"\bar{f}"]
+        \end{tikzcd}
+    \end{figure}
+    Let $\mor{K}{L}{N}$ denote the set of $K$-extension morphisms
+    from $(L,\iota_L)$ to $(N,\iota_N\circ\iota_L)$
+    and similarly $\mor{K}{L}{M}$ for $(M,\iota_M\circ\iota_L)$. 
+    Let $\phi \in \mor{K}{L}{N}$. Then clearly, 
+    $\bar\iota_M \circ \phi$ is a $K$-extension morphism 
+    from $(L,\iota_L)$ to $(M,\iota_M\circ\iota_L)$. 
+    So we have the following function, \[
+        (\bar\iota_M \circ - ) : \mor{K}{L}{N} \to \mor{K}{L}{M}, 
+        \phi \mapsto \bar\iota_M \circ \phi
+    \]
+    We claim this is a bijection. 
+    Since $\bar\iota_M$ is injective, $(\bar\iota_M \circ -)$ is injective as well.
+    
+    We now show surjectivity. 
+    Let $f \in \mor{K}{L}{M}$. 
+    Then we have an $L$-extension $\bar{f} : (M,\iota_M) \to (M,f)$
+    since two embeddings into a normal extension differ by an automorphism. 
+    Then $\bar\iota_M$ and $\bar{f}\circ\bar\iota_M$ are
+    both $K$-extension morphisms from
+    $(N,\iota_N\circ\iota_L)$ to $(M,\iota_M\circ\iota_L)$.
+    Hence by image invariance definition of normality, 
+    the restriction of $\bar{f}$ to $\bar{\iota_M} N$ is 
+    a well-defined bijective $L$-extension morphism, \[
+        \res{\bar{f}}{\bar{\iota_M} N} : \bar{\iota_M} N \to \bar{\iota_M} N,
+        x \mapsto \bar{f}(x)
+    \]
+    Then $\bar{\iota_M}^{-1} \circ \res{\bar{f}}{\bar{\iota_M}N} 
+    \circ \bar{\iota_M} \circ \iota_N $ is a $K$-extension morphism
+    from $(L,\iota_L)$ to $(N,\iota_N)$. 
+    This clearly maps to $f$ via $(\bar{\iota_M} \circ -)$. 
+\end{proof}
+We now have the a second tower law. 
 %    - Thm - Tower Law of Deg Sep
+\begin{thm} Tower Law of Seperable Degree. 
+    
+    Let $K \overset{\iota_L}{\to} L \overset{\iota_M}{\to} M$ be extensions.
+    Then $[M : K]_S = [M : L]_S [L : K]_S$.
+\end{thm}
+\begin{proof}
+    Let $\iota_N : M \to N$ be an extension such that 
+    $(N,\iota_N\circ\iota_M\circ\iota_L)$ is normal. 
+    Let $\mor{K}{M}{N}, \mor{K}{L}{N}$ be the sets of $K$-extensions
+    from respectively $(M,\iota_M\circ\iota_L)$ and $(L,\iota_L)$ 
+    to $(N,\iota_N\circ\iota_M\circ\iota_L)$. 
+    Then $[M:K]_S = |\mor{K}{M}{N}|$ and $[L:K]_S = |\mor{K}{L}{N}|$.
+    Similarly, let $\mor{L}{M}{N}$ be the set of $L$-extensions
+    from $(M,\iota_M)$ to $(N,\iota_N\circ\iota_M)$ so that 
+    $[M:L]_S = |\mor{L}{M}{N}|$.
+    We want to show \[
+        |\mor{K}{M}{N}| = |\mor{L}{M}{N}| |\mor{K}{L}{N}|
+    \]
+    We start by noting that by restricting to $L$, 
+    the $K$-extension morphisms from $M$ to $N$,
+    we obtain $K$-extension morphisms from $L$ to $N$, i.e.
+    \[
+        (- \circ \iota_M) : \mor{K}{M}{N} \to \mor{K}{L}{N}, 
+        \phi \mapsto \phi\circ\iota_M
+    \]
+    is a well-defined function. 
+    We will show this is surjective and 
+    the preimages of elements in $\mor{K}{L}{N}$ 
+    all have cardinality $|\mor{L}{M}{N}|$.
+    Then since the preimages of elements in $\mor{K}{L}{N}$ form
+    a partition of $\mor{K}{M}{N}$, we have our desired result. 
+    
+    We now show surjectivity. 
+    Let $f \in \mor{K}{L}{N}$. 
+    The situation is this: \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+        K \arrow[r,"\iota_L"] &
+        L \arrow[r,"\iota_M"] \arrow[rd,"f"{sloped,below}] &
+        M \arrow[d,"\iota_N"] \\
+        & 
+        &
+        N \arrow[loop right,"\bar{f}"]
+        \end{tikzcd}
+    \end{figure}
+    Then since two embeddings into a normal extension differ by an automorphism,
+    we have an $L$-extension morphism $\bar{f}$ 
+    from $(N,\iota_N\circ\iota_M)$ to $(N,f)$. 
+    Then $\bar{f}\circ\iota_M : M \to N$ is clearly
+    a $K$-extension morphism from $(M,\iota_M\circ\iota_L)$ 
+    to $(N,\iota_N\circ\iota_M\circ\iota_L)$ that restricts to $f$. 
+    
+    Let $f \in \mor{K}{L}{N}$. 
+    We now show that $(- \circ \iota_M)^{-1}(f)$ bijects with $\mor{L}{M}{N}$.
+    Let $\phi \in (- \circ \iota_M)^{-1}(f)$.
+    Then \[
+        \phi\circ\iota_M = f = \bar{f}\circ\iota_N\circ\iota_M 
+        \imp \bar{f}^{-1}\circ\phi\circ\iota_M = \iota_N\circ\iota_M 
+    \]
+    which says $\bar{f}^{-1}\circ\phi$ is a $L$-extension morphism
+    from $(M,\iota_M)$ to $(N,\iota_N\circ\iota_M)$.
+    That is to say we have the following function, \[
+        (\bar{f}^{-1} \circ -) : (- \circ \iota_M)^{-1}(f) \to \mor{L}{M}{N},
+        \phi \mapsto \bar{f}^{-1}\circ\phi
+    \]
+    By injectivity of $\bar{f}^{-1}$, $(\bar{f}^{-1} \circ -)$ is injective.
+    Let $\psi \in \mor{L}{M}{N}$. Then \[
+        \bar{f}\circ\psi\circ\iota_M = \bar{f}\circ\iota_N\circ\iota_M = f
+    \]
+    i.e. $\bar{f}\circ\psi \in (- \circ \iota_M)^{-1}(f)$.
+    Clearly, $\bar{f}\circ\psi$ maps to $\psi$.
+    This proves surjectivity and completes the proof. 
+\end{proof}
+We now move towards three equivalent charactersations of separable extensions. 
+First, a lemma. 
+%    - Lem - Separability Inheritance
+\begin{lem} 
+    
+    Let $K \overset{\iota_L}{\to} L \overset{\iota_M}{\to} M$ be extensions
+    and $a \in M$, $b \in L$. 
+    Then $\min(a,K)$ separable implies $\min(a,L)$ separable
+    and $\min(\iota_M(b),K)$ implies $\min(b,K)$ separable.
+    Consequently, $(M,\iota_M\circ\iota_L)$ separable implies
+    both $(L,\iota_L)$ and $(M,\iota_M)$ separable. 
+\end{lem}
+\begin{proof}
+    Let $\min(a,K)$ be separable.
+    $\min(a,L)$ divides $\min(a,K)$. 
+    Since $\min(a,K)$ is separable, it has no repeated roots,
+    which clearly implies $\min(a,L)$ also has no repeated roots. 
+    Hence $\min(a,L)$ is separable. 
+    
+    Let $\min(\iota_M(b),K)$ be separable. 
+    Since $\min(\iota_M(b),K) = \min(b,K)$, $\min(b,K)$ is separable, too. 
+\end{proof}
 %    - Thm - For K(a), Deg Sep = Deg Ext iff a sep over K 
 %          - Key : Roots <-> Maps from K(a)
 %    - Lem - Simp Ext Sep iff Sep Deg = Ext Deg
 %          - Key : Ineq Trick
+\begin{thm} Equivalent Conditions for Simple Algebraic to be Separable.
+
+    Let $\iota : K \to K(a)$ be a simple extension where $a$ is algebraic over $K$.
+    Then the following are equivalent: 
+    \begin{enumerate}
+        \item $\min(a,K)$ is a separable.
+        \item $[K(a) : K]_S = [K(a) : K]$
+        \item $\iota : K \to K(a)$ is a separable extension. 
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    ($1\iff 2$)
+    
+        Let $(N,\iota_N)$ be a $K(a)$-extension where 
+        $(N,\iota_N\circ\iota)$ is normal. 
+        Then $N$ splits $\min(a,K)$. 
+        Hence by embedding via conjugates for simple extensions,
+        the number of $K$-extension morphisms 
+        from $(K(a),\iota)$ to $(N,\iota_N\circ\iota)$
+        is equal to the number of distinct galois conjugates of $a$
+        inside $N$. 
+        This is equal to $\deg\min(a,K)$, which equals $[K(a):K]$,
+        if and only if $\min(a,K)$ is separable. 
+        
+    ($3\imp 1$) 
+        Trivial.
+    
+    ($2 \imp 3$)
+        Let $b \in K(a)$. 
+        Let $(N,\iota_N)$ be a $K(a)$-extension such that 
+        $N$ is normal as a $K(b)$-extension. 
+        We have the following trick of inequalities. 
+        Then by embedding via conjugates from $K(b)$ to $N$, 
+        we have $[K(a):K(b)]_S \leq [K(a):K(b)]$.
+        Then by the tower laws of separable degree and extension degree,
+        \begin{align*}
+            [K(a) : K]_S &= [K(a):K(b)]_S [K(b):K]_S \\
+            &\leq [K(a):K(b)] [K(b):K]_S \\
+            &\leq [K(a):K(b)] [K(b):K] = [K(a):K] = [K(a):K]_S
+        \end{align*}
+        Hence we have equality everywhere, giving 
+        $[K(b):K]_S = [K(b):K]$ which implies $\min(b,K)$ is separable.
+        Thus, $K(a)$ is a separable extension. 
+\end{proof}
+The generalisation of the above to finite extensions is what we are after. 
 %    - Thm - General Ext Sep iff Sep Deg = Ext Deg
 %          - Key : Decompose into Simp Exts AND Ineq Trick
 %    - Cor - Ext Sep iff Generators Sep
 %          - Key : Decompose into Simp Ext, Tower Law
+\begin{thm} 3 Equivalent Definitions for Separable Extensions.
+    
+    Let $\iota_L : K \to L$ be a finite extension.
+    Then the following are equivalent:
+    \begin{enumerate}
+        \item There exists a finite set of generators $a_0,\dots,a_{n-1}$ of $L$ 
+            such that for all $a_i$, $\min(a_i,K)$ is separable. 
+        \item $[L:K]_S = [L:K]$.
+        \item $(L,\iota_L)$ is separable.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    ($1\imp 2$)
+        
+        We break $L$ into finite steps of simple extensions. 
+        For $i\in n$, let $K_i := K(a_0,\dots,a_i)$.
+        Then $K_{i+1} = K_i(a_{i+1})$. 
+        Since $\min(a_{i+1},K)$ is separable, $\min(a_{i+1},K_i)$ is separable as well. 
+        Hence by the previous lemma, $[K_{i+1}:K_i]_S = [K_{i+1}:K_i]$. 
+        So by the tower laws of separable degree and extension degree applied $n$-times, 
+        $[L : K]_S = [L : K]$. 
+        
+    ($2\imp 3$)
+        
+        Let $b \in L$. 
+        This is the same inequality trick.
+        By embedding via conjugates, we have 
+        $[L : K(b)]_S \leq [L : K(b)]$. 
+        Then by the tower laws of separable degree and extension degree,
+        \begin{align*}
+            [L : K]_S &= [L : K(b)]_S [K(b) : K]_S \\
+            &\leq [L : K(b)] [K(b) : K]_S \\
+            &\leq [L : K(b)] [K(b) : K] = [L : K] = [L : K]_S 
+        \end{align*}
+        So by everywhere equality, we have $[K(b) : K]_S = [K(b) : K]$
+        which implies $\min(b,K)$ is separable. 
+        
+    ($3\imp 1$)
+        Trivial. 
+\end{proof}
 %    - Cor - Splitting Field of Sep Poly is Sep
 %    - Cor - Ext Sep iff Normal Closure Sep
 
-
+    
 \end{document}

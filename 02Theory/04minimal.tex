@@ -7,7 +7,8 @@
     Let $\iota_0 : K \to L, \iota_1 : L \to M$ be extensions. 
     Then we have a natural morphism of rings $\bar{\iota_0} : K[X] \to L[X]$
     and $\bar{\iota_1} : L[X] \to M[X]$ such that 
-    $\bar{\iota_1 \circ \iota_0} = \bar{\iota_1} \circ \bar{\iota_0}$. 
+    $\bar{\iota_1 \circ \iota_0} = \bar{\iota_1} \circ \bar{\iota_0}$,
+    i.e. the following diagram commutes: 
     \begin{figure}[ht]
         \centering
         \begin{tikzcd}
@@ -42,11 +43,11 @@
     we have $\iota \circ ev_a = ev_{\iota a} \circ \bar{\iota}$,
     i.e. the following diagram commutes. 
     \begin{figure}[ht]
-    \centering
-    \begin{tikzcd}
-    K[x] \arrow[r,"\bar{\iota}"] \arrow[d,"ev_a"]
-    & L[X] \arrow[d,"ev_{\iota a}"]\\
-    K \arrow[r,"\iota"]& L\\
+        \centering
+        \begin{tikzcd}
+        K[x] \arrow[r,"\bar{\iota}"] \arrow[d,"ev_a"]
+        & L[X] \arrow[d,"ev_{\iota a}"]\\
+        K \arrow[r,"\iota"]& L\\
     \end{tikzcd}
     \label{fig:ev}
 \end{figure}
@@ -130,8 +131,8 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
 
     Let $\iota : K \to L$ be a field extension and 
     $a \in L$ be an algebraic element over $K$. 
-    Then $K(a) = (ev_a \circ\bar\iota)K[X]$.
-    I.e. $K(a)$ looks like polynomials over $K$ evaluated at $a$.
+    Then $K(a) = (ev_a \circ\bar\iota)K[X]$,
+    i.e. $K(a)$ looks like polynomials over $K$ evaluated at $a$.
 \end{thm}
 \begin{proof}
     Clearly $(ev_a\circ\bar\iota) K[X] \subseteq K(a)$.
@@ -150,13 +151,6 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     every element in the quotient is either 0 or unit.
     The quotient is thus a field and we are done. 
 \end{proof}
-\begin{rmk}
-    We can think of $K[X]/(\min(a,K))$ as 
-    \[\displaystyle 
-        \{\sum_{i=0}^{\deg\min(a,K) - 1} \la_i X^i \mid \la_i \in K\}
-    \]
-\end{rmk}
-
 %    - Ex - Deg Ext = Deg Min Poly
 \begin{ex} The Degree of Simple Extensions over Algebraic Elements.
 
@@ -165,7 +159,12 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     Show that $[K(a):K] = \deg \min(a, K)$. 
     (Hint: You now know $K(a) \iso K[X]/(\min(a,K))$.)
 \end{ex}
-
+\begin{rmk}
+    We can think of $K[X]/(\min(a,K))$ as 
+    \[\displaystyle 
+        \{\sum_{i=0}^{\deg\min(a,K) - 1} \la_i X^i \mid \la_i \in K\}
+    \]
+\end{rmk}
 %Some equivalent conditions for an element to be algebraic.
 %    - Lem - K(a) fin iff a alg
 \begin{lem}

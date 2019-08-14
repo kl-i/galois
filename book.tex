@@ -109,6 +109,9 @@
 \newcommand{\im}{\textnormal{im}\;}
 
 \newcommand{\Hom}[3]{\text{Hom}_{#1}(#2, #3)}
+\newcommand{\mor}[3]{\text{Mor}_{#1}(#2, #3)}
+\newcommand{\End}[2]{\text{End}_{#1}(#2))}
+\newcommand{\aut}[2]{\text{Aut}_{#1}(#2)}
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Top}{\mathbf{Top}}
 \newcommand{\Grp}{\mathbf{Grp}}
@@ -122,6 +125,8 @@
 \newcommand{\normsub}{\trianglelefteq}
 \newcommand{\norm}[1]{\Vert#1\Vert}
 \renewcommand{\bar}[1]{\overline{#1}}
+
+\newcommand{\gal}[2]{\text{Gal}_{#1}(#2)}
 
 \newcommand{\fa}{\mathfrak{a}}
 \newcommand{\fb}{\mathfrak{b}}
@@ -174,25 +179,26 @@
         \subfile{01Preface/01markers}
 
 \part{Theory}
-
+    
     \chapter{Motivation}
         \subfile{02Theory/01motivation}
-
+        
     \chapter{Preliminaries}
+        
         \section{Groups}
-            \subfile{02Theory/02prelim_01groups}
+            \subfile{02Theory/02prelim/01groups}
         
         \section{Vector Spaces}
-            \subfile{02Theory/02prelim_02vectorspaces}
+            \subfile{02Theory/02prelim/02vectorspaces}
         
         \section{Rings}
-            \subfile{02Theory/02prelim_03rings}
+            \subfile{02Theory/02prelim/03rings}
         
         \section{Polynomial Rings over Fields}
-            \subfile{02Theory/02prelim_04polynomial}
+            \subfile{02Theory/02prelim/04polynomial}
         
         \section{A Little More on Vector Spaces}
-            \subfile{02Theory/02prelim_05morevector}
+            \subfile{02Theory/02prelim/05morevector}
 
     \chapter{Field Extensions}
         \subfile{02Theory/03extensions}
@@ -208,15 +214,20 @@
 
     \chapter{Seperable Extensions}
         \subfile{02Theory/07seperable}
+        
+    \chapter{Primitive Element Theorem}
+        \subfile{02Theory/08primitive}
 
     \chapter{Galois Correspondance}
-        \subfile{02Theory/08galois}
-
-    \chapter{Radical Extentions and Solvability}
-        \subfile{02Theory/09radical}
+        \subfile{02Theory/09galois}
 
     \chapter{Finite Fields}
         \subfile{02Theory/10finite}
+
+    \chapter{Radical Extentions and Solvability}
+        \subfile{02Theory/11radical}
+
+
 
 \part{Harder exercises}
 

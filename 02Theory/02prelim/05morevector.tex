@@ -40,8 +40,8 @@
     $(f_i : V_i \to W)_{i\in I}$ $K$-vector space morphisms,
     there exists a unique morphism of $K$-vector spaces 
     $f : \bigoplus_{i\in I} V_i \to W$ such that for all $i\in I$, 
-    $f_i = f \circ \iota_i$. 
-    I.e. the diagram below commutes for all $i \in I$.  
+    $f_i = f \circ \iota_i$,
+    i.e. the diagram below commutes for all $i \in I$.  
     \begin{figure} [ht]
         \centering
         \begin{tikzcd}
@@ -96,7 +96,11 @@
     Let $V$ be a $K$-vector space and $\{v_i\}_{i\in I}$ a subset of vectors.
     Then via the inclusion $\iota : \{v_i\}_{i\in I} \to V$ and
     the characterising property of free vector spaces, 
-    we have a $K$-vector space morphism \[
+    we have a $K$-vector space morphism \footnote{
+    We use the bar in $\bar \phi$ 
+    for any map that is induced by existing maps. 
+    In other words, when $\bar\phi$ exists because $\phi_i$ exist.
+    } \[
         \bar\iota : \bigoplus_{\{v_i \mid i\in I\}} K \to V, 
         \sum_{i\in I}\la_i v_i \mapsto \sum_{i\in I}\la_i v_i
     \]
