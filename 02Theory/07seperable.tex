@@ -4,7 +4,7 @@
 In this section, we deal with when minimal polynomials having multiple roots.
 
 \begin{rmk}
-    The following turns out to be intimately related to when
+    The following is intimately related to when
     polynomials can have multiple roots or not.
 \end{rmk}
 
@@ -30,7 +30,8 @@ In this section, we deal with when minimal polynomials having multiple roots.
     By the 1st isomorphism theorem, 
     \[ \Z/ (\chi_K) = \Z / \ker \iota_\Z \iso_\Ring \iota_\Z \Z \subseteq K\]
     where $\iota_\Z$ is the canonical ring morphism from $\Z$ into $K$.
-    Since fields are integral and subrings of integral domains are integral,
+    Since fields are integral rings
+    and subrings of integral domains are integral,
     $\Z / (\chi_K)$ is an integral domain.
     If $\chi_K$ is zero, we are done.
     If $\chi_K$ is non-zero, note that $\iota_\Z$ cannot be the zero map
@@ -45,9 +46,9 @@ In this section, we deal with when minimal polynomials having multiple roots.
     Let $f$ be a polynomial over $K$ and 
     $\iota_L : K \to L$ an extension splitting $f$.
     Suppose we have, \[
-            \bar\iota_L f = \bar\iota(\la) \prod_{i\in n} (X - a_i)^{m_i}
+            \bar\iota_L f = \iota(\la) \prod_{i\in n} (X - a_i)^{m_i}
     \]
-    where $\la \in K$ and $a_i \in L$. 
+    where $\la \in K$ and $a_i \in L$, and for all $i,j$, $a_i \neq a_j$. 
     For a root $a_i$ of $f$, $m_i$ is called its \textbf{multiplicity}.
     This is actually independent of the extension $L$,
     since $\bar\iota_L f$ is the same over $K(\{a_i\}_{i\in n})$,
@@ -55,7 +56,7 @@ In this section, we deal with when minimal polynomials having multiple roots.
     A root $a_i$ with multiplicity larger than one is called \textbf{repeated}.
 \end{dfn}
 Before we introduce the three equivalent definitions of separability, 
-we will need to following two lemma. 
+we will need to following two lemmas. 
 \begin{lem} GCD stays the same moving up Extensions.
     
     Let $f, g$ be polynomials over $K$ and $\iota_L : K \to L$ an extension.
@@ -74,22 +75,23 @@ we will need to following two lemma.
 \end{proof}
 \begin{rmk}
     The above lemma is significant because it says
-    if $f$ has a repeated root, then that repeated roots belongs to 
-    \emph{only one} of its irreducible factors. 
-    Hence, $f$ has a repeated root if and only if it has some irreducible factor
-    with repeated roots. 
-    This means from now on when consider the issue of repeated roots, 
+    if $f$ has a repeated root, then that repeated root belongs to 
+    \emph{only one} of its irreducible factors, 
+    because the gcd of any two distinct irreducible factors is $1$. 
+    Hence, $f$ has a repeated root if and only if it has some
+    irreducible factor with repeated roots. 
+    This means from now on when considering the issue of repeated roots, 
     we only need to consider irreducible polynomials. 
 \end{rmk}
 \begin{lem} Freshmen's Dream.
     
-    Let $K$ be a field where $\chi_K \neq 0$. 
+    Let $K$ be a field where $\chi_K \neq 0$ in $\Z$. 
     Then for all $a, b \in K$, \[
         (a+b)^{\chi_K} = a^{\chi_K} + b^{\chi_K}
     \]
 \end{lem}
 \begin{proof}
-    Follows from the binomial theorem and $\chi_K = 0$. 
+    Follows from the binomial theorem and $\chi_K = 0$ in $K$. 
 \end{proof}
 %    - Def - Sep Ext, 2 Eqv defs
 %          - Contrapositive
@@ -371,7 +373,7 @@ First, a lemma.
         Hence by embedding via conjugates for simple extensions,
         the number of $K$-extension morphisms 
         from $(K(a),\iota)$ to $(N,\iota_N\circ\iota)$
-        is equal to the number of distinct galois conjugates of $a$
+        is equal to the number of distinct Galois conjugates of $a$
         inside $N$. 
         This is equal to $\deg\min(a,K)$, which equals $[K(a):K]$,
         if and only if $\min(a,K)$ is separable. 

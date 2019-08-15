@@ -184,7 +184,7 @@
 
     Let $\iota_L : K \to L, \iota_M : K \to M$ be $K$-extensions and
     $a \in L, b \in M$ be elements algebraic over $K$. 
-    Then $a, b$ are called \textbf{galois conjugates} when
+    Then $a, b$ are called \textbf{Galois conjugates} when
     either of the following equivalent statements are true: 
     \begin{enumerate}
         \item $b$ is a root of $\min(a,K)$.
@@ -195,11 +195,11 @@
 \begin{eg} Conjugates
     \begin{enumerate}
         \item Let $\R \to \C$ be the usual extension.
-        Then $i$ and $-i$ are galois conjugates.
+        Then $i$ and $-i$ are Galois conjugates.
         \item Let $\Q \to \Q(\sqrt{2})$ be the usual extension.
-        Then $\sqrt{2}$ and $-\sqrt{2}$ are galois conjugates.
+        Then $\sqrt{2}$ and $-\sqrt{2}$ are Galois conjugates.
         \item Let $\Q \to \Q(\omega)$ where $\omega = \exp(2\pi i / 3)$.
-        Then $1$ and $\omega$ are \emph{not} galois conjugates even though
+        Then $1$ and $\omega$ are \emph{not} Galois conjugates even though
         both are roots of $X^3 - 1$. 
         The mistake is that $X^3 - 1$ is not the minimal polynomial.
         The minimal polynomial of $\omega$ is $X^2 + X + 1$. 
@@ -213,9 +213,9 @@
     where $a$ is algebraic over $K$. 
     Let $\iota_M : K \to M$ be another $K$-extension.
     Then for any $K$-extension morphism $f : K(a) \to M$, 
-    $f(a)$ is a galois conjugate of $a$.
+    $f(a)$ is a Galois conjugate of $a$.
     Hence the map $f \mapsto f(a)$ gives a bijection between
-    the $K$-extension morphisms $K(a) \to M$ and the galois conjugates of $a$ in $M$.
+    the $K$-extension morphisms $K(a) \to M$ and the Galois conjugates of $a$ in $M$.
     \[
         \{f : K(a) \to M \mid f \text{ $K$-extension morphism} \} \leftrightarrow 
         \{b \in M \mid b \text{ galois conjugate to } a \}
@@ -225,7 +225,7 @@
 \end{lem}
 \begin{proof}
     Let $f : K(a) \to M$ be a $K$-extension morphism. 
-    Then the fact that $f(a)$ is a galois conjugate of $a$ just comes from
+    Then the fact that $f(a)$ is a Galois conjugate of $a$ just comes from
     the property of the evaluation morphism, 
     \[
         \bar\iota_M \min(a,K) (f(a)) = ev_{f(a)}(\bar\iota_M \min(a,K))
@@ -244,7 +244,7 @@
     This proves injectivity. 
     
     Surjectivity is a consequence of the form of $K(a)$.
-    Let $b \in M$ be a galois conjugate of $a$. 
+    Let $b \in M$ be a Galois conjugate of $a$. 
     Then $\min(b,K) = \min(a,K)$ implies \[
         K(a) \iso K[X]/(\min(a,K)) = K[X]/(\min(b,K)) \iso K(b)
     \]
