@@ -10,7 +10,7 @@ we have a lemma.
     Let $R, S$ both be rings (commutative, of course) and
     $\phi, \psi$ ring morphisms from $R$ to $S$. 
     Suppose $\ker \phi \subseteq \ker \psi$. 
-    Then we have a unique ring morphism $\bar{\psi}$
+    Then there exists a unique ring morphism $\bar{\psi}$
     from the quotient $R/\ker \phi$ such that the following diagram commutes.
     \begin{figure}[H]
         \centering
@@ -22,8 +22,18 @@ we have a lemma.
     \end{figure}
 \end{lem}
 \begin{proof}
-    Define $$
+    From the requirement of the diagram commuting, 
+    we are forced to define $\bar{\psi}$ as \[
+      R/\ker\phi \to S , a + \ker\phi \mapsto \psi(a)  
+    \]
+    This is well-defined since $\ker\phi \subseteq \ker\psi$. 
+    It is clearly a ring morphism, so we have existence. 
+    We have uniqueness for free since
+    we used the condition of the commuting diagram 
+    to deduce the definition of $\bar{\psi}$. 
 \end{proof}
+
+We are now ready to define \emph{Galois extensions}. 
 
 %    -  Def - Galois Ext, Galois Group
 \begin{dfn} Fixed Subfield, Galois Extension and Galois Group.
@@ -62,6 +72,16 @@ we have a lemma.
         Let $f$ be a separable polynomial over $K$ 
         which $L$ is the splitting field of.
         Let $S_f$ be the finite set of the roots of $f$. 
+        Consider the multivariable polynomial ring $L[\{X_a\}_{a\in S_f}]$
+        with indeterminates indexed by $S_f$. 
+        We have the evaluation morphism $ev_{a\in S_f}$
+        which takes a polynomial over $L$ in $|S_f|$ many variables
+        and evaluates them at the roots of $S_f$. 
+        Note that the kernel of the evaluation map, 
+        is precisely the equations with coefficients in $L$ that
+        the roots of $f$ satisfy. 
+        In particular, these include equations with coefficients from $K$
+        that roots of $f$ satisfy. 
         
         
     ($3\imp 1$)

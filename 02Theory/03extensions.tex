@@ -53,7 +53,13 @@ Now we are ready to talk about the building blocks of Galois Theory.
     inside the extensions. 
 \end{dfn}
 
+\begin{rmk}
+    
+    Note that something like $K \to K[X], \la \mapsto \la$ is \emph{not}
+    a field extension since the polynomial ring $K[X]$ is not a field. 
+    The following result gives 
 
+\end{rmk}
 
 %\begin{dfn} Field Extension, Morphism of Extensions,Extension Degree,
 %Finite Extension.
@@ -97,7 +103,8 @@ is a basis of $M$ over $K$.
 \begin{itemize}
     \item Spanning: 
         Let $z \in M$. 
-        Then there exists $\lambda_i \in L$ such that     $z=\displaystyle\sum_{i=1}^{n} \lambda_iy_i$, 
+        Then there exists $\lambda_i \in L$ such that 
+        $z=\displaystyle\sum_{i=1}^{n} \lambda_iy_i$, 
         and for each $\lambda_i \in L$, there exists ${\mu_i}_j \in K$ 
         such that $\lambda_i=\displaystyle\sum_{j=1}^{m} {(\mu_i)}_j x_j$. 
         Hence,\[
@@ -151,6 +158,9 @@ Thus $|B| = nm$.
         $M$ forms a $K$-extension using $\iota_L$.  
         \item $M$ is the image of a $K$-extension morphism into $(L,\iota_L)$. 
     \end{enumerate}
+
 \end{dfn}
+
+
 
 \end{document}
