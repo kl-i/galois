@@ -156,17 +156,19 @@ we will need to following two lemmas.
         Thus $f'$ must be zero. 
         Let $f = \sum_{k\leq\deg f} f_k X^k$. 
         Then we have \[
-            0 = \sum_{k < \deg f} (k+1) f_{k+1} X^k
+            0 = f' = \sum_{k < \deg f} (k+1) f_{k+1} X^k
         \]
         which implies for all $k < \deg f$, $(k+1) f_{k+1} = 0$.
-        Then when the coefficients of $f$ are non-zero, we have $k+1 = 0$.
+        Let $S$ be the set of $k$ such that $f_{k+1} \ne 0$.
+        Then for all $k \in S$, we have $k+1 = 0$ in $K$.
         This implies the kernel of the canonical ring morphism 
         $\Z \to K$ is non-trivial. 
         Hence, $\chi_K$ is non-zero. 
-        Furthermore, for non-zero coefficients $f_{k+1}$, 
-        $k+1 = 0$ implies there exist $n_k$ such that $k+1 = n_k\chi_K$ in $\Z$
+        Furthermore, for all $k \in S$,
+        $k+1 = 0$ in $K$ implies there exist $n_k \in Z$ such that 
+        $k+1 = n_k\chi_K$ in $\Z$
         since $\chi_K$ generates the kernel of $\Z \to K$. 
-        Letting $g := f_0 + \sum_{k<\deg f} f_{k+1}X^{n_k}$,
+        Letting $g := f_0 + \sum_{k \in S} f_{k+1}X^{n_k}$,
         we have $f = g(X^{\chi_K})$.\footnote{
             Composition of polynomials is such that $(X^a)^b=X^{ab}$.
             This comes from the interpretation of polynomials over a field $K$
@@ -186,10 +188,10 @@ we will need to following two lemmas.
         Furthermore, there exists an extension $\iota : M \to L$ 
         that splits $\bar\iota_M f$.
         Let $(L,\iota_L) := (L,\iota\circ\iota_M)$. 
-        Then for all $b_i$, we have an $a_i \in L$ such that $a_i^{\chi_K} = b_i$. 
+        Then for all $b_i$, we have an $a_i \in L$ such that $a_i^{\chi_K} = \iota b_i$. 
         Hence we have \begin{align*}
             \bar\iota_L f &= \bar\iota_L g(X^p) 
-            = \iota_L(\la) \prod_{i < \deg g}  (X^{\chi_K} - a_i^{\chi_J}) \\
+            = \iota_L(\la) \prod_{i < \deg g}  (X^{\chi_K} - a_i^{\chi_K}) \\
             &= \iota_L(\la) \prod_{i < \deg g}  (X - a_i)^{\chi_K}  
         \end{align*}
         where the second line comes from Freshmen's dream. 
@@ -203,13 +205,14 @@ we will need to following two lemmas.
     Let $\iota_M : L \to M$ be an extension such that 
     $(M,\iota_M\circ\iota_L)$ is normal. 
     Then the \textbf{separable degree of $(L,\iota_L)$} is
-    the number of $K$-extension morphisms 
+    the number\footnote{... the cardinality of the set of...}
+    of $K$-extension morphisms 
     from $(L,\iota_L)$ to $(M,\iota_M\circ\iota_L)$.
     This is denoted $[L : K]_S$. 
     
     We prove below that for any choice of $M$,
-    the separable degree is equal to when $M$ is chosen to be 
-    the normal closure of $(L,\iota_L)$.
+    the separable degree is equal to the seperable degree 
+    when $M$ is chosen to be the normal closure of $(L,\iota_L)$.
     Hence it is well-defined.
 \end{dfn}
 \begin{proof}
@@ -239,7 +242,7 @@ we will need to following two lemmas.
     \end{figure}
     Let $\mor{K}{L}{N}$ denote the set of $K$-extension morphisms
     from $(L,\iota_L)$ to $(N,\iota_N\circ\iota_L)$
-    and similarly $\mor{K}{L}{M}$ for $(M,\iota_M\circ\iota_L)$. 
+    and similarly let $\mor{K}{L}{M}$ denote the same for $(M,\iota_M\circ\iota_L)$. 
     Let $\phi \in \mor{K}{L}{N}$. Then clearly, 
     $\bar\iota_M \circ \phi$ is a $K$-extension morphism 
     from $(L,\iota_L)$ to $(M,\iota_M\circ\iota_L)$. 
@@ -288,7 +291,7 @@ We now have the a second tower law.
     We want to show \[
         |\mor{K}{M}{N}| = |\mor{L}{M}{N}| |\mor{K}{L}{N}|
     \]
-    We start by noting that by restricting to $L$, 
+    We start by noting that by restricting to the image of $L$, 
     the $K$-extension morphisms from $M$ to $N$,
     we obtain $K$-extension morphisms from $L$ to $N$, i.e.
     \[
@@ -318,9 +321,10 @@ We now have the a second tower law.
     Then since two embeddings into a normal extension differ by an automorphism,
     we have an $L$-extension morphism $\bar{f}$ 
     from $(N,\iota_N\circ\iota_M)$ to $(N,f)$. 
-    Then $\bar{f}\circ\iota_M : M \to N$ is clearly
+    Then $\bar{f}\circ\iota_N : M \to N$ is clearly
     a $K$-extension morphism from $(M,\iota_M\circ\iota_L)$ 
-    to $(N,\iota_N\circ\iota_M\circ\iota_L)$ that restricts to $f$. 
+    to $(N,\iota_N\circ\iota_M\circ\iota_L)$ 
+    that gets sent to $f$ under $(- \circ \iota_M)$. 
     
     Let $f \in \mor{K}{L}{N}$. 
     We now show that $(- \circ \iota_M)^{-1}(f)$ bijects with $\mor{L}{M}{N}$.
@@ -351,13 +355,13 @@ First, a lemma.
     Let $K \overset{\iota_L}{\to} L \overset{\iota_M}{\to} M$ be extensions
     and $a \in M$, $b \in L$. 
     Then $\min(a,K)$ separable implies $\min(a,L)$ separable
-    and $\min(\iota_M(b),K)$ implies $\min(b,K)$ separable.
+    and $\min(\iota_M(b),K)$ seperable implies $\min(b,K)$ separable.
     Consequently, $(M,\iota_M\circ\iota_L)$ separable implies
     both $(L,\iota_L)$ and $(M,\iota_M)$ separable. 
 \end{lem}
 \begin{proof}
     Let $\min(a,K)$ be separable.
-    $\min(a,L)$ divides $\min(a,K)$. 
+    $\min(a,L)$ divides the image of $\min(a,K)$. 
     Since $\min(a,K)$ is separable, it has no repeated roots,
     which clearly implies $\min(a,L)$ also has no repeated roots. 
     Hence $\min(a,L)$ is separable. 
@@ -369,9 +373,11 @@ First, a lemma.
 %          - Key : Roots <-> Maps from K(a)
 %    - Lem - Simp Ext Sep iff Sep Deg = Ext Deg
 %          - Key : Ineq Trick
-\begin{thm} Equivalent Conditions for Simple Algebraic to be Separable.
+\begin{thm} Equivalent Conditions for Simple Algebraic 
+Extensions to be Separable.
 
-    Let $\iota : K \to K(a)$ be a simple extension where $a$ is algebraic over $K$.
+    Let $\iota : K \to K(a)$ be a simple extension where 
+    $a$ is algebraic over $K$.
     Then the following are equivalent: 
     \begin{enumerate}
         \item $\min(a,K)$ is separable.

@@ -475,8 +475,26 @@
         [Hint : Use the first isomorphism theorem, remembering to prove surjectivity.]
 \end{proof}
 %    -  Cor - Fund Thm Alg
+\begin{cor}
+For all polynomial $f \in \mathbb{C}[x]$, $\mathbb{C}$ splits $f$.
+\end{cor}
+
+To prove this corollary, we need to notice two lemmas first:
+
 %        -  No non-trivial odd deg ext of R
+\begin{lem}
+There does not exists non-trivial field $F$ such that $[F: \mathbb{R}]$ is odd.
+\end{lem}
+\begin{proof}
+Assume such $F$ exist, pick $ \alpha \in F\setminus \mathbb{R}$, it will have a minimal polynomial with odd degree. By immediate value theorem, then there exist real root in $\mathbb{R}$. Hence $[F: \mathbb{R}]=1$, i.e. this is a trivial extension.
+\end{proof}
 %        -  No non-trivial even deg ext of C 
+\begin{lem}
+There does not exists field $F$ such that $[F: \mathbb{C}]=2$
+\end{lem}
+\begin{proof}
+Assume such $F$ exist, pick $ \alpha \in F\setminus \mathbb{C}$, it will have a minimal polynomial with degree 2. However $\mathbb{C}$ must split any quadratic polynomial. Contradiction.
+\end{proof}
 
-
+\textit{Proof of Corollary.}
 \end{document}
