@@ -7,12 +7,12 @@
     
     Let $\iota : K \to L$ be a field extension, $f$ a polynomial over $K$. 
     Then \textbf{$(L,\iota)$ splits $f$} when there exist degree 1 polynomials
-    $(r_i)_{i\in\deg f} \in L[X]$ such that \[
-        \bar\iota f = \prod_{i\in\deg f} r_i
+    $(r_i)_{i<\deg f} \in L[X]$ such that \[
+        \bar\iota f = \prod_{i<\deg f} r_i
     \]
-    Equivalently, there exists elements $(a_i)_{i\in\deg f} \in L, \la \in K$ 
+    Equivalently, there exists elements $(a_i)_{i<\deg f} \in L, \la \in K$ 
     such that \[
-        \bar\iota f = \iota(\la)\prod_{i\in\deg f} (X - a_i)
+        \bar\iota f = \iota(\la)\prod_{i<\deg f} (X - a_i)
     \]
     If the extension is clear, we just say $L$ splits $f$ or
     $L$ contains all the roots of $f$. 
@@ -59,7 +59,7 @@
     \]
     Since $M$ splits $\min(a,K)$, \[
         f \bar\iota_1 \min(a,L) =
-        \bar\iota_1(\bar\iota_0 \min(a,K)) = \prod_{\tiny{i \in \deg\min(a,K)}} r_i
+        \bar\iota_1(\bar\iota_0 \min(a,K)) = \prod_{\tiny{i < \deg\min(a,K)}} r_i
     \]
     where $r_i \in M[X]$ are polynomials of degree 1. 
     
@@ -407,11 +407,11 @@
         \end{tikzcd}
     \end{figure}
     By definition, $L$ splits $f$, that is, there exists a $\la \in K$ such that 
-    \[\bar\iota_L f = \iota_L(\la) \prod_{i\in\deg f}(X - a_i)\]
+    \[\bar\iota_L f = \iota_L(\la) \prod_{i < \deg f}(X - a_i)\]
     This implies \[
         (\overline{\psi \circ \iota_L})(f) 
         = \bar\psi(\bar\iota_L(f))
-        = \psi(\iota_L \la) \prod_{i\in\deg f} (X-\psi(a_i))
+        = \psi(\iota_L \la) \prod_{i < \deg f} (X-\psi(a_i))
     \]
     Now since $\phi \circ ev_{a_i} = ev_{\phi(a_i)} \circ \bar\phi$
     and $a_i$ is a root of $f$, we have \[
@@ -424,8 +424,8 @@
     $\phi \circ \iota_L = \iota_M = \psi \circ \iota_L$.
     And hence, \[
         0 = ev_{\phi(a_i)}( (\overline{\psi \circ \iota_L})(f) )
-        = ev_{\phi(a_i)} (\psi(\iota_L \la) \prod_{i\in\deg f} (X-\psi(a_i)))
-        = \psi(\iota_L \la) \prod_{j\in\deg f} (\phi(a_i) -\psi(a_j))
+        = ev_{\phi(a_i)} (\psi(\iota_L \la) \prod_{i < \deg f} (X-\psi(a_i)))
+        = \psi(\iota_L \la) \prod_{j < \deg f} (\phi(a_i) -\psi(a_j))
     \]
     which by $K$ being an integral domain gives $\phi(a_i) = \psi(a_j)$
     for some $j$, finishing the proof. 

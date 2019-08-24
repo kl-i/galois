@@ -45,19 +45,22 @@ In this section, we deal with when minimal polynomials having multiple roots.
     
     Let $f$ be a polynomial over $K$ and 
     $\iota_L : K \to L$ an extension splitting $f$.
-    Suppose we have, \[
-            \bar\iota_L f = \iota(\la) \prod_{i\in n} (X - a_i)^{m_i}
+    Let $S_f$ be the set of roots of $f$ inside $L$. 
+    Then we have, \[
+            \bar\iota_L f = \iota(\la) \prod_{a\in S_f} (X - a)^{m_a}
     \]
-    where $\la \in K$ and $a_i \in L$, and for all $i,j$, $a_i \neq a_j$. 
-    For a root $a_i$ of $f$, $m_i$ is called its \textbf{multiplicity}.
-    This is actually independent of the extension $L$,
-    since $\bar\iota_L f$ is the same over $K(\{a_i\}_{i\in n})$,
-    the splitting field of $f$ and any two splitting fields are isomorphic. 
-    A root $a_i$ with multiplicity larger than one is called \textbf{repeated}.
+    where $\la \in K$. 
+    For a root $a \in S_f$, $m_a$ is called its \textbf{multiplicity}.
+    The multiplicities of roots are actually independent of the extension $L$,
+    since any $L$ that splits $f$ contains a splitting field of $f$
+    and inside the splitting field, $\bar{\iota_L} f$ is the same as in $L$
+    as well as inside any other splitting field since 
+    any two splitting fields of $f$ are isomorphic. 
+    A root $a$ with multiplicity larger than one is called a \textbf{repeated root}.
 \end{dfn}
 Before we introduce the three equivalent definitions of separability, 
 we will need to following two lemmas. 
-\begin{lem} GCD stays the same moving up Extensions.
+\begin{lem} GCD stays the same moving up Extensions. 
     
     Let $f, g$ be polynomials over $K$ and $\iota_L : K \to L$ an extension.
     Let $h \in K[X]$ be a gcd of $f, g$. 
@@ -98,20 +101,23 @@ we will need to following two lemmas.
 %    - Def - Sep Element over a Field, Sep Ext
 \begin{dfn} Seperable, Separable Extensions
 % Multiple definitions taken from John Milne's Galois notes. 
+
     Let $f$ be an irreducible polynomial over $K$. 
     The following are equivalent: 
     \begin{enumerate}
         \item There exists a $K$-extension $\iota_L : K \to L$ splitting $f$ where
         $f$ has a root with multiplicity higher than 1, i.e. a repeated root.
-        \item Suppose $f = \sum_{k \in \deg f} f_k X^k \in K[X]$.
+        \item Suppose $f = \sum_{k \leq \deg f} f_k X^k \in K[X]$.
         Define its formal derivative as 
-        \[ f' := \sum_{k \in \deg f} (k+1)f_{k+1}X^k \]
+        \[ f' := \sum_{k < \deg f} (k+1)f_{k+1}X^k \]
         Then $(f,f') \neq 1$.
         \item $\chi_K$ is non-zero and there exists a polynomial $g$ over $K$
         such that $f = g(X^{\chi_K})$.
     \end{enumerate}
     If any of the above is true, then $f$ is called \textbf{inseparable}.
     Otherwise, it is called \textbf{separable}.
+    Note that (3) implies polynomials over fields with characteristic zero
+    are automatically separable. 
     
     Let $\iota_L : K \to L$ be a finite $K$-extension.
     Then $(L,\iota_L)$ is called a \textbf{separable extension} when
@@ -120,16 +126,21 @@ we will need to following two lemmas.
 \begin{proof}
     ($1\imp 2$)
     
-        Let $\iota_L : K \to L$ be a $K$-extension where \[
-            \bar\iota_L f = \iota_L(\la) \prod_{i\in n} (X - a_i)^{m_i}
+        Let $\iota_L : K \to L$ be a $K$-extension 
+        and let $S_f$ be the set of roots of $f$ in $L$ so that \[
+            \bar\iota_L f = \iota_L(\la) \prod_{a\in S_f} (X - a)^{m_a}
         \]
-        WLOG $m_0 > 1$. WLOG again, let $m_0 = 2$.
+        and there exists an $a$ such that $m_a > 1$. 
+        WLOG, let $m_a = 2$.
         Suppose $(f,f') = 1$ in $K[X]$. 
         Then by the previous lemma, $(\bar\iota_L f, \bar\iota_L f') = 1$. 
-        However, by the product rule, $\bar\iota_L f'$ has a factor of $(X - a_0)$
+        However, by the product rule\footnote{
+        Prove it yourself if you can be arsed.
+        Strong induction is your friend.}, 
+        $\bar\iota_L f'$ has a factor of $(X - a)$
         which $\bar\iota_L f$ also has as a factor, i.e.
         $(\bar\iota_L f, \bar\iota_L f') \neq 1$.
-        We have a contradiction. 
+        We have a contradiction, hence $(f,f') \neq 1$. 
     
     ($2\imp 3$)
     
@@ -143,29 +154,33 @@ we will need to following two lemmas.
         Then we have $\deg f \leq \deg f'$ whilst $\deg f' < \deg f$,
         a contradiction. 
         Thus $f'$ must be zero. 
-        Let $f = \sum_{k\in\deg f + 1} f_k X^k$. 
+        Let $f = \sum_{k\leq\deg f} f_k X^k$. 
         Then we have \[
-            0 = \sum_{k\in \deg f} (k+1) f_{k+1} X^k
+            0 = \sum_{k < \deg f} (k+1) f_{k+1} X^k
         \]
-        which implies for all $k\in\deg f$, $(k+1) f_{k+1} = 0$.
-        Then on the non-zero coefficients of $f$, we have $k+1 = 0$.
-        This implies the kernel of the canonical ring morphism $\Z \to K$
-        is non-trivial. 
+        which implies for all $k < \deg f$, $(k+1) f_{k+1} = 0$.
+        Then when the coefficients of $f$ are non-zero, we have $k+1 = 0$.
+        This implies the kernel of the canonical ring morphism 
+        $\Z \to K$ is non-trivial. 
         Hence, $\chi_K$ is non-zero. 
-        Furthermore, for $k\in\deg f$ where $f_{k+1} \neq 0$, 
-        $k+1 = 0$ implies $k+1 = m_k\chi_K$ 
+        Furthermore, for non-zero coefficients $f_{k+1}$, 
+        $k+1 = 0$ implies there exist $n_k$ such that $k+1 = n_k\chi_K$ in $\Z$
         since $\chi_K$ generates the kernel of $\Z \to K$. 
-        Letting $g := f_0 + \sum_{k\in\deg f} f_{k+1}X^{m_k}$,
-        we have $f = g(X^{\chi_K})$.
+        Letting $g := f_0 + \sum_{k<\deg f} f_{k+1}X^{n_k}$,
+        we have $f = g(X^{\chi_K})$.\footnote{
+            Composition of polynomials is such that $(X^a)^b=X^{ab}$.
+            This comes from the interpretation of polynomials over a field $K$
+            as a function from $K$ to itself. 
+        }
         
     ($3\imp 1$)
     
         Let $\chi_K \neq 0$ and $f = g(X^{\chi_K})$
         for some polynomial $g \in K[X]$.
         There exists an extension $\iota_M : K \to M$ that splits $g$. 
-        Then inside $M$ we have \[
+        Then inside $M[X]$ we have \[
             \bar\iota_M f = \bar\iota_M g(X^{\chi_K})
-            = \iota_M(\la) \prod_{i\in\deg g+1} (X^{\chi_K} - b_i)
+            = \iota_M(\la) \prod_{i < \deg g} (X^{\chi_K} - b_i)
         \]
         where $\la \in K$ and $b_i \in M$. 
         Furthermore, there exists an extension $\iota : M \to L$ 
@@ -174,8 +189,8 @@ we will need to following two lemmas.
         Then for all $b_i$, we have an $a_i \in L$ such that $a_i^{\chi_K} = b_i$. 
         Hence we have \begin{align*}
             \bar\iota_L f &= \bar\iota_L g(X^p) 
-            = \iota_L(\la) \prod_{i\in\deg g + 1}  (X^{\chi_K} - a_i^{\chi_J}) \\
-            &= \iota_L(\la) \prod_{i\in\deg g + 1}  (X - a_i)^{\chi_K}  
+            = \iota_L(\la) \prod_{i < \deg g}  (X^{\chi_K} - a_i^{\chi_J}) \\
+            &= \iota_L(\la) \prod_{i < \deg g}  (X - a_i)^{\chi_K}  
         \end{align*}
         where the second line comes from Freshmen's dream. 
         Thus in fact, \emph{all} the roots of $f$ have multiplicity larger than 1. 
@@ -359,7 +374,7 @@ First, a lemma.
     Let $\iota : K \to K(a)$ be a simple extension where $a$ is algebraic over $K$.
     Then the following are equivalent: 
     \begin{enumerate}
-        \item $\min(a,K)$ is a separable.
+        \item $\min(a,K)$ is separable.
         \item $[K(a) : K]_S = [K(a) : K]$
         \item $\iota : K \to K(a)$ is a separable extension. 
     \end{enumerate}
@@ -382,7 +397,7 @@ First, a lemma.
         Trivial.
     
     ($2 \imp 3$)
-        Let $b \in K(a)$. 
+        Let $b \in K(a)$. We use $1,2$ on $b$ to prove this implication. 
         Let $(N,\iota_N)$ be a $K(a)$-extension such that 
         $N$ is normal as a $K(b)$-extension. 
         We have the following trick of inequalities. 
@@ -429,8 +444,7 @@ The generalisation of the above to finite extensions is what we are after.
         
         Let $b \in L$. 
         This is the same inequality trick.
-        By embedding via conjugates, we have 
-        $[L : K(b)]_S \leq [L : K(b)]$. 
+        By embedding via conjugates, we have $[L : K(b)]_S \leq [L : K(b)]$. 
         Then by the tower laws of separable degree and extension degree,
         \begin{align*}
             [L : K]_S &= [L : K(b)]_S [K(b) : K]_S \\
