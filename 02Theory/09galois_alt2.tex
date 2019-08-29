@@ -1,0 +1,338 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+
+We are now ready to define \emph{Galois extensions}. 
+
+%    -  Def - Galois Ext, Galois Group
+\begin{dfn} Fixed Subfield, Galois Extension and Galois Group.
+    Let $\iota_L : K \to L$ be a field extension.
+    Let $\aut{K}{(L,\iota_L)}$ denote the set of $K$-extension automorphisms of $L$.
+    If $\iota_L$ is clear, we simply write $\aut{K}{L}$. 
+    This forms a group under function composition and has an obvious action on $L$. 
+    For any subgroup $G$ of the group of $\aut{K}{L}$, 
+    define \textbf{the subfield of $L$ fixed by $G$} as
+    \[ L^G := \{l \in L \mid \forall g \in G, g(l)=l\} \]
+    Then following are equivalent.
+    \begin{enumerate}
+        \item $(L,\iota_L)$ is a finite, normal and separable extension.
+        \item There exists a finite subgroup $G$ of $\aut{K}{L}$ such that
+        $\iota_L K = L^G$. 
+    \end{enumerate} 
+    If any of the above is true, 
+    we have $[L : K] = |\aut{K}{L}|$ with $G = \aut{K}{L}$
+    and $(L,\iota_L)$ is called a \textbf{Galois extension}.
+    $\aut{K}{L}$ is then called the \textbf{Galois group of $(L,\iota_L)$}.
+\end{dfn}
+\begin{proof}
+    ($1\imp 2$)
+        
+        Note that $(L,\iota_L)$ separable implies $[L:K] = [L:K]_S$.
+        Since $L$ itself is an extension extending $\iota_L : K \to L$ that is normal,
+        we have \[
+            [L : K] = [L : K]_S = |\mor{K}{L}{L}| = |\aut{K}{L}|
+        \]
+        i.e. $\aut{K}{L}$ is finite. 
+        
+        We claim that $G = \aut{K}{L}$ works. 
+        To prove the image of $K$ is the subfield of $L$ fixed by $\aut{K}{L}$,
+        note that we already have \[
+            K \overset{\iota_L}{\to} L^{\aut{K}{L}} \overset{\subseteq}{\to} L
+        \]
+        Now let $b$ be an element of $L$ not in $\iota_L K$. 
+        $[L : K]$ finite implies $b$ is algebraic over $K$. 
+        Since $b$ not in $\iota_L K$, $\min(b,K)$ must have degree higher than one. 
+        $L$ normal and separable then implies 
+        there exists a Galois conjugate $\be$ of $b$ \emph{not equal to} $b$. 
+        So by embedding via conjugates, 
+        we have a $K$-extension morphism $\sigma$ 
+        from $K(b)$ to $K(\be)$ mapping $b$ to $\be$.
+        Then $\sigma$ is a $K$-extension morphism from $K(b)$ to $L$.
+        So we have an $L$-extension morphism $\bar{\sigma}$ of $L$
+        from $(K(b),\subseteq)$ to $(K(b),\sigma)$, 
+        i.e. $\bar{\sigma}$ restricted to $K(b)$ is equal to $\sigma$. 
+        Then clearly, $\bar{\sigma}$ is a $K$-extension automorphism of $L$
+        that does not fix $b$, 
+        so $b$ is not in $L^{\aut{K}{L}}$.
+        This proves $\iota_L K = L^{\aut{K}{L}}$. 
+        
+    ($2\imp 1$)
+        Since $\iota_L K = L^G$, it sufficient to consider the extension 
+        $L^G \subseteq L$. 
+        
+        Let $a \in L$. We claim that \[
+            \min(a,L^G) = \prod_{b \in Orb(a)} (X - b)
+        \]
+        where $Orb(a)$ is the orbit of $a$ under the obvious action of $G$ on $L$. 
+        This just says the Galois conjugates of $a$ is precisely
+        the images of $a$ under $K$-extension automorphisms of $L$. 
+        From this, we have $\min(a,L^G)$ splits and has no repeated roots. 
+    
+        We first show that the product is actually in $L^G[X]$. 
+        Let $g \in G$. Then \[
+            \bar{g} \prod_{b \in Orb(a)} (X - b) 
+            = \prod_{b \in Orb(a)} (X - g(b)) = \prod_{b' \in Orb(a)} (X - b')
+        \]
+        Hence the product is fixed by all $g \in G$. 
+        Writing the product as $\sum_{k\in n} \la_k X^k$ where $\la_k \in L$,
+        we have $\la_k \in L^G$, i.e. the product is indeed in $L^G[X]$. 
+    
+        We now prove the product is irreducible in $L^G[X]$.
+        The product is clearly non-zero and non-unit. 
+        Let $f, g$ be polynomials over $L^G$ such that \[
+            fg = \prod_{b \in Orb(a)} (X - b)
+        \]
+        Evaluating both sides at $a$, we have $0 = ev_a f$ or $0 = ev_a g$. 
+        WLOG $ev_a f = 0$. 
+        Then since $f \in L^G[X]$, for all $g \in G$, $\bar{g}f = f$, 
+        we have \[
+            0 = g(0) = g(ev_a f) = ev_{g(a)}(\bar{g} f) = ev_{g(a)} f
+        \]
+        Hence for all $b \in Orb(a)$, $b$ is a root of $f$, i.e.
+        there exists a polynomial $h$ over $L$ such that \[
+            h \prod_{b \in Orb(a)} (X - b) = f
+        \]
+        The by $L[X]$ is an integral domain, $1 = gh$,
+        which implies $\deg g = 0$, giving $g$ is a unit in $L^G[X]$. 
+        This proves irreducibility of the product in $L^G[X]$. 
+        Thus it is equal to $\min(a,L^G)$. 
+    
+        Note that since we defined normal and separable extensions as 
+        finite extensions,
+        we must prove the extensions degree is finite 
+        to conclude the extension is Galois.
+    
+        Suppose $|G| < [L : L^G]$. 
+        Then there exists finite linearly independent set $S$ such that $|G| < |S|$. 
+        Since the $L^G$-subspace generated by $S$ is contained in $L^G(S)$, 
+        we have \[ 
+            |G| < |S| = \dim_{L^G} \<S\>_{L^G} \leq [L^G(S) : L^G] 
+        \]
+        $S$ finite and algebraic over $L^G$ gives $L^G(S)$ is a finite extension,
+        and thus a separable extension as well. 
+        Hence there exists a primitive element $a$ where $L^G(S) = L^G(a)$. 
+        But then \[
+            |G| \leq |Orb(a)| = \deg\min(a,L^G) = [L^G(a) : L^G] 
+            = [L^G(S) : L^G] < |G|
+        \]
+        which is a contradiction. 
+        Thus $[L : L^G] \leq |G|$ which is finite
+        and $L^G \to L$ is Galois. 
+    
+        We already have \[
+            |\aut{K}{L}| = [L : K] = [L : L^G] \leq |G|
+        \]
+        So since $G$ is a subset of $\aut{K}{L}$, 
+        $|G| \leq |\aut{K}{L}|$ as well and hence $G = \aut{K}{L}$.  
+    
+\end{proof}
+
+% ex - Galois Closure
+\begin{ex} Galois Closure of a Separable Extension.
+    
+    Let $\iota_L : K \to L$ be an extension.
+    Then an $L$-extension $(N,\iota_N)$ is called 
+    the \textbf{Galois closure of $(L,\iota_L)$} 
+    when it is the smallest $L$-extension that is Galois as a $K$-extension,
+    i.e. for all $L$-extensions $(M,\iota_M)$,
+    $(M,\iota_M\circ\iota_L)$ Galois implies
+    there exists an $L$-extension morphism $\bar{\iota_M} : N \to M$. 
+    
+    Suppose $\iota_L : K \to L$ be a finite, separable extension. 
+    Show that there exists a $(N,\iota_N)$ Galois closure of $(L,\iota_L)$
+    and it is unique up to $L$-extension isomorphisms i.e.
+    any other Galois closure of $(L,\iota_L)$ is isomorphic to $(N,\iota_N)$
+    as an $L$-extension. 
+    
+\end{ex}
+
+%    - Thm - Galois Correspondance / Fund Thm Gal
+%        -  Well Def
+%        -  Inv.1 
+%        -  Inv.2 
+%        -  Order.1
+%        -  Order.2
+%        -  Degree
+%        -  Equivariance
+%        -  Normality
+%        -  Quotient
+
+\begin{thm} Galois Correspondance. 
+    
+    Let $\iota_L : K \to L$ be a Galois extension.
+    Let $E \subseteq L$ be a $K$-subextension of $L$. 
+    Then the group of $E$-extension automorphisms of $L$ is
+    a subgroup of the Galois group of $(L,\iota_L)$. \[
+        \aut{E}{L} \leq_\Grp \aut{K}{L}
+    \]
+    Let $G \leq \aut{K}{L}$ be a subgroup of the Galois group of $(L,\iota_L)$. 
+    Then the subfield fixed by $G$, $L^G$, is a $K$-subextension of $(L,\iota_L)$.
+    \[ K \overset{\iota_L}{\to} L^G \]
+    
+    The \emph{Galois Correspondance} states the following: 
+    \begin{enumerate}
+        \item (Inverses)
+            For a subgroup $G \leq \aut{K}{L}$ \[
+                G = \aut{L^G}{L}
+            \]
+            For a $K$-subextension $E$, \[
+                E = L^{\aut{E}{L}}
+            \]
+            Hence, we have a bijection between $K$-subextensions of $(L,\iota_L)$
+            and the subgroups of the Galois group of $(L,\iota_L)$.
+        \item (Order Reversing) 
+            Let $G, H \leq \aut{K}{L}$ be subgroups such that $G \subseteq H$.
+            Then \[ L^H \subseteq L^G \]
+            Similarly, 
+            let $E, F \subseteq L$ be $K$-subextensions such that $E \subseteq F$.
+            Then \[ \aut{F}{L} \subseteq \aut{E}{L} \]
+        \item (Degree) 
+            Let $E$ be a $K$-subextension of $L$. 
+            Then $[E : K] = [\aut{K}{L} : \aut{E}{L}]$
+            where the latter is index of subgroups. 
+        \item ($\aut{K}{L}$-Sets)
+            Let $\sigma$ be an element of the Galois group $\aut{K}{L}$.
+            Then $E \mapsto \sigma E$ defines a $\aut{K}{L}$-action
+            on the $K$-subextensions of $L$. 
+            We also have a $\aut{K}{L}$-action 
+            on the set of subgroups of $\aut{K}{L}$ via 
+            $H \mapsto \sigma H \sigma^{-1}$.
+            
+            With these two actions, $\aut{-}{L} : E \mapsto \aut{E}{L}$
+            becomes a $\aut{K}{L}$-set isomorphism from the $K$-subextensions of $L$
+            to the subgroups of the Galois group of $L$. 
+        \item (Normality)
+            Let $E$ be a $K$-subextension of $L$. \[
+                K \overset{\iota_L}{\to} E \overset{\subseteq}{\to} L
+            \]
+            Then $\iota_L : K \to E$ is a normal extension if and only if
+            $\aut{E}{L}$ is a normal subgroup of $\aut{K}{L}$. 
+            When this is the case, $\iota_L : K \to E$ is a Galois extension
+            and we have the isomorphism of Galois groups \[
+                \aut{K}{E} \iso_\Grp \aut{K}{L} / \aut{E}{L}
+            \]
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (Inverses)
+        
+        Let $G$ be a subgroup of $\aut{K}{L}$. 
+        Then $G$ is finite and clearly a subgroup of $\aut{L^G}{L}$. 
+        Hence by definition, $L^G \to L$ is Galois 
+        and $G = \aut{L^G}{L}$. 
+        
+        For the other side, let $E \subseteq L$ be a $K$-subextension of $(L,\iota_L)$.
+        Then $(L,\iota_L)$ finite, normal and separable implies
+        $(E,\subseteq)$ finite, normal separable, i.e. Galois.
+        Hence, there exists a finite subgroup $G$ of $\aut{E}{L}$ such that $E = L^G$.
+        Then we have \[
+            \aut{E}{L} = \aut{L^G}{L} = G
+        \]
+        i.e. $E = L^{\aut{E}{L}}$. 
+        
+    (Order Reversing) Left as an easy exercise. 
+        
+    (Degree) Left as an easy exercise.
+    
+    ($\aut{K}{L}$-Sets) 
+        
+        We already know $\aut{-}{L}$ is a bijection,
+        so we only need to show it respects the $\aut{K}{L}$-actions.
+        
+        Let $\sigma \in \aut{K}{L}$. Let $E$ be a $K$-subextension of $L$. 
+        We need to show \[
+            \aut{\sigma E}{L} = \sigma \aut{E}{L} \sigma^{-1}
+        \]
+        We invite the reader to stare at this
+        until this becomes trivial. 
+    
+    (Normality)
+        
+        Let $E$ be a $K$-subextension of $L$ that is normal. 
+        Then for all $K$-extension automorphisms $\sigma$ of $L$, $\sigma E = E$. 
+        Hence by $\aut{-}{L}$ being a morphism of $\aut{-}{L}$-sets,
+        for all $\sigma \in \aut{K}{L}$, \[
+            \sigma \aut{E}{L} \sigma^{-1} = \aut{\sigma E}{L} = \aut{E}{L}
+        \]
+        i.e. $\aut{E}{L}$ is a normal subgroup of $\aut{K}{L}$.
+        
+        Now the more difficult implication. 
+        Suppose $E$ is a $K$-subextension of $L$ such that
+        $\aut{E}{L}$ is normal. 
+        Then for all $K$-extension automorphisms $\sigma$ of $L$, 
+        $\sigma \aut{E}{L} \sigma^{-1} = \aut{E}{L}$.
+        Hence for all $\sigma \in \aut{K}{L}$, \[
+            \sigma E = L^{\aut{\sigma E}{L}} = L^{\aut{E}{L}} = E
+        \]
+        This looks almost like the image invariance definition of normality,
+        but only for $K$-extension automorphisms of $L$. 
+        We will prove $E$ has the image invariance property as a $K$-extension. 
+        
+        Let $\iota_M : K \to M$ be a $K$-extension and 
+        $f, g$ be $K$-extension morphisms from $(E,\iota_L)$ to $(M,\iota_M)$.
+        The following diagram presents the proof. 
+        \begin{figure} [H]
+            \centering
+            \begin{tikzcd} [sep = huge]
+            K \arrow[r,"\iota_L"] \arrow[rd,"\iota_M"{swap}] &
+            E \arrow[r,"\iota_{N(E)}"] \arrow[d,"f"{swap},xshift=-0.5ex] 
+            \arrow[d,"g",xshift=0.5ex] &
+            N(E) \arrow[r,"\iota"] \arrow[d,"\bar{f}"{swap},xshift=-0.5ex] 
+            \arrow[d,"\bar{g}",xshift=0.5ex] 
+            \arrow[loop above,"\sigma := \bar{g}^{-1}\circ\bar{f}"] &
+            L \arrow[loop above,"\bar{\sigma}"] \\
+            & 
+            M \arrow[r,"\iota_{N(M)}"] & 
+            N(M) & 
+            \end{tikzcd}
+        \end{figure}
+        We do not know whether $E$ has the image invariance property,
+        but we do know its normal closure does. 
+        Let $(N(E),\iota_{N(E)})$ be the normal closure of $(E,\iota_L)$. 
+        Since $L$ is an $E$-extension that is normal as a $K$-extension,
+        we have an $E$-extension morphism 
+        $\iota : (N(E),\iota_{N(E)}) \to (L,id_E)$,
+        i.e. $\iota\circ\iota_{N(E)} = id_E$ 
+        where $id_E$ is the inclusion of $E$ into $L$.  
+        
+        We want to use image invariance on $N(E)$ as a $K$-extension,
+        but the maps $f, g$ are from $E$. 
+        To "lift" these maps up to $N(E)$, 
+        let $(N(M),\iota_{N(M)}$ be the normal closure of $(M,\iota_M)$. 
+        Then $(N(M),\iota_{N(M)}\circ f)$ and $(N(M),\iota_{N(M)}\circ g)$
+        are both $E$-extensions that are normal as $K$-extensions.
+        Hence by minimality of the normal closure of $E$, 
+        we have $E$-extension morphisms 
+        $\bar{f} : (N(E),\iota_{N(E)}) \to (N(M),\iota_{N(M)}\circ f)$
+        and $\bar{g} : (N(E),\iota_{N(E)}) \to (N(M),\iota_{N(M)}\circ g)$.
+        Then $\bar{f}$ and $\bar{g}$ are clearly $K$-extension morphisms
+        from $N(E)$ to $N(M)$,
+        so by image invariance, \[ \bar{f} N(E) = \bar{g} N(E) \]
+        Then $\sigma := \bar{g}^{-1} \circ \bar{f}$ is well-defined as a function.
+        This gives $\sigma$ as a $K$-extension automorphism of $N(E)$. 
+        In particular, $id_E$ and $\iota\circ\sigma\circ\iota_{N(E)}$ 
+        are two $K$-extension morphisms from $(E,\iota_L)$ to $(L,\iota_L)$.
+        So by embeddings into normal extensions differing by an automorphism, 
+        we have an $E$-extension morphism $\bar{\sigma}$
+        from $(L,id_E)$ to $(L,\iota\circ\sigma\circ\iota_{N(E)})$.
+        We have turned the two $K$-extension morphisms $f, g$ into 
+        a $K$-extension automorphism of $L$!
+        Of course, $\bar{\sigma} E = E$, which implies \begin{align*}
+            (\iota\circ\sigma\iota_{N(E)}) E = (\iota\circ\iota_{N(E)}) E &\imp
+            (\bar{g}^{-1}\circ\bar{f}\circ\iota_{N(E)}) E = (\sigma\circ\iota_{N^(E)})E
+                = \iota_{N(E)} E \\
+            &\imp (\bar{f}\circ\iota_{N(E)}) E = (\bar{g}\circ\iota_{N(E)}) E \\
+            &\imp (\iota_{N(M)}\circ f) E = (\iota_{N(M)}\circ g) E \\
+            &\imp f E = g E
+        \end{align*}
+        Thus, $(E,\iota_L)$ has the image invariance property as a $K$-extension. 
+        
+        Furthermore, $\iota_L : K \to L$ finite and separable implies 
+        $\iota_L : K \to E$ also finite and separable,
+        so $(E,\iota_L)$ is a Galois extension. 
+        
+        We leave the isomorphism of Galois groups as an exercise to the reader. 
+        [Hint : Use the first isomorphism theorem, remembering to prove surjectivity.]
+\end{proof}
+
+\end{document}

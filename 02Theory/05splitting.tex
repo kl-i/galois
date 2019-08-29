@@ -251,9 +251,9 @@
     This composition of ring isomorphisms is a $K$-extension morphism 
     $f : K(a) \to K(b) \subseteq M$ that maps $a$ to $b$. 
 \end{proof}
-\begin{rmk}
-    We extend the previous result to finite extensions. 
-\end{rmk}
+
+We extend the previous result to finite extensions. 
+
 %    - Thm - Embedding of Fin Ext into Field with Conjugates
 \begin{thm} Embedding Finite Extensions via Conjugates.
     
@@ -346,6 +346,9 @@
     In particular, we also have uniqueness up to isomorphism, that is
     if $M$ is also a splitting field of $f$, 
     then $M,L$ are isomorphic as $K$-extensions.
+    We thus denote $(K_f,\iota_f)$ as any $K$-extension
+    isomorphic to a splitting field of $f$ 
+    and call $K_f$ \emph{the} splitting field of $f$. 
     
 \end{thm}
 \begin{proof}
@@ -373,6 +376,13 @@
     $K$-extension morphisms $\phi, \psi : L \to M$, $\phi L = \psi L$. 
 \end{thm}
 \begin{proof}
+    Intuitively, this is true because under $\phi,\psi$,
+    roots of $f$ remains as roots of $f$. 
+    So since $L$ contains all roots of $f$, 
+    both images of $L$ under $\phi$ and $\psi$ also contain all the roots of $f$.
+    Thus, the two contain the same elements. 
+    
+    Now the formal argument. 
     Let $\{a_i\}_{i\in\deg f}$ be the roots of $f$ in $L$. 
     Since $L$ is the splitting field of $f$, $\{a_i\}_{i\in\deg f}$ generates $L$,
     and hence $\{\phi(a_i)\}_{i\in\deg f}$ generates $\phi L$. 

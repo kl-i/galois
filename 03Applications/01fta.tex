@@ -1,0 +1,43 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+
+%    -  Cor - Fund Thm Alg
+\begin{thm}
+    For all polynomials $f \in \mathbb{C}[x]$, $\mathbb{C}$ splits $f$.
+\end{thm}
+
+To prove this, we need to notice two lemmas first:
+
+%        -  No non-trivial odd deg ext of R
+\begin{lem}
+    There does not exists non-trivial $\R$-extension $(L,\iota_L)$ 
+    such that $[L : \R]$ is odd.
+\end{lem}
+\begin{proof}
+    Assume such $L$ exist, pick $ \al \in L\setminus \iota_L\R$.
+    By the tower law of extension degree, 
+    it will have a minimal polynomial with odd degree. 
+    By the intermediate value theorem, there exist real root $a$ in $\R$.
+    Then by irreducibility, $\min(\al,\R) = (X - a)$, 
+    i.e. $\al = \iota_L(a) \in \iota_L\R$.
+    Since $\al$ was arbitrary, all of $L$ is actually in $\iota_L\R$.
+    Hence, $L$ is a trivial extension, which is a contradiction. 
+    
+\end{proof}
+%        -  No non-trivial even deg ext of C 
+\begin{lem}
+    There does not exists a $\C$-extension $(L,\iota_L)$ 
+    such that $[L : \mathbb{C}]=2$.
+\end{lem}
+\begin{proof}
+    Assume such $(L,\iota_L)$ exist and 
+    pick $ \al \in L \setminus \mathbb{C}$. 
+    It will have a minimal polynomial with degree 2. 
+    However $\mathbb{C}$ must split any quadratic polynomial.
+    So $\al$ is actually already inside $\iota_L \C$.
+    Since $\al$ was arbitrary, $L$ is actually a trivial extension of $\C$,
+    i.e. $[L : \C] = 1 \neq 2$, a contradiction. 
+\end{proof}
+
+\end{document}
