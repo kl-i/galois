@@ -7,6 +7,7 @@
 \usepackage{perpage}
 \usepackage{subfiles}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \MakePerPage{footnote}
 
@@ -129,6 +130,8 @@
 
 \newcommand{\gal}[2]{\text{Gal}_{#1}(#2)}
 
+\renewcommand{\O}{\mathcal{O}}
+
 \newcommand{\fa}{\mathfrak{a}}
 \newcommand{\fb}{\mathfrak{b}}
 \newcommand{\fp}{\mathfrak{p}}
@@ -200,8 +203,6 @@
         
         \section{More on Vector Spaces : Dimension}
             \subfile{02Theory/02prelim/05morevector}
-        
-        \section{More on Groups : Permutations}
 
     \chapter{Field Extensions}
         \subfile{02Theory/03extensions}
@@ -216,21 +217,29 @@
         \subfile{02Theory/06normal}
 
     \chapter{Seperable Extensions}
-        \subfile{02Theory/07seperable}
+        \subfile{02Theory/07seperable_alt}
         
     \chapter{Primitive Element Theorem}
         \subfile{02Theory/08primitive}
 
     \chapter{Galois Correspondance}
-        \subfile{02Theory/09galois}
+        \subfile{02Theory/09galois_alt2}
+        
+    \chapter{Finite Fields}
+        \subfile{02Theory/10finite}
         
 \part{Applications}
     
+    \chapter{Preliminaries}
+        
+        \section{Permutations}
+            \subfile{03Applications/03prelim/01permute}
+        
+        \section{Sylow's Theorems}
+            \subfile{03Applications/03prelim/02sylow}
+    
     \chapter{Fundamental Theorem of Algebra}
         \subfile{03Applications/01fta}
-        
-    \chapter{Finite Fields}
-        \subfile{03Applications/00finite}
         
     \chapter{Computing Galois Groups}
         \subfile{03Applications/02computing}

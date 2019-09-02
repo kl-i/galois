@@ -76,16 +76,16 @@ we will need to following two lemmas.
     divides $h_1$ and hence divides $\bar\iota_L h$. 
     Thus, $\bar\iota_L h$ is a gcd of $\bar\iota_L f$ and $\bar\iota_L g$. 
 \end{proof}
-\begin{rmk}
-    The above lemma is significant because it says
-    if $f$ has a repeated root, then that repeated root belongs to 
-    \emph{only one} of its irreducible factors, 
-    because the gcd of any two distinct irreducible factors is $1$. 
-    Hence, $f$ has a repeated root if and only if it has some
-    irreducible factor with repeated roots or two non-distinct irreducible factors.
-    This means from now on when considering the issue of repeated roots, 
-    we only need to consider irreducible polynomials. 
-\end{rmk}
+%\begin{rmk}
+%    The above lemma is significant because it says
+%    if $f$ has a repeated root, then that repeated root belongs to 
+%    \emph{only one} of its irreducible factors, 
+%    because the gcd of any two distinct irreducible factors is $1$. 
+%    Hence, $f$ has a repeated root if and only if it has some
+%    irreducible factor with repeated roots or two non-distinct %irreducible factors.
+%    This means from now on when considering the issue of repeated roots, 
+%    we only need to consider irreducible polynomials. 
+%\end{rmk}
 \begin{lem} Freshmen's Dream.
     
     Let $K$ be a field where $\chi_K \neq 0$ in $\Z$. 
@@ -99,10 +99,10 @@ we will need to following two lemmas.
 %    - Def - Sep Ext, 2 Eqv defs
 %          - Contrapositive
 %    - Def - Sep Element over a Field, Sep Ext
-\begin{dfn} Seperable, Separable Extensions
+\begin{dfn} Seperable Polynomials, Separable Extensions.
 % Multiple definitions taken from John Milne's Galois notes. 
 
-    Let $f$ be an irreducible polynomial over $K$. 
+    Let $f$ be a polynomial over $K$. 
     The following are equivalent: 
     \begin{enumerate}
         \item There exists a $K$-extension $\iota_L : K \to L$ splitting $f$ where
@@ -111,12 +111,14 @@ we will need to following two lemmas.
         Define its formal derivative as 
         \[ f' := \sum_{k < \deg f} (k+1)f_{k+1}X^k \]
         Then $(f,f') \neq 1$.
+    \end{enumerate}
+    If $f$ is irreducible, then the following is also equivalent: 
+    \begin{enumerate} [resume]
         \item $\chi_K$ is non-zero and there exists a polynomial $g$ over $K$
         such that $f = g(X^{\chi_K})$.
     \end{enumerate}
     If any of the above is true, then $f$ is called \textbf{inseparable}.
     Otherwise, it is called \textbf{separable}.
-    Furthermore for general polynomials $f$, $(1),(2)$ are still equivalent. 
     Note that (3) implies irreducible polynomials over fields with characteristic zero
     are automatically separable. 
     
@@ -128,20 +130,33 @@ we will need to following two lemmas.
     ($1\imp 2$)
     
         Let $\iota_L : K \to L$ be a $K$-extension 
-        and let $S_f$ be the set of roots of $f$ in $L$ so that \[
-            \bar\iota_L f = \iota_L(\la) \prod_{a\in S_f} (X - a)^{m_a}
+        and let $a$ be a root of $f$ in $L$ with multiplicity $m_a > 1$. 
+        WLOG, let $m_a = 2$, so there exists a polynomial $g$ over $L$ such that \[
+            \bar{\iota_L} f = (X - a)^2 g
         \]
-        and there exists an $a$ such that $m_a > 1$. 
-        WLOG, let $m_a = 2$.
-        Suppose $(f,f') = 1$ in $K[X]$. 
-        Then by the previous lemma, $(\bar\iota_L f, \bar\iota_L f') = 1$. 
-        However, by the product rule\footnote{
+        Then by the product rule\footnote{
         Prove it yourself if you can be arsed.
-        Strong induction is your friend.}, 
-        $\bar\iota_L f'$ has a factor of $(X - a)$
-        which $\bar\iota_L f$ also has as a factor, i.e.
-        $(\bar\iota_L f, \bar\iota_L f') \neq 1$.
-        We have a contradiction, hence $(f,f') \neq 1$. 
+        Strong induction is your friend.}, \[
+            \bar{\iota_L} f' = (\bar{\iota_L} f)' = 2(X - a) g + (X - a)^2 g
+        \]
+        In particular, $(\bar\iota_L f, \bar\iota_L f') \neq 1$
+        Suppose $(f,f') = 1$ in $K[X]$. 
+        Then $(\bar\iota_L f, \bar\iota_L f') = 1$ since GCD's stay the same. 
+        We have a contradiction. Hence $(f,f') \neq 1$. 
+        
+    ($2 \imp 1$)
+        
+        Suppose $(f,f') \neq 1$. 
+        Let $\iota_L : K \to L$ be the splitting field of $L$. 
+        Then $(\bar{\iota_L f},(\bar{\iota_L f})') \neq 1$. 
+        Suppose all roots of $f$ have multiplicity 1. 
+        Then by the product rule, 
+        one can see that no irreducible factor $(X - a)$ of $\bar{\iota_L f}$
+        can be a factor of $(\bar{\iota_L} f)'$. 
+        Hence $(\bar{\iota_L f},(\bar{\iota_L f})') = 1$, which is a contradiction. 
+        So there exists a root of $f$ with multiplicity higher than one. 
+        
+    We now assume $f$ is irreducible. 
     
     ($2\imp 3$)
     
@@ -197,12 +212,6 @@ we will need to following two lemmas.
         \end{align*}
         where the second line comes from Freshmen's dream. 
         Thus in fact, \emph{all} the roots of $f$ have multiplicity larger than 1. 
-    
-    To show that we still have $(1 \iff 2)$ for a general polynomial $f$,
-    note that if $f$ has any repeated irreducible factor, it is trivially true.
-    So suppose $f$ has distinct irreducible factors. 
-    Then $(1)$ holds for $f$ if and only if it holds for an irreducible factor $r$.
-    But $(1)$ is true for $r$ if and only if $(2)$ is true for $r$. 
 \end{proof}
 %    - Def - Deg Sep as Cardinality of Maps into any Normal Extension 
 %            (Well def via Maps into Normal Closure)

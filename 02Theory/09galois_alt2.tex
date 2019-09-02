@@ -6,6 +6,7 @@ We are now ready to define \emph{Galois extensions}.
 
 %    -  Def - Galois Ext, Galois Group
 \begin{dfn} Fixed Subfield, Galois Extension and Galois Group.
+
     Let $\iota_L : K \to L$ be a field extension.
     Let $\aut{K}{(L,\iota_L)}$ denote the set of $K$-extension automorphisms of $L$.
     If $\iota_L$ is clear, we simply write $\aut{K}{L}$. 
@@ -298,7 +299,7 @@ We are now ready to define \emph{Galois extensions}.
         We want to use image invariance on $N(E)$ as a $K$-extension,
         but the maps $f, g$ are from $E$. 
         To "lift" these maps up to $N(E)$, 
-        let $(N(M),\iota_{N(M)}$ be the normal closure of $(M,\iota_M)$. 
+        let $(N(M),\iota_{N(M)})$ be the normal closure of $(M,\iota_M)$. 
         Then $(N(M),\iota_{N(M)}\circ f)$ and $(N(M),\iota_{N(M)}\circ g)$
         are both $E$-extensions that are normal as $K$-extensions.
         Hence by minimality of the normal closure of $E$, 
@@ -318,9 +319,9 @@ We are now ready to define \emph{Galois extensions}.
         We have turned the two $K$-extension morphisms $f, g$ into 
         a $K$-extension automorphism of $L$!
         Of course, $\bar{\sigma} E = E$, which implies \begin{align*}
-            (\iota\circ\sigma\iota_{N(E)}) E = (\iota\circ\iota_{N(E)}) E &\imp
-            (\bar{g}^{-1}\circ\bar{f}\circ\iota_{N(E)}) E = (\sigma\circ\iota_{N^(E)})E
-                = \iota_{N(E)} E \\
+            (\iota\circ\sigma\circ\iota_{N(E)}) E = (\iota\circ\iota_{N(E)}) E &\imp
+            (\bar{g}^{-1}\circ\bar{f}\circ\iota_{N(E)}) E 
+            = (\sigma\circ\iota_{N^(E)})E = \iota_{N(E)} E \\
             &\imp (\bar{f}\circ\iota_{N(E)}) E = (\bar{g}\circ\iota_{N(E)}) E \\
             &\imp (\iota_{N(M)}\circ f) E = (\iota_{N(M)}\circ g) E \\
             &\imp f E = g E
