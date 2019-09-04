@@ -20,10 +20,12 @@ We are now ready to define \emph{Galois extensions}.
         \item There exists a finite subgroup $G$ of $\aut{K}{L}$ such that
         $\iota_L K = L^G$. 
     \end{enumerate} 
-    If any of the above is true, 
-    we have $[L : K] = |\aut{K}{L}|$ with $G = \aut{K}{L}$
-    and $(L,\iota_L)$ is called a \textbf{Galois extension}.
+    Furthermore, if $(1)$ is the case, $[L : K] = |\aut{K}{L}|$ 
+    and if $(2)$ is the case, $G = \aut{K}{L}$.
+    If either of the cases are true,
+    then $(L,\iota_L)$ is called a \textbf{Galois extension}.
     $\aut{K}{L}$ is then called the \textbf{Galois group of $(L,\iota_L)$}.
+    If $\iota_L$ is clear, we say the \textbf{Galois group of $L$ over $K$}. 
 \end{dfn}
 \begin{proof}
     ($1\imp 2$)
@@ -37,9 +39,11 @@ We are now ready to define \emph{Galois extensions}.
         
         We claim that $G = \aut{K}{L}$ works. 
         To prove the image of $K$ is the subfield of $L$ fixed by $\aut{K}{L}$,
-        note that we already have \[
-            K \overset{\iota_L}{\to} L^{\aut{K}{L}} \overset{\subseteq}{\to} L
-        \]
+        note that we already have that $\iota_L K$ is preserved by elements 
+        in $\aut{K}{L}$.
+        % \[
+        %     K \overset{\iota_L}{\to} L^{\aut{K}{L}} \overset{\subseteq}{\to} L
+        % \]
         Now let $b$ be an element of $L$ not in $\iota_L K$. 
         $[L : K]$ finite implies $b$ is algebraic over $K$. 
         Since $b$ not in $\iota_L K$, $\min(b,K)$ must have degree higher than one. 
@@ -47,10 +51,9 @@ We are now ready to define \emph{Galois extensions}.
         there exists a Galois conjugate $\be$ of $b$ \emph{not equal to} $b$. 
         So by embedding via conjugates, 
         we have a $K$-extension morphism $\sigma$ 
-        from $K(b)$ to $K(\be)$ mapping $b$ to $\be$.
-        Then $\sigma$ is a $K$-extension morphism from $K(b)$ to $L$.
-        So we have an $L$-extension morphism $\bar{\sigma}$ of $L$
-        from $(K(b),\subseteq)$ to $(K(b),\sigma)$, 
+        from $K(b)$ to $L$ mapping $b$ to $\be$.
+        Then we have an $K(b)$-extension automorphism $\bar{\sigma}$ of $L$
+        from $K(b) \subseteq L$ to $\sigma : K(b) \to L$, 
         i.e. $\bar{\sigma}$ restricted to $K(b)$ is equal to $\sigma$. 
         Then clearly, $\bar{\sigma}$ is a $K$-extension automorphism of $L$
         that does not fix $b$, 
@@ -66,8 +69,9 @@ We are now ready to define \emph{Galois extensions}.
         \]
         where $Orb(a)$ is the orbit of $a$ under the obvious action of $G$ on $L$. 
         This just says the Galois conjugates of $a$ is precisely
-        the images of $a$ under $K$-extension automorphisms of $L$. 
-        From this, we have $\min(a,L^G)$ splits and has no repeated roots. 
+        the images of $a$ under $K$-extension automorphisms of $L$
+        and they are all of them.
+        From this, we have $\min(a,L^G)$ splits and separable. 
     
         We first show that the product is actually in $L^G[X]$. 
         Let $g \in G$. Then \[
@@ -77,31 +81,45 @@ We are now ready to define \emph{Galois extensions}.
         Hence the product is fixed by all $g \in G$. 
         Writing the product as $\sum_{k\in n} \la_k X^k$ where $\la_k \in L$,
         we have $\la_k \in L^G$, i.e. the product is indeed in $L^G[X]$. 
-    
-        We now prove the product is irreducible in $L^G[X]$.
-        The product is clearly non-zero and non-unit. 
-        Let $f, g$ be polynomials over $L^G$ such that \[
-            fg = \prod_{b \in Orb(a)} (X - b)
+        
+        We now prove the product divides 
+        all the polynomials over $L^G$ with $a$ as a root.
+        Let $f$ be a polynomial over $L^G$ such that $ev_a(f) = 0$.
+        Let $b\in Orb(a)$. 
+        Then there exists a $\sigma \in G$ such that $\sigma(a) = b$.
+        Since $f$ is fixed by $G$, we have
+        \[
+            ev_b (f) = ev_{\sigma(a)}(f) 
+            = ev_{\sigma(a)}(\bar{\sigma} f)
+            = \sigma (ev_a (f)) = \sigma(0) = 0
         \]
-        Evaluating both sides at $a$, we have $0 = ev_a f$ or $0 = ev_a g$. 
-        WLOG $ev_a f = 0$. 
-        Then since $f \in L^G[X]$, for all $g \in G$, $\bar{g}f = f$, 
-        we have \[
-            0 = g(0) = g(ev_a f) = ev_{g(a)}(\bar{g} f) = ev_{g(a)} f
-        \]
-        Hence for all $b \in Orb(a)$, $b$ is a root of $f$, i.e.
-        there exists a polynomial $h$ over $L$ such that \[
-            h \prod_{b \in Orb(a)} (X - b) = f
-        \]
-        The by $L[X]$ is an integral domain, $1 = gh$,
-        which implies $\deg g = 0$, giving $g$ is a unit in $L^G[X]$. 
-        This proves irreducibility of the product in $L^G[X]$. 
+        i.e. $(X - b)$ divides $f$.
+        So the product divides $f$, and hence generates the ideal $\ker(ev_a)$.
         Thus it is equal to $\min(a,L^G)$. 
+        
+        % We now prove the product is irreducible in $L^G[X]$.
+        % The product is clearly non-zero and non-unit. 
+        % Let $f, g$ be polynomials over $L^G$ such that \[
+        %     fg = \prod_{b \in Orb(a)} (X - b)
+        % \]
+        % Evaluating both sides at $a$, we have $0 = ev_a f$ or $0 = ev_a g$. 
+        % WLOG $ev_a f = 0$. 
+        % Then since $f \in L^G[X]$, for all $g \in G$, $\bar{g}f = f$, 
+        % we have \[
+        %     0 = g(0) = g(ev_a f) = ev_{g(a)}(\bar{g} f) = ev_{g(a)} f
+        % \]
+        % Hence for all $b \in Orb(a)$, $b$ is a root of $f$, i.e.
+        % there exists a polynomial $h$ over $L$ such that \[
+        %     h \prod_{b \in Orb(a)} (X - b) = f
+        % \]
+        % The by $L[X]$ is an integral domain, $1 = gh$,
+        % which implies $\deg g = 0$, giving $g$ is a unit in $L^G[X]$. 
+        % This proves irreducibility of the product in $L^G[X]$. 
+        % Thus it is equal to $\min(a,L^G)$. 
     
-        Note that since we defined normal and separable extensions as 
-        finite extensions,
-        we must prove the extensions degree is finite 
-        to conclude the extension is Galois.
+        Note we cannot conclude the extension to be normal and separable yet,
+        since we defined those as \emph{finite} extensions.
+        So we prove $L^G \to L$ is finite next.
     
         Suppose $|G| < [L : L^G]$. 
         Then there exists finite linearly independent set $S$ such that $|G| < |S|$. 
@@ -113,17 +131,17 @@ We are now ready to define \emph{Galois extensions}.
         and thus a separable extension as well. 
         Hence there exists a primitive element $a$ where $L^G(S) = L^G(a)$. 
         But then \[
-            |G| \leq |Orb(a)| = \deg\min(a,L^G) = [L^G(a) : L^G] 
-            = [L^G(S) : L^G] < |G|
+            |G| < [L^G(S) : L^G] = [L^G(a) : L^G] = \deg\min(a,L^G)
+            = |Orb(a)| \leq |G|
         \]
         which is a contradiction. 
-        Thus $[L : L^G] \leq |G|$ which is finite
-        and $L^G \to L$ is Galois. 
+        Thus $[L : L^G] \leq |G|$ which is finite,
+        so $L^G \to L$ is normal and separable as well.
     
         We already have \[
             |\aut{K}{L}| = [L : K] = [L : L^G] \leq |G|
         \]
-        So since $G$ is a subset of $\aut{K}{L}$, 
+        Since $G$ is a subset of $\aut{K}{L}$, 
         $|G| \leq |\aut{K}{L}|$ as well and hence $G = \aut{K}{L}$.  
     
 \end{proof}
@@ -191,7 +209,7 @@ We are now ready to define \emph{Galois extensions}.
             Let $E$ be a $K$-subextension of $L$. 
             Then $[E : K] = [\aut{K}{L} : \aut{E}{L}]$
             where the latter is index of subgroups. 
-        \item ($\aut{K}{L}$-Sets)
+        \item (Action)
             Let $\sigma$ be an element of the Galois group $\aut{K}{L}$.
             Then $E \mapsto \sigma E$ defines a $\aut{K}{L}$-action
             on the $K$-subextensions of $L$. 
@@ -235,7 +253,7 @@ We are now ready to define \emph{Galois extensions}.
         
     (Degree) Left as an easy exercise.
     
-    ($\aut{K}{L}$-Sets) 
+    (Action) 
         
         We already know $\aut{-}{L}$ is a bijection,
         so we only need to show it respects the $\aut{K}{L}$-actions.
@@ -334,6 +352,30 @@ We are now ready to define \emph{Galois extensions}.
         
         We leave the isomorphism of Galois groups as an exercise to the reader. 
         [Hint : Use the first isomorphism theorem, remembering to prove surjectivity.]
+\end{proof}
+
+Here is an alternative proof for the reverse implication of Normality
+that is more straight forward.
+
+\begin{proof}
+    
+        Suppose $E$ is a $K$-subextension of $L$ such that 
+        $\aut{E}{L}$ is a normal subgroup of $\aut{K}{L}$.
+        Then for all $K$-extension automorphisms $\sigma$ of $L$, 
+        $\aut{\sigma E}{L} = \sigma \aut{E}{L} \sigma^{-1} = \aut{E}{L}$.
+        Hence for all $\sigma \in \aut{K}{L}$, \[
+            \sigma E = L^{\aut{\sigma E}{L}} = L^{\aut{E}{L}} = E
+        \]
+        
+        Let $a$ be in $E$. 
+        Recall that we proved for Galois extensions $\iota_L : K \to L$,
+        $\bar{\iota_L} \min(a,K) = \prod_{b \in Orb(a)} (X - b)$. 
+        This implies each $b = \sigma(a) \in \sigma E$
+        for some $K$-extension automorphism $\sigma$.
+        Hence all $b \in Orb(a)$ lies in $E$,
+        that is to say, $\min(a,K)$ splits in $E$ and $K \to E$ is normal. 
+        
+    
 \end{proof}
 
 \end{document}

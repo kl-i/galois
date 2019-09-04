@@ -1,0 +1,304 @@
+\documentclass[../../book.tex]{subfiles}
+
+\begin{document}
+The goal of this section is to introduce \emph{solvability} of groups,
+which plays an essential role in the insolvability of general quintics. 
+
+% Def - Normal Series, Factor Groups, Length of Series
+% Def - Refinement, Proper Refinement, Equivalence, Composition Series.
+\begin{dfn} Normal Series, Factor Groups, Length 
+and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
+    
+    Let $G$ be a group and 
+    $S = (S_i)_{i\leq n}$ a finite sequence of subgroups.
+    Then $S$ is called a \textbf{normal series} when the following conditions are met.
+    \begin{enumerate}
+        \item $S_0$ is the trivial subgroup and $S_n$ is $G$. 
+        \item For all $i < j \leq n$, $S_i \subseteq S_j$. 
+        \item For all $i < n$, $S_i \normsub S_{i+1}$.
+    \end{enumerate}
+    For a normal series $S$, 
+    its \textbf{factor groups}, or simply \textbf{factors},
+    are groups in the sequence of quotients $(S_{i+1}/S_i)_{i<n}$,
+    which we shall denote with $Fac(S)$.
+    
+    The \textbf{length} of a normal series $S$ is
+    the number of strict inclusions in $S$, which we shall denote with $|S|$.
+    Equivalently, it's the number of non-trivial factor groups of $S$. 
+    
+    Let $S$ and $T$ be normal series of $G$. 
+    Then $S \leq T$ is defined as $S$ being a subsequence of $T$. 
+    We say $T$ is a \textbf{refinement of $S$}.
+    It is easy to see that if $S \leq T$, then $|S| \leq |T|$.
+    We say $T$ is a \textbf{proper refinement of $S$}
+    when it is a refinement with strictly longer length. 
+    
+    For a normal series $S$, 
+    the following are equivalent by the 3rd isomorphism theorem.
+    \begin{enumerate}
+        \item $S$ has no proper refinements.
+        \item For a group, it is called \textbf{simple} when
+        the only normal subgroups are itself and the trivial subgroup.
+        Then the factor groups of $S$ are all simple. 
+    \end{enumerate}
+    If any of the above is true, $S$ is called a \textbf{composition series} of $G$. 
+    
+    For two normal series $S, T$ of $G$, 
+    they are called \textbf{equivalent} when 
+    there exists a bijection between $Fac(S)$ and $Fac(T)$
+    that maps factors to isomorphic factors. 
+    This unsurprisingly forms an equivalence relation 
+    on the set of all normal series of a group $G$. 
+    
+\end{dfn}
+
+\begin{thm} Existence of Composition Series for Finite Groups.
+    
+    Let $G$ be a finite group.
+    Then it has a composition series.
+    
+\end{thm}
+\begin{proof}
+    
+    Let $S$ be a normal series of $G$.
+    Clearly the length of $S$ cannot be larger than the cardinality of $G$
+    and $\<e\> \normsub G$ is a normal series of $G$.
+    Hence the set of lengths of normal series of $G$ is a non-empty
+    bounded subset of the naturals
+    and thus must have a maximum. 
+    Let $\hat{S}$ be a normal series of $G$ with maximal length. 
+    It cannot have a proper refinement, so it must be a composition series.
+    
+\end{proof}
+
+\begin{rmk}
+    
+    The motivation for considering normal series up to equivalence is that
+    the data of a normal series is really in its factor groups.
+    As we will now see, all finite groups have \emph{unique} composition series.
+    But first, the theorem that you might have been wondering about.
+    
+\end{rmk}
+
+% Thm - 2nd Iso.
+\begin{thm} 2nd Isomorphism.
+    
+    Let $A, B$ be subgroups of a group $G$ such that
+    $B$ is in the normaliser of $A$. 
+    Define \[
+        AB := \{ ab \mid a \in A, b \in B\}
+    \]
+    Then $AB$ is a subgroup of $G$ and we have the following isomorphism of groups. 
+    \[
+            \frac{AB}{A} \iso \frac{B}{A \cap B}
+    \]
+    
+\end{thm}
+\begin{proof}
+    
+    $AB$ being a subgroup and 
+    the normality of $A \normsub AB$. $A \cap B \normsub B$
+    is left as an exercise to the reader.
+    
+    As for the isomorphism, it is easily deduced from the 1st isomorphism theorem.
+    
+\end{proof}
+
+% Lem - Butterfly / Zassenhaus.
+\begin{lem} Butterfly / Zassenhaus.
+    
+    Let $G$ be a group with subgroups $A, A^*, B, B^*$ such that 
+    $A^* \normsub A$ and $B^* \normsub B$. 
+    Then \begin{itemize}
+        \item $A^* (A \cap B^*) \normsub A^* (A \cap B)$
+        \item $(A^* \cap B) B^* \normsub (A \cap B) B^*$
+        \item \[
+            \frac {A^* (A \cap B)}{A^* (A \cap B^*)}
+            \iso \frac{A \cap B}{(A^* \cap B)(A \cap B^*)}
+            \iso \frac{(A \cap B)B^*}{(A^*\cap B)B^*}
+        \]
+    \end{itemize}
+\end{lem}
+\begin{proof}
+    
+    Since the second isomorphism is entire analogous to the first,
+    but we have two proofs of the first,
+    we give different proofs for the two isomorphisms.
+    Note that $A^* \normsub A$ and $B^* \normsub B$
+    implies $A^* \cap B \normsub A \cap B$ and $A \cap B^* \normsub A \cap B$
+    which in turn implies $(A^* \cap B)(A \cap B^*)$ is a subgroup
+    by the 2nd isomorphism theorem,
+    and it is normal in $A \cap B$. 
+    
+    (the first isomorphism)
+    
+    We first show that $A^* (A \cap B^*) \normsub A^* (A \cap B)$. 
+    Let $a, \al \in A^*$, $b \in A \cap B$ and $\be \in A \cap B^*$. 
+    Then \[
+        ab \al\be (ab)^{-1} = ab \al\be b^{-1}a^{-1}
+        = a (b\al b^{-1}) 
+        [ (b\be b^{-1}) a^{-1} (b\be b^{-1})^{-1} ]
+        (b\be b^{-1})
+    \]
+    where $a$, $b\al b^{-1}$ and the square bracket term are in $A^*$
+    because $b\be b^{-1}$ is in $A \cap B^*$.
+    Hence for all $x \in A^* (A \cap B)$, 
+    $x (A^* (A \cap B^*)) x^{-1} \subseteq A^* (A \cap B^*)$,
+    i.e. we have the normality. 
+    
+    We then invite the reader to stare intensely
+    until they realise the following are true \[
+        A^* (A \cap B) = A^* (A \cap B^*) (A \cap B) \,\,\,\,\,\,\,\,\,\,
+        A \cap B \cap A^* (A \cap B^*) = (A^* \cap B)(A \cap B^*)
+    \]
+    and thus deduced from the the second isomorphism theorem, \[
+        \frac {A^* (A \cap B)}{A^* (A \cap B^*)}
+        = \frac {A^* (A \cap B^*)(A \cap B)}{A^* (A \cap B^*)}
+        \iso \frac{A \cap B}{A \cap B \cap A^*(A \cap B^*) }
+        = \frac{A \cap B}{(A^* \cap B)(A \cap B^*)}
+    \]
+    
+    (the second isomorphism)
+    
+    We construct an explicit group morphism 
+    from $(A \cap B)B^*$ to the quotient $(A \cap B) / (A^* \cap B)(A \cap B^*)$
+    that is surjective and has $(A^* \cap B)B^*$ as the kernel,
+    thus concluding the result from the 1st isomorphism theorem. 
+    
+    The group morphism is \[
+        \phi : (A \cap B)B^* \to \frac{A \cap B}{(A^* \cap B)(A \cap B^*)},
+        a b \mapsto a (A^* \cap B)(A \cap B^*)
+    \]
+    We must show this is well defined.
+    Let $a, \al \in A \cap B$ and $b, \be \in B^*$ such that $ab = \al \be$. 
+    Then $\al = a b \be^{-1}$ where $b \be^{-1} = a^{-1} \al \in A \cap B^*$
+    which is a subset of $(A^* \cap B)(A \cap B^*)$.
+    Hence $\al$ and $a$ are in the same coset of $(A^* \cap B)(A \cap B^*)$,
+    i.e. the group morphism is well-defined as a function. 
+    Furthmore, $a b \al \be = a \al (\al^{-1} b \al) \be$ 
+    where $\al^{-1} b \al$ is in $B^*$ since $B^*$ is normal in $B$.
+    Thus $a b \al \be = a \al (\al^{-1} b \al) \be$ is mapped to 
+    $(a \al)(A^* \cap B)(A \cap B^*)$,
+    proving the function to be a group morphism. 
+    
+    We leave surjectivity and $\ker \phi = (A^* \cap B) B^*$ 
+    as an easy exercise for the reader to check. 
+    
+\end{proof}
+
+% Thm - Schreier Refinement. 
+\begin{thm} Schreier Refinement. 
+    
+    Let $S, T$ be normal series of a group $G$. 
+    Then there exists normal series $\hat{S}, \hat{T}$ such that
+    $S \leq \hat{S}$, $T \leq \hat{T}$ and $\hat{S}, \hat{T}$ equivalent. 
+    
+\end{thm}
+\begin{proof}
+    
+    Let $S = (S_i)_{i \leq n}$ and $T = (T_j)_{j \leq m}$. 
+    For $i < n, j \leq m$, define \[
+        S_{i,j} := S_i (S_{i+1} \cap T_j)
+    \]
+    and for $i \leq n, j < m$, define \[
+        T_{i,j} := (S_{i} \cap T_{j+1}) T_j
+    \]
+    Then by the Butterfly lemma, 
+    $S_{i,j} \normsub S_{i,j+1}$ and $T_{i,j} \normsub T_{i+1,j}$
+    with \[
+        \frac{S_{i,j+1}}{S_{i,j}} \iso \frac{T_{i+1,j}}{T_{i,j}}
+    \]
+    Thus we have the following two normal series \begin{align*}
+        \<e\> = S_{0,0} \normsub \cdots \normsub S_{0,m} 
+        = S_{1,0} \normsub \cdots \normsub S_{1,m}
+        = S_{2,0} \normsub \cdots \normsub S_{n-2,m}
+        = S_{n-1,0} \normsub \cdots \normsub S_{n-1,m} = G
+        \\
+        \<e\> = T_{0,0} \normsub \cdots \normsub T_{n,0} 
+        = T_{0,1} \normsub \cdots \normsub T_{n,1} 
+        = T_{0,2}\normsub \cdots \normsub T_{n,m-2}
+        = T_{0,m-1} \normsub \cdots \normsub T_{n,m-1} = G
+    \end{align*}
+    which are equivalent and are clearly refinements of $S, T$ respectively. 
+    
+\end{proof}
+
+% Thm - Uniqueness and Every Normal Series has Composition Refinement.
+\begin{thm} Uniqueness of Composition Series.
+    
+    Let $G$ be a group with a composition series $S$
+    Then any other composition series $T$ is equivalent to $S$.
+    Furthermore, any normal series $R$ has a refinement that is a composition series.
+    
+\end{thm}
+\begin{proof}
+    
+    Easily deduced from the Schreier Refinement theorem.
+    
+\end{proof}
+
+We arrive at our goal.
+
+% Def - Solvability for Finite Groups, 3 Eqv.
+\begin{dfn} Solvability of a Finite Group.
+    
+    Let $G$ be a finite group.
+    Then the following are equivalent: \begin{enumerate}
+        \item There exists a normal series of $G$ with abelian factor groups.
+        \item There exists a normal series of $G$ 
+        with factor groups of prime cardinality or one.
+        \item There exists a normal series of $G$ with cyclic factor groups.
+    \end{enumerate}
+    If any of the above is true, we say $G$ is \textbf{solvable}. 
+    
+\end{dfn}
+\begin{proof}
+    
+    ($1 \imp 2$)
+        
+        Let $S$ be a normal series of $G$ with abelian factor groups.
+        Since $G$ is finite, it has a composition series,
+        so there exists a refinement $\hat{S}$ of $S$ that is a composition series.
+        It is not difficult to deduce from the 3rd isomorphism theorem
+        that the factor groups of $\hat{S}$ are abelian, too.
+        Suppose there is a non-trivial factor $\hat{S}_{i+1} / \hat{S}_i$ 
+        with non-prime cardinality. 
+        Then $|\hat{S}_{i+1} / \hat{S}_i|$ has a prime factor $p$ 
+        strictly smaller than itself. 
+        By Cauchy's theorem, 
+        there then exists a subgroup $T$ of cardinality $p$ in the factor.
+        Since the factor group is abelian, $T$ is normal in the factor group
+        and from the 3rd isomorphism theorem we can deduce that \[
+            S_i \normsub \pi^{-1} T \normsub S_{i+1}
+        \]
+        where $\pi^{-1} T$ is the preimage of $T$ under the projection to the factor.
+        This gives a proper refinement of $\hat{S}$, 
+        contradicting with it being a composition series. 
+        Thus all factor groups are either trivial or have prime cardinality. 
+        
+    ($2 \imp 3$) Easily deduced from Lagrange's theorem.
+    
+    ($3 \imp 1$) Trivial.
+\end{proof}
+
+A useful result.
+% Lem - Solvable iff Exists Solvable Factor.
+\begin{lem} Solvable if and only if Exists Solvable Factor.
+    
+    Let $G$ be a group.
+    If $G$ is solvable then for all normal subgroups $N$,
+    $N$ and $G / N$ are solvable.
+    On the other hand if there exists a normal subgroup $N$ such that 
+    $N$ and $G / N$ are solvable,
+    then $G$ is solvable.
+    
+\end{lem}
+\begin{proof}
+    
+    Left as an exercise. 
+    [Hint : The Schreier Refinement theorem
+    and the 3rd isomorphism theorem are your friends.]
+    
+\end{proof}
+
+\end{document}

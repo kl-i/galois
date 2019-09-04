@@ -214,16 +214,14 @@ The following result generalises the above to adjoining finite algebraic sets.
     has finite dimension as a $K$-vector space then we are done. 
     
     This is also rather easy. 
-    Elements of $(ev \circ \bar{\iota_L}) K[\{X_a\}_{a\in S}]$ look like
-    finite sums
+    Elements of $(ev \circ \bar{\iota_L}) K[\{X_a\}_{a\in S}]$ look like finite sums
     \[
-        \sum_{(n_a)_{a \in S} \in \N^{S}} 
-        \la_{(n_a)_{a \in S}} \prod_{a \in S} a^{n_a}
+        \sum_{t \in \N^{S}} 
+        \la_t \prod_{a \in S} a^{t_a}
     \]
-    where $\la_{(n_a)_{a \in S}}$ are from $K$. 
-    We see that $\{ \prod_{a \in S} a^{n_a} \mid (n_a)_{a \in S} \in \N^{S}\}$
-    is spanning, but
-    it has countably infinite cardinality. 
+    where $\la_t$ are from $K$. 
+    We see that $\{ \prod_{a \in S} a^{t_a} \mid t \in \N^{S}\}$ is spanning, 
+    but it has countably infinite cardinality. 
     The key is to cut this down to a finite set that is still spanning. 
     To do this, note that since all of $S$ is algebraic over $K$, 
     for all elements $a$ in $S$ we have \[
@@ -234,9 +232,9 @@ The following result generalises the above to adjoining finite algebraic sets.
     can be written as a $K$-linear combination of powers of $a$ 
     less than or equal to $\deg\min(a,K)$. 
     Hence everything in the span of 
-    $\{ \prod_{a \in S} a^{n_a} \mid (n_a)_{a \in S} \in \N^{S}\}$
+    $\{ \prod_{a \in S} a^{t_a} \mid t \in \N^{S}\}$
     can be written as something in the span of 
-    $\{ \prod_{a \in S} a^{n_a} \mid n_a \leq \deg\min(a,K)$. 
+    $\{ \prod_{a \in S} a^{t_a} \mid t \in \N^S, t_a \leq \deg\min(a,K) \}$. 
     This is a finite set that is spanning,
     which contains a finite basis. 
     Thus, $(ev \circ \bar{\iota_L}) K[\{X_a\}_{a\in S}]$ is
@@ -350,7 +348,7 @@ The following result generalises the above to adjoining finite algebraic sets.
     %Meh not too bad if you avoid the yucky part.
 \end{ex}
 
-We now have enough to solve some problems the greeks had.
+%We now have enough to solve some problems the greeks had.
 
 %    - Eg - Greek Geometry
 %        - Def - Constructible in one step/ Constructible

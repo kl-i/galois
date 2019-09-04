@@ -4,7 +4,7 @@
 We now present a short section on the Primitive Element theorem,
 which states that finite separable extensions are in fact simple extensions.
 We split into cases of the base field $K$ being a finite set and an infinite set. 
-The finite case will be dealt with in the section on finite fields. 
+The finite case will be dealt with in the chapter on finite fields. 
 
 \begin{thm} Primitive Element for Infinite Base Field.
     %From Milne's Galois theory notes
@@ -31,7 +31,8 @@ The finite case will be dealt with in the section on finite fields.
     \end{figure}
     We claim there exists a $\la$ such that $K(c) = L$. 
     Let $(N,\iota_N)$ be the normal closure of $(L,\iota_L)$
-    with $a_0,\dots,a_n$ and $b_0,\dots,b_m$ respectively Galois conjugates of $a, b$ in $N$.
+    with $a_0,\dots,a_n$ and $b_0,\dots,b_m$ 
+    respectively Galois conjugates of $a, b$ in $N$.
     WLOG $a_0 = \iota_N(a)$ and $b_0 = \iota_N(b)$.
     For $i \in n, 0 \neq j \in m$, the equation \[
         a_i + \la b_j = a_0 + \la b_0
@@ -39,7 +40,8 @@ The finite case will be dealt with in the section on finite fields.
     has the unique solution \[
         \la = \la_{i,j} := \frac{a_0 - a_i}{b_j - b_0}
     \]
-    $\la_{i,j}$ is well-defined since $L$ separable implies $b_j \neq b_0$ for $j\neq0$.
+    $\la_{i,j}$ is well-defined since $L$ separable 
+    simplies $b_j \neq b_0$ for $j\neq0$.
     There are only finitely many $\la_{i,j} \in K$, so since $K$ is infinite, 
     we can pick $\la$ that is not equal to any $\la_{i,j}$. 
     We show that such a $\la$ is sufficient.
@@ -55,7 +57,8 @@ The finite case will be dealt with in the section on finite fields.
     Hence $b_j$ being a root of $\min(b,K(c))$ implies
     \[ 0 = \bar{\iota_N} \min(a,K(c)) (\iota_N(c) - \la b_j) \]
     i.e. $\iota_N(c) - \la b_j = a_i$ a Galois conjugate of $a_0$.
-    Thus, $a_i + \la b_j = \iota_N(c) = a_0 + \la b_0$ for $j \neq 0$, a contradiction. 
+    Thus, $a_i + \la b_j = \iota_N(c) = a_0 + \la b_0$ for $j \neq 0$, 
+    a contradiction. 
     This completes the proof. 
     
 \end{proof}
