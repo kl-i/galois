@@ -25,11 +25,11 @@
     Let $(V,+)$ be a group. 
     The set of \textbf{endomorphisms} of $V$ is defined as
     \[ 
-        End_\Grp(V) := \{\la : V \to V \text{ in } \Grp\} 
+        \End{\Grp}{V} := \{\la : V \to V \text{ in } \Grp\} 
     \]
-    Then $End_\Grp(V)$ naturally forms a group, under pointwise addition:
+    Then $\End{\Grp}{V}$ naturally forms a group, under pointwise addition:
     \[
-        End_\Grp(V) \times End_\Grp(V) \to End_\Grp(V), 
+        \End{\Grp}{V} \times \End{\Grp}{V} \to \End{\Grp}{V}, 
     \]
     \[
         (\la, \mu) \mapsto (\la + \mu : x \mapsto \la(x) + \mu(x))
@@ -40,21 +40,21 @@
     with sufficient common sense this does not lead to confusion. 
     Here, $0$ is certainly not a ``number" in general 
     (whatever that means).}.
-    If $V$ is abelian, then $End_\Grp(V)$ is also abelian. 
+    If $V$ is abelian, then $\End{\Grp}{V}$ is also abelian. 
     
     The set of \textbf{automorphisms} of $V$, denoted $Aut_\Grp(V)$, 
-    is the subset of isomorphisms in $End_\Grp(V)$. 
+    is the subset of isomorphisms in $\End{\Grp}{V}$. 
     Then $Aut_\Grp(V)$ is a group on its own
     as a subgroup of $Aut_\Set(V)$ under function composition. 
     
 \end{dfn}
 
 \begin{rmk}
-    Note that multiplication for $Aut_\Grp(V)$ also works for $End_\Grp(V)$.
+    Note that multiplication for $Aut_\Grp(V)$ also works for $\End{\Grp}{V}$.
     However, since endomophisms are not required to be bijective, 
-    $End_\Grp(V)$ is \emph{not} a group under this multiplication. 
+    $\End{\Grp}{V}$ is \emph{not} a group under this multiplication. 
     For example, the zero morphism has no multiplicative inverse. 
-    This multiplication \emph{does} distribute over addition in $End_\Grp(V)$: let $f, g, h \in End_\Grp(V), v \in V$, then
+    This multiplication \emph{does} distribute over addition in $\End{\Grp}{V}$: let $f, g, h \in \End{\Grp}{V}, v \in V$, then
     \begin{align*}
         &(f(g + h))(v) = f((g+h)(v)) = f(g(v) + h(v)) \\
         =\;& f(g(v)) + f(h(v)) = (fg)(v) + (fh)(v) = (fg + fh)(v)
@@ -70,8 +70,8 @@
     Let $K$ be a field. 
     Then a \textbf{$K$-vector space} is a pair $(V,\rho)$
     where $V$ is an abelian group under $+$, 
-    and $\rho : K \to End_\Grp(V)$ is a morphism of groups for both
-    $(K,+) \to (End_\Grp(V),+)$ \emph{and} 
+    and $\rho : K \to \End{\Grp}{V}$ is a morphism of groups for both
+    $(K,+) \to (\End{\Grp}{V},+)$ \emph{and} 
     $(K^\times,\cdot) \to Aut_\Grp(V)$.
     If $\rho$ is unambiguous, then we write $V$ instead of $(V,\rho)$. 
     
@@ -185,7 +185,7 @@
     Let $V$ be a $K$-vector space, $W \subseteq V$.
     $W$ is a \textbf{subspace} of $V$ when 
     $W \leq_\Grp V$ \emph{and} $W \leq_{K^\times\mhyph\Set} V$
-    (or simply when $W$ is a vector space
+    (or equivalently when $W$ is a vector space
     under the vector space structure from $V$).
     We denote this with $W \leq_{\KVec} V$. 
     If it is clear that $W, V$ are $K$-vector spaces,

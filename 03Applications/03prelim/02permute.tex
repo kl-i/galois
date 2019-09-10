@@ -26,25 +26,27 @@
         \sigma = \sigma_n \circ \cdots \circ \sigma_1
     \]
     This is called the \textbf{cycle decomposition of $\sigma$}
-    with the individual $\sigma_i$ called \textbf{cycles}. 
+    with the individual $\sigma_i$ called \textbf{cycles}.
+    We often call a cycle of length $m$ an \textbf{$m$-cycle}. 
     
     Cycle decomposition gives us a way of notating permutations 
     called \emph{cycle notation}.
     Let $\sigma$ be a permutation with cycle decomposition 
     $\sigma = \sigma_n \circ \cdots \circ \sigma_1$. 
-    For each cycle $\sigma_i$ with corresponding orbit $\O_i$,
-    we write \[
-        ( x_i \thickspace \sigma_i(x_i) \thickspace \sigma_i^2(x_i) 
-        \thickspace \cdots \thickspace \sigma_i^{|\O_i| - 1}(x_i))
+    For each cycle $\sigma_i$ with corresponding orbit $\O_i$, 
+    we pick an element $x \in \O_i$ and write \[
+        \sigma_i = 
+        ( x \bigspace \sigma(x) \bigspace \sigma^2(x) 
+        \bigspace \cdots \bigspace \sigma^{|\O_i| - 1}(x))
     \]
-    where $x_i$ is any element of $\O_i$. 
-    So the notation for $\sigma$ is \[
-        ( x_n \thickspace \sigma_n(x_n) \thickspace \sigma_i^2(x_n) 
-        \thickspace \cdots \thickspace \sigma_n^{|\O_n| - 1}(x_n))
-        \cdots 
-        ( x_1 \thickspace \sigma_1(x_1) \thickspace \sigma_1^2(x_1) 
-        \thickspace \cdots \thickspace \sigma_1^{|\O_1| - 1}(x_1))
-    \]
+     
+    % So the notation for $\sigma$ is \[
+    %     ( x_n \bigspace \sigma_n(x_n) \bigspace \sigma_i^2(x_n) 
+    %     \bigspace \cdots \bigspace \sigma_n^{|\O_n| - 1}(x_n))
+    %     \cdots 
+    %     ( x_1 \bigspace \sigma_1(x_1) \bigspace \sigma_1^2(x_1) 
+    %     \bigspace \cdots \bigspace \sigma_1^{|\O_1| - 1}(x_1))
+    % \]
     
     An important characteristic of a permutation $\sigma$ is 
     its \textbf{cycle shape}, which is defined as 
@@ -62,7 +64,7 @@
     Consider the permutation on $5$ elements, \[
         0 \mapsto 3, 1 \mapsto 4, 2 \mapsto 1, 3 \mapsto 0, 4 \mapsto 2
     \]
-    This has cycle notation $(0\thickspace3) (1\thickspace4\thickspace2)$
+    This has cycle notation $(0\bigspace3) (1\bigspace4\bigspace2)$
     and cycle shape $[2, 3]$. 
     
 \end{eg}
@@ -70,7 +72,7 @@
 \begin{thm} The Order of a Permutation. 
     
     Let $\sigma$ be a permutation on $n$ elements 
-    with cycle decomposition $\sigma = \sigma_n \circ \cdots \circ \sigma_1$. 
+    with cycle decomposition $\sigma = \sigma_k \circ \cdots \circ \sigma_1$. 
     Then the order of an individual cycle $\sigma_i$ is 
     the cardinality of corresponding orbit $\O_i$.
     Consequently, the order of $\sigma$ is the lowest common multiple
@@ -94,10 +96,12 @@ Another important feature of permutations is their \emph{sign}.
         P(X_i)_{i<n} := \prod_{i<j<n} (X_i - X_j)
     \]
     Then the \textbf{sign} or \textbf{parity} of $\sigma$ is defined as \[
-        sign(\sigma) := \frac{P(X_{\sigma(i)})_{i<n}}{P(X_i)_{i<n}}
+        \mathrm{sign}(\sigma) := \frac{P(X_{\sigma(i)})_{i<n}}{P(X_i)_{i<n}} =
+        \frac{\prod_{i<j<n} (X_{\sigma (i)} - X_{\sigma (j)})}
+        {\prod_{i<j<n} (X_i - X_j)}
     \]
     Since $P(X_i)_{i<n}$ and $P(X_{\sigma(i)})_{i<n}$ have the same factors,
-    only differing in signs, $sign(\sigma)$ is $\pm 1$. 
+    only differing in signs, $\mathrm{sign}(\sigma)$ is $\pm 1$. 
     One can see that the sign of $\sigma$ counts
     the number of pairs $(i,j)$ such that $i < j$ and $\sigma(i) > \sigma(j)$. 
     Permutations of sign $+1$ are called \textbf{even} 
@@ -105,13 +109,13 @@ Another important feature of permutations is their \emph{sign}.
     
     Let $\sigma, \rho$ be permutations in $S_n$. 
     Then we have \[
-        sign(\rho \circ \sigma) = \frac{P(X_{\rho(\sigma(i))})_{i<n}}{P(X_i)_{i<n}}
+        \mathrm{sign}(\rho \circ \sigma) = \frac{P(X_{\rho(\sigma(i))})_{i<n}}{P(X_i)_{i<n}}
         = \frac{P(X_{\rho(\sigma(i))})_{i<n}}{P(X_{\sigma(i)})_{i<n}}
         \frac{P(X_{\sigma(i)})_{i<n}}{P(X_i)_{i<n}} 
-        = sign(\rho) sign(\sigma)
+        = \mathrm{sign}(\rho) \mathrm{sign}(\sigma)
     \]
     where the second equality comes from $\sigma$ being simply
-    a relabeling of the set $\{i\}_{i<n}$. 
+    a relabelling of the set $\{i\}_{i<n}$. 
     This shows $sign : S_n \to (\{-1,1\},\times)$ is a group morphism. 
     It is easy to see this morphism is surjective. 
     Hence by the 1st isomorphism theorem and Lagrange's theorem, 

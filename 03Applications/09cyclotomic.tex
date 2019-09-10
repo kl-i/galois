@@ -1,0 +1,244 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+
+% Def - Prim Root Unity
+\begin{dfn} Primitive Roots of Unity.
+    
+    Let $n$ be a positive integer and 
+    $K$ a field that splits the polynomial $X^n - 1 \in K[X]$.
+    Then the roots of $X^n - 1$ are called \textbf{$n$-th roots of unity}.
+    They form a group under multiplication. 
+    A root of unity $\zeta$ that generates the group of roots of unity
+    is called a \textbf{primitive} $n$-th root of unity. 
+    
+\end{dfn}
+% Thm - Number of Prim n roots is Totient n
+% Thm - Galois Grp of Cyclotomic Ext injects into units of Z/(n)
+\begin{thm} Cyclotomic Extensions.
+    
+    Let $K_{X^n - 1}$ be the splitting field of $X^n - 1 \in K[X]$
+    where $n$ is a positive integer not equal to zero inside $K$,
+    i.e. $K$'s characteristic is zero or $p$ not dividing $n$.
+    Then \begin{enumerate}
+        \item There exists $\phi(n)$ many 
+        primitive $n$-th roots of unity inside $L$.
+        \item There exists an injective group morphism from 
+        the Galois group of $K_{X^n - 1}$ 
+        to the units group of ring $\Z/(n)$.
+        In particular, it is abelian.
+    \end{enumerate}
+    Such an extension is called a \textbf{cyclotomic extension} of $K$.
+    
+\end{thm}
+\begin{proof} 
+    We give two proofs for $(1)$.
+    
+    (1 : 1st proof)
+    We know the $n$-th roots of unity form a group under multiplication.
+    For $d$ dividing $n$, 
+    the $d$-th roots of unity are also $n$-th roots of unity.
+    Hence the $n$-th roots of unity satisfies the condition that
+    the number of solutions to $X^d = 1$ is bounded by $d$.
+    So $n$-th roots of unity forms a cyclic group.
+    
+    Furthermore, since $n \neq 0$ inside $K$, 
+    it is easily shown that $X^n - 1$ is separable.
+    So the group of $n$-th roots of unity $n$ elements. 
+    Then the theory of finite cyclic groups tells us that 
+    the number of generators, i.e. primitive $n$-th roots of unity,
+    is equal to the totient of $n$.
+    
+    (1 : 2nd proof)
+    Again, since $n \neq 0$ in $K$, $X^n - 1$ is a separable polynomial,
+    so we have $n$ many $n$-th roots of unity. 
+    Also as in the previous proof, for $d$ dividing $n$,
+    the $d$-th roots of unity are inside the $n$-th roots of unity.
+    
+    Note that an $n$-th roots of unity is a primitive $d$-th root of unity
+    if and only if it has order $d$.
+    Let $X$ be the set of $n$-th roots of unity
+    and $X_d$ be the number of $n$-th roots of unity with order $d$.
+    Then partitioning $X$ by order and by strong induction on $n$, 
+    we have \[
+        |X_n| = |X| - \sum_{d \mid n, d < n} |X_d|
+        = n - \sum_{d \mid n, d < n} \phi(d) = \phi(n)
+    \]
+    
+    (2)
+    
+    Let $\zeta$ be a primitive $n$-th root of unity.
+    Then clearly $K_{X^n - 1} = K(\zeta)$.
+    The key is that for all $\sigma \in \aut{K}{K_{X^n - 1}}$,
+    $\sigma$ is determined by its image of $\zeta$ and
+    $\sigma(\zeta)$ must also be a primitive $n$-th root of unity.
+    Since $\zeta$ generates the group of $n$-th roots of unity,
+    we can write $\sigma(\zeta) = \zeta^k$ where $0 \leq k < n$ and $(n,k) = 1$.
+    This gives the function \[
+        f : \aut{K}{K_{X^n - 1}} \to (\Z/(n))^\times, \sigma \mapsto k
+    \]
+    It is left as an exercise to the reader to show that
+    this is an injective group morphism and 
+    is independent of the choice of primitive root $\zeta$. 
+    
+\end{proof}
+
+% Def - Cyclotomic Polynomial
+\begin{dfn} Cyclotomic Polynomials.
+    
+    Let $K$ be a field. For positive integers $n$ non-zero inside $K$,
+    let $K_{X^n - 1}$ be the splitting field of $X^n - 1$.
+    Then the \textbf{$n$-th cyclotomic polynomial} is defined as \[
+        \Phi_n := \prod (X - \zeta)
+    \]
+    where the product ranges over all primitive $n$-th roots of unity $\zeta$.
+    By the previous theorem, $\Phi_n$ has degree $\phi(n)$.
+    By the Galois correspondence, $\Phi_n$ has coefficients over $K$. 
+    Furthermore, since $n$-th roots of unity with order $d$ 
+    are precisely the primitive $d$-th root of unity, we have
+    \[
+        X^n - 1 = \prod_{d \mid n} \Phi_d
+    \]
+    This gives an inductive way of computing $\Phi_n$, that is: 
+    suppose $\Phi_d$ has been calculated for all $d < n$,
+    then $\Phi_n = X^n - 1 / \prod_{d \mid n, d < n} \Phi_d$. 
+    
+\end{dfn}
+\begin{ex} 
+    
+    Show that the 5-th cyclotomic polynomial over $\R$ is not irreducible.
+    Hence deduce the injective group morphism $\R_{X^5 - 1} \to \Z/(5)^\times$
+    as in the previous theorem is not a surjection. 
+    
+\end{ex}
+
+\begin{rmk}
+    
+    The above exercise shows that
+    though the Galois groups of cyclotomic extensions inject into $\Z/(n)^\times$,
+    it does not need to be isomorphic to it. 
+    The following theorem gives equivalent conditions for an isomorphism to occur.
+    
+\end{rmk}
+% Thm - 3 Eqv Conditions for Cyclotomic Galois Grp to be units of Z/(n)
+\begin{thm} 3 Equivalent Conditions for Cyclotomic Galois Group to be $\Z/(n)^\times$.
+    
+    Let $K_{X^n - 1}$ be the splitting field of $X^n - 1 \in K[X]$
+    where $n$ is a positive integers non-zero inside $K$. 
+    Then the following are equivalent: \begin{enumerate}
+        \item The $n$-th cyclotomic polynomial $\Phi_n$ is irreducible in $K[X]$.
+        \item $[K_{X^n - 1} : K] = \phi(n)$
+        \item The injective group morphism 
+        from $\aut{K}{K_{X^n - 1}}$ to $\Z/(n)^\times$
+        as in the previous theorem is an isomorphism.
+    \end{enumerate}
+    
+\end{thm}
+\begin{proof}
+    
+    Since $\Phi_n$ has $\zeta$ as a root, we have \begin{align*}
+        \Phi_n \text{ irreducible} &\iff \Phi_n = \min(\zeta,K) \\
+        &\iff \deg\min(\zeta,K) = \phi(n) \\
+        &\iff \deg\min(\zeta,K) = [K(\zeta) : K] = [K_{X^n - 1} : K] = \phi(n) \\
+        &\iff [K_{X^n - 1} : K] = |\aut{K}{K_{X^n - 1}}| = |\Z/(n)^\times| = \phi(n) \\
+        &\iff \aut{K}{K_{X^n - 1}} \iso \Z/(n)^\times
+    \end{align*}
+    
+\end{proof}
+
+We now show that for $K = \Q$, the cyclotomic polynomials are irreducible.
+So the Galois group of cyclotomic extensions of $\Q$ 
+are all of the form $\Z/(n)^\times$.
+For this, we need the following lemma.
+
+\begin{lem} Monic Factors of Monic Polynomials over $\Z$ are also over $\Z$.
+    
+    Let $f$ be a monic polynomial over $\Q$ with coefficients in $\Z$
+    and $g$ a monic factor of $f$.
+    Then $g$ also has coefficients in $\Z$. 
+    
+\end{lem}
+\begin{proof}
+    
+    We have $f = g h$ for some polynomial $h$ over $\Q$.
+    There exists integers $m, n$ such that $m g$ and $n h$ have integer coefficients,
+    so we have \[
+        m n f = (m g) (n h)
+    \]
+    Since non-empty subsets of the naturals have minimal elements,
+    WLOG $m$ and $n$ have minimal number of prime factors.
+    Suppose $m n \neq 1$.
+    Then there exists a prime integer $p$ that divides $m n$.
+    It is easy to show that in the polynomial ring $\Z[X] \subseteq \Q[X]$,
+    $p$ is still prime and so divides $m g$ or $n h$.
+    WLOG $p$ divides $m g$.
+    In particular, $p$ divides the leading coefficient of $g$, 
+    which is $m$ since $g$ is monic.
+    Then $(m / p) g$ has integer coefficients 
+    with $m / p$ having less prime factors than $m$, a contradiction.
+    Hence $m n = 1$, i.e. $m$ and $n$ are $\pm 1$.
+    So $g$ has integer coefficients. 
+\end{proof}
+
+% Thm - Cyclotomic Polynomials Irreducible over Q
+\begin{thm} Cyclotomic Polynomials over $\Q$ are Irreducible.
+    
+    Let $\Phi_n$ be the $n$-th cyclotomic polynomial over $\Q$.
+    Then $\Phi_n$ is irreducible in $\Q[X]$.
+    
+\end{thm}
+\begin{proof}
+    
+    Note that $\Phi_n$ is a monic factor of $X^n - 1$,
+    so by the previous lemma, it has coefficients in $\Z$.
+    Let $\Phi_n = f g$ where $f$ and $g$ are polynomials over $\Q$.
+    Then $f$ and $g$ also have integer coefficeints.
+    WLOG $f$ has a primitive $n$-th root of unity $\zeta_0$ as a root.
+    To show irreducibility, 
+    we will show that $f$ has \emph{all} primitive $n$-th roots of unity as roots.
+    The strategy is to go for a contradiction by taking things in $\F_p$
+    for some prime $p$.
+    
+    We already have $\zeta_0$ as a root of $f$ and we seek to show
+    for all $0 \leq k < n$ that is coprime to $n$, $\zeta_0^k$ is also a root of $f$.
+    If $k$ is coprime to $n$, then by the fundamental theorem of arithmetic,
+    $k$ is a product of primes $p_1, \dots, p_\kappa$ not dividing $n$. 
+    If $\zeta$ is a primitive root of unity, 
+    then $\zeta^{p_i}$ is also a primitive root of unity 
+    for prime factors $p_i$ of $k$.
+    It then suffices to show that for all primitive $n$-th roots of unity $\zeta$
+    and primes $p$ not dividing $n$, 
+    $\zeta$ being a root of $f$ implies $\zeta^p$ is also a root of $f$,
+    since that would imply $((\zeta_0^{p_1})^{p_2}\cdots )^{p_\ka} = \zeta_0^k$
+    is a root of $f$. 
+    
+    So suppose for a contradiction that there exists a primitive $n$-th root $\zeta$
+    with a prime $p$ not dividing $n$ such that 
+    $\zeta$ is a root of $f$ but $\zeta^p$ is not.
+    Then $\zeta^p$ is a root of $g$.
+    So $\zeta$ is a common root of $f$ and $g(X^p)$.
+    This implies there exists a common factor $h$ over $\Q$ of $f$ and $g(X^p)$.
+    (Exercise : In particular, what factor?)
+    Again by the previous lemma, $h$ must have integer coefficients.
+    Then inside $\F_p[X]$, $h$ is still a common factor of $f$ and $g(X^p)$.
+    Recall that all elements $a$ in $\F_p$ satisfy $a^p = a$. 
+    From this, it is easily deduced that $g(X^p) = (g(X))^p$ inside $\F_p[X]$.
+    WLOG $h$ is irreducible in $\F_p[X]$,
+    then $h$ is a common factor of $f$ and $g$ in $\F_p[X]$,
+    i.e. $\Phi_n$ has a repeated root in $\F_p[X]$.
+    This implies $X^n - 1 \in \F_p[X]$ has a repeated root,
+    which is a contradiction since $X^n - 1$ is seperable.
+    
+\end{proof}
+
+\begin{ex} Constructibility of Regular $n$-gon.
+    
+    Let $2 < n$ be a natural. 
+    Show that $\cos{2\pi / n}$ is constructible if and only if 
+    $[\Q(\zeta_n) : \Q]$ is a power of 2, where $\zeta_n = e^{2\pi i/n}$.
+    Hence deduce the regular $n$-gon is constructible if and only if 
+    $\phi(n)$ is a power of $2$. 
+    
+\end{ex}
+
+\end{document}

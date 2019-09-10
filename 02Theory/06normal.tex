@@ -175,9 +175,8 @@ For now, we restrict the definition of normality to 1 to 4.
     Furthermore, $N$ is unique up to isomorphism, i.e.
     any other normal closure of $\iota_L : K \to L$ is
     isomorphic to $N$ as a $K$-extension. 
-    Thus we denote $N$ as $N(L,\iota_L)$ and refer to anything isomorphic to it 
+    Thus we refer to anything isomorphic to $N$ 
     as \emph{the} normal closure of $(L,\iota)$.
-    If the extension $\iota_L$ is clear, we write $N(L)$ instead. 
 \end{thm}
 \begin{proof}
     Since $L$ is a finite dimensional $K$-vector space,
@@ -285,10 +284,10 @@ We are now ready to prove $5 \imp 1$.
     Let $f$ be an irreducible polynomial over $K$ with a root $a \in L$. 
     We do not know whether $L$ contains all the roots of $f$, 
     but we do know that $L$'s normal closure definitely does. 
-    So let $\iota_N : L \to N(L)$ be the normal closure of $L$. 
+    So let $\iota_N : L \to N$ be the normal closure of $L$. 
     Then $f$ is an irreducible polynomial with $\iota_N(a)$ as a root.
-    So by normality, $N(L)$ splits $f$. 
-    Let $a_i$ be an arbitrary root of $f$ in $N(L)$. 
+    So by normality, $N$ splits $f$. 
+    Let $a_i$ be an arbitrary root of $f$ in $N$. 
     We seek to show that the root $a_i$ is already in $\iota_N L$. 
     The following diagram is the situation. 
     \begin{figure} [H]
@@ -297,7 +296,7 @@ We are now ready to prove $5 \imp 1$.
         K \arrow[r,"\iota_L"] \arrow[rd,"\iota_N\circ\iota_L"{sloped,below}] & 
         K(a) \arrow[r,"\subseteq"] \arrow[d,"\phi",dashed] & 
         L \arrow[r,"\iota_N"] & 
-        N(L) \arrow[loop right,"\bar\phi",dashed] \\
+        N \arrow[loop right,"\bar\phi",dashed] \\
         & 
         K(a_i) \arrow[rru,"\subseteq"{sloped,below}] & 
         & 
@@ -340,7 +339,8 @@ It is the corollary of the following result.
         N = \<\bigcup_{\sigma \in \aut{K}{N}} \sigma(\iota_N L)\>
     \]
     Thus, if $(L,\iota_L)$ have the image invariance property,
-    then $(L,\iota_L)$ is isomorphic to $(N,\iota_N\circ\iota_L)$ as a $K$-extension,
+    then $(L,\iota_L)$ is isomorphic 
+    to $(N,\iota_N\circ\iota_L)$ as a $K$-extension,
     and hence normal. 
 \end{thm}
 \begin{proof}
@@ -351,18 +351,18 @@ It is the corollary of the following result.
     This is equivalent to saying $S_f$ is all the Galois conjugates
     of anything in $A$. 
     We claim that the set of all Galois conjugates, $S_f$,
-    is in fact equal to the union of 
-    the images of $\bar{\iota_N} A$ under all $K$-extension automorphisms of $N$. 
+    is in fact equal to the union of the images of $\bar{\iota_N} A$ 
+    under all $K$-extension automorphisms of $N$. 
     
     Let $b \in N$ be a Galois conjugate to some $a \in A$. 
     Then by embedding via conjugates, we have a $K$-extension morphism
-    from $(K(a),\iota_L)$ to $(K(b),\iota_N\circ\iota_L)$. 
-    In particular, $\phi$ is also a $K$-extension morphism from $K(a)$ to $N$.
+    from $(K(a),\iota_L)$ to $(N,\iota_N\circ\iota_L)$ that maps $a$ to $b$.
     So we have a $K(a)$-extension morphism $\bar{\phi}$ 
     from $(N,\iota_N)$ to $(N,\phi)$, which gives \[
         b = \bar{\phi}(\iota_N(a)) \in \bar{\phi} (\bar{\iota_N} A)
     \]
-    For the other inclusion, note that for any $a \in A$ and $\sigma \in \aut{K}{N}$,
+    For the other inclusion, 
+    note that for any $a \in A$ and $\sigma \in \aut{K}{N}$,
     \[
         ev_{\sigma(\iota_N(a))}(\bar{\iota_N}(\bar{\iota_L}\min(a,K)))
         = ev_{\sigma(\iota_N(a))}

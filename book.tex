@@ -93,7 +93,7 @@
 }}
 \newcommand{\<}{\langle}
 \renewcommand{\>}{\rangle}
-\newcommand{\supp}{\text{supp }}
+\newcommand{\supp}{\mathrm{supp }}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -106,21 +106,23 @@
 \newcommand{\ga}{\gamma}
 \newcommand{\de}{\delta}
 \newcommand{\ep}{\varepsilon}
+\newcommand{\ka}{\kappa}
 \newcommand{\la}{\lambda}
 \newcommand{\om}{\omega}
 \newcommand{\im}{\textnormal{im}\;}
 
-\newcommand{\Hom}[3]{\text{Hom}_{#1}(#2, #3)}
-\newcommand{\mor}[3]{\text{Mor}_{#1}(#2, #3)}
-\newcommand{\End}[2]{\text{End}_{#1}(#2))}
-\newcommand{\aut}[2]{\text{Aut}_{#1}(#2)}
+\newcommand{\Hom}[3]{\mathrm{Hom}_{#1}(#2, #3)}
+\newcommand{\mor}[3]{\mathrm{Mor}_{#1}(#2, #3)}
+\newcommand{\End}[2]{\mathrm{End}_{#1}#2}
+\newcommand{\aut}[2]{\mathrm{Aut}_{#1}#2}
 \newcommand{\Set}{\mathbf{Set}}
 \newcommand{\Top}{\mathbf{Top}}
 \newcommand{\Grp}{\mathbf{Grp}}
 \newcommand{\Ring}{\mathbf{Ring}}
 \newcommand{\RMod}{R\mhyph\mathbf{Mod}}
 \newcommand{\KVec}{K\mhyph\mathbf{Vec}}
-\renewcommand{\mod}[1]{#1\mhyph\textbf{Mod}}
+\renewcommand{\mod}[1]{#1\mhyph\mathbf{Mod}}
+\renewcommand{\vec}[1]{#1\mhyph\mathbf{Vec}}
 
 \newcommand{\imp}{\Rightarrow}
 \newcommand{\iso}{\cong}
@@ -128,7 +130,9 @@
 \newcommand{\norm}[1]{\Vert#1\Vert}
 \renewcommand{\bar}[1]{\overline{#1}}
 
-\newcommand{\gal}[2]{\text{Gal}_{#1}(#2)}
+\newcommand{\gal}[2]{\mathrm{Gal}_{#1}(#2)}
+\newcommand{\Orb}{\mathrm{Orb}}
+\newcommand{\Stab}{\mathrm{Stab}}
 
 \renewcommand{\O}{\mathcal{O}}
 
@@ -143,6 +147,8 @@
 \renewcommand{\tiny}[1]{\scalebox{0.5}{$#1$}}
 
 \newcommand{\dolater}{\Coffeecup \hspace{3pt}}
+
+\newcommand{\bigspace}{\mspace{12mu}}
 
 
 %Boxes
@@ -238,7 +244,7 @@
         \section{Sylow's Theorems}
             \subfile{03Applications/03prelim/03sylow}
             
-        \section{Filtrations on Groups}
+        \section{Normal Series of Groups}
             \subfile{03Applications/03prelim/04filtration}
             
     \chapter{Finite Fields}
@@ -246,12 +252,15 @@
     
     \chapter{Fundamental Theorem of Algebra}
         \subfile{03Applications/02fta}
-        
+    
     \chapter{Computing Galois Groups}
         \subfile{03Applications/03computing}
-        
+    
     \chapter{Impossible Constructions in Greek Geometry}
         \subfile{03Applications/04greeks}
+    
+    \chapter{Cyclotomic Extensions}
+        \subfile{03Applications/09cyclotomic}
 
     \chapter{Radical Extensions and Solvability}
         \subfile{03Applications/10radical}

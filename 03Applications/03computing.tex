@@ -146,7 +146,7 @@ Now the proof of $G_f \iso \aut{K}{K_f}$.
 \end{dfn}
 
 % Thm. Discriminant in Base Field, 3 eqv of Galois subgroup Alternating
-\begin{thm} 3 Equivalent Characterisations of Galois Group being Even.
+\begin{thm} 3 Equivalent Characterisations of Galois Group being Alternating.
     
     Let $f$ be a separable polynomial over $K$, $(K_f,\iota_f)$ its splitting field,
     $S_f$ the set of its roots and $G_f$ its Galois group. 
@@ -186,10 +186,8 @@ Now the proof of $G_f \iso \aut{K}{K_f}$.
     with cardinality $\deg f_i$. 
     
     In particular, if $f$ is irreducible in $K[X]$, 
-    then $S_f$ has only one orbit. 
-    In this case, we say \textbf{$G_f$ acts transitively on $S_f$},
-    and in general, group actions with single orbits are called 
-    \textbf{transitive actions}. 
+    then $S_f$ has only one orbit,
+    i.e. the $G_f$-action on $S_f$ is transitive.
     
 \end{thm}
 \begin{proof}
@@ -250,7 +248,8 @@ We now give some ways of checking irreducibility over $\Q$.
     
     Let $f = \sum_{i \leq n} f_k X^k$ be a polynomial over $\Q$ 
     with $n = \deg f$ and $f_k$ integers. 
-    $f$ is irreducible inside $\Z[X]$. 
+    Suppose $f$ is irreducible inside the subring $\Z[X]$ 
+    of polynomials with integer coefficients. 
     Then $f$ is irreducible inside $\Q[X]$. 
     
 \end{lem}
@@ -276,7 +275,7 @@ We now give some ways of checking irreducibility over $\Q$.
     giving $f = g_k h_k$ for some integer-coefficient polynomials $g_k, h_k$. 
     
 \end{proof}
-From the Gauss lemma, we deduce the following way of checking irreducibility. 
+From the Gauss lemma, we deduce the following quick way of checking irreducibility. 
 % Lem. For Q, via Eisenstein Criterion. 
 \begin{thm} Eisenstein's Criterion
     
@@ -323,16 +322,16 @@ We also have the following useful trick.
 \begin{proof}
     
     From the Gauss lemma, proving $f$ irreducible inside $\Z[X]$ is sufficient. 
-    We go via a contradiction. 
+    We go via the contrapositive. 
     Suppose $f = gh$ where $g$ and $h$ are non-zero, non-unit polynomials over $\Z$. 
     Since $p$ does not divide the leading coefficient of $f$,
     it does not divide the leading coefficients of $g$ and $h$ either. 
     In particular, $g, h$ are non-zero when seen as polynomials over $\F_p$. 
-    Hence $f$ is not irreducible inside $\F_p[X]$, which is a contradiction. 
+    Hence $f$ is not irreducible inside $\F_p[X]$.
     
 \end{proof}
 
-% Something from Dedekind
+% Thm - Dedekind's on Existence of Perms with certain Cycle Shapes
 
 
 % Thm. Irr, Prime Degree w 2 Complex roots gives S_p Galois Group
@@ -348,9 +347,9 @@ gives Symmetric Galois Group.
 \begin{proof}
     
     We will show that $G_f$ contains a $2$-cycle and a $p$-cycle,
-    which generates $S_p$. 
+    which generates $S_p$, so $G_f = S_p$.
     
-    We first show the existence of a transposition. 
+    We first show the existence of a $2$-cycle. 
     Since $f$ has exactly $p-2$ roots in $\R$, 
     as a polynomial over $\R$, it must have an irreducible quadratic factor. 
     Hence, by the quadratic formula, 
@@ -361,7 +360,7 @@ gives Symmetric Galois Group.
     Consider the automorphism of $\C$ that is complex conjugation. 
     This can be seen as a $\Q$-extension automorphism of $\Q_f$
     which swap the two non-real roots and leave the real roots alone, 
-    i.e. a transposition. 
+    i.e. a $2$-cycle. 
     
     Now for the $p$-cycle, take a root $a$ of $f$ inside $\Q(f)$.
     Since $f$ is irreducible, it is a unit multiple of $\min(a,\Q)$. 

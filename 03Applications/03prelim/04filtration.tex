@@ -3,7 +3,6 @@
 \begin{document}
 The goal of this section is to introduce \emph{solvability} of groups,
 which plays an essential role in the insolvability of general quintics. 
-
 % Def - Normal Series, Factor Groups, Length of Series
 % Def - Refinement, Proper Refinement, Equivalence, Composition Series.
 \begin{dfn} Normal Series, Factor Groups, Length 
@@ -51,7 +50,6 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     on the set of all normal series of a group $G$. 
     
 \end{dfn}
-
 \begin{thm} Existence of Composition Series for Finite Groups.
     
     Let $G$ be a finite group.
@@ -79,7 +77,6 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     But first, the theorem that you might have been wondering about.
     
 \end{rmk}
-
 % Thm - 2nd Iso.
 \begin{thm} 2nd Isomorphism.
     
@@ -88,7 +85,8 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     Define \[
         AB := \{ ab \mid a \in A, b \in B\}
     \]
-    Then $AB$ is a subgroup of $G$ and we have the following isomorphism of groups. 
+    Then $AB$ is a subgroup of $G$ with $AB = BA$
+    and we have the following isomorphism of groups. 
     \[
             \frac{AB}{A} \iso \frac{B}{A \cap B}
     \]
@@ -100,10 +98,14 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     the normality of $A \normsub AB$. $A \cap B \normsub B$
     is left as an exercise to the reader.
     
+    Let $a \in A$ and $b \in B$. 
+    Then $ab = b (b^{-1}ab)$ which is in $BA$ since $A$ is normal in $B$. 
+    Also, $ba = (bab^{-1}) b$ is in $AB$ for the same reason.
+    Thus $AB = BA$. 
+    
     As for the isomorphism, it is easily deduced from the 1st isomorphism theorem.
     
 \end{proof}
-
 % Lem - Butterfly / Zassenhaus.
 \begin{lem} Butterfly / Zassenhaus.
     
@@ -185,7 +187,6 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     as an easy exercise for the reader to check. 
     
 \end{proof}
-
 % Thm - Schreier Refinement. 
 \begin{thm} Schreier Refinement. 
     
@@ -219,10 +220,9 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
         = T_{0,2}\normsub \cdots \normsub T_{n,m-2}
         = T_{0,m-1} \normsub \cdots \normsub T_{n,m-1} = G
     \end{align*}
-    which are equivalent and are clearly refinements of $S, T$ respectively. 
+    which are equivalent and clearly refinements of $S, T$ respectively. 
     
 \end{proof}
-
 % Thm - Uniqueness and Every Normal Series has Composition Refinement.
 \begin{thm} Uniqueness of Composition Series.
     
@@ -259,28 +259,24 @@ We arrive at our goal.
         Let $S$ be a normal series of $G$ with abelian factor groups.
         Since $G$ is finite, it has a composition series,
         so there exists a refinement $\hat{S}$ of $S$ that is a composition series.
-        It is not difficult to deduce from the 3rd isomorphism theorem
-        that the factor groups of $\hat{S}$ are abelian, too.
-        Suppose there is a non-trivial factor $\hat{S}_{i+1} / \hat{S}_i$ 
-        with non-prime cardinality. 
-        Then $|\hat{S}_{i+1} / \hat{S}_i|$ has a prime factor $p$ 
-        strictly smaller than itself. 
-        By Cauchy's theorem, 
-        there then exists a subgroup $T$ of cardinality $p$ in the factor.
-        Since the factor group is abelian, $T$ is normal in the factor group
-        and from the 3rd isomorphism theorem we can deduce that \[
-            S_i \normsub \pi^{-1} T \normsub S_{i+1}
-        \]
-        where $\pi^{-1} T$ is the preimage of $T$ under the projection to the factor.
-        This gives a proper refinement of $\hat{S}$, 
-        contradicting with it being a composition series. 
-        Thus all factor groups are either trivial or have prime cardinality. 
+        It is left as an exercise to the reader 
+        to deduce from the 3rd isomorphism theorem
+        that the factor groups of $\hat{S}$ are also abelian.
+        Let $H$ be a factor group of $\hat{S}$. 
+        Then it is an abelian simple group. 
+        If it is trivial, we are done, so let it be non-trivial.
+        Then there is a prime $p$ that divides $|H|$ 
+        (by the fundamental theorem of arithmetic).
+        So by Cauchy's theorem, there exists a subgroup of cardinality $p$.
+        $H$ abelian implies this subgroup is normal, which means
+        $H$ simple implies this subgroup is either trivial or the entire group.
+        It cannot be trivial since $1$ is not a prime.
+        Thus $H$ is equal to the subgroup, i.e. it has prime cardinality. 
         
     ($2 \imp 3$) Easily deduced from Lagrange's theorem.
     
     ($3 \imp 1$) Trivial.
 \end{proof}
-
 A useful result.
 % Lem - Solvable iff Exists Solvable Factor.
 \begin{lem} Solvable if and only if Exists Solvable Factor.

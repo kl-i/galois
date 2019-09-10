@@ -9,32 +9,71 @@ The following is \emph{the} key lemma
 from which all of Sylow's theorems will be deduced. 
 
 % Lem - Fixed points of p-Groups
-\begin{dfn} Fixed Points in the Action of a $p$-Group. 
+\begin{lem} Fixed Points in the Action of a $p$-Group. 
     
     Let $X$ be a $G$-set where $G$ is a $p$-group with cardinality $p^n$.
-    Let $Fix(X)$ denote the set of elements of $X$ with orbit cardinality $1$. 
-    Then $|X| = |Fix(X)|$ in $\F_p$. 
+    Let $\mathrm{Fix}(X)$ denote the set of elements of 
+    $X$ with orbit cardinality $1$. 
+    Then $|X| = |\mathrm{Fix}(X)|$ in $\Z / (p)$. 
     
-\end{dfn}
+\end{lem}
 \begin{proof}
     
-    For any $x \in X$, since $Stab(x)$ is a subgroup of $G$, 
-    Lagrange's theorem dictates that $Stab(x)$ must have cardinality of power $p$.
+    For any $x \in X$, since $\Stab(x)$ is a subgroup of $G$, 
+    Lagrange's theorem dictates that $\Stab(x)$ must have cardinality of power $p$.
     Hence by the Orbit-Stabiliser theorem, 
-    $Orb(x)$ must also have power $p$ cardinality. 
+    $\Orb(x)$ must also have power $p$ cardinality. 
     For $k \leq n$, let $m_k$ denote the number of orbits of $X$ with size $p^k$. 
     Since orbits partition $X$, we have \[
         |X| = m_0 + m_1 p + m_2 p^2 + \cdots + m_n p^n
     \]
-    But of course, $m_0 = |Fix(x)|$ so we are done. 
+    But of course, $m_0 = |\mathrm{Fix}(x)|$ so we are done. 
+\end{proof}
+
+From this, we first deduce Cauchy's theorem.
+
+\begin{thm} Cauchy.
+    
+    Let $G$ be a finite group and $p$ a prime that divides the cardinality of $G$.
+    Then there exists an element $g$ with order $p$.
+    In particular, there exists a subgroup of $G$ with cardinality $p$.
+    
+\end{thm}
+\begin{proof}
+    
+    To show such an element exists, we use a clever group action. 
+    Let $X$ be the set of $p$-tuples $(g_1,\dots,g_p)$ of elements from $G$ 
+    such that $g_1\cdots g_p = e$. 
+    It is easy to show that if $g_1 \cdots g_p = e$, then $g_2 \cdots g_p g_1 = e$,
+    and hence more generally any cyclic permutation also yields $e$. 
+    This defines an action on $X$ from the cyclic group of order $p$. 
+    Now here is the key: let $(g_1,\cdots,g_p)$ be in $\mathrm{Fix}(X)$. 
+    Since the action is cycling elements, we have \[
+        (g_1,\cdots,g_{p-1},g_p) = (g_2,\cdots,g_p,g_1)
+    \]
+    i.e. $g_1 = g_2 = \cdots = g_p = g$ for some element $g$ 
+    with $g^p = g_1\cdots g_p = e$. 
+    Thus, the fixed points correspond to the elements we are looking for! 
+    We know $(e,\cdots,e)$ is already a fixed point, 
+    so if we can show there are more than one fixed points, we are done. 
+    Note that $X$ is now a $C_p$-set where $C_p$ has cardinality $p$-power.
+    So by the key lemma, we have $|X| = |\mathrm{Fix}(X)| \in \Z / (p)$. 
+    Note that no matter what $g_1,\dots,g_{p-1}$ are, 
+    as long as $g_p = g_{p-1}^{-1}\cdots g_1^{-1}$,
+    we have $(g_1,\dots,g_p)$ is in $X$. 
+    Hence $|X| = |G|^{p-1}$, which $p$ divides.
+    Thus, $|\mathrm{Fix}(X)| = 0 \in \Z / (p)$, 
+    i.e. $|\mathrm{Fix}(X)|$ is a multiple of $p$.
+    It is not zero so $1 < p \leq |\mathrm{Fix}(X)|$. 
+    
 \end{proof}
 
 % Def - Normaliser Subgroup
 \begin{dfn} Normaliser of a Subgroup. 
     
     Let $H$ be a subgroup of a group $G$. 
-    Then the \textbf{normaliser of $H$} is defined as the smallest normal subgroup
-    containing $H$, denoted $N_G(H)$. 
+    Then the \textbf{normaliser of $H$}, $N_G(H)$, is defined as the largest subgroup
+    containing $H$ such that $H$ is normal in $N_G(H)$. 
     It is in fact equal to the set of all $g$ such that $g^{-1}Hg \subseteq H$
     where $g^{-1} H g = \{ g^{-1}hg \mid h \in H \}$. 
     
@@ -45,7 +84,7 @@ from which all of Sylow's theorems will be deduced.
     
     Let $G$ be a finite group and $p$ a prime with divides $|G|$. 
     Suppose $p^n$ is the maximal power of $p$ dividing $|G|$. 
-    Then there exists subgroups $H_1, \cdots, H_n$ such that
+    Then there exists subgroups $H_0, \cdots, H_n$ such that
     $|H_i| = p^i$ and each $H_i$ is a normal subgroup of $H_{i+1}$. 
     Subgroups like $H_n$ with maximal prime power are called 
     \textbf{Sylow $p$-subgroups}.
@@ -54,41 +93,9 @@ from which all of Sylow's theorems will be deduced.
 \begin{proof}
     
     We show the existence of the subgroups by induction. 
+    The base case of $H_0$ is trivial. 
     
-    (Cauchy's Theorem / Existence of $H_1$)
-    
-    We show that since $p$ divides $|G|$, 
-    there exists an element $g$ with order $p$.
-    \footnote{This is Cauchy's theorem.}
-    Hence, $H_1 := \<g\>$ is a subgroup of order $p$.  
-    
-    To show such an element exists, we use a clever group action. 
-    Let $X$ be the set of $p$-tuples $(g_1,\dots,g_p)$ of elements from $G$ 
-    such that $g_1\cdots g_p = e$. 
-    It is easy to show that if $g_1 \cdots g_p = e$, then $g_2 \cdots g_p g_1 = e$,
-    and hence more generally any cyclic permutation also yields $e$. 
-    This defines an action on $X$ from the cyclic group of order $p$. 
-    Now here is the key: let $(g_1,\cdots,g_p)$ be in $Fix(X)$. 
-    Since the action is cycling elements, we have \[
-        (g_1,\cdots,g_{p-1},g_p) = (g_2,\cdots,g_p,g_1)
-    \]
-    i.e. $g_1 = g_2 = \cdots = g_p = g$ for some element $g$ 
-    with $g^p = g_1\cdots g_p = e$. 
-    Thus, the fixed points correspond to the elements we are looking for! 
-    We know $(e,\cdots,e)$ is already a fixed point, 
-    so if we can show there are more than one fixed points, we are done. 
-    For that, we use the key lemma on 
-    $X$ with the action from the cyclic group of order $p$,
-    which gives $|X| = |Fix(X)| \in \F_p$. 
-    Note that no matter what $g_1,\dots,g_{p-1}$ are, 
-    as long as $g_p = g_{p-1}^{-1}\cdots g_1^{-1}$,
-    we have $(g_1,\dots,g_p)$ is in $X$. 
-    Hence $|X| = |G|^{p-1}$, which $p$ divides.
-    Thus, $p$ divides $|Fix(X)|$, which is non-zero, so $1 < p \leq |Fix(X)|$. 
-    
-    (Existence of $H_{i+1}$ from $H_i$)
-    
-    Suppose we have the existence of the $i$-th subgroup $H_i$
+    Now suppose we have the existence of the $i$-th subgroup $H_i$
     with order $p^i$ strictly less than the maximal power $p^n$. 
     Let $\pi_i$ be the projection of $N_G(H_i)$ to $N_G(H_i) / H_i$.
     The plan is to show that $p$ divides the cardinality of $N_G(H_i) / H_i$
@@ -96,7 +103,7 @@ from which all of Sylow's theorems will be deduced.
     we have a subgroup $\bar{H_i}$ of the quotient with cardinality $p$. 
     Then by the 3rd and 1st isomorphism theorem, 
     $H_i$ is normal in $\pi_i^{-1}\bar{H_i}$ which has order $p^{i+1}$,
-    i.e. $H_{i+1} = \pi_i^{-1}\bar{H_i}$ works. 
+    i.e. $\pi_i^{-1}\bar{H_i}$ will be our $H_{i+1}$. 
     
     To show $p$ divides $|N_G(H_i) / H_i|$, we again use a clever action.
     Consider $G / H_i$, the set of all left cosets of $H_i$.
@@ -105,11 +112,12 @@ from which all of Sylow's theorems will be deduced.
     \]
     This gives us an $H_i$-action on $G / H_i$. 
     $H_i$ is a $p$-group, so by the key lemma,
-    we have $|G / H_i| = |Fix(G / H_i)| \in \F_p$.
+    we have $|G / H_i| = |\mathrm{Fix}(G / H_i)|$ in $\Z / (p)$.
     Since $|H_i|$ is not the maximal power of $p$ dividing $|G|$,
-    $p$ divides $|G / H_i|$ as well, and hence $0 = |Fix(G / H_i)| \in \F_p$. 
+    $p$ divides $|G / H_i|$ as well, 
+    and hence $0 = |\mathrm{Fix}(G / H_i)|$ in $\Z / (p)$. 
     But note that \[
-        gH_i \in Fix(G / H_i) 
+        gH_i \in \mathrm{Fix}(G / H_i) 
         \iff \forall h \in H_i, h gH_i = gH_i
     \]
     \[
@@ -154,10 +162,10 @@ from which all of Sylow's theorems will be deduced.
     \]
     we see the fixed points of this action give us our desired element $g$. 
     Since $A$ is a $p$-group, by the key lemma we have
-    $p$ divides $|G / B| - |Fix(G / B)|$.
+    $p$ divides $|G / B| - |\mathrm{Fix}(G / B)|$.
     Then $B$ having cardinality maximal power $p$ implies 
     $p$ does not divide $|G / B|$, 
-    and hence does not divide $|Fix(G / B)|$.
+    and hence does not divide $|\mathrm{Fix}(G / B)|$.
     In particular, the number of fixed points is non-zero. 
     
 \end{proof}
@@ -170,39 +178,35 @@ from which all of Sylow's theorems will be deduced.
     Let $Syl_p(G)$ be the set of Sylow $p$-subgroups of $G$ and $n_p$ its cardinality.
     Then the following are true. \begin{enumerate}
         \item For any Sylow $p$-subgroup $A$, $n_p = [ G : N_G(A)]$.  
-        \item $n_p = 1$ in $\F_p$. 
+        \item $n_p = 1$ in $\Z / (p)$. 
         \item $n_p$ divides $k$. 
     \end{enumerate}
     
 \end{thm}
 \begin{proof}
+    \begin{enumerate}
+        \item In Sylow II, we proved that the $G$-action on the Sylow $p$-subgroups
+        that is $g \mapsto (A \mapsto g^{-1} A g)$ is transitive. 
+        This implies for any Sylow $p$-subgroup $A$, its orbit has cardinality $n_p$.
+        The result then follows from the Orbit-Stabiliser theorem. 
+        \item We will obtain the result by yet again using the key lemma. 
+        Let $A$ be a Sylow $p$-subgroup of $G$. 
+        Recall that we already have a $G$-action on the set of Sylow $p$-subgroups.
+        This naturally gives us an $A$-action \[
+            a \mapsto (B \mapsto a^{-1} B a)
+        \]
+        Then the key lemma says $n_p = |\mathrm{Fix}(Syl_p(G))|$ inside $\Z / (p)$. 
+        We claim there is only one fixed point, $A$ itself. 
+     
+        Suppose $B$ is a Sylow $p$-subgroup that is fixed by the $A$-action.
+        Then $A$ is inside the normaliser of $B$,
+        i.e. $A$ and $B$ are both Sylow $p$-subgroups of $N_G(B)$.
+        However, since $B$ is normal inside $N_G(B)$, by Sylow II,
+        it must be the only Sylow $p$-subgroup of $N_G(B)$. 
+        Thus, $A = B$ as desired.
     
-    (1)
-    In Sylow II, we proved that the $G$-action on the Sylow $p$-subgroups
-    that is $g \mapsto (A \mapsto g^{-1} A g)$ is transitive. 
-    This implies for any Sylow $p$-subgroup $A$, its orbit has cardinality $n_p$.
-    The result then follows from the Orbit-Stabiliser theorem. 
-    
-    (2)
-    We will obtain the result by yet again using the key lemma. 
-    Let $A$ be a Sylow $p$-subgroup of $G$. 
-    Recall that we already have a $G$-action on the set of Sylow $p$-subgroups.
-    This naturally gives us an $A$-action \[
-        a \mapsto (B \mapsto a^{-1} B a)
-    \]
-    Then the key lemma says $n_p = |Fix(Syl_p(G))|$ inside $\F_p$. 
-    We claim there is only one fixed point, $A$ itself. 
-    
-    Suppose $B$ is a Sylow $p$-subgroup that is fixed by the $A$-action.
-    Then $A$ is inside the normaliser of $B$,
-    i.e. $A$ and $B$ are both Sylow $p$-subgroups of $N_G(B)$.
-    However, since $B$ is normal inside $N_G(B)$, by Sylow II,
-    it must be the only Sylow $p$-subgroup of $N_G(B)$. 
-    Thus, $A = B$ as desired.
-    
-    (3)
-    Follows from (1) and (2) with elementary number theory. 
-    
+        \item Follows from parts 1 and 2 with elementary number theory. 
+    \end{enumerate}
 \end{proof}
 
 \end{document}

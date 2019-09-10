@@ -1,0 +1,839 @@
+\documentclass{article}
+
+
+\usepackage{xfrac}    
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+
+%amsthm settings
+\newtheoremstyle{definitionstyle}%
+{20pt}% above thm
+{20pt}% below thm
+{}% body font
+{}% space to indent
+{\bf}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\newtheoremstyle{lemmastyle}%
+{20pt}% above thm
+{5pt}% below thm
+{\it}% body font
+{}% space to indent
+{\bf}% head font
+{.}% punctuation between head and body
+{ }% space after head
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{definitionstyle}
+\newtheorem{defn}{Definition}[section]
+
+\theoremstyle{lemmastyle}
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{cor}[lem]{Corrollary}
+
+\theoremstyle{remark}
+\newtheorem*{note}{Note}
+\newtheorem*{remark}{Remark}
+
+
+%tikzset settings
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+  }
+}
+
+%commands
+\newcommand{\ibar}{\overline{\imath}}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{document}
+\title{Galois Theory Notes}
+\author{Joseph Hua}
+\date{10 May 2019}
+\maketitle
+
+\section{Pre-requisites}
+Here is a list of some things I had to learn before studying Galois Theory:
+\begin{itemize}
+  \item Groups (subgroups, normal subgroups, homomorphisms, and the first isomorphism theorem)
+  \item Vector spaces (until definition of bases)
+\end{itemize}
+
+Don't let this list scare you if you have not seen any of these types of things before. For groups, see Herstein's Topics in Algebra. Just look up the definition of a vector space and a basis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Field extentions}
+%
+\begin{defn} Ring\\
+
+A set $R$, together with two binary operations add, $+$, and multiply, $\times$, forms a ring if $(R,+)$ is an abelian group, and $\times$ is assosiative, is distributive over $+$, is commutative, and has an identity. (I remember this as distributivity holds, and $(R,\times)$ would also be an abelian group if multiplicative inverses exist.) Formally:\\
+\\
+If $R$ set, $+ : R \times R \to R$ , $\times : R \times R \to R$,\\
+
+$R:=(R,+,\times)$ ring $:= (R,+)\textrm{ group abel}  \land (0) \land (1) \land (2) \land (3)$, where\\
+\\
+$(0):=$\[\forall a,b,c\in R, (a\times b)\times c = a \times (b\times c)\]
+$(1):=$\[\forall a,b,c\in R, (a\times b) + c = a\times b + a \times c\]
+$(2):=$\[\forall a,b \in R, a\times b = b\times a\]
+$(3):=$\[\exists e_\times \in R, \forall a \in R, e_\times \times a = a\]
+\\
+\end{defn}
+\begin{note}: When working with rings, we always use the symbol $1$ for $e_\times$. \\ \end{note}
+\begin{note}: Unfortunately, everyone uses $R$ to denote both the ring and the set of elements in the ring. Ideally we would write $S$ set, and $R = (S,+,\times)$. They are different, as with the case of using $G$ for a group (and $K$ for a field), but mathematicians don't really care about these things, so we will sometimes call $R$ a set, and sometimes call $R$ a ring. \end{note}
+%
+\begin{defn} Unit\\
+\\
+If $R$ ring, $a \in R$,\\
+
+$a$ unit $:= \exists b \in R, a \times b = 1$\\
+\\
+In other words, an element is a unit if it has a multiplicative inverse.
+%
+\end{defn}
+
+\begin{defn} Field\\
+\\
+A set $K$, together with two binary operations $+$ and $\times$ forms a field if $(K,+,\times)$  is a ring and for all non-zero elements in K, there exists a multiplicative inverse. Formally:\\
+\\
+If $K$ set, $+ : K \times K \to K$ , $\times : K \times K \to K$,\\
+
+$K = (K,+,\times)$ field $:=(K,+,\times) \textrm{ ring} \land \forall a \in K\backslash \{0\}, a$ unit\\
+\\
+There are many ways of stating the conditions for $K$ to be a field, alternatively I could say $K$ is a field if $(K,+)$ and $(K\backslash \{0\},\times)$ are both abelian groups, and $\times$ is distributive over $+$.\end{defn}
+%
+\begin{defn} Ring homomorphism\\
+\\
+If $R$ ring, $S$ ring, $\phi : R \to S$,\\
+
+$ \phi \textrm{ hom} := (0) \land (1) \land (2)$, where\\
+\\
+$(0):=$\[\forall a,b \in R, \phi (a+b) = \phi(a) + \phi(b) \]
+$(1):=$\[\forall a,b \in R, \phi(a\times b) = \phi (a) \times \phi (b) \]
+$(2):=$\[\phi(1)=1\]
+\begin{note} In (2), the first $1$ belongs to $R$ and the second $1$ belongs to $S$, although they are not the same object, we use the same notation for both. I think this is bad form even though it is sufficiently convenient for everyone to use it. We will see that this notation will not be confusing if we allow ourselves not to be confused.\end{note} \end{defn}
+\begin{lem} Ring homomorphisms from fields are injective\\
+ \\
+If $K$ field, $R$ ring, $\phi : K \to R, \phi$ hom,\\
+
+then $\phi$ injective.\\
+\\
+\begin{note} For a while we will only concern ourselves with ring homomorphisms from fields to fields, so for now we will only say field homomorphism. They are defined in the same way, field homomorphisms turn out to have additional nice properties.\\ \end{note}
+\begin{remark} This lemma tells us that in some sense of size, field homomorphisms go from 'smaller' fields to 'equal or bigger' fields. Thus we consider a field homomorphism as evidence that one field lies 'inside' another field. Formally, we make the following \end{remark}
+\end{lem}
+\begin{lem} Extends\\
+\\
+If $K$ field, $L$ field,\\
+
+$\sfrac{L}{K} := \exists i : K \to L, i $ hom\\
+
+\begin{note} We call  \sfrac{$L$}{$K$} a field extension, and we say that $L$ extends $K$. We call $K$ a subfield of $L$, and $L$ an extension field of $K$. We call $i$ an inclusion homomorphism.\\ \end{note}
+\begin{note} A lot of people simply say $K$ is a subset of $L$, and this is an okay way of visualising relationships between fields, but it is informal. For example, the rational numbers are not a subset of the real numbers, as elements in the two field are different objects.\\ \end{note}
+\begin{note} $i$ stands for inclusion, as we think of $K$ as being 'included' in $L$.\end{note}
+\end{lem}
+
+\begin{lem} $\sfrac{L}{K}$ is a K - vector space\\
+\\
+If $K$ field, $L$ field, $\sfrac{L}{K}$,\\
+
+then $L$ is a $K$ vector space.\\
+\begin{note} Checking this lemma against the definition of a field is trivial, but this lemma is a key piece of insight. \end{note}
+\end{lem}
+
+\begin{defn} Degree of extension\\
+\\
+If $K$ field, $L$ field, $\sfrac{L}{K}$,\\
+
+$[L:K]:=dim(\sfrac{L}{K})$,\\
+\\
+where $dim$ refers to the dimension of the vector space $L$ over $K$.
+\end{defn}
+\begin{defn} Finite extension
+If $K$ field, $L$ field, $\sfrac{L}{K}$,\\
+
+$\sfrac{L}{K}$ finite $:= \exists n \in \mathbb{Z}, n = [L:K]$\\
+\end{defn}
+
+\begin{defn} Simple extension\\
+\\
+If $K$ field, $L$ field, $\sfrac{L}{K}$, $S \subseteq L$, $a \in L$,\\
+
+$K(S):= \displaystyle\bigcap\limits_{E \leq L, (K \cup S) \subseteq E}E$\\
+
+$K(a):= K({a})$\\
+
+
+\begin{note} We think of $K(S)$ as the minimal field such that $S \subseteq K(S)$ and $K \subseteq K(S)$ \end{note}
+\begin{note} We will mostly use $K(a)$, and finite extensions of the like. \end{note}
+\end{defn}
+
+\begin{lem} Homomorphisms composed are homomorphisms\\
+\\
+If $K$ field, $L$ field, $M$ field, $i_0 : K \to L$ hom, $i_1 : L \to M$ hom,\\
+
+then $i_1 i_0 : K \to M$ hom\\
+
+\begin{note} From now on, unless stated otherwise, $i : K \to L$ implies existance of fields $K$ and $L$, and that $i$ is a homomorphism; similarly, $\sfrac{L}{K}$, implies existance of fields $K$ and $L$. Similarly $p \in R[X]$ will imply existance of a ring $R$ and so on.\end{note}
+\end{lem}
+
+\begin{lem} Extension inheritance\\
+\\
+If $\sfrac{M}{L}, \sfrac{L}{K}$, then $\sfrac{M}{K}$\\
+\end{lem}
+
+\begin{lem} The Tower Law\\
+\\
+If $\sfrac{L}{K}$ finite, $\sfrac{M}{L}$ finite,\\
+
+then $[M:L] [L:K] = [M:K]$
+\end{lem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Polynomial rings}
+\begin{defn}$R[X]$\footnote{ $K[X]$ is not the same type of object as $K(a)$. Square brackets are associated with rings, whereas round brackets are (in this case) associated with fields. The term $x$ in $K[X]$ is a variable, as $K[X]$ contains polynomials with $x$ as a variable (will be defined later), whereas $a$ in $K(a)$ is an element of a field.}\\
+\\
+If $R$ Ring, then\\
+
+$R[X]:=\{\sum_{i=0}^{n} \lambda_i x^{i} | n \in \mathbb{Z} \land \forall i, \lambda_i \in R\}$\\
+
+and $p(x)$ polynomial$:= \exists R$ Ring, $p(x) \in R[X]$
+\begin{note} A polynomial ring over a field $K$ is a ring as all fields are rings, and you will see that polynomial rings over fields have even nicer properties. For now we will only consider polynomials rings over fields.\end{note} \end{defn}
+
+\begin{lem}$R[X]$ is a ring\\
+\\
+If $R$ Ring, then $R[X]$ Ring, with addition and multiplication defined the way you expect it to be.
+
+\begin{note} What are the additive and multiplicative identities? What are additive inverses? Do multiplicative inverses exist? \end{note}
+\end{lem}
+\begin{defn} Degree of a polynomial\\
+\\
+If $p(x) \in R[X]$, then $\exists n \in \mathbb{Z}, \forall i, \exists \lambda_i \in R, p = \sum_{i=0}^{n} \lambda_i x^{i}$\\
+
+$deg(p) := n$
+\begin{note} The degree of a polynomial is always in the non-negative integers. \end{note}
+\end{defn}
+\begin{lem} Polynomials multiplying make degrees add\\
+\\
+If $p(x), q(x) \in R[X], \forall a, b \in R[X], (ab = 0 \Rightarrow a = 0 \lor b = 0)$\footnote{$\forall a, b \in R[X], (ab = 0 \Rightarrow a = 0 \lor b = 0)$ is the condition 'R is an integral domain'. A field is always an integral domain, so from now on this won't have to be specified anyway.}\\
+
+then $deg(pq) = deg(p) + deg(q)$
+\begin{remark} Now we will stop looking at general polynomial rings over rings, and start looking at polynomial rings over fields. The difference is crucial for the following lemmas to hold.\end{remark}\end{lem}
+
+\begin{lem} Division algorithm\\
+\\
+If $K$ Field, $p(x), q(x) \in K[X]$, $q \ne 0$\\
+
+then $\exists d(x), r(x) \in K[X], deg(r) < deg(q), p = d \times q + r$
+\begin{note} Why does this not work in general for $p$ and $q$ in $R[X]$? What is the difference? \end{note}
+\end{lem}
+\begin{defn} Monic\\
+\\
+If $p \in R[X]$,
+
+$p$ monic $:= deg(p - x^{deg(p)}) < deg(p)$
+\begin{note} In this case I apologise for the way I wrote it, but I think it looks nice. In English: the leading coefficient is 1.\end{note}
+\end{defn}
+
+\begin{defn} Divides\\
+If $K$ Field, $p, q \in K[X]$,\\
+
+$q \mid p : = \exists d \in K[X], q \times d = p$
+\end{defn}
+
+\begin{defn} Greatest common divisor\\
+\\
+If $p, q \in K[X], p \ne 0, q \ne 0,$\\
+
+$gcd(p, q) := d \in K[X], (0) \land (1) \land (2),$ where\\
+\\
+$(0) := d \text{ monic}$,\\
+\\
+$(1) := d \mid p \land d \mid q$,\\
+\\
+$(2) := \forall a \in K[X], (a \mid p \land a \mid q \Rightarrow a \mid d)$
+\begin{note} The monic requirement is not very important, it is only there to ensure the polynomial is unique. \end{note}
+
+\end{defn}
+
+\begin{lem} Euclid's algorithm\\
+\\
+If $p, q \in K[X], p \ne 0, q \ne 0,$ use what you know about Euclid's agorithm for the integers to come up with an informal algorithm that spits out $gcd(p,q)$. Using this, verify that the gcd exists and is unique.
+\begin{note} If $gcd(p, q) = 1$, then we say $p$ and $q$ are coprime \end{note}
+\end{lem}
+
+\begin{lem} Units are constants for $K[X]$x\\
+\\
+If $a \in K[X]$ unit, then $deg(a) = 1$\end{lem}
+
+\begin{defn} Irreducible\\
+\\
+If $K$ Field, $a, b, p \in K[X]$,\\
+\\
+$p$ irr $:= deg(p) > 0 \land (a \times b = p \Rightarrow a$ unit $\lor$ $b$ unit)
+\begin{note} We will soon see that in our situation polynomials are irriducible if and only if they are prime. However, this is not generally the case. \end{note} \end{defn}
+
+\begin{lem} $p$ irr $\Rightarrow$ $gcd(a,p)=1$ $\lor$ $p\mid a$\\
+\\
+If $K$ Field, $p \in K[X]$, $p$ irr\\
+
+then $\forall a \in K[X], (gcd(a,p)=1$ $\lor$ $p\mid a)$
+\end{lem}
+
+\begin{defn} Prime\\
+\\
+If $K$ Field, $ a, b, p \in K[X]$,\\
+
+$p$ prime $:= (p = a \times b \Rightarrow p \mid a $ $\lor$ $p \mid b)$
+\end{defn}
+
+\begin{lem} $p$ irr $\iff$ $p$ prime\\
+\\
+If $K$ Field, $p \in K[X]$,\\
+
+then $p$ irr $\iff$ $p$ prime
+\end{lem}
+
+\begin{lem} K[X] is a unique factorisation domain\\
+\\
+If  $p \in K[X],$\\
+
+then $\exists q_i \in K[X], q_i$ unique, $q_i$ irr, $p = \displaystyle \prod q_i$
+
+\begin{remark} Now we have established some structure in $K[X]$, we can start piecing together fields and their polynomial rings. \end{remark}
+\end{lem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Minimal polynomials}
+\begin{defn} Evaluation\\
+\\
+If $K$ Field, $a \in K$,\\
+
+$ev_a : K[X] \to K :=$\\
+
+$ev_a p(x) = ev_a(\sum_{i=0}^{n} \lambda_i x^{i}) = \sum_{i=0}^{n} \lambda_i a^{i} = p(a)$
+\begin{note} We use $ev_a$ rather than $p(a)$ because 
+\end{note}\end{defn}
+
+\begin{lem} Evaluation is a ring homomorphism\\
+\\ 
+If $K$ Field, $a \in K$, then $ev_a$ hom\\
+
+\begin{note} When you evaluate the image of an element $a \in K$ in $L$, you evaluate at $i(a)$, as you can only evaluate at an element that exists in the underlying field of the polynomial ring.\end{note}
+\begin{equation}\begin{tikzcd}
+K[X] \arrow[d, "ev_a"] & L[X] \arrow[d, "ev_{i(a)}"]\\
+K \arrow[r, "i"]& L\end{tikzcd}\end{equation}
+
+\begin{remark} Given $a \in K$, diagram (1) depicts the maps $ev_a, i, ev_{i(a)}$. The next step is to make this diagram commute\footnote{Commutative in the category theory sense}, by adding in another ring homomorphism from $K[X]$ to $L[X]$, namely\end{remark}\end{lem}
+
+\begin{defn} $\ibar$\footnote{The quotient symbol $/$ will represent two very different things. One is quotienting by an ideal or a normal subgroup. For example, \sfrac{$\mathbb{Z}$}{$p$$\mathbb{Z}$,} and \sfrac{$K[x]$}{$I_a$} represent the quotients of their respective rings. Another is representing field extensions. For example, \sfrac{$L$}{$K$} is the logical statement $\exists i : K \to L, i$ hom.}\\
+\\
+
+If diagram (1),\\
+
+$\ibar := K[X] \to L[X], (0) \land (1) \land (2)$, where\\
+\\
+$(0) := \ibar$ hom\\
+\\
+$(1) := \forall p(x) \in K[X], \overline{\imath_1 \imath_0} p = \overline{\imath_1}\circ \overline{\imath_0}p$\\
+\\
+$(2) := \forall p(x) \in K[X], i \circ ev_a p = ev_{i(a)} \circ \overline{\imath} p$\\
+\begin{equation}\begin{tikzcd}
+K[X] \arrow[d, "ev_a"] \arrow[r, "\ibar"] & L[X] \arrow[d, "ev_{i(a)}"]\\
+K \arrow[r, "i"]& L\end{tikzcd}\end{equation}
+\begin{note} $(1)$ is the condition 'the diagram with composition commutes', $(2)$ is 'the diagram with evaluation commutes'. From now on similar expressions for commutativity will be written without the $\circ$s and $\forall p(x)$s and simply as: $\overline{\imath_1}\overline{\imath_0}$ and $i$ $ev_a = ev_{i(a)} \ibar $\end{note}
+\begin{note} We say that $\overline{\imath}$ an induced map, as it is created once we have the existance of the other three homomorphisms\end{note}\end{defn}
+
+\begin{lem} $\ibar$ exists and is unique\\
+\\
+If diagram (1), then $\exists ! \ibar$ \end{lem}
+
+\begin{defn} Algebraic\\
+\\
+Let $i : K \to L, a \in L$,\\
+
+$a$ algebraic over $K := \exists p \in K[X]\backslash\{0\}, ev_a \ibar p = 0$ \end{defn}
+
+\begin{defn} Minimal polynomial\\
+\\
+If $i : K \to L, a \in L$, $a$ algebraic over $K$,\\
+
+$I_a :=\{p \in K[X] \mid ev_a \ibar p = 0\}$\\
+
+$min(a,K)\footnote{I have seen $irr(a,K)$ used to denote the minimal polynomial. I will use $min(a,K)$ because it's nice to be able to easily say what you're writing.} := p \in K[X], (0) \land (1) \land (2)$\\
+\\
+$(0) := p$ monic\\
+\\
+$(1) := p$ irr\\
+\\
+$(2) := \forall q \in I_a, deg(p) \le deg(q)$\\
+\end{defn}
+
+\begin{note} If you know what an ideal is, you can see that $I_a$ is the ideal generated by the minimal polynomial $min(a,K)$. \end{note}
+
+\begin{lem} Existance and uniqueness of $min(a,K)$\\
+\\
+If $\sfrac{L}{K}, a \in L$, $a$ algebraic over $K$, then $\exists! min(a,K)$
+\end{lem}
+
+\begin{lem} $min(a,K)$ divides all polynomials in the ideal\\
+\\
+If $\sfrac{L}{K}, a \in L$, $a$ algebraic over $K$,\\
+
+then $\forall p \in  I_a , min(a,K) \mid p $\end{lem}
+
+\begin{lem} $min(a,K)$ is irreducible\\
+\\
+If $\sfrac{L}{K}, a \in L$, $a$ algebraic over $K$, then $min(a,K)$ irr
+\begin{remark} Knowing now that the minimal polynomial is irreducible, we know it is prime. This is good news. \end{remark}
+\end{lem}
+
+\begin{defn} Image of homomorphism\\
+\\
+If $i : K \to L$,\\
+
+$i(K) := \{y \in L \mid \exists x \in K, i(x) = y\}$
+\begin{note} Not only do we know that there exists a homomorphism $i' : K \to L$, we know that it can simply be defined as $i'(x) = x$, as $i(K) \subseteq L$, and informally $i' =$ $\subseteq$. We will use this fact to flesh out our diagrams.\end{note}
+\end{defn}
+
+\begin{lem} Simple extensions are subsets\\
+\\
+If $i : K \to L, i(K) \subseteq L, a \in L$, $a$ algebraic over $K$,\\
+
+then, $K(a) \subseteq L$\end{lem}
+
+\begin{lem} $ev_a \ibar K[x]$ is a field\\
+\\
+If $i : K \to L, a \in L$, $a$ algebraic over $K$, then $ev_a \ibar K[x]$ Field
+\end{lem}
+
+\begin{lem} $K(a)=ev_a \bar{i} K[x]$\\
+\\
+If $i : K \to L, a \in L$, $a$ algebraic over $K$, then $ev_a \ibar K[x] = K(a)$
+\begin{remark} This lemma is very powerful, as now we have a way of constructing $K(a)$ using polynomials in $K[X]$. Before now, all we knew about $K(a)$ was that it was some (possibly countibly infinite) intersection of sets.\end{remark}\end{lem}
+
+\begin{defn} Ideal generated by an element\\
+\\
+If $p \in K[X], p$ irr\\
+
+$(p)\footnote{Round brackets are used for a lot of things. Unfortunately, I will use brackets here as well. Bracket confusion is best solved using context and common sense. I often mistake $(min(a,K))$ for $min(a,K)$.} := \{pq \in K[X] \mid q \in K[X] \}$
+\begin{remark} If you want, you can show that $I_a = (min(a,K))$ \end{remark}
+\end{defn}
+
+\begin{lem}  Equivalence classes formed by quotient $(p)$\\
+\\
+If $p, a, b \in K[X], p$ irr, then \[a \sim b : = (a - b) \in (p)\] is equivalence relation \end{lem}
+
+\begin{defn} Quotient ring\footnote{The quotient symbol $/$ will represent two very different things. One is quotienting by an ideal and the other is representing field extensions. For example, \sfrac{$\mathbb{Z}$}{$p$$\mathbb{Z}$,} and \sfrac{$K[x]$}{$I_a$} represent the quotients of their respective rings. Whereas, \sfrac{$L$}{$K$} is the logical statement $\exists i : K \to L, i$ hom. }\\
+\\
+If $p, a \in K[X], p$ irr, $a \sim b : = (a - b) \in (p)$,\\
+
+then $a + (p) := \{b \in K[X] \mid a \sim b\}$,\\
+
+and $\sfrac{K}{(p)} := \{a + (p) \mid a \in K[X]\}$
+\end{defn}
+\begin{lem} If $p \in K[X], p$ irr,$p$ monic, then $\sfrac{K}{(p)}$ Field\end{lem}
+\begin{cor} $\sfrac{K}{(min(a,K))}$ Field\end{cor}
+\begin{defn} Isomorphism\\
+\\
+If $K$ Field, $L$ Field,\\
+
+$K \cong L := \exists i : K \to L, i$ hom $\land$ $i$ bijection \end{defn}
+\begin{lem} $K(a) \cong \sfrac{K}{(min(a,K))}$\end{lem}
+\begin{lem} $[K(a):K]=deg(min(a,K))$
+\begin{remark} So far we have that if there exists an algebraic number in an extension field, we can construct an extension field isomorphic to $K(a)$, i.e. we can construct $K(a)$. The following lemmas give us the tools to do the same but with polynomials over $K$. \end{remark}\end{lem}
+\begin{lem} Extendsion field generated from monic and irreducible $p$\\
+\\
+If $K$ Field, $p \in K[X]$, $p$ monic, $p$ irr, then $(0) \land (1) \land (2)$, where\\
+\\
+$(0) :=$ \[\exists i : K \to \sfrac{K}{(p)}\]
+$(1) :=$ \[\exists a \in \sfrac{K}{(p)}, ev_a \ibar p = 0\]
+$(2) :=$ \[\sfrac{(\sfrac{K}{(p)})}{K} \textit{  finite}\]
+\end{lem}
+
+\begin{lem} Extension field generated from any non-constant polynomial\\
+\\
+If $K$ Field, $p \in K[X]$, $p \neq 0$\\
+
+then, $\exists i : K \to L, \exists a_n \in L, \ibar p(x) = a_0 \displaystyle \prod_{n=1}^{deg(p)} (x -  a_n)$\end{lem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Splitting fields}
+\begin{defn} Splits\\
+\\
+If $p \in K[X]$, $i : K \to L$,\\
+
+$L$ splits $p := \exists \{a_n\}_{n=0}^{deg(p)} \subseteq L, \ibar p(x) = a_0 \displaystyle \prod_{n=1}^{deg(p)} (x -  a_n)$
+\begin{note} Using this definition, we do not specify $a_n$s; the list $\{a_n\}_{n=1}^{deg(p)}$ can have repeated elements corresponding to repeated roots. \end{note}
+\begin{remark} Now we have this definition, Lemma 4.14 simply says all polynomials can be split in some field.\end{remark}\end{defn}
+
+%\begin{lem} All polynomials can be split in some field\\\end{lem}
+
+\begin{lem} Embedding lemma\\
+\\
+If $i_0 : K \to L, i_1 : K \to M,$\\
+\\
+$a \in L, a$ algebraic over $K, \\
+\\
+\exists b \in M, ev_b \ibar_1 min(a, K) = 0$,\\
+
+then $\exists \phi : K(a) \to M, \phi i_0 = i_1 \land \phi (a) = b$\\
+\begin{note} Below, diagram (1) summarises the structure of this lemma, and diagram (2) fleshes out some of the details involved in its proof. \end{note}
+\begin{equation}\begin{tikzcd}
+K \ar[r, "i_0"] \ar[dr, swap, "i_1"]	& K(a) \ar[d, "\exists \phi"] \ar[r, "\subseteq"]& L\\
+						& M
+\end{tikzcd} \end{equation}
+\begin{equation}\begin{tikzcd}
+K \ar[r, "i_0"] \ar[dr, swap, "i_1"]&i_0 (K) \arrow[r,symbol=\subseteq]
+	& K(a) \ar[d, "\phi"] \ar[r, symbol=\subseteq]	& L\\
+					&i_1 (K) \ar[r, symbol=\subseteq]
+	& K(b) \ar[r, symbol=\subseteq] 		& M
+\end{tikzcd} \end{equation}\end{lem}
+
+\begin{lem} Number of maps equals number of roots\\
+\\
+If $a$ algebraic over $K, i_0 : K \to K(a),\\
+\\
+i_1 : K \to L, L$ splits $min(a,K)$,\\
+
+then $\{\phi : K(a) \to L \mid i i_0 = i_1\} \leftrightarrow \{b \in L \mid ev_b \ibar \ibar_0 mid(a, K) = 0\}$,
+\begin{equation}\begin{tikzcd}
+K \ar[r, "i_0"] \ar[dr, swap, "i_1"]	& K(a) \ar[d, "\phi"]\\
+						& L
+\end{tikzcd} \end{equation}\begin{note} The symbol $\leftrightarrow$ denotes existance of a bijection between sets. \end{note}\end{lem}
+
+\begin{lem} Splitting inheritance\\
+\\
+If $i_0 : K \to L, i_1 : L \to M, p \in K[X], M$ splits $p$,\\
+
+then $M$ splits $\ibar_0 p$ \end{lem}
+\begin{lem} Embedding theorem\\
+\\
+If $i_0 : K \to L, i_1 : K \to M,$\\
+\\
+$\{a_n\}_{n=0}^{n=N} \subseteq L, \forall n, a_n$ algebraic over $K, M$ splits $min(a_n, K)$,\\
+
+then $\exists \phi : K(\{a_n\}_{n=0}^{n=N}) \to M, \phi i_0 = i_1$
+\end{lem}
+\begin{defn} Splitting field\\
+\\
+If $p \in K[X], i : K \to L$,$\ibar p(x) = a_0 \displaystyle \prod_{n=1}^{deg(p)} (x -  a_n)$\\
+
+$L$ splitting field of $p := K(\{a_n\}_{n=0}^{n=deg(p)})$, where
+\end{defn}
+
+\begin{lem} If $p \in K[X]$, then $\exists L, L$ splitting field of $p$\end{lem}
+\begin{lem} Splitting field is minimal field\\
+\\
+If $p \in K[X], L$ splitting field of $p, M$ splits $p$,\\
+
+then $\sfrac{M}{L}$\end{lem}
+
+\begin{lem} Any two splitting fields are isomorphic\\
+\\
+If $p \in K[X], L$ splitting field of $p, M$ splitting field of $p$,\\
+
+then $L \cong M$
+
+\begin{note} For this proof, we must use a lemma from linear algebra, namely: 'If $V$ and $W$ are vector spaces over field $F$, and linear transformation $T : V \to K$ injective, then $T$ surjective.' \end{note}\end{lem}
+
+\section{Algebraic Extensions}
+
+\begin{defn} Algebraic extension\\
+\\
+If $\sfrac{L}{K}$,\\
+
+then $\sfrac{L}{K}$ algebraic $:= \forall a \in L, a$ algebraic over $K$\end{defn}
+\begin{lem} $K(a)$ finite $\iff a$ algebraic over $K \iff K(a)$ algebraic\end{lem}
+\begin{lem} Finite extensions are algebraic\\
+\\
+If $\sfrac{L}{K}$,\\
+
+then $\sfrac{L}{K}$ finite $\iff$ $\sfrac{L}{K}$ algebraic\end{lem}
+\begin{defn} Closed\\
+\\
+If $K$ field,\\
+
+$K$ algebraically closed $:= \forall p \in K[X], \exists a \in K, ev_a p = 0$ \end{defn}
+\begin{lem} Polynomials split completely if field is algebraically closed\\
+\\
+If $K$ algebraically closed, $p \in K[X]$,\\
+
+then $p$ splits in $K$\end{lem}
+\begin{defn} Algebraic closure\\
+\\
+If $\sfrac{L}{K}$\\
+
+then $L$ algebraic closure $:= \sfrac{L}{K}$ algebraic $\land \forall p \in K[X], p$ splits in $L$\\
+
+\begin{note} We denote an algebraic closure as $\overline{K}$ \end{note} \end{defn}
+
+\begin{lem} Existance of algebraic closure \end{lem}
+
+\section{Normal extensions}
+
+\begin{lem} Images of splitting fields are the same\\
+\\
+If $p \in K[X], L$ splitting field of $p$, and,
+\begin{equation} \begin{tikzcd}
+K \ar[r, "i_0"] \ar[rd, "i_2", swap] 	& L \ar[d, "i_1"] \\
+						& M 
+\end{tikzcd} \end{equation} 
+
+then $\forall f, g : L \to M,$ \[f i_0 = g i_0 = i_1 \Rightarrow f(L) = g(L)\]\end{lem}
+
+\begin{lem} Properties of roots are same in extension field\\
+\\
+If $i_0 : K \to L, i_1 : L \to M, i_2 : K \to M, i_1 i_0 = i_2$,\\
+\\
+$a \in L, p \in K[X]$,\\
+
+then $ev_a \ibar_0 p = 0 \iff ev_{i_1 (a)} \ibar_1 \ibar_0 p$ \end{lem}
+
+\begin{lem} Embeddings permute roots\\
+\\
+If $i_0 : K \to L, i_1 : L \to M, i_2 : K \to M, i_1 i_0 = i_2$\\
+\\
+$p \in K[X], p$ splits in $L, S = \{a \in L \mid ev_a \ibar_0 p = 0\}$,\\
+
+then $i_1(S) \leftrightarrow S$ \end{lem}
+
+\begin{defn} Equivalent definitions of normal extension\\
+\\
+If $i_0 : K \to L$ algebraic, $i_1 : K \to M$, algebraic\\
+
+$\sfrac{L}{K} \circled{0} := \forall f : L \to \overline{K}, f(L) \cong L$\\
+
+$\sfrac{L}{K} \circled{1} := \sfrac{L}{K}$ normal $:= \forall p \in K[X],$ \[(p\text{ irr }\land \exists a \in L, ev_a \ibar_0 p = 0) \Rightarrow L\text{ splits }p\]
+
+$\sfrac{L}{K} \circled{2} := \forall a \in L, L$ splits $min(a,K)$\\
+
+$\sfrac{L}{K} \circled{3} := \exists p \in K[X], L$ splitting field of $p$\\
+
+$\sfrac{L}{K} \circled{4} := \forall f, g : L \to M,$ \[f i_0 = g i_0 = i_1 \Rightarrow f(L) = g(L)\]
+\begin{remark} We will proceed in the following lemmas to show that each of these definitions are equivalent \end{remark}
+\end{defn}
+
+\begin{lem} $\sfrac{L}{K} \circled{1} \iff \sfrac{L}{K} \circled{2}$ \end{lem}
+
+\begin{lem} $\sfrac{L}{K} \circled{2} \iff  \sfrac{L}{K} \circled{3}$ 
+\begin{note} The diagram below is useful for $\Leftarrow$. We let $a \in L,$ let $M$ splitting field of $min(a,K)$, and let $b \in M, ev_a \ibar_1 min(a,K) = 0$.\end{note}%%%%%%%%%%%%%
+\begin{equation}\begin{tikzcd}
+K \ar[r, "i_0"]\ar[rd, "i_1", swap]	&i_0(K) \ar[r, symbol=\subseteq]	&K(a)\ar[r, symbol=\subseteq]\ar[d, symbol=\cong]
+					& L\ar[r, "i_3"]				&i_3(L) \ar[d, symbol=\subseteq] \\
+					&i_1(K)\ar[r, symbol=\subseteq]		&K(b) \ar[r]	
+					& L(b)	\ar[r, symbol=\subseteq]		& M
+\end{tikzcd}\end{equation}
+\end{lem}
+
+\begin{lem} $\sfrac{L}{K}\circled{3} \Rightarrow \sfrac{L}{K}\circled{4}$ \end{lem}
+
+\begin{lem} $\sfrac{L}{K}\circled{3} \Rightarrow \sfrac{L}{K}\circled{0}$ \end{lem}
+
+\begin{lem} $\sfrac{L}{K}\circled{0} \Rightarrow \sfrac{L}{K}\circled{1}$ \end{lem}
+
+\begin{defn} Normal Closure\\
+\\
+If $i: K \to L$ algebraic, \\
+
+$N(\sfrac{L}{K}) := \{N \mid \sfrac{N}{L}\land \sfrac{N}{K}$ normal\}
+
+\end{defn}
+\begin{lem} Normal Inheritance\\
+\\
+If $K \to L \to N$ algebraic, $\sfrac{N}{K}$ normal, then $\sfrac{N}{L}$ normal
+\end{lem}
+
+\begin{lem} Normal closure is minimal\\
+\\
+If $K \to L \to M$ algebraic, $\sfrac{M}{K}$ normal, then $\forall N \in N(\sfrac{L}{K}), \exists i: N \to M$ \end{lem}
+\begin{remark} Applying this lemma to any member of $N(\sfrac{L}{K})$, we see that all members of the set $N(\sfrac{L}{K})$ are isomorphic. Thus we abuse notation and write $N(\sfrac{L}{K})$ to mean any member of the set. \end{remark}
+
+\begin{lem} Image of L is in the Normal Closure\\
+\\
+If \begin{tikzcd} K \ar[r, "i_0"] &L \ar[r, "i_1"] \ar[dr, "f", swap] &N(\sfrac{L}{K}) \ar[d, "i_2"] \\ &&M \end{tikzcd}, $i_2 i_1 i_0 = f i_0$,\\
+
+then $f(L) \subseteq i_2(N)$ \end{lem}
+\begin{lem} The Loopy Lemma\\
+\\
+If $i_0 : K \to L$ normal, $i_1 : L \to M$,\\
+
+then $\forall f: L \to M, f i_0 = i_1 i_0, \exists \phi : M \to M, \phi i_1 = f$ \end{lem}
+\begin{equation}\begin{tikzcd}
+K \ar[r, "i_0"] &L\rar[start anchor=north east, end anchor=north west]{\forall f} \ar[r, "i_1", swap] & M \ar[loop right]{r}{\exists \phi}
+\end{tikzcd}\end{equation}
+
+\begin{lem} $\sfrac{L}{K}\circled{4} \Rightarrow \sfrac{L}{K}\circled{2}$ \end{lem}
+
+\section{Seperable Extensions}
+
+\begin{defn} Seperable element\\
+\\
+If $i : K \to L$ finite, $a \in L, L$ splits $min(a,K)$\\
+
+then $a$ seperable $:= \ibar min(a,K)$ has distinct roots\end{defn}
+
+\begin{defn} Seperable extension\\
+\\
+If $i : K \to L$ finite,\\
+
+then $\sfrac{L}{K}$ seperable $:= \forall a \in L, a$ seperable \end{defn}
+
+\begin{defn} Seperable degree\\
+\\
+If $i_0 : K \to L$ finite, $i_1 : K \to N(\sfrac{L}{K})$\\
+
+then $Sep[L : K] := |\{ f : L \to N(\sfrac{L}{K}) \mid f i_0 = i_1\}|$ \end{defn}
+
+\begin{lem} Seperable degree is number of maps into any normal extension\\
+\\
+If \begin{tikzcd}
+K \ar[r, "i_0"] \ar[dr, "i_1 i_0", swap]&L \ar[d, "i_1"]\\ &M
+\end{tikzcd} all finite, \sfrac{M}{K} normal,\\
+
+then $Sep[L:K] = |\{ f : L \to M \mid f i_0 = i_1 i_0\}|$
+\end{lem}
+
+\begin{lem} Tower law of seperable degree\\
+\\
+If \begin{tikzcd} K \ar[r, "i_0"] &L \ar[r, "i_1"] &M \end{tikzcd} all finite,\\
+
+then $Sep[M : K] = Sep[M : L] Sep[L : K]$
+\end{lem}
+
+\begin{lem} If $K \to L$ finite, $a \in L$,\\
+
+then $a$ seperable $\iff [K(a) : K] = Sep[K(a) :K]$\end{lem}
+
+\begin{lem} If $K \to L$ finite, $a \in L$,\\
+
+then $\sfrac{K(a)}{K}$ seperable $\iff [K(a) : K] = Sep[K(a) :K]$\end{lem}
+
+\begin{lem}  If $K \to L$ finite,\\
+
+then $\sfrac{L}{K}$ seperable $\iff [L: K] = Sep[L:K]$ \end{lem}
+
+\begin{lem} Seperable inheritance\\
+\\
+If \begin{tikzcd} K \ar[r, "i_0"] &L \ar[r, "i_1"] &M \end{tikzcd} all finite, $\sfrac{M}{K}$ seperable,\\
+\\
+then $\sfrac{L}{K} seperable \land \sfrac{M}{L}$ seperable \end{lem}
+\begin{remark} This is somewhat nicer than with normal inheritance, as $\sfrac{M}{K}$ normal only implies $\sfrac{M}{L}$ normal.\end{remark} 
+\section{Primative element theorem}
+\begin{defn} $C_n :=$ cyclic group, $|C_n|= n$ \end{defn}
+\begin{lem} $\langle a \rangle = C_n$, then $o(a^k) = \frac{n}{gcd(n,k)}$ \end{lem}
+\begin{cor} $| \{a \in C_n \mid \langle a \rangle = C_n \}| = \phi(n)$, \\
+
+where $\phi(-)$ is Euler's totient function. \end{cor}
+\begin{lem} $\forall d \in \{1, 2, ... n - 1\}, d \mid n, \exists ! H \le C_n, |H| = d$ \end{lem}
+
+\begin{cor} $n = \displaystyle \sum_{d \mid n}{\phi(d)}$ \end{cor}
+
+\begin{lem} If $G$ finite group, $\forall d \in \mathbb{N}, |\{x \in G \mid x^d = e\}| \le d $,\\
+
+then $G$ cyclic
+\end{lem}
+\begin{lem} Primative element theorem for finite fields\\
+\\
+If $K$ finite field, $K \to L$ finite, then $\exists a \in L, K(a) = L$ \end{lem}
+\begin{lem} Primative element theorem for infinite fields\\
+\\
+If $K$ infinite field, $K \to L$ finite and seperable, then $\exists a \in L, K(a) = L$ \end{lem}
+
+\section{Galois correspondence}
+\begin{defn} Galois extension\\
+\\
+If $K \to L$,\\
+
+then $\sfrac{L}{K}$ Galois := $\sfrac{L}{K}$ normal $\land \sfrac{L}{K}$ seperable \end{defn}
+\begin{defn} Galois group\\
+\\
+If $i: K \to L$ Galois,\\
+
+then $Gal(\sfrac{L}{K}):=\{\sigma : L \to L \mid \sigma i = i\}$ \end{defn}
+\begin{lem} $Gal(\sfrac{L}{K})$ group \end{lem}
+\begin{lem} If $i: K \to L$ Galois and finite, then $[L:K] = |Gal(\sfrac{L}{K})|$ \end{lem}
+\begin{lem} If $L$ field, then $Aut(L):= \{i : L \to L\}$ group \end{lem}
+\begin{defn}$L^G$\\
+\\
+If $L$ field, $G \le Aut(L), G$ finite,\\
+
+then $L^G := \{ a \in L \mid \forall g \in G, g(a) = a\}$ \end{defn}
+
+\begin{lem} If $L$ field, $G \le Aut(L), G$ finite, then $(0) \land (1) \land (2)$, where\\
+\\
+$(0):= L^G \to L$ Galois,\\
+\\
+$(1):= [L : L^G] = |G|$,\\
+\\
+$(2):= |Gal(\sfrac{L}{L^G})|=|G|$
+\end{lem}
+
+\begin{lem} Galois Correspondence\\
+\\
+If $K \to L$ finite and Galois, then \\
+\begin{equation}\begin{tikzcd}
+\{E \mid K \to E \to L\} \ar[r, "Gal(\sfrac{L}{-})", rightharpoonup, start anchor=north east, end anchor=north west] 
+\ar[r, "L^-", leftharpoondown, start anchor=south east, end anchor=south west, swap]
+&  \{H \mid H \le Gal(\sfrac{L}{K})\} \end{tikzcd}\end{equation} 
+and (0) to (8) hold, where\\
+\\
+$(0):= E \to L$ finite and Galois$\\
+\\
+(1):=  L^{Gal(\sfrac{L}{E})}=E\\
+\\
+(2):=  Gal(\sfrac{L}{L^H}) = H\\
+\\
+(3):= K \to E \to F \to L \Rightarrow \langle e \rangle \le Gal(\sfrac{L}{L^F}) \le Gal(\sfrac{L}{L^E})\le Gal(\sfrac{L}{K})\\
+\\
+(4):= H \le G \le Gal(\sfrac{L}{K}) \Rightarrow K \to L^{G} \to L^{H} \to L\\
+\\
+(5):= [Gal(\sfrac{L}{K}) : Gal(\sfrac{L}{E})] = [E : K]\\
+\\
+(6):= \forall \sigma \in Gal(\sfrac{L}{K}), Gal(\sfrac{L}{\sigma E}) = \sigma Gal(\sfrac{L}{E}) \sigma^{-1}\\
+\\
+(7):= K \to E$ normal $\iff Gal(\sfrac{L}{E}) \trianglelefteq Gal(\sfrac{L}{K})\\
+\\
+(8):= K \to E$ normal $\Rightarrow Gal(\sfrac{E}{K}) \cong \sfrac{Gal(\sfrac{L}{K})}{Gal(\sfrac{L}{E})}$
+\end{lem}
+\section{The Fundimental Theorem of Algebra}
+
+Assuming some knowledge of analysis, some basic knowledge about the complex numbers, alongside one of Sylow's Theorems, we can have a bash at the Fundimental Theorem of Algebra.
+
+\begin{defn} Charictaristic\\
+\\
+If $K$ is a field, $ \exists n > 0, \displaystyle\sum_{1}^{n} 1 = 0$\\
+
+then char $K := min\{n > 0 | \sum_{1}^{n} 1 = 0\}$\\
+\\
+If $K$ is a field, $\forall n> 0, \displaystyle\sum_{1}^{n} 1 \ne 0$\\
+
+then char $K := 0$\\ \end{defn}
+
+\begin{lem} If $f \in K[X],$ then $f$ seperable $\iff gdc(f, f') = 1$ \end{lem}
+
+\begin{lem} If char $K = 0, f \in K[x]$ irreducible,then $f$ seperable. \end{lem}
+
+\begin{lem} If $\mathbb{R} \to L, [L : \mathbb{R}]$ odd, then $[L : \mathbb{R}] = 1$ \end{lem}
+
+\begin{note} This requires a bit of analysis (the Intermediate Value Theorem is useful). \end{note}
+
+\begin{lem} If $\mathbb{C} \to L$, then $[L :\mathbb{C}] \ne 2$ \end{lem}
+
+\begin{lem} Sylow's Theorem\\
+\\
+If $G$ group, $\exists n, p, k \in \mathbb{Z}_{\ge 1}, p$ prime $\land$ $gcd(k, p) = 1 \land|G| = k p^n$,\\
+
+then $\forall i \in \{1, 2, ..., n\}, \exists H_i \le G, |H_i| = p^i \land (i < n \Rightarrow H_i \le H_{i+1})$\\ \end{lem}
+
+\begin{lem} Fundimental Theorem of Algebra\\
+\\
+If $f \in \mathbb{C}[X]$, then $\exists a \in \mathbb{C}, f(a) = 0$ \end{lem}
+
+\end{document}

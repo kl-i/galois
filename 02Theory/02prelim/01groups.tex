@@ -338,7 +338,7 @@ given a group $G$, we also have \emph{morphisms of $G$-sets}.
     i.e. $\im f$ forms a $G$-set from the $G$-action on $Y$.  
 }
 
-\begin{dfn} Sub-$G$-Sets.
+\begin{dfn} $G$-Subsets.
     Let $X$ be a $G$-set, $Y \subseteq X$. 
     Then the following are equivalent: 
     \begin{enumerate}
@@ -349,7 +349,7 @@ given a group $G$, we also have \emph{morphisms of $G$-sets}.
         that is injective and $fZ = Y$. 
     \end{enumerate}
     If either of the above is true, 
-    we say $Y$ is a \textbf{sub-$G$-set} of $X$,
+    we say $Y$ is a \textbf{$G$-subset} of $X$,
     denoted $Y \leq_{G\mhyph\Set} X$. 
     If it is clear that these are $G$-sets, 
     we omit the subcript $G\mhyph\Set$.
@@ -362,22 +362,22 @@ given a group $G$, we also have \emph{morphisms of $G$-sets}.
     Let $(X, \rho)$ be a $G$-set, $x \in X$. 
     Then the \emph{orbit of $x$ under $\rho$} is defined as
     \[
-        Orb_\rho(x) := \{g_\rho(x) \in X \mid g \in G\}
+        \Orb_\rho(x) := \{g_\rho(x) \in X \mid g \in G\}
     \]
     The set of orbits is denoted $X / G$.
-    If the action is unambiguous, we use $Orb(x)$ instead of $Orb_\rho(x)$. 
+    If the action is unambiguous, we use $\Orb(x)$ instead of $\Orb_\rho(x)$. 
 
 \end{dfn}
 
 %   - Ex - Orbits are equivalence classes
 \ex{[Important]
-    For $x, y \in X$, let $x \sim y := y \in Orb(x)$. 
+    For $x, y \in X$, let $x \sim y := y \in \Orb(x)$. 
     Show that $\sim$ is an equivalence relation on $X$ 
     with orbits as equivalence classes, 
     hence deducing $X/G$ is a partition $X$. 
 }
 
-\ex{Let $x \in X$. Show that $Orb(x) \leq_{G\mhyph\Set} X$.}
+\ex{Let $x \in X$. Show that $\Orb(x) \leq_{G\mhyph\Set} X$.}
 
 A subgroup $H$ of a group $G$ acts on $G$ as a set: 
 
@@ -395,7 +395,7 @@ A subgroup $H$ of a group $G$ acts on $G$ as a set:
     }
     For $g \in G$, 
     the \emph{left coset of $H$ represented by $g$} is defined as
-    \[gH := Orb(g)\]
+    \[gH := \Orb(g)\]
     i.e. the orbit of $g$ under this $H$-action. 
     This is all the elements in $G$ reachable by 
     right-multiplication with $H$, hence the notation $gH$. 
@@ -413,11 +413,11 @@ The following concept is intimately related to that of orbits.
     Let $\rho$ be a $G$-action on $X$, $x \in X$. 
     Then the \emph{stabiliser subgroup of $x$} is defined as
     \[
-        Stab_\rho(x) := \{g \in G \mid g_\rho(x) = x\} \leq_\Grp G
+        \Stab_\rho(x) := \{g \in G \mid g_\rho(x) = x\} \leq_\Grp G
     \]
     Unfold the definition of ``$\rho$ in $\Grp$" and verify that 
-    $Stab_\rho(x)$ is indeed a subgroup. 
-    We write $Stab(x)$ instead, if the action is clear. 
+    $\Stab_\rho(x)$ is indeed a subgroup. 
+    We write $\Stab(x)$ instead, if the action is clear. 
 
 \end{dfn}
 Now, the main theorem concerning group actions. 
@@ -425,21 +425,22 @@ Now, the main theorem concerning group actions.
 \begin{thm} Orbit-Stabiliser. 
     
     Let $(X,\rho)$ be a $G$-set, $x \in X$.
-    Then $G / Stab(x) \iso_{G-Set} Orb(x)$ via the isomorphism of $G$-sets, 
+    Then $G / \Stab(x) \iso_{G-Set} \Orb(x)$ via the isomorphism of $G$-sets, 
     \[
-        G / Stab(x) \to Orb(x), gStab(x) \mapsto g_\rho(x)
+        G / \Stab(x) \to \Orb(x), g\Stab(x) \mapsto g_\rho(x)
     \]
 \end{thm}
 \begin{proof}
     Well-definedness and bijectivity are easily verified. 
-    To show this is a morphism of $G$-sets, let $g \in G$, $g_0Stab(x) \in G / Stab(x)$. 
-    Then by the definition of the $G$-actions on $G/Stab(x)$ and $Orb(x)$, 
+    To show this is a morphism of $G$-sets, 
+    let $g \in G$, $g_0\Stab(x) \in G / \Stab(x)$. 
+    Then by the definition of the $G$-actions on $G/\Stab(x)$ and $\Orb(x)$, 
     we have 
     \begin{figure}[ht]
         \centering
         \begin{tikzcd}
-        g_0Stab(x) \arrow[r,"g",symbol=\longmapsto] \arrow[d,symbol=\longmapsto]
-        & (gg_0)Stab(x) \arrow[d,symbol=\longmapsto]\\
+        g_0\Stab(x) \arrow[r,"g",symbol=\longmapsto] \arrow[d,symbol=\longmapsto]
+        & (gg_0)\Stab(x) \arrow[d,symbol=\longmapsto]\\
         g_0(x) \arrow[r,"g",symbol=\longmapsto] 
         & g(g_0(x)) = (gg_0)(x)\\
         \end{tikzcd}
@@ -460,8 +461,8 @@ From this we can immediately deduce the classic theorem due to Lagrange.
     The \emph{index of $H$ in $G$} is defined as $[G : H] := |G / H|$. 
 \end{cor}
 \begin{proof}
-    For $g \in G$, $Stab(g) = \{h \in H \mid gh^{-1} = g\} = \{e\}$.
-    Then by the orbit-stabiliser theorem, $|gH| = |H/Stab(g)| = |H/{e}| = |H|$.
+    For $g \in G$, $\Stab(g) = \{h \in H \mid gh^{-1} = g\} = \{e\}$.
+    Then by the orbit-stabiliser theorem, $|gH| = |H/\Stab(g)| = |H/{e}| = |H|$.
     Hence by $G / H$ partitioning $G$, 
     \[
         |G| = \sum_{gH \in G/H} |gH| = \sum_{gH \in G/H} |H| = |G/H| |H|
