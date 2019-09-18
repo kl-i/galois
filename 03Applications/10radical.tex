@@ -5,11 +5,400 @@
 In this chapter, we prove there exists quintics
 with roots that are not expressible using 
 addition, subtraction, multiplication, division and radicals. 
+We first classify \emph{simple radical extensions}.
+For that, we need a theorem by Dedekind. 
 
-% Def - Cyclic Extensions.
+\begin{thm} Dedekind's Linear Independence of Characters. 
+    
+    Let $G$ be a group and $L$ a field.
+    Consider the set of all functions from $G$ to $L$, denoted $\mor{\Set}{G}{L}$.
+    Under pointwise addition and multiplication by elements in $L$,
+    this forms an $L$-vector space. 
+    Let $\sigma_1,\dots,\sigma_n$ be distinct group morphisms from $G$ to $L^\times$.
+    Then $\{\sigma_1,\dots,\sigma_n\}$ is a linearly independent subset 
+    of $\mor{\Set}{G}{L}$.
+    
+    In particular, 
+    if $\sigma_1,\dots,\sigma_n$ were instead ring morphisms from a field $K$,
+    they will be linearly independent. 
+\end{thm}
+\begin{proof}
+    
+    We proceed by induction on $n$. 
+    Let $\la_1,\dots,\la_n$ be scalars in $L$ and for all $x \in G$, 
+    \[ \la_1 \sigma_1(x) + \cdots + \la_n \sigma_n(x) = 0 \]
+    Then for any $y \in G$, we have \begin{align*}
+        & \la_1 \sigma_1(xy) + \cdots + \la_n \sigma_n(xy) = 0 \\
+        \imp 
+        & \la_1\sigma_1(x)\sigma_1(y) + \cdots + \la_n\sigma_n(x)\sigma_n(y) = 0 \\
+        \imp 
+        & \la_1(\sigma_1(y) - \sigma_n(y))\sigma_1(x) + \cdots
+        + \la_{n-1}(\sigma_{n-1}(y) - \sigma_n(y))\sigma_{n-1}(x) = 0 
+    \end{align*}
+    In particular, for all $1 \leq i < n$, we have by induction
+    $\la_i = 0$ or $\sigma_i(y) = \sigma_n(y)$.
+    Since $y$ was arbitrary, this says for all $1 \leq i < n$, 
+    $\la_i = 0$ or $\sigma_i = \sigma_n$. 
+    It follows from the morphisms being distinct and $\sigma_n(x) \in L^\times$ that
+    for all $i$, $\la_i = 0$. 
+    This completes the induction. 
+    
+    To apply this for ring morphisms $\sigma_i : K \to L$, 
+    simply choose $G = K^\times$. 
+\end{proof}
+\begin{dfn} Simple Radical Extensions. 
+    
+    Let $\iota_L : K \to L$ be an extension.
+    Then $(L,\iota_L)$ is called a \textbf{simple radical extension} when
+    there exists an element $a \in L$ and $0 < n \in \N$ such that 
+    $L = K(a)$ and $a^n$ is in $K$,
+    i.e. every element in $L$ is the sum of powers of 
+    the $n$-th radical of some element in $K$. 
+    
+\end{dfn}
 % Thm - Classification of Cyclic Extensions.
-
+\begin{thm} Classification of Simple Radical Extensions.
+    
+    Let $\iota_L : K \to L$ be an extension. 
+    If $K$ splits $X^n - 1$ where $n$ is non-zero inside $K$,
+    then the following are true: \begin{enumerate}
+        \item If $(L,\iota_L)$ is simple radical
+        with $L = K(a)$ and $a^n \in K$,
+        then $\aut{K}{L}$ is cyclic.
+        Furthermore, if $a^n$ is the \emph{minimal} power of $a$ inside $K$,
+        then $\aut{K}{L} \iso C_n$.
+        \item Conversely, if $(L,\iota_L)$ is a Galois extension 
+        with $\aut{K}{L} \iso C_n$ the cyclic group of cardinality $n$,
+        then $(L,\iota_L)$ is simple radical with $L = K(a)$ and $a^n \in K$. 
+    \end{enumerate}
+    
+\end{thm}
+\begin{proof}
+    
+    Let $\zeta$ be a primitive $n$-th root of unity in $K$.
+    
+    $(1 \imp 2)$
+    
+    $a, a\zeta,\dots,a\zeta^{n-1}$ are all the roots of $X^n - a^n$,
+    a separable polynomial over $K$,
+    which $L$ is clearly the splitting field of. 
+    Hence $\iota_L : K \to L$ is Galois.
+    
+    Since $a$ is a root of the polynomial $X^n - a^n$ over $K$,
+    for all $\sigma \in \aut{K}{L}$, $\sigma(a)$ is a root as well and
+    hence is equal to $a \zeta^k$ for some $0 \leq k < n$. 
+    Let $G_n$ denote the group of primitive $n$-th roots of unity in $L$.
+    Then we have the following map: \[
+        \aut{K}{L} \to G_n , \sigma \mapsto \frac{\sigma(a)}{a}
+    \]
+    Note that we have for all $\sigma \in \aut{K}{L}$ and $0 \leq k < n$, \[
+        \frac{\sigma(a \zeta^k)}{a\zeta^k} 
+        = \frac{\sigma(a)\zeta^k}{a\zeta^k}
+        = \frac{\sigma(a)}{a}
+    \]  
+    which gives us for all $\rho, \sigma \in \aut{K}{L}$, \[
+        \frac{(\rho \circ \sigma)(a)}{a} 
+        = \frac{\rho(\sigma(a))}{\sigma(a)} \frac{\sigma(a)}{a}
+        = \frac{\rho(a)}{a} \frac{\sigma(a)}{a}
+    \]
+    Hence the map is a morphism of groups. 
+    The kernel is clearly trivial, so this is an injective group morphism.
+    Thus, $\aut{K}{L}$ is isomorphic to a subgroup of $G_n$,
+    which must be cyclic since $G_n$ is cyclic. 
+    
+    Now let $a^n$ is the minimal power of $a$ in $K$
+    and suppose the above group morphism is not surjective. 
+    The the image of the map is a subgroup of cardinality $d$ in $G_n$
+    for $d$ dividing $n$ and $d < n$. 
+    Then for all $\sigma$ in the Galois group of $L$,
+    $(\sigma(a)/a)^d = 1$, which gives $\sigma(a^d) = a^d$,
+    i.e. by the Galois correspondence, $a^d$ is in $K$.
+    This contradicts $a^n$ being the minimal power of $a$ inside $K$.
+    So the map is surjective and $\aut{K}{L} \iso G_n \iso C_n$. 
+    
+    $(2 \imp 1)$
+    
+    Let $\sigma$ be a generator of the Galois group of $L$. 
+    We will show that there exists a non-zero $a \in L$ such that 
+    $\sigma(a) = a / \zeta$. 
+    If such an element exists, 
+    then $\sigma(a^n) = \sigma(a)^n = a^n/\zeta^n = a^n$,
+    i.e. $a^n$ is fixed by the Galois group $\aut{K}{L}$.
+    So by the Galois correspondence, $a^n$ is inside $K$.
+    Furthermore, none of the elements of the Galois group (save the identity)
+    fixes such an $a$. 
+    So again by the Galois correspondence, $L = K(a)$,
+    i.e. $a$ is what we want. 
+    
+    Note that $id + \zeta\sigma + \cdots + \zeta^{n-1}\sigma^{n-1}$
+    is a linear combination of distinct ring morphisms 
+    with non-zero scalars from $L$.
+    So by Dedekind's linear independence of characters, 
+    this is not the zero function from $L$ to $L$.
+    In particular, there exists a $\be \in L$ such that 
+    $a = \be + \zeta\sigma(\be) + \cdots + \zeta^{n-1}\sigma^{n-1}(\be) \neq 0$.
+    Then \[
+        \sigma(a) = \sigma(\be) + \zeta\sigma^2(\be) + \cdots 
+        + \zeta^{n-2}\sigma^{n-1}(\be) + \zeta^{n-1} \sigma^n(\be)
+        = 
+        \frac{\be + \zeta\sigma(\be) + \cdots + \zeta^{n-1}\sigma^{n-1}(\be)}{\zeta}
+        = \frac{a}{\zeta}
+    \]
+    as desired.
+    
+\end{proof}
+\begin{ex} Examples of Simple Radical Extensions.
+    
+    Show that the following are simple radical extensions.
+    Do they all have cyclic Galois groups? 
+    \begin{itemize}
+        \item $\Q \to \Q(\sqrt{2})$
+        \item $\Q(i) \to \Q(i)(\sqrt[4]{3})$
+        \item $\F_3 \to \F_9$ 
+        \item $\Q \to \Q(\sqrt[4]{3})$
+    \end{itemize}
+\end{ex}
+\begin{rmk}
+    
+    It is very important to note that
+    the proof of classification of simple radical extensions
+    hinders on the base field $K$ containing a primitive $n$-th root of unity.
+    The result may no longer hold if the condition is not fulfilled,
+    as the exercise above demonstrates. 
+    
+\end{rmk}
+We now come to \emph{radical extensions}.
 %    -  Def - Radical Ext, Solvable by Radicals
+\begin{dfn} Radical Extensions and Solvability of a Polynomial by Radicals.
+    
+    Let $\iota_L : K \to L$ be an extension.
+    Then the extension is called \textbf{radical} when
+    there exists subfields $L_0,\dots,L_n$ such that 
+    \begin{enumerate}
+        \item $\iota_L K = L_0$ and $L_n = L$.
+        \item For all $0 \leq i < n$, 
+        $L_{i+1}$ is a simple radical extension of $L_i$.
+    \end{enumerate}
+    This says elements of $L$ can be expressed 
+    using $+, -, \times, \div, \sqrt[m]{}$ on elements in $K$. 
+
+    Thus, for a polynomial $f$ over $K$,
+    we say $f$ is \textbf{solvable by radicals} when
+    its splitting field is contained in a radical $K$-extension.
+    
+\end{dfn}
+We are almost ready for Galois' theorem connecting solvability of polynomials
+to solvability of Galois groups.
+We need the following lemma.
+\begin{lem} The Composite of Finitely Many Radical Subextensions is Radical.
+    
+    Let $\iota_L : K \to L$ be an extension.
+    Let $E_1,\dots,E_n$ be finitely many radical subextensions of $L$.
+    Then the composite $(E_1)\cdots(E_n)$ is a radical $K$-extension.
+    
+\end{lem}
+\begin{proof}
+    
+    By induction, it suffices to prove the case of two subextensions.
+    Let $E, F$ be radical subextensions of $L$.
+    Then there exists subfields $E_0,\dots,E_n$ of $E$ and $F_0,\dots,F_m$ of $F$
+    such that $\iota_L K = E_0 = F_0$, $E_n = E$, $F_m = F$ and
+    for all $0\leq i < n, 0\leq j < m$, $E_{i+1} = E_i(a_i)$ and $F_{j+1} = F_j(b_j)$
+    with $a_i^{n_i} \in E_i$ and $b_j^{m_j} \in F_j$ for positive powers $n_i, m_j$.
+    
+    Consider the following subfields : \[
+        E_0 \subseteq E_1 \subseteq \cdots \subseteq E_n = (E_n)(F_0) 
+        \subseteq (E_n)(F_1) \subseteq \cdots \subseteq (E_n)(F_m) = (E)(F)
+    \]
+    It follows that $(E_n)(F_{j+1}) = (E_n)(F_j)(b_j)$
+    so $(E)(F)$ is a radical extension. 
+    
+\end{proof}
+
+\begin{thm} Galois' Solvability.
+    
+    Let $f$ be a polynomial over $K$ where $K$ is a field of characteristic zero.
+    Then the following are equivalent: \begin{enumerate}
+        \item $f$ is solvable by radicals.
+        \item The Galois group of $f$ is solvable.
+    \end{enumerate}
+    
+\end{thm}
+\begin{proof}
+    
+    % ($1 \imp 2$)
+    
+    % By definition of being solvable, 
+    % the splitting field of $f$ lies in a radical extension $\iota_L : K \to L$.
+    % The idea of the proof is to use the classification of simple radical extensions
+    % to turn the radial extension $K \to L$ into a normal series with cyclic factors.
+    % However, there are a few complications.
+    % The classfication of simple radical extensions 
+    % requires the base field $K$ to have some primitive roots of unity.
+    % Also, as of now, $K \to L$ may not even be Galois.
+    
+    % The first step is to fix $K \to L$ not being Galois.
+    % For this, take the normal closure $(N,\iota_N)$ of $(L,\iota_L)$.
+    % Then $\iota_N \circ \iota_L : K \to N$ is Galois.
+    % Furthermore, for any $K$-extension automorphism $\sigma$ of $N$,
+    % $L$ radical implies $\sigma(\iota_N L)$ radical.
+    % Thus by the previous lemma, since $N$ is the composite of $\sigma(\iota_N L)$,
+    % $N$ is a radical extension of $K$. 
+    
+    % The next step is to fix the lack of roots of unity in $K$. 
+    % The goal is to replace $K$ and $N$ with $K^*$ and $N^*$
+    % where $K^* \to N^*$ is radical and 
+    % $K^*$ has the required roots of unity to allow 
+    % the classification of simple radical extensions to work. 
+    
+    % To start with, $K \to N$ is radical, so we have subfields $N_0,\dots,N_n$ of $N$
+    % such that $N_0 = \iota_N(\iota_L K)$, $N_n = N$ and for $0 \leq i < n$,
+    % $N_{i+1} = N_i(a_i)$ where $a_i^{n_i} \in N_i$ for some positive $n_i$.
+    % Let $\iota_{N^*} : N \to N^*$ be the splitting field of $X^M - 1 \in N[X]$
+    % where $M = \prod_{i<n} n_i$.
+    % Then $(N^*,\iota_{N^*}\circ\iota_N\circ\iota_L)$ 
+    % is generated by $\al_0,\dots,\al_{n-1},\zeta$ 
+    % where $\al_i$ are the image of $a_i$ inside $N^*$
+    % and $\zeta$ is a primitive $M$-th root of unity in $\N^*$.
+    % It follows that $N^*$ is a Galois $K$-extension.
+    % Consider the following chain of subextensions: \[
+    %     K \to K^* = N^*_0 \to N^*_0(\al_0) = N^*_1 \to \cdots 
+    %     \to N^*_{n-1}(\al_{n-1}) = N^*_n = N^*
+    % \]
+    % where $K^* = K(\zeta)$. 
+    % Then $K^* \to N^*$ Galois and radical with desired roots of unity in $K^*$. 
+    % Applying the classification of simple radical extensions yields
+    % a normal series of $\aut{K^*}{N^*}$ with cyclic factors.
+    
+    % Note that $K \to K^*$ is cyclotomic, 
+    % so by the classfication of cyclotomic extensions, 
+    % $\aut{K}{K^*}$ is abelian.
+    % In particular, by the Galois correspondence, 
+    % $\aut{K^*}{N^*}$ is a solvable normal subgroup of $\aut{K}{N^*}$
+    % with quotient isomorphic to the solvable group $\aut{K}{K^*}$. 
+    % Hence $\aut{K}{N^*}$ is solvable.
+    % Let $K_f$ be the splitting field of $f$ inside $N^*$.
+    % Then $\aut{K}{K_f}$ is a quotient of $\aut{K}{N^*}$,
+    % and hence must be solvable as well.
+    % This completes the forward implication. 
+    
+    ($1\imp 2$) 
+    
+    By definition of $f$ being solvable, 
+    the splitting field of $f$ lies in a radical extension $\iota_L : K \to L$.
+    We wish to use the Galois correspondence 
+    so first, we replace $L$ with its normal closure $(N,\iota_N)$.
+    Note that $L$ radical implies 
+    for all $K$-extension automorphisms $\sigma$ of $N$,
+    $\sigma(\iota_N L)$ is also radical. 
+    Since $N$ is the composite of finitely many such $\sigma(\iota_N L)$,
+    it is a radical $K$-extension as well.
+    We thus have a chain of subfield $N_0,\dots,N_n$ 
+    where $N_0 = \iota_N(\iota_L K)$, $N_n = N$ and
+    $N_{i+1} = N_i(a_i)$ where $a_i^{n_i} \in N_i$ for some positive $n_i$. 
+    We now break into two cases.
+    
+    Suppose $K$ splits $X^{M} - 1$ where $M = \prod_{i<n} n_i$. 
+    Then for all $i$, $K$ splits $X^{n_i} - 1$.
+    So by the classification of simple radical extensions,
+    the chain of simple radical subextensions of $N$ gives 
+    a normal series of $\aut{K}{N}$ with cyclic factor groups,
+    i.e. $\aut{K}{N}$ is solvable. 
+    Let $K_f$ be the splitting field of $f$ inside $N$.
+    Then by the Galois correspondence, 
+    $\aut{K}{K_f}$ is a quotient of $\aut{K}{N}$, a solvable group.
+    Thus the Galois group of $f$ is also solvable. 
+    
+    Now suppose $K$ does not split $X^M - 1$. 
+    The idea is the same as the previous case, 
+    except we replace $K$ and $N$ with $K^*$ and $N^*$
+    where $K^*$ does split $X^M - 1$ and 
+    $K^* \to N^*$ is still a Galois radical extension.
+    This is not difficult: 
+    take $\iota_{N^*} : N \to N^*$, the splitting field of $X^M - 1 \in N[X]$.
+    Then $N^*$ has $\al_0,\dots,\al_n,\zeta$ as $K$-extension generators
+    where $\al_i$ are images of $a_i$ in $N^*$ and 
+    $\zeta$ is a primitive $M$-th root of unity.
+    Let $K^* = K(\zeta)$.
+    It now follows that $K \to N^*$ is Galois and
+    $K^* \to N^*$ is Galois radical with the chain of simple radical extensions, \[
+        K^* = N^*_0 \to N^*_0(\al_0) = N^*_1 \to \cdots 
+        \to N^*_{n-1}(\al_{n-1}) = N^*_n = N^*
+    \]
+    with $\al_i^{n_i} \in N^*_i$. 
+    Since $K^*$ now splits $X^M - 1$, 
+    by the same argument as in the previous case
+    we have $\aut{K^*}{N^*}$ is solvable.
+    Note that $K \to K^*$ is cyclotomic, 
+    so by the classification of cyclotomic extensions,
+    $\aut{K}{K^*} \iso \aut{K}{N^*} / \aut{K^*}{N^*}$ is abelian,
+    in particular solvable.
+    Hence $\aut{K}{N^*}$ is solvable.
+    Let $K_f$ be the splitting field of $f$ inside $N^*$.
+    Then as before, the solvability of $\aut{K}{N^*}$ implies
+    the solvability of $\aut{K}{K_f}$. 
+    This completes the forward implication. 
+    
+    ($2 \imp 1$)
+    
+    Let $\iota_L : K \to L$ be the splitting field of $f$.
+    Let the Galois group of $f$, $\aut{K}{L}$, be solvable.
+    The following proof reverse engineers the forward proof.
+    We break into two cases.
+    
+    Suppose $K$ splits $X^{[L : K]} - 1$. 
+    By assumption, we have a normal series of $\aut{K}{L}$ with cyclic factors.\[
+        \aut{L}{L} = H_0 \normsub H_1 \normsub \cdots \normsub H_n = \aut{K}{L}
+    \]
+    This gives us a chain of extensions, \[
+        K \iso L^{H_n} \to L^{H_{n-1}} \to \cdots \to L^{H_0} = L
+    \]
+    where $\aut{L^{H_{i+1}}}{L^{H_i}} \iso H_{i+1} / H_i$ is cyclic.
+    It is easy to show that $|H_{i+1} / H_i|$ divides $|\aut{K}{L}| = [L : K]$,
+    so $K$ splits $X^{|\aut{L^{H_{i+1}}}{L^{H_i}}|} - 1$ for $0 \leq i < n$. 
+    Thus by the classification of simple radical extensions,
+    the chain of extensions above is a chain of simple radical extensions,
+    i.e. $\iota_L : K \to L$ is radical. 
+    
+    Now suppose $K$ does not split $X^{[L : K]} - 1$. 
+    As in the forward proof, 
+    the idea is to replace $K \to L$ with 
+    $K^* \to L^*$ where $K^*$ does split $X^{[L : K]} - 1$.
+    Let $\iota_L^* : L \to L^*$ be the splitting field of $X^{[L : K]} - 1$
+    and $K^* = K(\zeta)$ where 
+    $\zeta$ is a primitive $[L : K]$-th root of unity inside $L^*$.
+    Then $\iota_{L^*} \circ \iota_L : K \to L^*$ is Galois 
+    with $\aut{K}{L^*} / \aut{L}{L^*} \iso \aut{K}{L}$ solvable
+    and $\aut{L}{L^*}$ solvable since $\iota_{L^*} : L \to L^*$ is cyclotomic. 
+    Hence $\aut{K}{L^*}$ is solvable.
+    Then $\aut{K^*}{L^*}$ being a normal subgroup of $\aut{K}{L^*}$
+    implies $\aut{K^*}{L^*}$ is solvable as well.
+    Then as before, this gives us a chain of extensions, \[
+        K^* = (L^*)^{H_n} \to (L^*)^{H_{n-1}} \to \cdots \to (L^*)^{H_0} = L^*
+    \]
+    with $\aut{(L^*)^{H_{i+1}}}{(L^*)^{H_i}} \iso H_{i+1} / H_i$ cyclic.
+    So if we can show $K^*$ splits $X^{|H_{i+1}/H_i|} - 1$,
+    then we have $K^* \to L^*$ is radical.
+    Since $|H_{i+1} / H_i|$ divides $|\aut{K^*}{L^*}|$,
+    it suffices to show $|\aut{K^*}{L^*}|$ divides $|\aut{K}{L}| = [L : K]$,
+    for which it suffices to show $\aut{K^*}{L^*}$ injects into $\aut{K}{L}$.
+    One such injection is the following: \[
+        \aut{K^*}{L^*} \iso 
+        \frac{\aut{K^*}{L^*}}{(\aut{K^*}{L^*})\cap(\aut{L}{L^*})}
+        \iso \frac{(\aut{K^*}{L^*})(\aut{L}{L^*})}{\aut{L}{L^*}}
+        \leq \frac{\aut{K}{L^*}}{\aut{L}{L^*}} \iso \aut{K}{L}
+    \]
+    The first isomorphism follows from 
+    the Galois correspondence and
+    $L^*$ being the smallest $K$-extension containing $K^*$ and $L$.
+    The second isomorphism follows from the second isomorphism theorem.
+    So we have $K^* \to L^*$ is radical.
+    Since $K \to K^*$ is simple radical, 
+    we have $K \to L^*$ is radical.
+    Thus, the splitting field of $f$ lies in the radical extension $K \to L^*$.
+    This completes the proof. 
+    
+\end{proof}
 %    -  Def - Generated Subfield
 %    -  Def - Compositum
 %    -  Thm - Compositum of Simple Exts is Double
@@ -18,15 +407,10 @@ addition, subtraction, multiplication, division and radicals.
 %    -  Cor - 4 -> 2
 %    -  Lem - Embedding of Rad Ext is Rad
 %    -  Thm - Normal Closure of Rad Ext is Rad
-
 %    -  Thm - Strong Condition for Solvability of Rad Ext
-
 %    -  Thm - Weak Condition fo Solvability of Rad Ext
-
 %    -  Thm - Exists Rad Ext over Gal Ext -> Gal Ext Solvable
-
 %    -  Thm - S5 not solvable
-
 %    -  Thm - Quintics not generally solvable by radicals
 
 \end{document}

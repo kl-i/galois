@@ -2,15 +2,12 @@
 
 \begin{document}
 
-%    -  Cor - Fund Thm Alg
-\begin{thm}
-    For all polynomials $f \in \mathbb{C}[x]$, $\mathbb{C}$ splits $f$.
-\end{thm}
-
-To prove this, we need to notice two lemmas first:
-
+In this chapter, we give a proof of the fundamental theorem of algebra,
+which states that all polynomials over $\C$ split in $\C$. 
+To prove this, we need two lemmas first.
 %        -  No non-trivial odd deg ext of R
 \begin{lem}
+
     There does not exists non-trivial $\R$-extension $(L,\iota_L)$ 
     such that $[L : \R]$ is odd.
 \end{lem}
@@ -27,6 +24,7 @@ To prove this, we need to notice two lemmas first:
 \end{proof}
 %        -  No non-trivial even deg ext of C 
 \begin{lem}
+
     There does not exists a $\C$-extension $(L,\iota_L)$ 
     such that $[L : \mathbb{C}]=2$.
 \end{lem}
@@ -38,6 +36,51 @@ To prove this, we need to notice two lemmas first:
     So $\al$ is actually already inside $\iota_L \C$.
     Since $\al$ was arbitrary, $L$ is actually a trivial extension of $\C$,
     i.e. $[L : \C] = 1 \neq 2$, a contradiction. 
+\end{proof}
+\begin{thm} Fundamental Theorem of Algebra. 
+    
+    Let $f$ be a polynomial over $\C$.
+    Then $f$ splits in $\C$.
+    
+\end{thm}
+\begin{proof}
+    
+    Let $\iota_L : \C \to L$ be the splitting field of $f$. 
+    We seek to show that this is a trivial extension.
+    
+    First, we note that it suffices to show $[L : \C]$ is a power of 2,
+    for if it is, then Sylow's theorem in conjunction with the Galois correspondence
+    gives a chain of extensions \[
+        \C \iso L_0 \subseteq \cdots \subseteq L_n = L
+    \]
+    where $[L_{i+1} : L_i] = 2$.
+    Then all these extensions must be trivial, 
+    since there does not exists a $\C$-extension of degree 2. 
+    
+    Next, consider the extension $\iota_L : \R \to L$,
+    where we viewed $\R$ as a subset of $\C$. 
+    This may not be a normal extension, 
+    so take the normal closure $\iota_N \circ \iota_L : \R \to N$ instead.
+    The Galois correspondence then implies 
+    the $\aut{\C}{L}$ is isomorphic to $\aut{\C}{N} / \aut{L}{N}$,
+    where $\aut{\C}{N}$ is a subgroup of $\aut{\R}{N}$.
+    It then suffices to show $\aut{\R}{N}$ has cardinality power of 2. 
+    
+    Suppose $[N : \R] = |\aut{\R}{N}| = k 2^n$ where 
+    $2^n$ is the maximal power of 2 
+    dividing the cardinality of the Galois group of $N$ over $\R$.
+    This implies $k$ is odd.
+    Then by Sylow's theorem, we have a chain of subgroups, \[
+         \aut{N}{N} = H_0 \subseteq \cdots \subseteq H_n \subseteq \aut{\R}{N}
+    \]
+    where $H_i$ has cardinality $2^i$.
+    By the Galois correspondence, we then have a chain of subextensions, \[
+        \R \to N^{H_n} \subseteq \cdots \subseteq N^{H_0} = N
+    \]
+    In particular, $[N^{H_n} : \R] = [\aut{\R}{N} : H_n] = k$ which is odd.
+    Since all $\R$-extensions of odd degree are trivial, 
+    $k = 1$ and we are done. 
+    
 \end{proof}
 
 \end{document}

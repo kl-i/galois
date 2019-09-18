@@ -86,7 +86,7 @@ From this, we first deduce Cauchy's theorem.
     Suppose $p^n$ is the maximal power of $p$ dividing $|G|$. 
     Then there exists subgroups $H_0, \cdots, H_n$ such that
     $|H_i| = p^i$ and each $H_i$ is a normal subgroup of $H_{i+1}$. 
-    Subgroups like $H_n$ with maximal prime power are called 
+    Subgroups like $H_n$ with maximal $p$-power are called 
     \textbf{Sylow $p$-subgroups}.
     
 \end{thm}
@@ -128,8 +128,15 @@ From this, we first deduce Cauchy's theorem.
     i.e. fixed cosets are precisely cosets of $H_i$ inside its normaliser. 
     Of course, the number of such cosets is equal to $|N_G(H_i) / H_i|$.
     Thus $p$ divides the cardinality of $N_G(H_i) / H_i$ and we are done. 
-    
 \end{proof}
+
+\begin{rmk}
+    
+    The inductive proof above shows that 
+    any $p$-subgroup with non-maximal $p$-power cardinality
+    is in fact contained in a Sylow $p$-subgroup. 
+    
+\end{rmk}
 
 % Thm - Sylow 2
 \begin{thm} Sylow II.

@@ -59,7 +59,7 @@ To prove this, we need a generalised 1st isomorphism theorem for rings.
 
 Now the proof of $G_f \iso \aut{K}{K_f}$.  
 
-\begin{proof}
+\begin{proof} 
     
     We begin by noting 
     the set of all algebraic equations over $K$ satisfied by the roots of $f$ 
@@ -145,6 +145,11 @@ Now the proof of $G_f \iso \aut{K}{K_f}$.
     
 \end{dfn}
 
+\begin{ex}
+    Verify that the discriminant of a real quadratic $aX^2 + bX + c$
+    is indeed the usual $b^2 - 4ac$. 
+\end{ex}
+
 % Thm. Discriminant in Base Field, 3 eqv of Galois subgroup Alternating
 \begin{thm} 3 Equivalent Characterisations of Galois Group being Alternating.
     
@@ -174,30 +179,7 @@ Now the proof of $G_f \iso \aut{K}{K_f}$.
 % Over Q
 \section{Galois Groups of Integer Coefficient Polynomials over the Rationals}
 
-% Irreducibility and Transitivity
-% Thm. Orbits correspond to Irreducible Factors
-\begin{thm} Orbits of Roots correspond to Irreducible Factors.
-    
-    Let $f$ be a separable polynomial over a field $K$,
-    $K_f$ its splitting field, $S_f$ the set of its roots, and $G_f$ its Galois group.
-    Let $f = \prod_{i<n} f_i$ where $f_i$ are irreducible in $K[X]$.
-    Then each irreducible factor $f_i$ corresponds 
-    to an orbit $s_i$ of the roots of $f$ under the action from $G_f$,
-    with cardinality $\deg f_i$. 
-    
-    In particular, if $f$ is irreducible in $K[X]$, 
-    then $S_f$ has only one orbit,
-    i.e. the $G_f$-action on $S_f$ is transitive.
-    
-\end{thm}
-\begin{proof}
-    
-    Let $f_i$ be an irreducible factor of $f$. 
-    Let $s_i$ be the set of roots of $f_i$.
-    The result then follows from all of $s_i$ being mutual Galois conjugates. 
-\end{proof}
-
-We now give some ways of checking irreducibility over $\Q$.
+We first give some ways of checking irreducibility over $\Q$.
 
 % Lem. For Cubics, via no roots.
 \begin{ex} For up to Degree 3, via No Roots.
@@ -237,7 +219,7 @@ We now give some ways of checking irreducibility over $\Q$.
 
 \begin{rmk}
     
-    The rational roots lemma can be used to check 
+    The rational roots theorem can be used to check 
     whether cubics from with integer coefficients have roots,
     and hence whether they are irreducible. 
     
@@ -277,7 +259,7 @@ We now give some ways of checking irreducibility over $\Q$.
 \end{proof}
 From the Gauss lemma, we deduce the following quick way of checking irreducibility. 
 % Lem. For Q, via Eisenstein Criterion. 
-\begin{thm} Eisenstein's Criterion
+\begin{thm} Eisenstein's Criterion.
     
     Let $f = \sum_{i \leq k} f_i X^i$ be a polynomial over $\Q$ 
     with integer coefficients and $\deg f = k$.
@@ -323,16 +305,16 @@ We also have the following useful trick.
     
     From the Gauss lemma, proving $f$ irreducible inside $\Z[X]$ is sufficient. 
     We go via the contrapositive. 
-    Suppose $f = gh$ where $g$ and $h$ are non-zero, non-unit polynomials over $\Z$. 
-    Since $p$ does not divide the leading coefficient of $f$,
-    it does not divide the leading coefficients of $g$ and $h$ either. 
+    Suppose $f = gh$ where $g$ and $h$ are non-zero, non-unit polynomials over $\Z$
+    and let $p$ be a prime not dividing the leading coefficient of $f$.
+    Then $p$ does not divide the leading coefficients of $g$ and $h$ either. 
     In particular, $g, h$ are non-zero when seen as polynomials over $\F_p$. 
     Hence $f$ is not irreducible inside $\F_p[X]$.
     
 \end{proof}
 
-% Thm - Dedekind's on Existence of Perms with certain Cycle Shapes
-
+The following gives a condition for irreducible polynomials of prime order
+to have symmetric groups as their Galois groups.
 
 % Thm. Irr, Prime Degree w 2 Complex roots gives S_p Galois Group
 \begin{thm} Irreducible Prime Degree with 2 Complex Roots 
@@ -373,5 +355,63 @@ gives Symmetric Galois Group.
     It is easy to deduce from $p$ being prime that this permutation is a $p$-cycle. 
     
 \end{proof}
+
+Irreducibility of a polynomial is also related 
+to the orbits of roots under the action of the polynomial's Galois group.
+% Irreducibility and Transitivity
+% Thm. Orbits correspond to Irreducible Factors
+\begin{thm} Orbits of Roots correspond to Irreducible Factors.
+    
+    Let $f$ be a separable polynomial over a field $K$,
+    $K_f$ its splitting field, $S_f$ the set of its roots, and $G_f$ its Galois group.
+    Let $f = \prod_{i<n} f_i$ where $f_i$ are irreducible in $K[X]$.
+    Then each irreducible factor $f_i$ corresponds 
+    to an orbit $s_i$ with cardinality $\deg f_i$ of the roots of $f$
+    under the action from $G_f$. 
+    
+    In particular, if $f$ is irreducible in $K[X]$, 
+    then $S_f$ has only one orbit,
+    i.e. the $G_f$-action on $S_f$ is transitive.
+    
+\end{thm}
+\begin{proof}
+    
+    Let $f_i$ be an irreducible factor of $f$. 
+    Let $s_i$ be the set of roots of $f_i$.
+    The result then follows from all of $s_i$ being mutual Galois conjugates. 
+\end{proof}
+
+\begin{cor} Existence of Cycle Shapes in Galois Groups of Polynomials 
+over Finite Fields.
+    
+    Let $f$ be a separable polynomial over a finite field $\F_{p^n}$ and 
+    $L$ its splitting field. 
+    Note that the Galois group of $f$ is then cyclic with 
+    $\sigma = \mathrm{Frob}(p)^n$ as a generator.
+    Suppose $f$ factorises into irreducibles $f_1, \dots, f_m$. 
+    Then $\sigma$ has cycle shape of the degrees of $f_1,\dots,f_m$.
+\end{cor}
+\begin{proof}
+    Since $\aut{\F_{p^n}}{L}$ is generated by $\sigma$, 
+    the orbits of the $f$'s roots under the action from $\aut{\F_{p^n}}{L}$
+    are the same as the disjoint cycles of $\sigma$. 
+    The result then follows from the previous theorem. 
+\end{proof}
+\begin{rmk}
+    
+    There is a way to lift the above result up to Galois extensions of $\Q$.
+    However, since the proof requires quite a bit of machinery from 
+    algebraic number theory, we only quote the result. 
+    
+\end{rmk}
+\begin{thm} Dedekind. 
+    
+    Let $f$ be a polynomial over $\Q$ with integer coefficients. 
+    Suppose $p$ is a prime integer such that $\bar{f}$, the image of $f$ in $\F_p[X]$,
+    is separable and factorises into irreducibles $f_1, \dots, f_m$.
+    Then $f$ is separable and its Galois group contains 
+    a permutation with cycle shape of the degrees of $f_1,\dots,f_m$.
+    
+\end{thm}
 
 \end{document}

@@ -124,7 +124,7 @@
 \begin{thm} 3 Equivalent Conditions for Cyclotomic Galois Group to be $\Z/(n)^\times$.
     
     Let $K_{X^n - 1}$ be the splitting field of $X^n - 1 \in K[X]$
-    where $n$ is a positive integers non-zero inside $K$. 
+    where $n$ is a positive integer non-zero inside $K$. 
     Then the following are equivalent: \begin{enumerate}
         \item The $n$-th cyclotomic polynomial $\Phi_n$ is irreducible in $K[X]$.
         \item $[K_{X^n - 1} : K] = \phi(n)$
@@ -235,10 +235,20 @@ For this, we need the following lemma.
     
     Let $2 < n$ be a natural. 
     Show that $\cos{2\pi / n}$ is constructible if and only if 
-    $[\Q(\zeta_n) : \Q]$ is a power of 2, where $\zeta_n = e^{2\pi i/n}$.
+    $[\Q(\zeta_n) : \Q]$ is a power of 2, 
+    where $\zeta_n = \cos{2\pi/n} + i\sin{2\pi/n}$.
     Hence deduce the regular $n$-gon is constructible if and only if 
     $\phi(n)$ is a power of $2$. 
     
+    [Hint : For the reverse implication, Sylow I. ]
 \end{ex}
+
+\begin{rmk}
+    
+    The above exercise is amazing because
+    you now know the regular 17-gon is constructible
+    without needing to construct it at all!
+    
+\end{rmk}
 
 \end{document}
