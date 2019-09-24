@@ -16,8 +16,8 @@
 
 \begin{eg}
     $(\Q,+,\cdot), (\R,+,\cdot), (\C,+,\cdot)$ are all fields. 
-    Verify that for all primes $p \in \Z$, $(\Z/p\Z,+,\cdot)$
-    is also a field.
+    % Verify that for all primes $p \in \Z$, $(\Z/p\Z,+,\cdot)$
+    % is also a field.
 \end{eg}
 
 \begin{dfn} Endomorphisms, Automorphisms of Groups.
@@ -51,15 +51,20 @@
 
 \begin{rmk}
     Note that multiplication for $Aut_\Grp(V)$ also works for $\End{\Grp}{V}$.
-    However, since endomophisms are not required to be bijective, 
-    $\End{\Grp}{V}$ is \emph{not} a group under this multiplication. 
-    For example, the zero morphism has no multiplicative inverse. 
-    This multiplication \emph{does} distribute over addition in $\End{\Grp}{V}$: let $f, g, h \in \End{\Grp}{V}, v \in V$, then
+    % However, since endomophisms are not required to be bijective, 
+    % $\End{\Grp}{V}$ is \emph{not} a group under this multiplication. 
+    % For example, the zero morphism has no multiplicative inverse. 
+    This multiplication \emph{does} distribute over addition in $\End{\Grp}{V}$: 
+    let $f, g, h \in \End{\Grp}{V}, v \in V$, then
     \begin{align*}
         &(f(g + h))(v) = f((g+h)(v)) = f(g(v) + h(v)) \\
         =\;& f(g(v)) + f(h(v)) = (fg)(v) + (fh)(v) = (fg + fh)(v)
     \end{align*}
-    It looks like it is \emph{almost} a field. 
+    It looks like it is a field,
+    but since endomorphisms need not be bijective, 
+    there may exist non-zero endomorphisms without multiplicative inverse,
+    so this is in general \emph{not} a field. 
+    (Exercise : Find an abelian group with a non-zero, non-invertible endomorphism.)
     We shall have more to say about structures like this 
     in the next section on \emph{rings}. 
 \end{rmk}
@@ -93,10 +98,27 @@
     is a morphism of groups. 
     The motivation for $\rho$ mapping into $Aut_\Grp(V)$ is
     to have $K^\times$ preserve the "structure" of $V$ as a group. 
-    
 \end{rmk}
 
-\ex{Unfold the definition of of $V$ being a $K$-vector space to obtain
+\begin{ex}
+    
+    Which one of these are vector spaces? 
+    \begin{itemize}
+        \item A field $K$ as a $K$-vector space where 
+        scalar multiplication is just multiplication. 
+        \item The set of functions from a set $X$ to $\Q$ under pointwise addition 
+        with pointwise multiplication by rationals as the $\Q$-action.
+        \item The set of functions from a non-empty set $X$ to $\R$
+        under pointwise addition with 
+        pointwise multiplication by reals as the $\R$-action.
+        \item $\C$ as a $\Q$-vector space where 
+        scalar multiplication is just multiplication.
+    \end{itemize}
+\end{ex}
+
+\begin{ex}
+    
+    Unfold the definition of of $V$ being a $K$-vector space to obtain
     the usual axioms of a vector space used in other sources: 
     \begin{enumerate}
         \item Associativity of Vector Addition.
@@ -110,7 +132,8 @@
         \item Compatibility of Scalar Multiplication.
             $\forall \la, \mu \in K, \forall a \in V, (\la\mu)(a) = \la(\mu(a))$
         \item Identity for Scalar Multiplication.
-            $\forall a \in V, 1(a) = a$.
+            $\forall a \in V, 1(a) = a$,
+            where $1$ is the multiplicative identity of $K$.
         \item Distributivity of Scalar Multiplication over Vector Addition.
             \[ 
                 \forall \la \in K, \forall a, b \in V, \la(a + b) = \la(a) + \la(b)
@@ -121,16 +144,17 @@
                 \forall a \in V, (\la + \mu)(a) = \la(a) + \mu(a) 
             \]
     \end{enumerate}
-}
+\end{ex}
 
-\ex{Let $V$ be a $K$-vector space. 
+\begin{ex}
+    Let $V$ be a $K$-vector space. 
     Show that $\forall a \in V, 0(a) = 0$, 
     where the first 0 is in $K$ and the second is in $V$. 
     
     Also show that $\forall a \in V, (-1)a = -a$
     where the first $-1$ is in $K$ and 
-    the second $-a$ is the additive inverse in $V$ as an abelian group. 
-}
+    the second $-a$ is the additive inverse in $V$ as an abelian group.
+\end{ex}
 
 %   - Def - Linear Map, Isomorphism, Kernel
 \begin{dfn} Morphism of $K$-vector Spaces, Isomorphisms, Images, Kernels. 
@@ -154,6 +178,8 @@
     If in addition $f$ bijects, it is called an \textbf{isomorphism}, and 
     we say $V$ and $W$ are \textbf{isomorphic as $K$-vector spaces}.
     We write $V \iso_{\KVec} W$.
+    A morphism from a $K$-vector space to itself is called a \textbf{endomorphism}.
+    An endomorphism that is also an isomorphism is called an \textbf{automorphism}. 
     
     We also have: 
     \begin{itemize}
@@ -163,6 +189,12 @@
             $ \ker f$ := $\{ a \in V \mid f(a) = 0 \in W\}$.
     \end{itemize}
 \end{dfn}
+\begin{eg}
+    
+    Consider $\C$ as a $\Q$-vector space.
+    Then complex conjugation is a $\Q$-vector space morphism from $\C$ to itself.
+    
+\end{eg}
 \ex{Let $U, V, W$ be $K$-vector spaces, $f : U \to V$, $g : V \to W$ both in $\KVec$.
     Show that $g \circ f : U \to W$ in $\KVec$. 
 }
@@ -170,14 +202,6 @@
 %   - ex - Homomorphism Inject iff Kernel Trivial
 \ex{Let $f : V \to W$ in $\KVec$. 
     Prove that $f$ injects if and only if $\ker f = \{0\} \subseteq V$.
-}
-
-\ex{Let $f : V \to W$ in $\KVec$. 
-    Show that \[\im f \leq_\Grp W \;and\;
-    \im \; f \leq_{K^\times\mhyph\Set}W\]
-    Hence deduce that $\im f$ is a $K$-vector space. 
-    Similarly, show that $ \ker f$ forms a $K$-vector space
-    from the group multiplication and $K^\times$-action on $V$. 
 }
 %   - Def - Subspaces
 \begin{dfn} Subspaces. 
@@ -192,10 +216,24 @@
     we omit the subscript $\KVec$. 
     
 \end{dfn}
-%   - Ex - Images, Kernels are Subspaces
-\begin{eg}
-    Images and kernels are subspaces.
-\end{eg}
+\begin{ex}
+
+    Which one of these are subspaces in the vector space they're in?
+    For the ones that are, give a proof. 
+    \begin{enumerate}
+        \item The set of functions from $X$ to $\Q$ inside 
+        the set of functions from $X$ to $\R$, with $X$ non-empty. 
+        \item The set containing $0$ inside any $K$-vector space $V$. 
+        \item $\R$ inside $\C$ where $\C$ is seen as a $\Q$-vector space.
+        \item $\Q$ inside $\C$ where $\C$ is seen as a $\C$-vector space.
+    \end{enumerate}
+    Let $f : V \to W$ in $\KVec$.
+    \begin{enumerate} [resume]
+        \item $\im f$ inside $W$.
+        \item $\ker f$ inside $V$.
+    \end{enumerate}
+
+\end{ex}
 %   - Ex - Arbitrary intersection of subspaces is subspace
 \begin{ex} Subspace Generated by a Subset. 
 

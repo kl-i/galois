@@ -9,7 +9,7 @@ Now we are ready to talk about the building blocks of Galois Theory.
 
     Let $K$ be a field. 
 
-    A \textbf{$K$-extension} is a pair $(L,\iota)$ where $L$ is a field 
+    A $K$-extension is a pair $(L,\iota)$ where $L$ is a field 
     and $\iota : K \to L$ is a ring morphism. 
     Since all ring morphisms of rings from a field are injective,
     one can see $K$ as ``sitting inside" $L$ via $\iota$.\footnote{
@@ -69,7 +69,8 @@ Now we are ready to talk about the building blocks of Galois Theory.
     Let $f$ be a $\Q$-extension endomorphism of $\R$. 
     Show that $f$ is the identity function of $\R$.
     
-    [Hint : Show that for $\epsilon > 0$, $f(\epsilon) > 0$.]
+    [Hint : Use the fact that all positive reals have a square root
+    to show for $\epsilon > 0$, $f(\epsilon) > 0$.]
 \end{ex}
 
 \begin{rmk}
@@ -100,9 +101,9 @@ Now we are ready to talk about the building blocks of Galois Theory.
 
 %    - Thm - Tower Law of Deg Ext
 \begin{thm} Tower Law of Extension Degree. \\
-Let $\iota_0 : K \to L$ be a finite $K$-extension and 
-$\iota_1 : L \to M$ a finite $L$-extension.
-Then $\iota_1 \circ \iota_0 : K \to M$ is a finite $K$-extension, and 
+Let $\iota_L : K \to L$ be a finite $K$-extension and 
+$\iota_M : L \to M$ a finite $L$-extension.
+Then $\iota_M \circ \iota_L : K \to M$ is a finite $K$-extension, and 
 \[
     [M : K]=[M : L][L : K]
 \]

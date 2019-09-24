@@ -91,6 +91,7 @@
   \vphantom{\big|} % pretend it's a little taller at normal size
   \right|_{#2} % this is the delimiter
 }}
+
 \newcommand{\<}{\langle}
 \renewcommand{\>}{\rangle}
 \newcommand{\supp}{\mathrm{supp }}
@@ -129,6 +130,7 @@
 \newcommand{\normsub}{\trianglelefteq}
 \newcommand{\norm}[1]{\Vert#1\Vert}
 \renewcommand{\bar}[1]{\overline{#1}}
+\newcommand{\id}[1]{\mathrm{id}_{#1}}
 
 \newcommand{\gal}[2]{\mathrm{Gal}_{#1}(#2)}
 \newcommand{\Orb}{\mathrm{Orb}}
@@ -150,7 +152,6 @@
 
 \newcommand{\bigspace}{\mspace{12mu}}
 
-
 %Boxes
 \mdfdefinestyle{Definitions}{
     leftmargin=0cm,
@@ -168,6 +169,8 @@
         \begin{definition}}
         {\end{definition}
     \end{mdframed}}
+
+
 
 
 \begin{document}
@@ -191,7 +194,7 @@
 \part{Theory}
     
     \chapter{Motivation}
-        \subfile{02Theory/01motivation}
+        \subfile{02Theory/01motivation_alt}
         
     \chapter{Preliminaries}
         
@@ -253,11 +256,11 @@
     \chapter{Fundamental Theorem of Algebra}
         \subfile{03Applications/02fta}
     
-    \chapter{Computing Galois Groups}
-        \subfile{03Applications/03computing}
-    
     \chapter{Impossible Constructions in Greek Geometry}
         \subfile{03Applications/04greeks}
+        
+    \chapter{Computing Galois Groups}
+        \subfile{03Applications/03computing}
     
     \chapter{Cyclotomic Extensions}
         \subfile{03Applications/09cyclotomic}

@@ -30,6 +30,14 @@
         v = \sum_{i \in I} v_i , v_i = v(i) \in V_i
     \]
 \end{dfn}
+\begin{ex} Free Vector Space is a Direct Sum.
+    
+    Let $S$ be a set. 
+    Show that $\<S\> \iso_{\KVec} \bigoplus_{s\in S} K$ where the latter is
+    the direct sum of copies of $K$ indexed by $S$. 
+    This gives another construction for the free vector space over a set. 
+    In particular, $K^n \iso K \oplus \cdots \oplus K$ $n$-times. 
+\end{ex}
 
 \begin{thm} The ``Characterising" Property of the Direct Sum.
     
@@ -79,16 +87,6 @@
     Similarly, $f \circ g = id$. 
     So $\bigoplus_{i\in I} V_i \iso W$ as $K$-vector spaces via $f$. 
 \end{proof}
-% Free Vector Space as direct sum indexed by set
-\begin{ex} Free Vector Space is a Direct Sum.
-    
-    Let $S$ be a set. 
-    Show that $\<S\> \iso_{\KVec} \bigoplus_{s\in S} K$ where the latter is
-    the direct sum of copies of $K$ indexed by $S$. 
-    This gives another construction for the free vector space over a set. 
-    
-    In particular, $K^n \iso K \oplus \cdots \oplus K$ $n$-times. 
-\end{ex}
 
 % Linear Indep, Spanning, Basis as Inject, Surject, Biject
 \begin{dfn} Linear Independence, Spanning, Basis.
@@ -97,7 +95,7 @@
     Then via the inclusion $\iota : \{v_i\}_{i\in I} \to V$ and
     the characterising property of free vector spaces, 
     we have a $K$-vector space morphism \footnote{
-    We use the bar in $\bar \phi$ 
+    We use the bar in $\bar{\phi}$ 
     for any map that is induced by existing maps. 
     In other words, when $\bar\phi$ exists because $\phi_i$ exist.
     } \[
@@ -160,7 +158,10 @@
     creating an injection from $S$ to $T$. 
     ...
 \end{proof}
-\begin{cor} Morphisms between Finite Vector Spaces 
+From Steinitz exchange, we have the following, possibly most important, fact about 
+finite dimensional vector spaces.
+
+\begin{cor} Morphisms between Finite Dimensional Vector Spaces 
 are like Functions between Finite Sets. 
 
     Let $f : V \to W$ be a $K$-vector space morphism and $\dim V = \dim W$ finite.

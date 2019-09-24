@@ -5,50 +5,45 @@ The goal of this section is to introduce \emph{solvability} of groups,
 which plays an essential role in the insolvability of general quintics. 
 % Def - Normal Series, Factor Groups, Length of Series
 % Def - Refinement, Proper Refinement, Equivalence, Composition Series.
-\begin{dfn} Normal Series, Factor Groups, Length 
-and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
+\begin{dfn} Normal Series, Factor Groups, Refinements of a Series, 
+Equivalence of Series, Composition Series.
     
-    Let $G$ be a group and 
-    $S = (S_i)_{i\leq n}$ a finite sequence of subgroups.
-    Then $S$ is called a \textbf{normal series in $G$} when the following conditions are met.
+    Let $G$ be a group and $S$ a finite set of subgroups of $G$.
+    $S$ is called a \textbf{series in $G$} when both of the following are true : 
     \begin{enumerate}
-        \item $S_0$ is the trivial subgroup and $S_n$ is $G$. 
-        \item For all $i < n$, $S_i \normsub S_{i+1}$.
+        \item $G$ and $\<e\>$ are in $S$.
+        \item (Totally Ordered) 
+        For all $S_1, S_2$ in $S$, $S_1 \subseteq S_2$ or $S_2 \subseteq S_1$. 
     \end{enumerate}
-    For a normal series $S$, 
-    its \textbf{factor groups}, or simply \textbf{factors},
-    are groups in the sequence of quotients $(S_{i+1}/S_i)_{i<n}$.
+    This allows $S$ to be indexed by ascending strict inclusions, 
+    i.e. $S = \{S_i\}_{i\leq n}$ where $S_i \subset S_{i+1}$ for $0 \leq i < n$.
+    Then $S$ is called a \textbf{normal series in $G$} when 
+    for all $0 \leq i < n$, $S_i$ is a normal subgroup of $S_{i+1}$. 
     
-    The \textbf{length} of a normal series $S$ is
-    the number of strict inclusions in $S$, which we shall denote with $|S|$.
-    Equivalently, it's the number of non-trivial factor groups from $S$. 
+    For a normal series $S = \{S_i\}_{i\leq n}$, 
+    its \textbf{factor groups}, or simply \textbf{factors},
+    are groups of the form $S_{i+1}/S_i$ where $0\leq i < n$. 
     
     Let $S$ and $T$ be normal series of $G$. 
-    Then $S \leq T$ is defined as $S$ being a subsequence of $T$. 
-    We say $T$ is a \textbf{refinement of $S$}.
-    It is easy to see that if $S \leq T$, then $|S| \leq |T|$.
-    We say $T$ is a \textbf{proper refinement of $S$}
-    when it is a refinement with strictly longer length. 
-    
-    For a normal series $S$, 
+    We say $T$ is a \textbf{(proper) refinement of $S$} when
+    $S$ is a (proper) subset of $T$. 
+    Then for a normal series $S$, 
     the following are equivalent by the 3rd isomorphism theorem.
     \begin{enumerate}
         \item $S$ has no proper refinements.
         \item For a group, it is called \textbf{simple} when
         the only normal subgroups are itself and the trivial subgroup.
-        Then the factor groups of $S$ are all simple. 
+        Then all the factor groups of $S$ are simple. 
     \end{enumerate}
     If either of the above is true, 
     $S$ is called a \textbf{composition series} of $G$. 
     
     For two normal series $S, T$ of $G$, 
     they are called \textbf{equivalent} when 
-    there exists a bijection between the \emph{non-trivial} factors of $S$ and $T$
+    there exists a bijection between the set of the factors of $S$ and $T$
     that maps factors to isomorphic factors. 
     This unsurprisingly forms an equivalence relation 
     on the set of all normal series of a group $G$. 
-    Note that if $T$ is a non-proper refinement of $S$, 
-    then $T$ is equivalent to $S$. 
     
 \end{dfn}
 \begin{thm} Existence of Composition Series for Finite Groups.
@@ -60,12 +55,11 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
 \begin{proof}
     
     Let $S$ be a normal series of $G$.
-    Clearly the length of $S$ cannot be larger than the cardinality of $G$
-    and $\<e\> \normsub G$ is a normal series of $G$.
-    Hence the set of lengths of normal series of $G$ is a non-empty
-    bounded subset of the naturals
-    and thus must have a maximum. 
-    Let $\hat{S}$ be a normal series of $G$ with maximal length. 
+    Clearly $|S|$ cannot be larger than the cardinality of $G$
+    and $\{\<e\>,G\}$ is a normal series of $G$.
+    Hence the set of cardinalities of normal series of $G$ is a non-empty
+    bounded subset of the naturals, and thus must have a maximum. 
+    Let $\hat{S}$ be a normal series of $G$ with maximal cardinality. 
     It cannot have a proper refinement, so it must be a composition series.
     
 \end{proof}
@@ -73,7 +67,7 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
 \begin{rmk}
     
     The motivation for considering normal series up to equivalence is that
-    the data of a normal series is really in its non-trivial factor groups.
+    the data of a normal series is really in its factor groups.
     As we will now see, all finite groups have \emph{unique} composition series.
     But first, the theorem that you might have been wondering about.
     
@@ -193,12 +187,13 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     
     Let $S, T$ be normal series of a group $G$. 
     Then there exists normal series $\hat{S}, \hat{T}$ such that
-    $S \leq \hat{S}$, $T \leq \hat{T}$ and $\hat{S}, \hat{T}$ equivalent. 
+    $S \subseteq \hat{S}$, $T \subseteq \hat{T}$ and $\hat{S}, \hat{T}$ equivalent. 
     
 \end{thm}
 \begin{proof}
     
-    Let $S = (S_i)_{i \leq n}$ and $T = (T_j)_{j \leq m}$. 
+    Let $S = \{S_i\}_{i \leq n}$ and $T = \{T_j\}_{j \leq m}$,
+    both indexed by ascending strict inclusion. 
     For $i < n, j \leq m$, define \[
         S_{i,j} := S_i (S_{i+1} \cap T_j)
     \]
@@ -210,7 +205,7 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     with \[
         \frac{S_{i,j+1}}{S_{i,j}} \iso \frac{T_{i+1,j}}{T_{i,j}}
     \]
-    Thus we have the following two normal series \begin{align*}
+    Thus we have the following two series \begin{align*}
         \<e\> = S_{0,0} \normsub \cdots \normsub S_{0,m} 
         = S_{1,0} \normsub \cdots \normsub S_{1,m}
         = S_{2,0} \normsub \cdots \normsub S_{n-2,m}
@@ -221,9 +216,11 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
         = T_{0,2}\normsub \cdots \normsub T_{n,m-2}
         = T_{0,m-1} \normsub \cdots \normsub T_{n,m-1} = G
     \end{align*}
-    which are clearly refinements of $S, T$ respectively.
-    These are equivalent since via the Butterfly lemma, 
-    the non-trivial factors are mapped to isomorphic non-trivial factors bijectively.
+    Let $\hat{S} = \{ S_{i,j} \}_{i<n, j\leq m}$ and 
+    $\hat{T} = \{T_{i, j}\}_{i\leq n, j < m}$.
+    Then $\hat{S}, \hat{T}$ are normal series 
+    that are respectively refinements of $S, T$
+    and equivalent via the bijection of factors given by the Butterfly lemma. 
     
 \end{proof}
 \begin{eg} 
@@ -238,16 +235,16 @@ and (Proper) Refinements of a Series, Equivalence of Series, Composition Series.
     we obtain the two refinements, \begin{figure}[H]
         \centering
         \begin{tikzcd}[sep = huge]
-        \<e\> = \<e\>(\<a^2\>\cap\<e\>) \ar[d,"C_1"{swap}]&
-        (\<e\>\cap\<a^3\>)\<e\> = \<e\> \ar[d,"C_1"]\\
+        \<e\> = \<e\>(\<a^2\>\cap\<e\>) \ar[d,"="{swap}]&
+        (\<e\>\cap\<a^3\>)\<e\> = \<e\> \ar[d,"="]\\
         \<e\> = \<e\>(\<a^2\>\cap\<a^3\>) \ar[d,"C_3"{swap,blue}] &
         (\<a^2\>\cap\<a^3\>)\<e\> = \<e\> \ar[d,"C_2"{red}] \\
         \<a^2\> = \<e\>(\<a^2\>\cap\<a\>) \ar[d,"="{swap}] &
         (\<a\>\cap\<a^3\>)\<e\> = \<a^3\> \ar[d,"="] \\
         \<a^2\>(\<a\>\cap\<e\>) \ar[d,"C_2"{swap,red}] & 
         (\<e\>\cap\<a\>)\<a^3\> \ar[d,"C_3"{blue}] \\
-        \<a\> = \<a^2\>(\<a\>\cap\<a^3\>) \ar[d,"C_1"{swap,green}] &
-        (\<a^2\>\cap\<a\>)\<a^3\> = \<a\> \ar[d,"C_1"{green}] \\
+        \<a\> = \<a^2\>(\<a\>\cap\<a^3\>) \ar[d,"="{swap}] &
+        (\<a^2\>\cap\<a\>)\<a^3\> = \<a\> \ar[d,"="] \\
         \<a\> = \<a^2\>(\<a\>\cap\<a\>) &
         (\<a^2\>\cap\<a\>)\<a^3\> = \<a\> 
         \end{tikzcd}
@@ -277,10 +274,12 @@ We arrive at our goal.
     
     Let $G$ be a finite group.
     Then the following are equivalent: \begin{enumerate}
-        \item There exists a normal series of $G$ with abelian factor groups.
-        \item There exists a normal series of $G$ 
-        with factor groups of prime cardinality or one.
-        \item There exists a normal series of $G$ with cyclic factor groups.
+        \item There exists a normal series of $G$ such that 
+        all factor groups are abelian.
+        \item There exists a normal series of $G$ such that
+        all factor groups have prime cardinality or one.
+        \item There exists a normal series of $G$ such that
+        all factor groups are cyclic.
     \end{enumerate}
     It is also immediate from the first definition that the composition series
     of $G$ has abelian factor groups.

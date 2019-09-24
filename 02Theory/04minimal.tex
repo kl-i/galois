@@ -80,7 +80,8 @@
     when for all $a \in L$, $a$ is algebraic over $K$.
 \end{dfn}
 %    - Def - \min(a,K) 3 eqv def (min deg, irr, generates ideal) and uniqueness
-\begin{dfn}
+\begin{dfn} Minimal Polynomial of an Algebraic Element. 
+
 Let $\iota : K \to L$ be an extension, $a \in L$, $a$ is algebraic over $K$. 
 Then there exists a unique non-zero, monic polynomial $\min(a,K)$ 
 with $a$ as a root such that one of the three equivalent conditions holds:
@@ -126,12 +127,23 @@ Then $\min(a,K)$ is called the \textbf{minimal polynomial of $a$ over $K$}.
     Hence, $\min(a,K)$ divides all polynomials in $\ker(ev_a \circ \bar\iota)$,
     i.e. generates the kernel.
 \end{proof}
-\begin{rmk}
-    From the motivating example in the first section of the book, 
-    we know that for a simple extension $K(a)$ ought to look like
-    polynomials in $a$ over $K$. 
-    The following theorem proves this.
-\end{rmk}
+\begin{ex}
+    
+    Consider the usual extension $\Q \to \C$.
+    Find the minimal polynomials of the following elements: \begin{enumerate}
+        \item $i$
+        \item $\omega = \exp{2\pi / n}$
+        \item $\sqrt{2}$
+        \item $\sqrt{2} + \sqrt{3}$
+    \end{enumerate}
+    
+\end{ex}
+% \begin{rmk}
+%     From the motivating example in the first section of the book, 
+%     we know that for a simple extension $K(a)$ ought to look like
+%     polynomials in $a$ over $K$. 
+%     The following theorem proves this.
+% \end{rmk}
 %    - Thm - K(a) = K[a] i.e. Simple Ext iso to Quotient by Min Poly
 \begin{thm} The Form of Simple Extensions by Algebraic Elements.
 

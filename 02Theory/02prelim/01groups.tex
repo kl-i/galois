@@ -18,38 +18,66 @@ unless the group multiplication is of significance.
 A group $G$ is called \textbf{abelian} 
 if the group operation is \textbf{commutative}, that is
 \[\forall a, b \in G, ab = ba.\]
-In this case, the group ``multiplication" is often denoted with a plus ``$+$"
+In a ``commutative additive group'' the group 
+``multiplication" is denoted with a plus ``$+$"
 and the group identity with ``$0$".
 
 \end{dfn}
 
+\begin{ex}
+    
+    Which of the following are groups? 
+    For the ones that are, find an identity element. 
+    \begin{enumerate}
+        \item $(\Z,+)$
+        \item $(\Q\setminus\{0\},\cdot)$
+        \item The empty set under the unique binary operation on it. 
+        \item The set of all functions from a fixed set $X$
+        to $\R$ under pointwise addition.
+        \item Functions from $\R$ to itself under pointwise multiplication. 
+        \item $(\C,\cdot)$
+        \item The set of bijective functions from a set to itself 
+        under function composition.
+    \end{enumerate}
+    
+\end{ex}
 %   - Ex - Unique identity and inverse
-
 \begin{ex} Uniqueness of Identity and Inverse.
 
     Prove that the identity element in a group is unique, denoted by $e$ and every element $g \in G$ has a unique inverse, denoted by $g^{-1}$. And thus $(g^{-1})^{-1}=g$.
 \end{ex}
-
-%\begin{ex} 
-%    Verify that the following are groups: 
-%    \begin{enumerate}
-%        \item $(\Z, +), (\Q, +), (\R,+), (\C,+)$ all abelian
-%        \item $(\Q\backslash\{0\}, \cdot), (\R\backslash\{0\}, \cdot),
-%        (\C\backslash\{0\}, \cdot)$ all abelian
-%        \item Let $n \in \N$. 
-%        $C(\R^n) := \{f : \R^n \to \R \mid f \text{ continuous}\}$.
-%        Then $(C(\R^n),+)$ where $+$ is pointwise addition. 
-%        \item Let $X$ be a set, $(G, \cdot)$ a group. 
-%        Define $G^X := \{f : X \to G\}$. 
-%        Then $(G^X, \cdot)$ where $\cdot$ is pointwise multiplication. 
-%    \end{enumerate}
-%    Show that the following are \emph{not} groups: 
-%    \begin{enumerate}
-%       \item $(\R, \cdot)$
-%        \item $(C(\R^n),\cdot)$ where $\cdot$ is pointwise multiplication.
-%        \item Calle Non-Group. 
-%    \end{enumerate}
-%\end{ex}
+\begin{ex} Dihedral Groups.
+    
+    Let $2 < n$ be a natural number. 
+    Then the \textbf{dihedral group of order $2n$}, denoted $D_{2n}$,
+    is defined as the group ``generated" from two symbols $a, b$
+    where the multiplication is ``generated" from the following equations: 
+    \begin{align*}
+        a^2 = e && b^n = e && a b a^{-1} = b^{-1}
+    \end{align*}
+    where $e$ is the identity of the group.\footnote{
+        The formal way of ``generating a group from a set of symbols" is called 
+        the \emph{free group}. 
+        We have left its construction as an exercise
+        at the end of the chapter. 
+    }
+    This means all elements of $D_{2n}$ look like 
+    some finite string of powers of $a$ and $b$ in any order.
+    
+    Show that all elements of $D_{2n}$ can be written in the form of
+    $a^\al b^\be$ where $0 \leq \al < 2$ and $0 \leq \be < n$,
+    hence deducing that $D_{2n}$ has $2n$ elements. 
+    The elements where $\al = 0$ are called \textbf{rotations}.
+    Otherwise, they are called \textbf{reflections}. 
+    The following illustrations show the motivation for such names,
+    via the example of $D_6$.
+    
+    % \footnote{
+    %     For now, ``symmetries" are exactly what you think they are.
+    %     We will formally define them later. 
+    % }
+    
+\end{ex}
 
 %   - Def - Group Homomorphism, Isomorphism, Kernel
 \begin{dfn} Morphism of Groups, Isomorphisms, Image, Kernel. 
@@ -70,9 +98,10 @@ If $\phi$ is bijective, we say $G$ and $H$ are \textbf{isomorphic as groups},
 denoted by $G \iso_{\Grp} H$ and $\phi$ is called an \textbf{isomorphism}. 
 Notice that a morphism of groups preserve identity (i.e. $\phi(e_G)=e_H$), 
 inverse and powers.
+Morphisms from a group to itself are called \textbf{endomorphisms}.
+An endomorphism that is also an isomorphism is called an \textbf{automorphism}.
 
 If $f:G \to H, g: H \to K$ both in $\Grp$, then $g \circ f: G \to K$ in $\Grp$. 
-Also the identity mapping is an isomorphism, i.e. $G \iso_{\Grp} G$.
 
 Given $\phi: G \to H$ in $\Grp$, we define
 \begin{enumerate}
@@ -82,10 +111,19 @@ Given $\phi: G \to H$ in $\Grp$, we define
         $\ker \phi=\{g \in G \mid \phi(g)=e_H\}$.
 \end{enumerate}
 \end{dfn}
-\ex{Prove that both $\im  \phi$ and $\text{ker } \phi$ are groups 
-    under the multiplication from the groups they are respectively subsets of. 
-}
-
+\begin{ex} 
+    
+    Consider $D_6$, the dihedral group of order $6$. 
+    This can be interpreted as the ``symmetries of a regular triangle".
+    Show that $D_6$ is isomorphic to 
+    the group of bijective functions on a 3-element set. 
+    
+\end{ex}
+\begin{rmk}
+    
+    As the above exercise shows, 
+    group morphisms allow us to ``compare" groups by mapping one into another.
+\end{rmk}
 %   - Ex - Homomorphism Inject iff Kernel trivial
 \ex{Prove that $\phi$ is injective if and only if $\text{ker }\phi=\{e_G\}$.}
 
@@ -104,26 +142,45 @@ Given $\phi: G \to H$ in $\Grp$, we define
     we omit the subscript $\Grp$. 
     
 \end{dfn}
+\begin{ex}
+    
+    Which of the following are subgroups of the groups they are in? 
+    Give a proof for the ones that are.
+    \begin{enumerate}
+        \item $(\Q,+)$ in $(\R,+)$.
+        \item $(\N,+)$ in $(\Z,+)$.
+        \item $(\Z\setminus\{0\},\cdot)$ in $(\Q\setminus\{0\},\cdot)$.
+        \item The set of negative reals with $1$ inside $(\R\setminus\{0\},\cdot)$.
+        \item The set of rotations in $D_{2n}$ where $2 < n \in \N$.
+        \item The set $\{e,ab^k\}$ in $D_{2n}$ where $ab^k$ is any reflection.
+    \end{enumerate}
+    Let $\phi : G \to H$ be a morphism of groups.
+    \begin{enumerate}[resume]
+        \item $\im \phi$ in $H$.
+        \item $\ker \phi$ in $G$.
+    \end{enumerate}
+    
+\end{ex}
 
-\begin{eg} Subgroups. 
-    Images and kernels of morphisms of groups.
-\end{eg}
 %   - Ex - Arbitrary intersection of subgroups is subgroup
-\ex{Let $(H_i)_{i \in I}$ be subgroups of $G$. 
+\begin{ex}
+    
+    Let $(H_i)_{i \in I}$ be subgroups of $G$. 
     Prove that $\bigcap_{i \in I} H_i \leq G$. 
     Hence deduce that 
     \[
         \forall S \subseteq G, \exists ! \<S\> \leq G, 
         S \subseteq \< S \> \land 
-        \forall H \leq G, S \subseteq H \imp \< S \> \subseteq H. 
+        \left(\forall H \leq G, S \subseteq H \imp \< S \> \subseteq \right) 
     \]
     i.e. $\< S \>$ is the \emph{smallest} subgroup containing $S$.
     $\< S \>$ is called the \textbf{subgroup generated by $S$}. 
+    If $\<S\> = G$, then we say $G$ is \textbf{generated by $S$}.
     If $S = \{x\}$ is a singleton set, 
     we write $\< x \>$ instead of $\< \{x\} \>$. 
-}
-
-\begin{ex} Alternative construction for Subgroup Generated by a Subset.
+    
+\end{ex}
+\begin{ex} Alternative Construction for Subgroup Generated by a Subset.
 
     Let $S \subseteq G$. 
     Define \[
@@ -136,132 +193,17 @@ Given $\phi: G \to H$ in $\Grp$, we define
     \]
     Show that $\< S \> = \bigcup_{n \in \N} \tilde{S}^n$. 
 \end{ex}
+\begin{eg} 
+    $D_{2n}$ is generated by $a, b$. 
+\end{eg}
+\begin{dfn} Automorphism Group of a Set. 
 
-\begin{ex} \dolater Construction of Free Groups. 
-
-    Let $S$ be a set. We proceed to turn $S$ into a group.
-    The idea is essentially the same as the alternative 
-    construction for the subgroup generated by a subset.
-    The only difference is that for subgroups, 
-    we had an ambient group structure to use,
-    but for sets "sitting in a vacuum", 
-    we will have to make a group structure from scratch.
-    
-    Define 
-    \[\tilde{S} := \{1,-1\}\times S)\]
-    Let $s$ denote $(1,s) \in \{1\} \times S$ and
-    $s^{-1}$ denote $(-1,s) \in \{-1\} \times S$. 
-    For $n \in \N$, define the \textbf{$\tilde{S}$-strings of length $n$} as
-    \[
-        \tilde{S}^n := \{ s : n \to \tilde{S} \}
-    \]
-    For $s \in \tilde{S}^n, i \in n$, denote $s_i$ as $s(i)$.
-    So $s$ can be seen as an $n$-tuple $(s_i)_{i \in n}$\footnote{If you like,
-    this is a way of formally
-    defining a tuple.},
-    and we write $s_0\cdots s_{n-1}$ for the function $s$ instead.
-    This should be thought of as finite products of elements in $\tilde{S}$.
-    So our to-be group is the set of all such products, 
-    $\bigsqcup_{n \in \N} \tilde{S}^n$.
-    For 
-    $s : n \to \tilde{S}, t : m \to \tilde{S} \in \bigsqcup_{n \in \N} \tilde{S}^n$,
-    we define the multiplication as concatenation of strings: 
-    \[
-        st : n+m \to \tilde{S}, i \mapsto 
-        \begin{cases}
-            s(i), & i < n \\
-            t(i-n), & i \geq n
-        \end{cases}
-    \]
-    Then clearly this multiplication is associative and 
-    we have the empty string $e : 0 \to \tilde{S}$ as the identity. 
-    
-    We are not quite finished yet.
-    As of now, for $s \in \tilde{S}$, 
-    $ss^{-1}$, $s^{-1}s$ and $e$ are \emph{different} elements in our to-be group,
-    i.e. we have not defined cancellation by inverses. 
-    This is done as follows. 
-    For $n \leq m \in \N$, $a \in S$,  
-    define the \textbf{n-th Chirs-Frod insertion of $a$}
-    as 
-    \[
-        CF_n : \tilde{S}^m \to \tilde{S}^{m+2}, 
-        s_0\cdots s_{m-1} \mapsto 
-        \begin{cases}
-        aa^{-1} & \text{, if } 0 = m\\
-        s_0 \cdots s_{n-1} a a^{-1} s_n \cdots s_{m-1} & \text{, if } 0 < m
-        \end{cases}
-    \]
-    i.e. insert $aa^{-1}$ after the $n$-th symbol. 
-    Similarly, we define the \textbf{n-th Frod-Chirs insertion of $a$}, $FC_n$, 
-    as inserting $a^{-1}a$ after the $n$-th symbol. 
-    Then for 
-    $s_0\cdots s_{n-1}, t_0\cdots t_{m-1} \in \bigsqcup_{n \in \N} \tilde{S}^n$, 
-    we define $s_0\cdots s_{n-1} \sim t_0\cdots t_{m-1}$ when
-    they are equal or there exists a Chirs-Frod or Frod-Chirs insertion
-    mapping one to the other. 
-    
-    Prove that $\sim$ is an equivalence relation on 
-    $\bigsqcup_{n \in \N} \tilde{S}^n$
-    and the multiplication of strings respects the equivalence classes of $\sim$,
-    that is
-    \[
-        s \sim f \land t \sim g \imp st \sim fg
-    \]
-    Hence show that $\< S \>_\Grp := 
-    \bigsqcup_{n \in \N} \tilde{S}^n / \sim$
-    forms a group with the multiplication carried over to equivalence classes. 
-    
-    $\< S \>_\Grp$ is called the \textbf{free group generated by $S$}. 
-    If it is clear that it is a group, we omit the subscript $\Grp$.
-    A free group is one that is isomorphic to a free group generated by a set. 
-\end{ex}
-
-\begin{ex} \dolater The ``Characterising" Property of Free Groups. 
-
-    Let $\< S \>$ be the free group generated by a set $S$. 
-    We have a natural inclusion $\iota : S \to \< S \>, s \mapsto s$.
-    Let $G$ be a group, $f : S \to G$ any function. 
-    Show that 
-    $\exists ! \< f \> : \< S \> : \<G\> \text{ in } \Grp, 
-    \< f \> \circ \iota = f$. 
-    Diagrammatically, 
-    \begin{figure} [ht]
-        \centering
-        \begin{tikzcd}
-        & \< S \> \arrow[dd,"\exists ! \< f \>",dashed]\\
-        S \arrow{ru}{\iota} \arrow{rd}{f} & \\
-        & G \\
-        \end{tikzcd}
-    \end{figure}
-    
-    This can be interpreted as saying $\< S \>$ is the 
-    ``smallest" group containing $S$. 
-    
-    Show that any other group with the property above is automatically
-    isomorphic to $\< S \>$ as groups. 
-    Thus, this property characterises $\< S \>$ uniquely
-    up to isomorphisms of groups. 
-    Hence, we never have to think about 
-    the construction of $\< S \>$ ever again.
-    \footnote{
-        This idea of determining an object
-        as the ``best" with a certain property will appear again and again. 
-        It is formalised by the concept of \emph{universal properties} in Category Theory,
-        which we shall not explore explicitly here. 
-    }
-\end{ex}
-
-\begin{ex} Automorphism Group of a Set. 
-
-    Let $X$ a set. Prove that the \emph{set-theoretic automorphisms of $X$}
-    \[Aut_\Set(X) := \{f : X \to X \mid f \text{ bijects }\}\] forms a group
-    with function composition as multiplication, i.e.
-    \[
-        Aut_\Set(X) \times Aut_\Set(X) \to Aut_\Set(X), 
-        (f, g) \mapsto fg := f \circ g
-    \]
-\end{ex}
+    Let $X$ a set. 
+    The set of bijections from a set to itself
+    forms a group under function composition. 
+    This set is called the \emph{set-theoretic automorphisms of $X$}, denoted
+    \[Aut_\Set(X) := \{f : X \to X \mid f \text{ bijects }\}\] 
+\end{dfn}
 
 \begin{rmk}
 
@@ -270,32 +212,37 @@ Given $\phi: G \to H$ in $\Grp$, we define
     $Aut_\Set(X)$ simply consists of all permutations of elements of $X$. 
     Thus, when $X$ has more ``structure", 
     we will often be considering a subgroup of $Aut_\Set(X)$ instead, 
-    as the following simple example illustrates. 
+    as the following exercise illustrates. 
     
 \end{rmk}
 
-\begin{eg}
+\begin{ex} $D_8$.
+    
     Let $X = \{v_0, v_1, v_2, v_3 \in \R^2\}$ be 
     vertices of a square centred at the origin, labelled counterclockwise. 
-    Let $(a, b, c, d)$ denote the permutation of $X$ sending
-    $v_0 \mapsto a, v_1 \mapsto b, v_2 \mapsto c, v_3 \mapsto d$. 
-    We have the following set of ``symmetries" of $X$ as a square, 
-    \begin{align*}
-        \{
-            &(v_0, v_1, v_2, v_3), (v_1, v_2, v_3, v_0), 
-            (v_2, v_3, v_0, v_1), (v_3, v_0, v_1, v_2), \\
-            &(v_0, v_3, v_2, v_1), (v_1, v_0, v_3, v_2), 
-            (v_2, v_1, v_0, v_3), (v_3, v_2, v_1, v_0)
-        \} \subseteq Aut_\Set(X)
-    \end{align*}
+    Show that $D_8$ is isomorphic to a subgroup of $\aut{\Set}{X}$
+    that preserves the square,
+    i.e. $D_8$ is the symmetries of the square $X$.
     
-    \ex{Prove that the symmetries above form a subgroup of $Aut_\Set(X)$.}
-\end{eg}
+    % Let $(a, b, c, d)$ denote the permutation of $X$ sending
+    % $v_0 \mapsto a, v_1 \mapsto b, v_2 \mapsto c, v_3 \mapsto d$. 
+    % We have the following set of ``symmetries" of $X$ as a square, 
+    % \begin{align*}
+    %     \{
+    %         &(v_0, v_1, v_2, v_3), (v_1, v_2, v_3, v_0), 
+    %         (v_2, v_3, v_0, v_1), (v_3, v_0, v_1, v_2), \\
+    %         &(v_0, v_3, v_2, v_1), (v_1, v_0, v_3, v_2), 
+    %         (v_2, v_1, v_0, v_3), (v_3, v_2, v_1, v_0)
+    %     \} \subseteq Aut_\Set(X)
+    % \end{align*}
+    
+    % \ex{Prove that the symmetries above form a subgroup of $Aut_\Set(X)$.}
+\end{ex}
 
 \begin{rmk}
-    In general, given a group $G$ and a set $X$, 
-    we may want to interpret $G$ as ``symmetries" of $X$. 
-    This is made precise via a \emph{group action}. 
+    The above exercise is an example
+    of ``interpreting" a group $G$ as the ``symmetries" of a set $X$. 
+    This idea is made precise via a \emph{group action}. 
 \end{rmk}
 
 %   - Def - Group Action
@@ -315,14 +262,19 @@ Given $\phi: G \to H$ in $\Grp$, we define
 Just as we had morphisms of groups to compare groups, 
 given a group $G$, we also have \emph{morphisms of $G$-sets}. 
 
-% Should sub-G-sets be included formally?
 \begin{dfn} Morphism of $G$-Sets. 
 
     Let $(X,\rho), (Y,\sigma)$ be $G$-sets, $f : X \to Y$ a function. 
-    Then $f$ is a \textbf{morphism of $G$-sets} when
-    \[
-        \forall g \in G, f \circ g_\rho = g_\sigma \circ f
-    \]
+    Then $f$ is a \textbf{morphism of $G$-sets} when for all $g \in G$,
+    the following diagram commutes: 
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+        X \ar[r,"f"] \ar[d,"g_\rho"{swap}] & Y \ar[d,"g_\sigma"] \\
+        X \ar[r,"f"] & Y
+        \end{tikzcd}
+    \end{figure}
+    i.e. $f \circ g_\rho = g_\sigma \circ f$. 
     Morphisms of $G$-sets are essentially 
     the functions between $G$-sets that preserve the actions from $G$. 
     Thus, they are really the only maps to consider in ``the world of $G$-sets".
@@ -332,14 +284,19 @@ given a group $G$, we also have \emph{morphisms of $G$-sets}.
     
 \end{dfn}
 
-\ex{ Let $f : X \to Y$ in $G\mhyph\Set$, $\im f$ be the usual set-theoretic image.
+\begin{ex}
+    
+    Let $f : X \to Y$ in $G\mhyph\Set$ and $\im f$ be the usual set-theoretic image.
     Show that $\forall g \in G, 
     \res{g}{\im  f} \in Aut_\Set(\im  f) \leq_\Grp Aut_\Set(Y)$,
     i.e. $\im f$ forms a $G$-set from the $G$-action on $Y$.  
-}
+\end{ex}
+
+We also have \emph{$G$-subsets}, analogous to subgroups. 
 
 \begin{dfn} $G$-Subsets.
-    Let $X$ be a $G$-set, $Y \subseteq X$. 
+    
+    Let $X$ be a $G$-set and $Y \subseteq X$. 
     Then the following are equivalent: 
     \begin{enumerate}
         \item $Y$ forms a $G$-set from the $G$-action on $X$, 
@@ -370,16 +327,35 @@ given a group $G$, we also have \emph{morphisms of $G$-sets}.
 \end{dfn}
 
 %   - Ex - Orbits are equivalence classes
-\ex{[Important]
+\begin{ex} [Important] Orbits give a Partition.
+
     For $x, y \in X$, let $x \sim y := y \in \Orb(x)$. 
     Show that $\sim$ is an equivalence relation on $X$ 
-    with orbits as equivalence classes, 
-    hence deducing $X/G$ is a partition $X$. 
-}
+    with orbits as equivalence classes.
+    Hence deduce $X/G$ is a partition $X$. 
+\end{ex}
 
-\ex{Let $x \in X$. Show that $\Orb(x) \leq_{G\mhyph\Set} X$.}
+\begin{eg}
+    
+    We have the following action of $(\Z,+)$ on $\R$. \[
+        \Z \to \aut{\Set}{\R}, n \mapsto (x \mapsto x + n)
+    \]
+    i.e. translating real numbers by integer-steps. 
+    Then the orbit of any real number $a$ is 
+    the set $a + \Z := \{a + n \mid n \in \Z\}$. 
+    The set of orbits $\R / \Z$ can be represented by
+    the interval $[0,1)$,
+    since every $a$ is in the same orbit as $a$ subtract its floor.
+    
+\end{eg}
 
-A subgroup $H$ of a group $G$ acts on $G$ as a set: 
+\begin{ex} Orbits are $G$-Subsets.
+
+    Let $x \in X$. Show that $\Orb(x) \leq_{G\mhyph\Set} X$.
+\end{ex}
+
+An important example of an action is where
+a subgroup $H$ of a group $G$ acts on $G$ as a set.
 
 %   - Def - Cosets as Orbits
 \begin{dfn} Left Cosets. 
@@ -401,9 +377,16 @@ A subgroup $H$ of a group $G$ acts on $G$ as a set:
     right-multiplication with $H$, hence the notation $gH$. 
     Furthermore, let $G / H$ be the set of all cosets, 
     then $G$ acts naturally on $G / H$ by
-    
     \[G \to Aut_\Set(G / H), g \mapsto (g_0H \mapsto gg_0H)\]
 \end{dfn}
+
+\begin{eg}
+    
+    Since $\Z$ under addition is a subgroup of $\R$ under addition,
+    the orbits $a + \Z$ calculated in the previous example
+    are examples of left cosets. 
+    
+\end{eg}
 
 The following concept is intimately related to that of orbits. 
 
@@ -446,7 +429,6 @@ Now, the main theorem concerning group actions.
         \end{tikzcd}
     \end{figure}
     
-    %\kern-3em
     So this is indeed a isomorphism of $G$-sets. 
 \end{proof}
 
@@ -479,8 +461,7 @@ From this we can immediately deduce the classic theorem due to Lagrange.
 %    Hence we have, for subgroups, the notion of \emph{normality}. 
 %\end{rmk}
 %   - Def - 4 eqv defs of Normal Subgroup
-\begin{dfn} 4 Equivalent Definitions of Normal Subgroups, 
-Quotient Groups. 
+\begin{dfn} 4 Equivalent Definitions of Normal Subgroups, Quotient Groups. 
     Let $N \leq_{\Grp} G$. 
     Then the following are equivalent: 
     \begin{enumerate}
@@ -496,7 +477,6 @@ Quotient Groups.
     and write $N \normsub_\Grp G$. 
     $G/N$ is called the \emph{quotient of $G$ by $N$}. 
 \end{dfn}
-
 \begin{proof}
     ($1 \imp 2$) 
         We check that the multiplication is well-defined. 
@@ -531,11 +511,48 @@ Quotient Groups.
     The set of these points form the quotient. 
 \end{rmk}
 
+\begin{ex}
+    
+    Which of these are normal subgroups of the groups they are in? 
+    For the ones that are, give a proof.
+    \begin{enumerate}
+        \item $(\Z,+)$ in $(\Q,+)$.
+        \item The set of rotations in $D_{2n}$.
+        \item The subgroup generated by a single reflection in $D_{2n}$.
+        
+    \end{enumerate}
+    
+\end{ex}
+
 \begin{rmk}
     Note that all subgroups of abelian groups are normal. 
     The main significance of this is that 
     when we quotient here we always end up with a group structure.
 \end{rmk}
+
+\begin{eg}
+    
+    $\Z$ is a normal subgroup of $\R$ under addition. 
+    Thus $\R / \Z$ forms a group under the group ``multiplication", \[
+        (a + \Z) + (b + \Z) := (a + b) + \Z
+    \]
+    As noted before, $\R / \Z$ can be represented by the interval $[0,1)$.
+    So $\R / \Z$ looks like $[0,1)$ where 1 is ``glued" to 0
+    and adding beyond 1 loops back around to 0. 
+    
+\end{eg}
+
+\begin{ex} Integers Modulo $n$.
+    
+    Let $n$ be an integer and let $n\Z$ be the set of all integer multiples of $n$.
+    Verify that $n\Z$ is a normal subgroup in $\Z$ under addition.
+    Show that for all integers $m$,
+    there exists $0 \leq r < n$ in the same coset as $m$.
+    So $\Z / n\Z$ can be represented with naturals $\{0,1,\dots,n-1\}$,
+    where adding beyond $n-1$ loops back around from 0. 
+    $\Z / n\Z$ is often called \textbf{integers modulo $n$}.
+    
+\end{ex}
 
 Now we are ready for the main theorems regarding isomorphisms
 that we will so often use. 
@@ -642,4 +659,131 @@ Here is the diagram to have in mind:
     will appear again and again with various objects in algebra. 
     We next cover the above theory for vector spaces. 
 \end{rmk}
+
+Here is that exercise for readers interested in \emph{free groups}. 
+
+\begin{ex} \dolater Construction of Free Groups. 
+
+    Let $S$ be a set. We proceed to turn $S$ into a group.
+    The idea is essentially the same as the alternative 
+    construction for the subgroup generated by a subset.
+    The only difference is that for subgroups, 
+    we had an ambient group structure to use,
+    but for sets "sitting in a vacuum", 
+    we will have to make a group structure from scratch.
+    
+    Define 
+    \[\tilde{S} := \{1,-1\}\times S\]
+    Let $s$ denote $(1,s) \in \{1\} \times S$ and
+    $s^{-1}$ denote $(-1,s) \in \{-1\} \times S$. 
+    For $n \in \N$, define the \textbf{$\tilde{S}$-strings of length $n$} as
+    \[
+        \tilde{S}^n := \{ s : n \to \tilde{S} \}
+    \]
+    For $s \in \tilde{S}^n, i \in n$, denote $s_i$ as $s(i)$.
+    So $s$ can be seen as an $n$-tuple $(s_i)_{i \in n}$\footnote{If you like,
+    this is a way of formally
+    defining a tuple.},
+    and we write $s_0\cdots s_{n-1}$ for the function $s$ instead.
+    This should be thought of as finite products of elements in $\tilde{S}$.
+    So our to-be group is the set of all such products, 
+    $\bigsqcup_{n \in \N} \tilde{S}^n$.
+    For 
+    $s : n \to \tilde{S}, t : m \to \tilde{S} \in \bigsqcup_{n \in \N} \tilde{S}^n$,
+    we define the multiplication as concatenation of strings: 
+    \[
+        st : n+m \to \tilde{S}, i \mapsto 
+        \begin{cases}
+            s(i), & i < n \\
+            t(i-n), & i \geq n
+        \end{cases}
+    \]
+    Then clearly this multiplication is associative and 
+    we have the empty string $e : 0 \to \tilde{S}$ as the identity. 
+    
+    We are not quite finished yet.
+    As of now, for $s \in \tilde{S}$, 
+    $ss^{-1}$, $s^{-1}s$ and $e$ are \emph{different} elements in our to-be group,
+    i.e. we have not defined cancellation by inverses. 
+    This is done as follows. 
+    For $n \leq m \in \N$, $a \in S$,  
+    define the \textbf{n-th Chirs-Frod insertion of $a$}
+    as 
+    \[
+        CF_n : \tilde{S}^m \to \tilde{S}^{m+2}, 
+        s_0\cdots s_{m-1} \mapsto 
+        \begin{cases}
+        aa^{-1} & \text{, if } 0 = m\\
+        s_0 \cdots s_{n-1} a a^{-1} s_n \cdots s_{m-1} & \text{, if } 0 < m
+        \end{cases}
+    \]
+    i.e. insert $aa^{-1}$ after the $n$-th symbol. 
+    Similarly, we define the \textbf{n-th Frod-Chirs insertion of $a$}, $FC_n$, 
+    as inserting $a^{-1}a$ after the $n$-th symbol. 
+    Then for 
+    $s_0\cdots s_{n-1}, t_0\cdots t_{m-1} \in \bigsqcup_{n \in \N} \tilde{S}^n$, 
+    we define $s_0\cdots s_{n-1} \sim t_0\cdots t_{m-1}$ when
+    they are equal or there exists a Chirs-Frod or Frod-Chirs insertion
+    mapping one to the other. 
+    
+    Prove that $\sim$ is an equivalence relation on 
+    $\bigsqcup_{n \in \N} \tilde{S}^n$
+    and the multiplication of strings respects the equivalence classes of $\sim$,
+    that is
+    \[
+        s \sim f \land t \sim g \imp st \sim fg
+    \]
+    Hence show that $\< S \>_\Grp := 
+    \bigsqcup_{n \in \N} \tilde{S}^n / \sim$
+    forms a group with the multiplication carried over to equivalence classes. 
+    
+    $\< S \>_\Grp$ is called the \textbf{free group generated by $S$}. 
+    If it is clear that it is a group, we omit the subscript $\Grp$.
+    A free group is one that is isomorphic to a free group generated by a set. 
+\end{ex}
+
+\begin{ex} The ``Characterising" Property of Free Groups. 
+
+    Let $\< S \>$ be the free group generated by a set $S$. 
+    We have a natural inclusion $\iota : S \to \< S \>, s \mapsto s$.
+    Let $G$ be a group, $f : S \to G$ any function. 
+    Show that 
+    $\exists ! \< f \> : \< S \> \to G \text{ in } \Grp, 
+    \< f \> \circ \iota = f$. 
+    Diagrammatically, 
+    \begin{figure} [ht]
+        \centering
+        \begin{tikzcd}
+        & \< S \> \arrow[dd,"\exists ! \< f \>",dashed]\\
+        S \arrow{ru}{\iota} \arrow{rd}{f} & \\
+        & G \\
+        \end{tikzcd}
+    \end{figure}
+    
+    This can be interpreted as saying $\< S \>$ is the 
+    ``smallest" group containing $S$. 
+    
+    Suppose $G$ also has the above ``smallest" property.
+    Then we have a unique group morphism $\< \iota \> : G \to \<S\>$ such that
+    $\<\iota\> \circ f = \iota$. 
+    Show that $\<\iota\> \circ \<f\> \circ \iota = \iota$ and
+    hence deduce $\id{\<S\>} = \<\iota\> \circ \<f\>$ from
+    the existence of a unique morphism from $\<S\>$ to itself commuting with $\iota$.
+    Do the same with $G$, concluding $\<f\>$ and $\<\iota\>$ are inverses,
+    i.e. $G$ isomorphic to $\<S\>$.
+    
+    What the above says is that 
+    the minimal property characterises $\< S \>$ uniquely
+    up to isomorphisms of groups. 
+    Hence, we never have to think about 
+    the construction of $\< S \>$ ever again.
+    \footnote{
+        This idea of determining an object
+        as the ``best" with a certain property will appear again and again. 
+        It is formalised by the concept of \emph{universal properties} in Category Theory,
+        which we shall not explore explicitly here. 
+    }
+    
+\end{ex}
+
 \end{document}

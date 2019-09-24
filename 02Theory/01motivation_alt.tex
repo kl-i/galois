@@ -1,0 +1,192 @@
+\documentclass[../book.tex]{subfiles}
+
+\begin{document}
+% This example is the original one Kenny showed us.
+
+What follows is a simple example of the \emph{Galois correspondence},
+the central result upon which Galois theory is built. 
+We assume the reader is familiar with the notion of groups, subgroups,
+dimension of vector spaces, linear maps and subspaces.
+
+Consider $\R$, the set of real numbers.
+We can do basic arithmetic 
+with addition and multiplication in $\R$,
+as well as divide by non-zero elements. 
+Objects of this form are called \emph{fields}.
+With the basic arithmetic operations, 
+we can form equations of unknowns and ask for their solutions.
+The simplest of such equations are \emph{polynomial equations},
+i.e. asking for roots of a polynomial. 
+One famous example is $X^2 + 1$.
+It has no roots in $\R$.
+However, we can artificially add in a root, called $i$,
+to \emph{extend} $\R$ to some larger field that 
+does contain a root of $X^2 + 1$.
+This is what the field of complex numbers $\C$ is. 
+$\R$ then injects into $\C$.
+This is an example of what we call a \emph{field extension}. 
+
+The way in which $\R$ injects into $\C$ is not arbitrary. 
+If one takes two real numbers $a, b$, 
+then adding them inside the reals followed by injecting yields
+the same result as injecting them separately then adding inside the complex numbers.
+That is to say, if we let $\iota : \R \to \C$ denote the injection,
+then we have \[
+    \iota(a + b) = \iota(a) + \iota(b)
+\]
+The same holds for multiplication. \[
+    \iota(a b) = \iota(a)\iota(b)
+\]
+In particular, $\iota(1) = \iota(1\cdot 1) = \iota(1)^2$,
+so \[
+    \iota(1) = 1
+\]
+where the first ``1" is in $\R$ and the second is in $\C$. 
+In a sense, the field structure of $\R$ is preserved when passing through $\iota$.
+Thus when considering fields, 
+functions satisfying the above three conditions are of interest. 
+They are called \emph{field morphisms}. 
+
+Note that $\iota$ being a field morphism gives $\C$ a real vector space structure.
+The fact that every element of $\C$ is of the form $a + b i$ with real $a, b$
+says $\{1,i\}$ is a basis of $\C$ as a real vector space. 
+
+Consider the field morphisms $\sigma$ from $\C$ to itself that preserve $\R$,
+which we shall call $\R$-automorphisms of $\C$. 
+This is the same as $\sigma$ being $\R$-linear field morphisms.\[
+    \sigma(\la z + w) = \la \sigma(z) + \sigma(w) \,\,\,\,,\, \la \in \R
+\]
+What could such a $\sigma$ be? 
+Since $\{1,i\}$ is a basis for $\C$, 
+$\sigma$ is uniquely determined by $\sigma(1), \sigma(i)$.
+But $\sigma$ is a field morphism, so $\sigma(1) = 1$. 
+So we only need to figure out what $\sigma(i)$ could be. 
+Intuitively, we only need $\sigma(i)$ because 
+the data of $\C$ only consisted of : \begin{enumerate}
+    \item It is a field.
+    \item It has $\R$ sitting in it.
+    \item It is obtained by creating a root of $X^2 + 1$, $i$.
+\end{enumerate}
+Since $\sigma$ preserves the field structure of $\C$ and leaves $\R$ unchanged,
+the only data left to play with is regarding $i$. 
+
+To see what $\sigma(i)$ can be, recall that 
+$i$ is a root of the real equation $X^2 + 1 = 0$.
+Here is the trick : 
+since $\sigma$ is a field morphism that preserves $\R$, 
+this equation is \emph{also preserved},
+i.e. \[
+    0 = i^2 + 1 \imp 
+    0 = \sigma(0) = \sigma(i^2 + 1) = \sigma(i)^2 + 1
+\]
+So $\sigma(i)$ is still a root of $X^2 + 1$
+and hence can only be $\pm i$. 
+This shows that $\sigma$ can only be either the identity function of $\C$
+or complex conjugation. 
+
+Both the identity function and complex conjugation are invertible functions,
+with inverses that are also $\R$-automorphisms of $\C$. 
+This means the set of all $\R$-automorphisms of $\C$ forms a group
+under function composition. 
+This is called the \emph{Galois group of the extension $\R \to \C$},
+denoted $\aut{\R}{\C}$.
+Observe that $\aut{\R}{\C}$ is has cardinality two
+and the dimension of $\C$ as a real vector space is also two.
+This is one part of the Galois correspondence.
+
+Next, consider the fields inside $\C$ that contain $\R$.
+These fields also extend $\R$, but are in $\C$, 
+so they are called \emph{subextensions of $\C$}.
+Let $L$ be a subextension. What could $L$ be?
+Since $L$ contains $\R$, it is also a real vector space,
+in fact a real subspace of $\C$. 
+The dimension of $L$ is less than or equal to the dimension of $\C$. 
+But the dimension of $\C$ is 2, so the dimension of $L$ can only be 1 or 2,
+i.e. $L$ is either $\R$ or $\C$.
+Observe that since $\aut{\R}{\C}$ is a two element group, 
+the number of its subgroups is also 2. 
+So the set of subextensions of $\C$ has the same cardinality as 
+the set of subgroups of its Galois group.
+
+In fact, we can give an explicit bijection between the subextensions and subgroups.
+For a subextension $L$, 
+let $\aut{L}{\C}$ denote the group of $L$-automorphisms of $\C$.
+This is a subgroup of the Galois group $\aut{\R}{\C}$.
+For a subgroup $G$ of $\aut{\R}{\C}$,
+let $\C^G$ be the set of all compelx numbers fixed by all elements of $G$.
+This is a field inside $\C$ containing $\R$, i.e. a subextension of $\C$.
+One can verify that these are inverse functions of each other
+and thus they give a bijection between 
+the subextensions of $\C$ and the subgroups of its Galois group.
+Furthermore, the bijection reverses inclusions. 
+\begin{figure} [H]
+    \centering
+    \begin{tikzcd}
+    \C \ar[r, "\C^-", rightharpoonup, xshift = 2,yshift = -15] & 
+    \<\id{\C}\> \ar[d,"\subseteq"] \\
+    \R \ar[u,"\subseteq"]
+    \ar[r, "\aut{-}{\C}" below=2, leftharpoondown, swap, xshift = 2, yshift = 15] &
+    \aut{\R}{\C}
+    \end{tikzcd}
+\end{figure}
+This is the Galois correspondence for the case of the extension $\R \to \C$. 
+
+The general Galois correspondence is as follows. 
+\begin{thm} Basically Galois Correspondance. 
+    
+    Let $\iota_L : K \to L$ be a ``nice" field extension.
+    \footnote{
+        i.e. there are conditions for the Galois correspondence to hold,
+        which we do not have the language to describe yet.
+    }
+    
+    Let $E \subseteq L$ be a subextension of $L$. 
+    Then the group of $E$-automorphisms of $L$ is
+    a subgroup of the Galois group of $L$. \[
+        \aut{E}{L} \leq_\Grp \aut{K}{L}
+    \]
+    Let $G$ be a subgroup of the Galois group of $L$. 
+    Then the subfield fixed by $G$, $L^G$, is a subextension of $L$.
+    \[ K \overset{\iota_L}{\to} L^G \]
+    
+    The following are true :  
+    \begin{enumerate}
+        \item (Inverses)
+            For a subgroup $G$ of $\aut{K}{L}$ \[
+                G = \aut{L^G}{L}
+            \]
+            For a subextension $E$ of $L$, \[
+                E = L^{\aut{E}{L}}
+            \]
+            Hence, we have a bijection between subextensions of $L$
+            and the subgroups of the Galois group of $L$.
+            
+            \begin{figure} [H]
+                \centering
+                \begin{tikzcd}
+                \{G \mid G \le \aut{K}{L}\} 
+                \ar[r, "L^-", rightharpoonup, 
+                start anchor=north east, end anchor=north west, yshift = -5] 
+                \ar[r, "\aut{-}{L}" below=2, leftharpoondown, 
+                start anchor=south east, end anchor=south west, swap, yshift = 7]
+                &  \{E \mid K \to E \subseteq L\} \end{tikzcd}
+            \end{figure}
+            
+            \item (Order Reversing) 
+            Let $G, H \leq \aut{K}{L}$ be subgroups such that $G \subseteq H$.
+            Then \[ L^H \subseteq L^G \]
+            Similarly, 
+            let $E, F \subseteq L$ be $K$-subextensions such that $E \subseteq F$.
+            Then \[ \aut{F}{L} \subseteq \aut{E}{L} \]
+        \item (Degree) 
+            Let $E$ be a subextension of $L$. 
+            Let $[E : K]$ denote the dimension of $E$ as a vector space over $K$
+            and $[\aut{K}{L} : \aut{E}{L}]$ denote the subgroup index of $\aut{E}{L}$.
+            Then $[E : K] = [\aut{K}{L} : \aut{E}{L}]$. 
+    \end{enumerate}
+\end{thm}
+We call the above the ``basically" Galois correspondence because
+as the reader will see, the correspondence is quite an elaborate one,
+relating many other properties of field extensions to properties of groups. 
+
+\end{document}

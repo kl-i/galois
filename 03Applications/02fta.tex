@@ -12,7 +12,7 @@ To prove this, we need two lemmas first.
     such that $[L : \R]$ is odd.
 \end{lem}
 \begin{proof}
-    Assume such $L$ exist, pick $ \al \in L\setminus \iota_L\R$.
+    Assume such an $L$ exists, pick $ \al \in L\setminus \iota_L\R$.
     By the tower law of extension degree, 
     it will have a minimal polynomial with odd degree. 
     By the intermediate value theorem, there exist real root $a$ in $\R$.
@@ -29,8 +29,8 @@ To prove this, we need two lemmas first.
     such that $[L : \mathbb{C}]=2$.
 \end{lem}
 \begin{proof}
-    Assume such $(L,\iota_L)$ exist and 
-    pick $ \al \in L \setminus \mathbb{C}$. 
+    Assume such an $(L,\iota_L)$ exists and 
+    pick $ \al \in L \setminus \iota_L \mathbb{C}$. 
     It will have a minimal polynomial with degree 2. 
     However $\mathbb{C}$ must split any quadratic polynomial.
     So $\al$ is actually already inside $\iota_L \C$.
@@ -54,13 +54,15 @@ To prove this, we need two lemmas first.
         \C \iso L_0 \subseteq \cdots \subseteq L_n = L
     \]
     where $[L_{i+1} : L_i] = 2$.
-    Then all these extensions must be trivial, 
-    since there does not exists a $\C$-extension of degree 2. 
+    Then since there does not exists a $\C$-extension of degree 2, $n=0$. 
     
     Next, consider the extension $\iota_L : \R \to L$,
     where we viewed $\R$ as a subset of $\C$. 
     This may not be a normal extension, 
     so take the normal closure $\iota_N \circ \iota_L : \R \to N$ instead.
+    Note that we are in characteristic $0$,
+    therefore all extensions are seperable. 
+    Then note that $(L,\iota_L)$ is normal as a $\C$-extension.
     The Galois correspondence then implies 
     the $\aut{\C}{L}$ is isomorphic to $\aut{\C}{N} / \aut{L}{N}$,
     where $\aut{\C}{N}$ is a subgroup of $\aut{\R}{N}$.
