@@ -53,14 +53,19 @@ Now we are ready to talk about the building blocks of Galois Theory.
     inside the extensions. 
 \end{dfn}
 
-\begin{eg} 
+\begin{ex} 
     
-    Let $\iota : \R \to \C$ where $\iota$ is the usual identification of
-    $\R$ with a subset of $\C$.
-    Then $(\C,\iota)$ is an $\R$-extension.
-    Complex conjugation is then an $\R$-extension automorphism of $\C$.
+    Which of the following are field extensions? 
+    \begin{enumerate}
+        \item $\iota : \Q \to \C$ where $\iota$ is 
+        the usual identification of $\Q$ as a subset of $\C$. 
+        \item $\iota : \Z \to \Q$ where $\iota$ is
+        the usual identification of $\Z$ as a subset of $\Q$.
+        \item $\iota : K \to K[X]$ where $K$ is a field and
+        $\iota$ maps an element $k$ to the constant polynomial $k$. 
+    \end{enumerate}
     
-\end{eg}
+\end{ex}
 \begin{ex} The Only $\Q$-Extension Automorphism of $\R$.
     
     Let $\iota : \Q \to \R$ where $\iota$ is the usual identification of
@@ -70,15 +75,9 @@ Now we are ready to talk about the building blocks of Galois Theory.
     Show that $f$ is the identity function of $\R$.
     
     [Hint : Use the fact that all positive reals have a square root
-    to show for $\epsilon > 0$, $f(\epsilon) > 0$.]
+    to show for $\epsilon > 0$, $f(\epsilon) > 0$.
+    Hence deduce $f$ must be monotonic.]
 \end{ex}
-
-\begin{rmk}
-    
-    Note that something like $K \to K[X], \la \mapsto \la$ is \emph{not}
-    a field extension since the polynomial ring $K[X]$ is not a field. 
-
-\end{rmk}
 
 %\begin{dfn} Field Extension, Morphism of Extensions,Extension Degree,
 %Finite Extension.
@@ -183,8 +182,7 @@ Thus $|B| = nm$.
 
 \begin{ex} Simple Extensions.
     
-    Let $\iota : \Q \to \C$ be the usual identification of $\Q$ as a subset of $\C$.
-    Then $(\C,\iota)$ is a $\Q$-extension.
+    Consider $\C$ as a $\Q$-extension.
     Show that : \begin{enumerate}
         \item $\{a + b i \mid a, b \in \Q\}$ is $\Q(i)$.
         \item $\{a + b\sqrt{2} \mid a, b \in \Q \}$ is $\Q(\sqrt{2})$.
