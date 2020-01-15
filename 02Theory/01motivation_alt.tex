@@ -7,6 +7,7 @@ What follows is a simple example of the \emph{Galois correspondence},
 the central result upon which Galois theory is built. 
 We assume the reader is familiar with the notion of groups, subgroups,
 dimension of vector spaces, linear maps and subspaces.
+If not, feel free to study the preliminaries in the next section first.
 
 Consider $\R$, the set of real numbers.
 We can do basic arithmetic 
@@ -22,6 +23,7 @@ It has no roots in $\R$.
 However, we can artificially add in a root, called $i$,
 to \emph{extend} $\R$ to some larger field that 
 does contain a root of $X^2 + 1$.
+(Think about why we only need to add one root.)
 This is what the field of complex numbers $\C$ is. 
 $\R$ then injects into $\C$.
 This is an example of what we call a \emph{field extension}. 
@@ -42,7 +44,8 @@ so \[
     \iota(1) = 1
 \]
 where the first ``1" is in $\R$ and the second is in $\C$. 
-In a sense, the field structure of $\R$ is preserved when passing through $\iota$.
+Similarly $\iota(0) = 0$.
+In a sense, the field structure of $\R$ is ``preserved'' when passing through $\iota$.
 Thus when considering fields, 
 functions satisfying the above three conditions are of interest. 
 They are called \emph{field morphisms}. 
@@ -51,9 +54,10 @@ Note that $\iota$ being a field morphism gives $\C$ a real vector space structur
 The fact that every element of $\C$ is of the form $a + b i$ with real $a, b$
 says $\{1,i\}$ is a basis of $\C$ as a real vector space. 
 
-Consider the field morphisms $\sigma$ from $\C$ to itself that preserve $\R$,
-which we shall call $\R$-automorphisms of $\C$. 
-This is the same as $\sigma$ being $\R$-linear field morphisms.\[
+Consider the field morphisms $\sigma$ from $\C$ to itself that ``preserve'' $\R$,
+which we shall call $\R$-automorphisms of $\C$.
+For now think of these as morphisms that keep $\R$ where it is. 
+One way to characterise this is saying $\sigma$ is a $\R$-linear field morphism.\[
     \sigma(\la z + w) = \la \sigma(z) + \sigma(w) \,\,\,\,,\, \la \in \R
 \]
 What could such a $\sigma$ be? 
@@ -94,9 +98,8 @@ Observe that $\aut{\R}{\C}$ is has cardinality two
 and the dimension of $\C$ as a real vector space is also two.
 This is one part of the Galois correspondence.
 
-Next, consider the fields inside $\C$ that contain $\R$.
-These fields also extend $\R$, but are in $\C$, 
-so they are called \emph{subextensions of $\C$}.
+Next, consider the fields inside $\C$ that contain $\R$ called 
+\emph{subextensions of $\C$}.
 Let $L$ be a subextension. What could $L$ be?
 Since $L$ contains $\R$, it is also a real vector space,
 in fact a real subspace of $\C$. 
@@ -113,7 +116,7 @@ For a subextension $L$,
 let $\aut{L}{\C}$ denote the group of $L$-automorphisms of $\C$.
 This is a subgroup of the Galois group $\aut{\R}{\C}$.
 For a subgroup $G$ of $\aut{\R}{\C}$,
-let $\C^G$ be the set of all compelx numbers fixed by all elements of $G$.
+let $\C^G$ be the set of all complex numbers fixed by all elements of $G$.
 This is a field inside $\C$ containing $\R$, i.e. a subextension of $\C$.
 One can verify that these are inverse functions of each other
 and thus they give a bijection between 
@@ -132,7 +135,7 @@ Furthermore, the bijection reverses inclusions.
 This is the Galois correspondence for the case of the extension $\R \to \C$. 
 
 The general Galois correspondence is as follows. 
-\begin{thm} Basically Galois Correspondance. 
+\begin{thm} More or Less Galois Correspondance. 
     
     Let $\iota_L : K \to L$ be a ``nice" field extension.
     \footnote{
@@ -185,7 +188,7 @@ The general Galois correspondence is as follows.
             Then $[E : K] = [\aut{K}{L} : \aut{E}{L}]$. 
     \end{enumerate}
 \end{thm}
-We call the above the ``basically" Galois correspondence because
+We call the above the ``more or less" Galois correspondence because
 as the reader will see, the correspondence is quite an elaborate one,
 relating many other properties of field extensions to properties of groups. 
 
